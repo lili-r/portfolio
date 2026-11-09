@@ -66,13 +66,16 @@ Mobile : barre fixe compacte, menu plein écran.
 ├──────────────────────────────┤
 │ 8 ans · 6 projets · 200 pers │  Bandeau de chiffres (optionnel)
 ├──────────────────────────────┤
-│ PROJETS                      │  INDEX (moodboard image 2)
-│ Programme aéronautique  2024 │  liste : titre en grand, année,
-│ Kaizo                   2024 │  disciplines en petit
-│ Événement interne       2023 │  desktop : survol = ligne en noir,
-│ Onboarding en IA        2024 │  autres en gris, aperçu image
-│ Intranet SharePoint     2023 │  à droite
-│ Restaurant —            2022 │  mobile : vignette + titre
+│ PROJETS                      │  BIBLIOTHÈQUE D'IMAGES (choix Julie)
+│ ┌─────┐ ┌─────┐              │  grille visuelle : l'image d'abord
+│ │ img │ │ img │              │  sous chaque image : titre + disciplines
+│ └─────┘ └─────┘              │  en petit (lisible sans survol)
+│ ┌─────┐ ┌─────┐              │  survol desktop : légère mise à
+│ │ img │ │ img │              │  l'échelle / passage de la couleur
+│ └─────┘ └─────┘              │  clic sur l'image → étude de cas
+│ ┌─────┐ ┌─────┐              │  mobile : 1 colonne ; tablette : 2 ;
+│ │ img │ │ img │              │  desktop : 3 (ou mosaïque de tailles
+│ └─────┘ └─────┘              │  variées, projet phare plus grand)
 ├──────────────────────────────┤
 │ SAVOIR-FAIRE                 │  5 blocs = un système, pas une liste
 │ 01 Identité                  │  logo, univers, charte
@@ -104,6 +107,17 @@ Mobile : barre fixe compacte, menu plein écran.
 └──────────────────────────────┘
 ```
 
+### Étude de cas : 2 modes de lecture (choix Julie)
+Un sélecteur en haut de chaque étude : **[ Essentiel | En profondeur ]**.
+- **Essentiel** (par défaut, pour Thomas, 1 minute) : hero, résumé, fiche, réalisations (galerie), *ce dont je suis le plus fière*, CTA, projet suivant.
+- **En profondeur** (pour Claire) : tout l'Essentiel **+** contexte, défi, démarche 01–04, système, résultats, ce que j'en retiens.
+- Le mode choisi est mémorisé d'une page à l'autre, et un lien partageable est possible (`?lecture=profondeur`).
+- Changer de mode ne recharge pas la page et garde la position de lecture. Les sections ajoutées apparaissent en douceur.
+- En bas du mode Essentiel : invitation « Passer en lecture en profondeur ↓ ».
+- Accessibilité : boutons à état (`aria-pressed`). Le contenu masqué l'est vraiment (`hidden`). Sans JavaScript, tout est affiché.
+
+Ci-dessous, le mode **En profondeur** complet. Les blocs marqués ◆ sont aussi visibles en Essentiel.
+
 ### Étude de cas `/projets/[slug]` (structure inspirée de jcubhow)
 ```
 ┌──────────────────────────────┐
@@ -134,6 +148,9 @@ Mobile : barre fixe compacte, menu plein écran.
 ├──────────────────────────────┤
 │ RÉSULTATS  200 participants… │  chiffres en grand + puces
 ├──────────────────────────────┤
+│ ◆ CE DONT JE SUIS LE PLUS    │  section humaine, 1re personne,
+│   FIÈRE                      │  visible dans les 2 modes
+├──────────────────────────────┤
 │ CE QUE J'EN RETIENS          │  réflexion, 1 paragraphe
 ├──────────────────────────────┤
 │ [Parlons de votre projet]    │
@@ -157,14 +174,15 @@ Les projets plus petits (logo du restaurant) utilisent une **version courte** : 
 
 ## 9. Notes pour la DA
 - Hero : portrait + chien. **Placeholder** en attendant la photo, même ratio que la future photo (4:5 ou carré).
-- Index projets : liste typographique avec survol (moodboard image 2). C'est l'élément signature.
+- Projets en accueil : bibliothèque d'images (grille ou mosaïque). L'image est la porte d'entrée vers l'étude de cas. Elle doit être soignée et cadrée de façon homogène.
 - Les titres de section sont des **titres-phrases** (jcubhow) avec petits labels en majuscules.
 - Ton : chaleureux, design, structuré → palette chaude, grain, grille nette.
 
 ## 10. Notes pour le dev
 - Les projets sont des fichiers Markdown (`src/content/projets/`) avec champs : titre, slug, année, disciplines[], client, rôle, livrables[], outils[], résumé, couverture, ordre, confidentiel (bool), format (`complet` | `court`).
 - Les ancres doivent rester utilisables quand le header est fixe (`scroll-margin-top`).
-- Le survol de l'index doit aussi marcher au clavier (focus). Sur mobile, pas de survol : afficher des vignettes.
+- Grille de projets : cartes entièrement cliquables (lien sur l'image + titre), focus visible au clavier, images lazy sauf la première ligne.
+- Sélecteur Essentiel / En profondeur : champ `profondeur: true` sur les blocs du Markdown (ou composant `<Deep>`), état mémorisé en localStorage, paramètre `?lecture=profondeur`.
 - CV : `public/julie-ramier-cv.pdf`.
 
 ## Questions ouvertes

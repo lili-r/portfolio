@@ -17,7 +17,8 @@ Site portfolio personnel. Langue principale : français (anglais en option).
 - **Confidentialité** : client aéronautique anonymisé (voir `docs/ux.md` §8).
 - **Chiffre clé** : événement interne de 200 personnes.
 - **Portrait** : photo avec un chien, à fournir. Placeholder en attendant.
-- **Ton** : chaleureux, design, structuré.
+- **Ton** : chaleureux, design, structuré. Pas d'écriture inclusive.
+- **Choix UX validés** : accueil avec bibliothèque d'images des projets ; études de cas en 2 modes (Essentiel / En profondeur) ; section « Ce dont je suis le plus fière » dans chaque projet.
 - **Moodboard** : `docs/img/moodboard-01.png`, analysé dans `docs/references.md`.
 - **Références aimées** (analyse détaillée : `docs/references.md`) :
   - https://www.product.inc/#resume — structure, ton, navigation simple, portrait avec le chien en home

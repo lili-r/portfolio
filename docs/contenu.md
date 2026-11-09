@@ -1,6 +1,6 @@
 # Contenu — textes du site (v1)
 
-Ton : chaleureux, design, structuré. 1re personne. Voix active, phrases courtes.
+Ton : chaleureux, design, structuré. 1re personne. Voix active, phrases courtes. **Pas d'écriture inclusive.**
 `[À COMPLÉTER]` = information à fournir par Julie (rien n'est inventé).
 
 ---
@@ -19,6 +19,14 @@ H1 : **Julie Ramier**
 
 **C. Directe, avec de l'aplomb**
 > Identité, slides, motion, événement, SharePoint : une seule designer pour toute la chaîne. 8 ans en cabinet de conseil, des grands groupes, des délais serrés, et des projets qui ont fini par donner envie. Basée à Paris.
+
+**→ Julie préfère l'esprit de C** (direct, avec de l'aplomb) et cherche aussi de son côté. Pistes dans cet esprit :
+- C1. Identité, slides, motion, événement, SharePoint : une seule designer pour toute la chaîne.
+- C2. Du logo au jour J : je conçois l'identité de vos projets, et tout ce qui les fait vivre.
+- C3. Une idée, une identité, et tout ce qui va avec.
+- C4. Je donne une forme à vos projets, et je la tiens jusqu'au bout.
+- C5. Le design de toute la chaîne, avec la rigueur du conseil.
+Sous-ligne commune : *8 ans en cabinet de conseil. Basée à Paris.*
 
 Boutons : **Parlons de votre projet** · **Télécharger mon CV** · LinkedIn
 
@@ -86,7 +94,16 @@ Adresse mail : [À COMPLÉTER — adresse pro ? ex. contact@julieramier.fr]
 
 ## ÉTUDES DE CAS : trames
 
-Chaque étude suit la structure de `docs/ux.md` §6. Les titres-phrases ci-dessous sont **des propositions** à valider une fois les réponses aux questions obtenues.
+Chaque étude suit la structure de `docs/ux.md` §6. Elle existe en **2 modes de lecture : Essentiel / En profondeur**. Les titres-phrases ci-dessous sont **des propositions** à valider une fois les réponses aux questions obtenues.
+
+**Infos à collecter par projet** : rôle exact · contexte · ce qui a été livré · **ce dont je suis le plus fière** (section humaine, visible dans les deux modes).
+
+Sélecteur de lecture : **Essentiel** · **En profondeur**
+- Sous-titre Essentiel : *« L'essentiel en 1 minute. »*
+- Sous-titre En profondeur : *« Toute la démarche, étape par étape. »*
+- Invitation en bas du mode Essentiel : *« Envie de voir comment j'ai travaillé ? Passer en lecture en profondeur ↓ »*
+
+Section humaine, label : CE DONT JE SUIS LE PLUS FIÈRE. Titre-phrase rédigé à partir de la réponse de Julie, puis 2 ou 3 phrases à la 1re personne, sincères et concrètes.
 
 ### 01 · Programme interne, groupe aéronautique (format complet)
 - Disciplines : DIRECTION ARTISTIQUE / DÉCLINAISONS / ÉVÉNEMENT / SHAREPOINT
