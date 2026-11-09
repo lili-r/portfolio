@@ -43,5 +43,7 @@ Accroche v1 :
 > Julie Ramier — Designer graphique & motion, à Paris.
 > Je crée des identités et je les fais vivre partout : logos, présentations, motion, événements, intranet. 8 ans en cabinet de conseil à donner forme aux projets de grandes entreprises.
 
-## Encore ouvert
-- Clients visés en priorité : grands groupes en direct ? cabinets de conseil / agences en sous-traitance ? PME / indépendants (logos) ?
+## Cibles
+1. Grands groupes en direct
+2. Cabinets de conseil qui la vendent sur leurs missions
+3. PME. **Note interne, à ne pas communiquer** : sert de terrain pour tester des logiques de design avec des agents.
