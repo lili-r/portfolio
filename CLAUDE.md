@@ -19,7 +19,8 @@ Site portfolio personnel. Langue principale : français (anglais en option).
 - **Portrait** : photo avec un chien, à fournir. Placeholder en attendant.
 - **Ton** : chaleureux, design, structuré. Pas d'écriture inclusive.
 - **Choix UX validés** : accueil avec bibliothèque d'images des projets ; études de cas en 2 modes (Essentiel / En profondeur) ; section « Ce dont je suis le plus fière » dans chaque projet.
-- **Moodboard** : `docs/img/moodboard-01.png`, analysé dans `docs/references.md`.
+- **Moodboard** : `docs/img/moodboard-01.png`, analysé dans `docs/references.md`. Esprit d'accueil retenu : `docs/img/moodboard-02-home.png` (fond sombre pointillé, cartes d'interface flottantes, labels mono numérotés).
+- **Méthode DA (choix de Julie)** : tester d'abord, définir les règles ensuite. On itère sur l'accueil (`docs/test-home.html`), puis on décline et on fige la DA dans `docs/da.md`. Les 3 pistes de `docs/da-pistes.html` ont été écartées.
 - **Références aimées** (analyse détaillée : `docs/references.md`) :
   - https://www.product.inc/#resume — structure, ton, navigation simple, portrait avec le chien en home
   - https://jcubhow.com/colour — présentation des travaux, réflexion derrière chaque projet, typographie
