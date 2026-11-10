@@ -20,7 +20,11 @@ H1 : **Julie Ramier**
 **C. Directe, avec de l'aplomb**
 > Identité, slides, motion, événement, SharePoint : une seule designer pour toute la chaîne. 8 ans en cabinet de conseil, des grands groupes, des délais serrés, et des projets qui ont fini par donner envie. Basée à Paris.
 
-**→ Julie préfère l'esprit de C** (direct, avec de l'aplomb) et cherche aussi de son côté. Pistes dans cet esprit :
+**✅ ACCROCHE VALIDÉE**
+> **Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.**
+> Logo, slides, motion, événement, SharePoint. 8 ans en cabinet de conseil, basée à Paris.
+
+*(Historique)* **→ Julie préférait l'esprit de C** (direct, avec de l'aplomb) et cherche aussi de son côté. Pistes dans cet esprit :
 - C1. Identité, slides, motion, événement, SharePoint : une seule designer pour toute la chaîne.
 - C2. Du logo au jour J : je conçois l'identité de vos projets, et tout ce qui les fait vivre.
 - C3. Une idée, une identité, et tout ce qui va avec.

@@ -1,0 +1,384 @@
+<title>Pistes DA Julie Ramier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Inter+Tight:wght@300;400&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout : page de présentation, 3 pistes empilées ; chaque piste = fiche + maquette hero + grille projets + palette + typo */
+:root {
+  --bg: #f6f5f2;
+  --fg: #1b1a18;
+  --muted: #6b6760;
+  --line: #dcd8d0;
+  --card: #ffffff;
+  --accent: #b5481b;
+  --font-ui: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141312; --fg: #efece6; --muted: #a39e95; --line: #2e2b28; --card: #1c1a18; --accent: #e8743b; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #141312; --fg: #efece6; --muted: #a39e95; --line: #2e2b28; --card: #1c1a18; --accent: #e8743b; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-ui); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 80px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 72px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* Intro */
+.intro { display: grid; gap: 16px; max-width: 70ch; }
+.intro h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+.intro p { color: var(--muted); font-size: 17px; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.toc a { color: var(--fg); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14px; }
+.toc a:hover, .toc a:focus-visible { border-color: var(--fg); outline: none; }
+
+/* Piste */
+.piste { display: grid; gap: 24px; scroll-margin-top: 24px; }
+.piste-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 48px; align-items: end; border-top: 1px solid var(--line); padding-top: 24px; }
+.piste-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; font-weight: 600; line-height: 1.1; }
+.piste-head .idea { font-size: 17px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tags span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); padding: 3px 10px; border-radius: 999px; }
+
+/* Maquette (fenêtre) : couleurs fixes, ce sont des spécimens */
+.frame { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); max-width: 100%; }
+.frame-bar { display: flex; gap: 6px; padding: 10px 12px; background: var(--card); border-bottom: 1px solid var(--line); }
+.frame-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.site { padding: clamp(20px, 4vw, 44px); display: grid; gap: clamp(28px, 5vw, 56px); }
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px; }
+.nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
+.portrait { aspect-ratio: 4 / 5; max-width: 100%; display: grid; place-items: end start; padding: 14px; font-size: 12px; position: relative; overflow: hidden; }
+.hero-text { display: grid; gap: 16px; min-width: 0; }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { font-size: 13px; padding: 10px 16px; display: inline-block; }
+.grid-proj { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tile { display: grid; gap: 8px; min-width: 0; }
+.tile .img { aspect-ratio: 4 / 3; max-width: 100%; position: relative; overflow: hidden; }
+.tile .cap { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }
+.toggle { display: inline-flex; font-size: 12px; justify-self: start; }
+.toggle span { padding: 6px 12px; }
+
+/* Palette + typo */
+.specs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.sw { display: grid; gap: 6px; font-size: 12px; }
+.sw b { display: block; height: 56px; border-radius: 6px; border: 1px solid rgba(127,127,127,.25); }
+.sw code { font-family: var(--font-mono); color: var(--muted); }
+.specimen { display: grid; gap: 8px; }
+.verdict { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; font-size: 14px; }
+.verdict ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); }
+
+/* ───── PISTE A · ATELIER ───── */
+.a { --a-paper: #efe8dc; --a-ink: #1e1915; --a-ember: #b5481b; --a-sand: #d9cbb5; --a-stone: #6e645a;
+  background: var(--a-paper); color: var(--a-ink); font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; }
+.a .nav ul li, .a .label { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.a .label { color: var(--a-ember); }
+.a h3 { font-size: clamp(40px, 7vw, 84px); font-weight: 500; letter-spacing: -.045em; line-height: .92; }
+.a .lead { font-size: clamp(16px, 1.8vw, 20px); line-height: 1.4; max-width: 34ch; }
+.a .sub { color: var(--a-stone); font-size: 14px; }
+.a .portrait { background: var(--a-sand); color: var(--a-stone); }
+.a .portrait::before { content: ""; position: absolute; inset: 18% 18% 0 18%; background: #c9b79c; border-radius: 48% 48% 0 0; }
+.a .portrait::after { content: ""; position: absolute; width: 34%; aspect-ratio: 1; right: 6%; bottom: 0; background: #b7a281; border-radius: 50% 50% 0 0; }
+.a .portrait span { position: relative; z-index: 1; }
+.a .btn.primary { background: var(--a-ink); color: var(--a-paper); }
+.a .btn.ghost { border: 1px solid var(--a-ink); }
+.a .tile .img { background: var(--a-sand); }
+.a .tile:nth-child(1) .img { background: var(--a-ember); }
+.a .tile:nth-child(2) .img { background: #d6c3a3; }
+.a .tile:nth-child(3) .img { background: var(--a-ink); }
+.a .tile:nth-child(4) .img { background: #c2937a; }
+.a .tile:nth-child(5) .img { background: #e3d9c8; }
+.a .tile:nth-child(6) .img { background: #8a6f55; }
+.a .tile .img::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); opacity: .35; mix-blend-mode: multiply; }
+.a .tile .cap span:last-child { color: var(--a-stone); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.a .toggle { border: 1px solid var(--a-ink); border-radius: 999px; }
+.a .toggle span.on { background: var(--a-ink); color: var(--a-paper); border-radius: 999px; }
+
+/* ───── PISTE B · BRAISE ───── */
+.b { --b-night: #17110d; --b-umber: #2a1d15; --b-cream: #f1e6d6; --b-ember: #e0652b; --b-rust: #7a2a12; --b-dust: #a8968a;
+  background: var(--b-night); color: var(--b-cream); font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif; font-weight: 400; position: relative; }
+.b .nav { font-size: 12px; }
+.b .nav ul li { color: var(--b-dust); }
+.b .label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--b-dust); }
+.b h3 { font-size: clamp(42px, 7.5vw, 92px); font-weight: 300; letter-spacing: -.055em; line-height: .92; }
+.b .lead { font-size: clamp(16px, 1.8vw, 21px); line-height: 1.4; max-width: 34ch; font-weight: 300; }
+.b .sub { color: var(--b-dust); font-size: 14px; }
+.b .portrait { border-radius: 18px; color: var(--b-cream);
+  background: radial-gradient(120% 90% at 30% 85%, var(--b-ember) 0%, var(--b-rust) 45%, var(--b-umber) 80%); }
+.b .portrait::after, .b .tile .img::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); opacity: .5; mix-blend-mode: overlay; }
+.b .portrait span { position: relative; z-index: 1; }
+.b .btn { border-radius: 999px; }
+.b .btn.primary { background: var(--b-cream); color: var(--b-night); }
+.b .btn.ghost { border: 1px solid #5a4a3f; color: var(--b-cream); }
+.b .tile .img { border-radius: 14px; background: var(--b-umber); }
+.b .tile:nth-child(1) .img { background: radial-gradient(100% 100% at 20% 100%, var(--b-ember), var(--b-rust) 55%, var(--b-umber)); }
+.b .tile:nth-child(2) .img { background: radial-gradient(90% 90% at 80% 20%, #c9a27e, var(--b-umber) 70%); }
+.b .tile:nth-child(3) .img { background: radial-gradient(80% 120% at 50% 110%, #3d5a99, var(--b-umber) 70%); }
+.b .tile:nth-child(4) .img { background: radial-gradient(100% 80% at 70% 90%, #e89a5c, var(--b-rust) 50%, var(--b-night)); }
+.b .tile:nth-child(5) .img { background: linear-gradient(160deg, #3a2a20, var(--b-umber)); }
+.b .tile:nth-child(6) .img { background: radial-gradient(90% 90% at 30% 30%, var(--b-cream), #b08a6a 40%, var(--b-umber) 85%); }
+.b .tile .cap span:last-child { color: var(--b-dust); }
+.b .toggle { background: var(--b-umber); border-radius: 999px; padding: 3px; }
+.b .toggle span.on { background: var(--b-cream); color: var(--b-night); border-radius: 999px; }
+
+/* ───── PISTE C · SYSTÈME ───── */
+.c { --c-chalk: #e9e7e2; --c-ink: #121212; --c-cobalt: #2c46c8; --c-grid: #cfcbc3; --c-graphite: #5d5a55; --c-white: #f7f6f3;
+  color: var(--c-ink); font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--c-chalk);
+  background-image: linear-gradient(var(--c-grid) 1px, transparent 1px), linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
+  background-size: 48px 48px; background-position: -1px -1px; }
+.c .nav ul li, .c .label, .c .mono { font-family: "Geist Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.c .label { color: var(--c-cobalt); }
+.c h3 { font-size: clamp(40px, 7vw, 84px); font-weight: 600; letter-spacing: -.05em; line-height: .92; }
+.c .lead { font-size: clamp(16px, 1.8vw, 20px); line-height: 1.4; max-width: 34ch; }
+.c .sub { color: var(--c-graphite); font-size: 14px; }
+.c .portrait { background: var(--c-white); border: 1px solid var(--c-ink); color: var(--c-graphite); }
+.c .portrait::before { content: "FIG. 01"; position: absolute; top: 10px; left: 12px; font-family: "Geist Mono", monospace; font-size: 10px; }
+.c .portrait::after { content: ""; position: absolute; inset: 22% 22% 22% 22%; border: 1px dashed var(--c-graphite); border-radius: 50%; }
+.c .btn.primary { background: var(--c-cobalt); color: #fff; }
+.c .btn.ghost { border: 1px solid var(--c-ink); background: var(--c-white); }
+.c .tile .img { background: var(--c-white); border: 1px solid var(--c-ink); }
+.c .tile .img .card { position: absolute; border-radius: 8px; border: 1px solid var(--c-ink); }
+.c .tile .img .n { position: absolute; top: 8px; left: 10px; font-family: "Geist Mono", monospace; font-size: 10px; }
+.c .tile:nth-child(1) .img .card { inset: 28% 30% 14% 12%; background: var(--c-cobalt); }
+.c .tile:nth-child(2) .img .card { inset: 22% 22% 22% 22%; background: var(--c-ink); border-radius: 50%; }
+.c .tile:nth-child(3) .img .card { inset: 30% 10% 30% 34%; background: #d9d4ca; }
+.c .tile:nth-child(4) .img .card { inset: 18% 46% 18% 14%; background: var(--c-cobalt); }
+.c .tile:nth-child(5) .img .card { inset: 20% 14% 40% 14%; background: var(--c-chalk); }
+.c .tile:nth-child(6) .img .card { inset: 30% 30% 30% 30%; background: var(--c-ink); border-radius: 2px; }
+.c .tile .cap span:last-child { color: var(--c-graphite); font-family: "Geist Mono", monospace; font-size: 11px; }
+.c .toggle { border: 1px solid var(--c-ink); background: var(--c-white); }
+.c .toggle span.on { background: var(--c-ink); color: var(--c-white); }
+
+/* Responsive */
+@media (max-width: 760px) {
+  .piste-head, .specs, .verdict { grid-template-columns: minmax(0, 1fr); }
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .portrait { aspect-ratio: 16 / 11; }
+  .nav ul { display: none; }
+  .grid-proj { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) { .grid-proj { grid-template-columns: minmax(0, 1fr); } }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <span class="eyebrow">Direction artistique · étape 1 sur 2</span>
+    <h1>Trois pistes visuelles pour le portfolio de Julie Ramier</h1>
+    <p>Chaque piste part de ton moodboard et de tes deux références, avec ta phrase validée en haut de l'accueil. Les images sont des emplacements en attendant tes visuels. Choisis une piste, ou dis-moi ce que tu veux mélanger, et je construis le système complet.</p>
+    <nav class="toc" aria-label="Pistes">
+      <a href="#atelier">A · Atelier</a>
+      <a href="#braise">B · Braise</a>
+      <a href="#systeme">C · Système</a>
+    </nav>
+  </header>
+
+  <!-- ═════════════ PISTE A ═════════════ -->
+  <section class="piste" id="atelier">
+    <div class="piste-head">
+      <div>
+        <span class="eyebrow">Piste A</span>
+        <h2>Atelier</h2>
+      </div>
+      <div>
+        <p class="idea">Un carnet de designer, clair et chaleureux. Papier, encre et une seule touche d'orange brûlé : l'élégance éditoriale de jcubhow, version lumineuse.</p>
+        <div class="tags"><span>chaleureux</span><span>éditorial</span><span>papier</span><span>calme</span><span>proche de product.inc</span></div>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="site a">
+        <div class="nav"><strong>Julie Ramier</strong><ul><li>Projets</li><li>Savoir-faire</li><li>À propos</li><li>Contact</li></ul></div>
+        <div class="hero">
+          <div class="portrait"><span>Portrait avec ton chien (photo à venir)</span></div>
+          <div class="hero-text">
+            <span class="label">Designer graphique &amp; motion</span>
+            <h3>Julie Ramier</h3>
+            <p class="lead">Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.</p>
+            <p class="sub">Logo, slides, motion, événement, SharePoint. 8 ans en cabinet de conseil, basée à Paris.</p>
+            <div class="ctas"><span class="btn primary">Parlons de votre projet</span><span class="btn ghost">Télécharger mon CV</span></div>
+          </div>
+        </div>
+        <div class="grid-proj">
+          <div class="tile"><div class="img"></div><div class="cap"><span>Programme interne</span><span>2024</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Kaizo</span><span>Identité</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Onboarding IA</span><span>Motion</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Événement interne</span><span>200 pers.</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Intranet SharePoint</span><span>Digital</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Restaurant</span><span>Logo</span></div></div>
+        </div>
+        <div class="toggle" aria-hidden="true"><span class="on">Essentiel</span><span>En profondeur</span></div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <div class="panel">
+        <span class="eyebrow">Palette</span>
+        <div class="swatches">
+          <div class="sw"><b style="background:#efe8dc"></b>Papier<code>#EFE8DC</code></div>
+          <div class="sw"><b style="background:#1e1915"></b>Encre<code>#1E1915</code></div>
+          <div class="sw"><b style="background:#b5481b"></b>Orange brûlé<code>#B5481B</code></div>
+          <div class="sw"><b style="background:#d9cbb5"></b>Sable<code>#D9CBB5</code></div>
+          <div class="sw"><b style="background:#6e645a"></b>Pierre<code>#6E645A</code></div>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Typographie</span>
+        <div class="specimen">
+          <span style="font-family:'Instrument Sans',sans-serif;font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1">Instrument Sans</span>
+          <span style="font-family:'Instrument Sans',sans-serif;font-size:15px">Titres et textes. Grotesque fine et élégante, gratuite (Google Fonts), au caractère proche de Neue Montreal.</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">IBM Plex Mono · labels &amp; données</span>
+        </div>
+      </div>
+    </div>
+    <div class="verdict">
+      <div><strong>Pour</strong><ul><li>Le plus fidèle à « chaleureux, design, structuré »</li><li>Laisse toute la place à tes visuels, quelles que soient leurs couleurs</li><li>Rassurant pour les grands groupes</li></ul></div>
+      <div><strong>Point d'attention</strong><ul><li>Doit être exécutée avec précision pour ne pas paraître sage</li><li>Signature à trouver : le grain sur les images, ou ta mascotte de « designer »</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ═════════════ PISTE B ═════════════ -->
+  <section class="piste" id="braise">
+    <div class="piste-head">
+      <div>
+        <span class="eyebrow">Piste B</span>
+        <h2>Braise</h2>
+      </div>
+      <div>
+        <p class="idea">Un fond sombre et chaud, traversé de lueurs orangées et de grain. L'ambiance de ton moodboard (Neue Montreal, dégradés), avec une typo fine en une seule graisse comme jcubhow.</p>
+        <div class="tags"><span>sombre chaud</span><span>grain</span><span>motion</span><span>cinématographique</span><span>proche du moodboard</span></div>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="site b">
+        <div class="nav"><span>Julie Ramier</span><ul><li>Projets</li><li>Savoir-faire</li><li>À propos</li><li>Contact</li></ul></div>
+        <div class="hero">
+          <div class="portrait"><span>Portrait avec ton chien (photo à venir)</span></div>
+          <div class="hero-text">
+            <span class="label">Designer graphique &amp; motion</span>
+            <h3>Julie Ramier</h3>
+            <p class="lead">Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.</p>
+            <p class="sub">Logo, slides, motion, événement, SharePoint. 8 ans en cabinet de conseil, basée à Paris.</p>
+            <div class="ctas"><span class="btn primary">Parlons de votre projet</span><span class="btn ghost">Télécharger mon CV</span></div>
+          </div>
+        </div>
+        <div class="grid-proj">
+          <div class="tile"><div class="img"></div><div class="cap"><span>Programme interne</span><span>2024</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Kaizo</span><span>Identité</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Onboarding IA</span><span>Motion</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Événement interne</span><span>200 pers.</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Intranet SharePoint</span><span>Digital</span></div></div>
+          <div class="tile"><div class="img"></div><div class="cap"><span>Restaurant</span><span>Logo</span></div></div>
+        </div>
+        <div class="toggle" aria-hidden="true"><span class="on">Essentiel</span><span>En profondeur</span></div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <div class="panel">
+        <span class="eyebrow">Palette</span>
+        <div class="swatches">
+          <div class="sw"><b style="background:#17110d"></b>Nuit<code>#17110D</code></div>
+          <div class="sw"><b style="background:#2a1d15"></b>Terre d'ombre<code>#2A1D15</code></div>
+          <div class="sw"><b style="background:#f1e6d6"></b>Crème<code>#F1E6D6</code></div>
+          <div class="sw"><b style="background:#e0652b"></b>Braise<code>#E0652B</code></div>
+          <div class="sw"><b style="background:#7a2a12"></b>Rouille<code>#7A2A12</code></div>
+          <div class="sw"><b style="background:#a8968a"></b>Poussière<code>#A8968A</code></div>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Typographie</span>
+        <div class="specimen">
+          <span style="font-family:'Inter Tight',sans-serif;font-size:44px;font-weight:300;letter-spacing:-.05em;line-height:1">Inter Tight</span>
+          <span style="font-family:'Inter Tight',sans-serif;font-size:15px">Une seule famille, graisses fines, contraste par la taille uniquement, comme sur jcubhow. Gratuite (Google Fonts).</span>
+          <span style="font-size:12px;color:var(--muted)">Option payante : Neue Montreal (licence commerciale Pangram Pangram).</span>
+        </div>
+      </div>
+    </div>
+    <div class="verdict">
+      <div><strong>Pour</strong><ul><li>La plus proche de ton moodboard</li><li>Met en valeur le motion et la vidéo</li><li>Très mémorable</li></ul></div>
+      <div><strong>Point d'attention</strong><ul><li>Un fond sombre écrase certains visuels clairs (slides, SharePoint)</li><li>Plus « créatif » que « rassurant » pour un grand groupe</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ═════════════ PISTE C ═════════════ -->
+  <section class="piste" id="systeme">
+    <div class="piste-head">
+      <div>
+        <span class="eyebrow">Piste C · le contre-pied</span>
+        <h2>Système</h2>
+      </div>
+      <div>
+        <p class="idea">Ton métier, c'est la déclinaison : la piste montre la grille sous le design. Fond craie quadrillé, figures numérotées, et un bleu cobalt pour le pilotage. La rigueur du conseil, assumée.</p>
+        <div class="tags"><span>structuré</span><span>grille visible</span><span>méthode</span><span>conseil</span><span>proche de product.inc</span></div>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="site c">
+        <div class="nav"><strong>JR —</strong><ul><li>Projets</li><li>Savoir-faire</li><li>À propos</li><li>Contact</li></ul></div>
+        <div class="hero">
+          <div class="portrait"><span>Portrait avec ton chien (photo à venir)</span></div>
+          <div class="hero-text">
+            <span class="label">Designer graphique &amp; motion</span>
+            <h3>Julie Ramier</h3>
+            <p class="lead">Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.</p>
+            <p class="sub">Logo, slides, motion, événement, SharePoint. 8 ans en cabinet de conseil, basée à Paris.</p>
+            <div class="ctas"><span class="btn primary">Parlons de votre projet</span><span class="btn ghost">Télécharger mon CV</span></div>
+          </div>
+        </div>
+        <div class="grid-proj">
+          <div class="tile"><div class="img"><span class="n">01</span><span class="card"></span></div><div class="cap"><span>Programme interne</span><span>2024</span></div></div>
+          <div class="tile"><div class="img"><span class="n">02</span><span class="card"></span></div><div class="cap"><span>Kaizo</span><span>Identité</span></div></div>
+          <div class="tile"><div class="img"><span class="n">03</span><span class="card"></span></div><div class="cap"><span>Onboarding IA</span><span>Motion</span></div></div>
+          <div class="tile"><div class="img"><span class="n">04</span><span class="card"></span></div><div class="cap"><span>Événement interne</span><span>200 pers.</span></div></div>
+          <div class="tile"><div class="img"><span class="n">05</span><span class="card"></span></div><div class="cap"><span>Intranet SharePoint</span><span>Digital</span></div></div>
+          <div class="tile"><div class="img"><span class="n">06</span><span class="card"></span></div><div class="cap"><span>Restaurant</span><span>Logo</span></div></div>
+        </div>
+        <div class="toggle" aria-hidden="true"><span class="on">Essentiel</span><span>En profondeur</span></div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <div class="panel">
+        <span class="eyebrow">Palette</span>
+        <div class="swatches">
+          <div class="sw"><b style="background:#e9e7e2"></b>Craie<code>#E9E7E2</code></div>
+          <div class="sw"><b style="background:#121212"></b>Encre<code>#121212</code></div>
+          <div class="sw"><b style="background:#2c46c8"></b>Cobalt<code>#2C46C8</code></div>
+          <div class="sw"><b style="background:#cfcbc3"></b>Trame<code>#CFCBC3</code></div>
+          <div class="sw"><b style="background:#5d5a55"></b>Graphite<code>#5D5A55</code></div>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Typographie</span>
+        <div class="specimen">
+          <span style="font-family:'Geist',sans-serif;font-size:44px;font-weight:600;letter-spacing:-.05em;line-height:1">Geist</span>
+          <span style="font-family:'Geist',sans-serif;font-size:15px">La typo de product.inc : nette, technique, très lisible. Gratuite.</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)">Geist Mono · numéros de figures, labels</span>
+        </div>
+      </div>
+    </div>
+    <div class="verdict">
+      <div><strong>Pour</strong><ul><li>Raconte ta méthode (audit, système, déclinaisons) avant même de lire</li><li>Parle immédiatement aux cabinets de conseil</li></ul></div>
+      <div><strong>Point d'attention</strong><ul><li>Moins chaleureuse que ce que tu as demandé (c'est le contre-pied)</li><li>Le bleu s'éloigne de ta palette orange : on peut le remplacer par l'orange brûlé</li></ul></div>
+    </div>
+  </section>
+</div>
