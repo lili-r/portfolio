@@ -42,7 +42,7 @@ Boutons : **Parlons de votre projet** · **Télécharger mon CV** · LinkedIn
 
 ### Projets (index)
 Label : PROJETS
-Titre : **Des projets qui avaient besoin d'une identité, et de la faire vivre.**
+Titre : **Des univers pensés pour prendre vie.** (validé par Julie)
 | # | Titre dans l'index | Disciplines | Année |
 |---|---|---|---|
 | 01 | Programme interne : groupe aéronautique | Direction artistique · Déclinaisons · Événement · SharePoint | [À COMPLÉTER] |
