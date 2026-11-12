@@ -84,6 +84,32 @@ a { color: inherit; }
 .i-restaurant { background: #1d1c1a; display: grid; place-items: center; }
 .i-restaurant::before { content: ""; width: 44%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--bone); box-shadow: inset 0 0 0 10px #1d1c1a, inset 0 0 0 12px var(--ember); }
 
+/* Vraies images */
+.img > img.ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.img.contain { background: #1d1c1a; }
+.img.contain > img.ph { object-fit: contain; padding: 12%; }
+
+/* Header C : composition de Julie (test Figma n°2) */
+.compo { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; aspect-ratio: 270 / 159; --mx: 0; --my: 0; }
+.compo .el { position: absolute; left: var(--x); top: var(--y); width: var(--w); z-index: var(--z, 1);
+  translate: calc(var(--mx) * var(--d, 10) * 1px) calc(var(--my) * var(--d, 10) * 1px); transition: translate .8s var(--ease); animation: pop 1s var(--back, ease) both; animation-delay: var(--delay, 0s); }
+.compo .el > * { display: block; width: 100%; }
+.compo img { display: block; width: 100%; height: auto; }
+.compo .floaty { animation: drift 6s ease-in-out infinite alternate; animation-delay: var(--fd, 0s); }
+@keyframes drift { from { transform: translateY(-5px); } to { transform: translateY(6px); } }
+@keyframes pop { from { scale: .7; opacity: 0; } to { scale: 1; opacity: 1; } }
+.compo .photo img { border-radius: 4px; box-shadow: 0 30px 60px -25px rgba(0,0,0,.8); }
+.compo .tile img { border-radius: 4px; }
+.compo .glass { border-radius: 50%; overflow: hidden; backdrop-filter: blur(8px); }
+.compo button.el { padding: 0; border: 0; background: none; cursor: pointer; }
+.compo button.el img { transition: scale .5s var(--ease), filter .4s; }
+.compo button.el:hover img, .compo button.el:focus-visible img { scale: 1.06; }
+.compo:has(button.el:hover) .el:not(:hover) img { filter: brightness(.6); }
+.compo .stamp { transition: translate .8s var(--ease), rotate .8s var(--ease); }
+.compo .stamp:hover { rotate: -6deg; }
+.compo .badge { filter: drop-shadow(0 8px 16px rgba(0,0,0,.45)); }
+@media (max-width: 900px) { .hero-media:has(.compo) { height: auto; } .compo { position: relative; top: auto; translate: none; } }
+
 /* Cartes cliquables (bouton qui contient une image) */
 .shot { display: block; padding: 0; border: 0; background: none; cursor: pointer; width: 100%; height: 100%; border-radius: 14px; }
 .shot .img { transition: scale .5s var(--ease), filter .4s; }
@@ -306,6 +332,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 
 <nav class="switch" aria-label="Variantes du header à tester">
   <span class="mono dim">Header</span>
+  <a href="#header-c" id="t-c">Ta compo</a>
   <a href="#header-a" id="t-a">A · Mosaïque</a>
   <a href="#header-b" id="t-b">B · Bazar organisé</a>
   <span class="mono dim">Contact</span>
@@ -331,12 +358,13 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 
 <script>
 const wave = [5,9,14,8,18,26,12,20,28,16,10,22,14,7,11,5].map(h => `<i style="height:${h * 3.4}%"></i>`).join("");
+const A = "assets/";
 const IMG = {
-  portrait: `<div class="img i-portrait"></div>`,
-  programme: `<div class="img i-programme"></div>`,
-  kaizo: `<div class="img i-kaizo"><div class="blob"><i></i><i></i><i></i><i></i><b></b></div></div>`,
+  portrait: `<div class="img"><img class="ph" src="${A}portrait-chien.webp" alt="Julie Ramier avec son chien"></div>`,
+  programme: `<div class="img contain"><img class="ph" src="${A}programme-tampon.webp" alt="Tampon de l'identité du programme interne"></div>`,
+  kaizo: `<div class="img"><img class="ph" src="${A}kaizo-poulpe.webp" alt="Mascotte poulpe de Kaizo"></div>`,
   onboarding: `<div class="img i-onboarding"><div class="wave">${wave}</div></div>`,
-  evenement: `<div class="img i-event"></div>`,
+  evenement: `<div class="img"><img class="ph" src="${A}evenement-kaleidoscope.webp" alt="Visuel de l'événement interne"></div>`,
   sharepoint: `<div class="img i-sharepoint"><div class="bar"><i></i><i></i><i></i></div><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i></div></div>`,
   restaurant: `<div class="img i-restaurant"></div>`,
 };
@@ -379,6 +407,18 @@ const PILE = [
 ];
 const headerB = `<div class="pile" id="pile">${PILE.map(([id, x, y, w, ar, r, z, d], i) => `<div class="p" style="--x:${x}%;--y:${y}%;--w:${w}%;--ar:${ar};--r:${r}deg;--z:${z};--d:${d};--delay:${(i * .07).toFixed(2)}s">${shot(id)}</div>`).join("")}</div>`;
 
+/* Header C : composition de Julie (positions relevées sur son test Figma n°2) */
+const headerC = `<div class="compo" id="compo">
+  <button class="el tile" data-id="evenement" aria-label="Ouvrir le projet Événement interne" style="--x:0%;--y:0%;--w:24.1%;--z:1;--d:10;--delay:.05s"><img class="floaty" style="--fd:-1s" src="${A}evenement-kaleidoscope.webp" alt=""></button>
+  <div class="el glass" aria-hidden="true" style="--x:23%;--y:17.6%;--w:16.3%;--z:3;--d:22;--delay:.35s"><img class="floaty" style="--fd:-3s" src="${A}icone-fleche.webp" alt=""></div>
+  <div class="el photo" style="--x:35.9%;--y:13.2%;--w:35.2%;--z:2;--d:6;--delay:.15s"><img src="${A}portrait-chien.webp" alt="Julie Ramier avec son chien"></div>
+  <button class="el stamp" data-id="programme" aria-label="Ouvrir le projet Programme interne" style="--x:54.4%;--y:1.9%;--w:35.2%;--z:4;--d:16;--delay:.25s"><img src="${A}programme-tampon.webp" alt=""></button>
+  <button class="el tile" data-id="kaizo" aria-label="Ouvrir le projet Kaizo" style="--x:83%;--y:38.4%;--w:17%;--z:3;--d:18;--delay:.3s"><img class="floaty" style="--fd:-2s" src="${A}kaizo-poulpe.webp" alt=""></button>
+  <div class="el glass" aria-hidden="true" style="--x:15.9%;--y:76.7%;--w:14.1%;--z:3;--d:14;--delay:.45s"><img class="floaty" style="--fd:-4s" src="${A}icone-equipe.webp" alt=""></div>
+  <div class="el badge" aria-hidden="true" style="--x:53.7%;--y:89.9%;--w:21.5%;--z:5;--d:26;--delay:.7s"><img src="${A}badge-conforme.webp" alt=""></div>
+  <div class="el glass" aria-hidden="true" style="--x:80%;--y:76.7%;--w:16.3%;--z:3;--d:20;--delay:.55s"><img class="floaty" style="--fd:-2.5s" src="${A}icone-calques.webp" alt=""></div>
+</div>`;
+
 /* Projets (contenu de page) */
 document.getElementById("projects").innerHTML = P.map(p => `
   <button class="shot proj" data-id="${p.id}" aria-label="Ouvrir le projet ${p.name}" style="height:auto">
@@ -390,12 +430,11 @@ document.getElementById("projects").innerHTML = P.map(p => `
 const media = document.getElementById("media");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function route() {
-  const b = location.hash === "#header-b";
-  media.innerHTML = b ? headerB : headerA;
-  document.getElementById("t-a").toggleAttribute("aria-current", false);
-  document.getElementById("t-b").toggleAttribute("aria-current", false);
-  document.getElementById(b ? "t-b" : "t-a").setAttribute("aria-current", "page");
-  const pile = document.getElementById("pile");
+  const h = location.hash === "#header-a" ? "a" : location.hash === "#header-b" ? "b" : "c";
+  media.innerHTML = { a: headerA, b: headerB, c: headerC }[h];
+  ["a", "b", "c"].forEach(k => document.getElementById("t-" + k).toggleAttribute("aria-current", false));
+  document.getElementById("t-" + h).setAttribute("aria-current", "page");
+  const pile = document.getElementById("pile") || document.getElementById("compo");
   if (pile && !reduce) {
     media.onpointermove = e => { if (innerWidth <= 900) return; const r = media.getBoundingClientRect();
       pile.style.setProperty("--mx", ((e.clientX - r.left) / r.width - .5).toFixed(3));
