@@ -106,6 +106,7 @@ a { color: inherit; }
 .compo button.el:hover img, .compo button.el:focus-visible img { scale: 1.06; }
 .compo:has(button.el:hover) .el:not(:hover) img { filter: brightness(.6); }
 .compo .stamp { transition: translate .8s var(--ease), rotate .8s var(--ease); }
+.compo .star { filter: drop-shadow(0 18px 30px rgba(60,20,140,.45)); }
 .compo .badge { filter: drop-shadow(0 8px 16px rgba(0,0,0,.45)); }
 @media (max-width: 900px) { .hero-media:has(.compo) { height: auto; } .compo { position: relative; top: auto; translate: none; } }
 
@@ -445,6 +446,7 @@ const headerC = `<div class="compo" id="compo">
   <button class="el stamp" data-id="programme" aria-label="Ouvrir le projet Programme interne" style="--x:54.4%;--y:1.9%;--w:35.2%;--z:4;--d:16;--delay:.25s"><img src="${A}programme-tampon.webp" alt=""></button>
   <button class="el tile" data-id="kaizo" aria-label="Ouvrir le projet Kaizo" style="--x:83%;--y:38.4%;--w:17%;--z:3;--d:18;--delay:.3s"><img class="floaty" style="--fd:-2s" src="${A}kaizo-poulpe.webp" alt=""></button>
   <div class="el glass" aria-hidden="true" style="--x:15.9%;--y:76.7%;--w:14.1%;--z:3;--d:14;--delay:.45s"><img class="floaty" style="--fd:-4s" src="${A}icone-equipe.webp" alt=""></div>
+  <div class="el" aria-hidden="true" style="--x:65.5%;--y:47%;--w:15%;--z:5;--d:30;--delay:.6s"><img class="floaty star" style="--fd:-1.5s" src="${A}etoile.webp" alt=""></div>
   <div class="el badge" aria-hidden="true" style="--x:53.7%;--y:89.9%;--w:21.5%;--z:5;--d:26;--delay:.7s"><img src="${A}badge-conforme.webp" alt=""></div>
   <div class="el glass" aria-hidden="true" style="--x:80%;--y:76.7%;--w:16.3%;--z:3;--d:20;--delay:.55s"><img class="floaty" style="--fd:-2.5s" src="${A}icone-calques.webp" alt=""></div>
 </div>`;
