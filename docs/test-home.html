@@ -214,6 +214,13 @@ a { color: inherit; }
 .replay:hover { color: var(--chalk); border-color: var(--haze); }
 :root { --out: cubic-bezier(.16,1,.3,1); --back: cubic-bezier(.34,1.56,.64,1); }
 
+/* Bouton magnétique dans le header */
+.hero-row { align-items: center; gap: 8px 20px; padding-top: 0 !important; }
+.hero-orb.k2 .zone { width: clamp(128px, 9.5vw, 148px); }
+.hero-orb.k2 .orb { width: 100%; white-space: nowrap; }
+.hero-row { flex-wrap: nowrap !important; }
+.hero-orb .orb { text-decoration: none; font-size: 15px; }
+
 /* Contact 1 · Révélation */
 .k1 .line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
 .k1 .line > span { display: inline-block; }
@@ -303,10 +310,20 @@ a { color: inherit; }
 .switch .grp + .grp { border-left: 1px solid var(--rule); padding-left: 4px; }
 .switch .ebtn, .switch .nbtn { width: 30px; height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
 .switch .ebtn[aria-pressed="true"], .switch .nbtn[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
-.switch .kbtn.wide { width: auto; padding: 0 10px; }
+.switch .kbtn.wide, .switch .nbtn.wide { width: auto; padding: 0 12px; }
 .switch .kbtn { height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
 .switch .kbtn[aria-pressed="true"] { background: var(--blush); color: var(--night); }
 @media (max-width: 640px) { .switch { flex-wrap: wrap; justify-content: center; width: calc(100vw - 32px); border-radius: 22px; } }
+
+/* Aimant du bouton « Écrivez-moi » (header) */
+(() => {
+  const zone = document.getElementById("hero-zone"), orb = zone.querySelector(".orb"), lbl = zone.querySelector(".lbl");
+  if (reduce) return;
+  zone.addEventListener("pointermove", e => { const r = zone.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    orb.style.translate = `${dx * .35}px ${dy * .35}px`; lbl.style.translate = `${dx * .15}px ${dy * .15}px`;
+    const o = orb.getBoundingClientRect(); orb.style.setProperty("--fx", `${e.clientX - o.left}px`); orb.style.setProperty("--fy", `${e.clientY - o.top}px`); });
+  zone.addEventListener("pointerleave", () => { orb.style.translate = "0 0"; lbl.style.translate = "0 0"; });
+})();
 
 /* Fiche projet */
 dialog { border: 1px solid var(--rule); background: var(--slate); color: var(--chalk); border-radius: 22px; padding: 0; width: min(780px, calc(100vw - 32px)); max-height: calc(100vh - 48px); }
@@ -355,8 +372,8 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     <h1>Julie<br>Ramier</h1>
     <p class="phrase">Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.</p>
     <p class="sub">Logo, slides, motion, événement, SharePoint.<br>8&nbsp;ans en cabinet de conseil.</p>
-    <div class="row">
-      <a class="cta solid" href="#contact">Parlons de votre projet <span aria-hidden="true">→</span></a>
+    <div class="row hero-row">
+      <div class="k2 hero-orb"><div class="zone" id="hero-zone"><a class="orb" href="#contact"><span class="lbl">Écrivez-moi</span></a></div></div>
       <span class="cta" title="Le CV sera ajouté au site">Télécharger mon CV</span>
     </div>
   </div>
@@ -421,11 +438,9 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <div class="grp"><span class="mono dim">Header</span>
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
   <div class="grp"><span class="mono dim">Contact</span>
-    <button type="button" class="kbtn" data-k="3">3</button><button type="button" class="kbtn" data-k="4">4</button><button type="button" class="kbtn wide" data-k="7">3 + 4</button></div>
-  <div class="grp"><span class="mono dim">Embargo</span>
-    <button type="button" class="ebtn" data-e="a">A</button><button type="button" class="ebtn" data-e="b">B</button><button type="button" class="ebtn" data-e="c">C</button></div>
+    <button type="button" class="kbtn" data-k="3">3</button><button type="button" class="kbtn" data-k="4">4</button></div>
   <div class="grp"><span class="mono dim">Numéros</span>
-    <button type="button" class="nbtn" data-s="serif">1</button><button type="button" class="nbtn" data-s="fraction">2</button><button type="button" class="nbtn" data-s="grand">3</button><button type="button" class="nbtn" data-s="glyphe">4</button><button type="button" class="nbtn" data-s="mono" title="Version actuelle">0</button></div>
+    <button type="button" class="nbtn wide" data-s="fraction">Fin</button><button type="button" class="nbtn wide" data-s="grand">Grand creux</button></div>
 </nav>
 
 <dialog id="detail" aria-labelledby="d-title">
@@ -561,12 +576,12 @@ document.querySelectorAll(".ebtn").forEach(b => b.addEventListener("click", () =
 function setNum(st) {
   document.documentElement.dataset.num = st;
   document.querySelectorAll(".num").forEach(el => { const n = +el.dataset.n, t = +el.dataset.t;
-    el.textContent = st === "serif" ? `N°${n}` : st === "fraction" ? `${n}/${t}` : st === "grand" ? n : st === "glyphe" ? "✦" : String(n).padStart(2, "0"); });
+    el.textContent = String(n).padStart(2, "0"); });
   document.querySelectorAll(".nbtn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st)));
 }
 document.querySelectorAll(".nbtn").forEach(b => b.addEventListener("click", () => { setNum(b.dataset.s); document.getElementById("projets").scrollIntoView({ behavior: "smooth" }); }));
-setNum("serif");
-setEmbargo("a");
+setNum("fraction");
+setEmbargo("b");
 
 /* Routage entre les deux headers */
 const media = document.getElementById("media");
@@ -698,14 +713,6 @@ K[6] = { name: "Contour puis plein", html: `
         <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
       </div>`,
   init(root) { return playOnView(root.querySelector(".k6")); } };
-K[7] = { name: "Lueur + mots qui changent", html: `
-      <div class="k3"><div class="card"><span class="glow" aria-hidden="true"></span>
-        <div class="k4" style="display:grid;gap:clamp(32px,4vw,56px)">
-          <h2 id="h-contact">Un <span class="rot" aria-live="off"><span>logo</span></span><br>à faire vivre ?</h2>
-          <div class="dots" aria-hidden="true"></div>
-          <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
-        </div></div></div>`,
-  init(root) { const a = K[3].init(root), b = K[4].init(root); return { replay() { a.replay(); b.replay(); }, stop() { a.stop(); b.stop(); } }; } };
 let api = { replay() {}, stop() {} };
 function showContact(k) {
   api.stop(); current = k;
@@ -719,7 +726,7 @@ document.querySelectorAll(".kbtn").forEach(b => b.addEventListener("click", () =
   setTimeout(() => api.replay(), reduce ? 0 : 500);
 }));
 document.getElementById("ct-replay").addEventListener("click", () => api.replay());
-showContact(7);
+showContact(4);
 
 /* Fiche projet */
 const dlg = document.getElementById("detail");

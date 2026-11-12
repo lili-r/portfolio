@@ -15,12 +15,13 @@ Site portfolio personnel. Langue principale : français (anglais en option).
   5. Design SharePoint d'un programme interne
   6. Kaizo : atelier de branding, naming, logo, mascotte poulpe et identité d'une solution tech créée sans designer (2026)
   7. Orbit : marque FICTIVE créée pour tester les outils d'IA → toujours la présenter comme projet personnel / exploration IA, jamais comme projet client
-  9. Carte de vœux (visuel : l'étoile) : SOUS EMBARGO, ne rien montrer avant sa diffusion ; carte « Sous embargo » floutée en attendant
+  9. Carte de vœux (visuel : l'étoile) : SOUS EMBARGO, ne rien montrer avant sa diffusion ; présentée en « carte à gratter » (message seul, rien de la carte) en attendant
   8. Invitations animées : projet perso (business de templates de mariage, pas encore lancé — rester discret) + déclinaison BtoB à concevoir ; GIF « opening-door » attendu
 - **Confidentialité** : client aéronautique anonymisé (voir `docs/ux.md` §8).
 - **Chiffre clé** : événement interne de 200 personnes.
 - **Portrait** : photo avec un chien, à fournir. Placeholder en attendant.
 - **Ton** : chaleureux, design, structuré. Pas d'écriture inclusive.
+- **Choix validés (tests accueil)** : header = composition de Julie ; bouton magnétique « Écrivez-moi » dans le header ; contact = variante 3 (lueur) ou 4 (mots qui changent), à trancher ; numéros de section en « 01 » (style fin ou grand chiffre creux, à trancher) ; pas de style mono/code pour les numéros.
 - **Choix UX validés** : accueil avec bibliothèque d'images des projets ; études de cas en 2 modes (Essentiel / En profondeur) ; section « Ce dont je suis le plus fière » dans chaque projet.
 - **Moodboard** : `docs/img/moodboard-01.png`, analysé dans `docs/references.md`. Esprit d'accueil retenu : `docs/img/moodboard-02-home.png` (fond sombre pointillé, cartes d'interface flottantes, labels mono numérotés).
 - **Méthode DA (choix de Julie)** : tester d'abord, définir les règles ensuite. On itère sur l'accueil (`docs/test-home.html`), puis on décline et on fige la DA dans `docs/da.md`. Les 3 pistes de `docs/da-pistes.html` ont été écartées.
