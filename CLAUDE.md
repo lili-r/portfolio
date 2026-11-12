@@ -14,6 +14,8 @@ Site portfolio personnel. Langue principale : français (anglais en option).
   4. Logo d'un restaurant
   5. Design SharePoint d'un programme interne
   6. Kaizo : atelier de branding, naming, logo, mascotte poulpe et identité d'une solution tech créée sans designer (2026)
+  7. Orbit : création de logo (visuel de mise en scène sur écran d'auditorium)
+  8. Invitations animées : projet perso (business de templates de mariage, pas encore lancé — rester discret) + déclinaison BtoB à concevoir ; GIF « opening-door » attendu
 - **Confidentialité** : client aéronautique anonymisé (voir `docs/ux.md` §8).
 - **Chiffre clé** : événement interne de 200 personnes.
 - **Portrait** : photo avec un chien, à fournir. Placeholder en attendant.
