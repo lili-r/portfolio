@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Space+Mono&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Space+Mono&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout : un seul conteneur 12 colonnes pour tout le site. Header = texte (col. 1–5) + images seules (col. 7–12). Sections = label (col. 1–3) + contenu (col. 4–12), beaucoup d'air. */
 :root {
@@ -88,6 +88,50 @@ a { color: inherit; }
 .img > img.ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .img.contain { background: #1d1c1a; }
 .img.contain > img.ph { object-fit: contain; padding: 12%; }
+
+/* Numérotation : 5 styles à tester */
+.slabel { font-size: 14px; }
+.num { color: var(--haze); font-variant-numeric: tabular-nums; }
+[data-num="mono"] .num, [data-num="mono"] .slabel { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+[data-num="serif"] .num { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 30px; line-height: 1; color: var(--chalk); }
+[data-num="serif"] .skill .num { font-size: 26px; }
+[data-num="serif"] .slabel { font-size: 15px; color: var(--haze); }
+[data-num="fraction"] .num, [data-num="fraction"] .slabel { font-family: var(--f-display); font-weight: 300; font-size: 22px; letter-spacing: -.02em; }
+[data-num="fraction"] .slabel { color: var(--chalk); }
+[data-num="grand"] .s-label .num { font-family: var(--f-display); font-weight: 200; font-size: clamp(64px, 7vw, 104px); line-height: .8; letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 1px var(--haze); }
+[data-num="grand"] .skill .num { font-family: var(--f-display); font-weight: 300; font-size: 22px; }
+[data-num="grand"] .slabel { font-size: 14px; color: var(--chalk); padding-top: 10px; }
+[data-num="glyphe"] .num { color: var(--blush); font-size: 14px; }
+[data-num="glyphe"] .s-label { display: flex; flex-wrap: wrap; align-items: baseline; align-content: start; gap: 6px 10px; }
+[data-num="glyphe"] .slabel { font-family: var(--f-display); font-weight: 300; font-size: 22px; letter-spacing: -.02em; }
+[data-num="glyphe"] .s-label > :nth-child(n+3) { flex-basis: 100%; }
+[data-num="glyphe"] .s-label > .replay { flex-basis: auto; }
+
+/* Embargo A : enveloppe cachetée */
+.i-env { background: radial-gradient(70% 70% at 50% 40%, #2b2050, #121019 75%); perspective: 900px; }
+.i-env .env { position: absolute; left: 16%; right: 16%; top: 24%; bottom: 20%; background: #ece6da; border-radius: 4px; box-shadow: 0 30px 50px -20px rgba(0,0,0,.7); }
+.i-env .env::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent 49.6%, #dcd4c5 50%) left / 50% 100% no-repeat, linear-gradient(to top left, transparent 49.6%, #dcd4c5 50%) right / 50% 100% no-repeat; }
+.i-env .flap { position: absolute; left: 0; right: 0; top: 0; height: 58%; background: #e4ddcf; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .9s var(--ease); filter: drop-shadow(0 4px 6px rgba(0,0,0,.15)); }
+.i-env .seal { position: absolute; left: 50%; top: 58%; width: 22%; aspect-ratio: 1; translate: -50% -50%; border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 35% 30%, #8d6be8, #4a2a9e 55%, #2a1466); box-shadow: inset 0 0 0 3px rgba(255,255,255,.08), 0 6px 12px rgba(30,10,70,.5); display: grid; place-items: center; transition: rotate .9s var(--ease); }
+.i-env .seal img { width: 62%; opacity: .9; filter: grayscale(.2) brightness(1.4) drop-shadow(0 1px 0 rgba(0,0,0,.4)); }
+.shot:hover .i-env .flap { transform: rotateX(28deg); }
+.shot:hover .i-env .seal { rotate: -8deg; }
+
+/* Embargo B : carte à gratter */
+.i-scratch { background: radial-gradient(70% 70% at 50% 45%, #2b2050, #121019 75%); display: grid; place-items: center; text-align: center; }
+.i-scratch .msg { display: grid; gap: 6px; padding: 12%; }
+.i-scratch .msg strong { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.05; color: var(--chalk); }
+.i-scratch .msg span { color: var(--haze); font-size: 13px; }
+.i-scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; }
+.i-scratch .hint2 { position: absolute; left: 0; right: 0; bottom: 8%; text-align: center; color: #3b3550; font-size: 12px; pointer-events: none; z-index: 2; transition: opacity .4s; }
+
+/* Embargo C : compte à rebours */
+.i-count { background: radial-gradient(60% 60% at 50% 50%, #2b2050, #121019 72%); display: grid; place-items: center; }
+.i-count .glow2 { position: absolute; width: 40%; left: 30%; top: 22%; opacity: .55; filter: blur(22px); }
+.i-count .cnt { position: relative; display: grid; justify-items: center; gap: 4px; }
+.i-count .cnt b { font-family: var(--f-display); font-weight: 200; font-size: clamp(72px, 9vw, 140px); letter-spacing: -.06em; line-height: .85; color: var(--chalk); font-variant-numeric: tabular-nums; }
+.i-count .cnt span { color: var(--haze); font-size: 14px; }
 
 /* Projet sous embargo */
 .i-teaser { background: radial-gradient(60% 60% at 50% 50%, #2b2050, #121019 72%); }
@@ -254,7 +298,13 @@ a { color: inherit; }
 .switch a { text-decoration: none; font-size: 13px; color: var(--haze); padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
 .switch a[aria-current="page"] { background: var(--chalk); color: var(--night); }
 .switch span { align-self: center; padding: 0 8px 0 10px; }
-.switch .kbtn { width: 34px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
+.switch { flex-wrap: wrap; justify-content: center; max-width: calc(100vw - 32px); border-radius: 22px; row-gap: 2px; }
+.switch .grp { display: inline-flex; align-items: center; gap: 2px; padding-right: 6px; }
+.switch .grp + .grp { border-left: 1px solid var(--rule); padding-left: 4px; }
+.switch .ebtn, .switch .nbtn { width: 30px; height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
+.switch .ebtn[aria-pressed="true"], .switch .nbtn[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
+.switch .kbtn.wide { width: auto; padding: 0 10px; }
+.switch .kbtn { height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
 .switch .kbtn[aria-pressed="true"] { background: var(--blush); color: var(--night); }
 @media (max-width: 640px) { .switch { flex-wrap: wrap; justify-content: center; width: calc(100vw - 32px); border-radius: 22px; } }
 
@@ -317,7 +367,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" id="projets" aria-labelledby="h-projets">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="mono dim">01</span><span class="mono">Projets</span></div>
+      <div class="s-label"><span class="num" data-n="1" data-t="4"></span><span class="slabel">Projets</span></div>
       <div class="s-body">
         <h2 id="h-projets">Des univers pensés pour prendre vie.</h2>
         <div class="projects" id="projects"></div>
@@ -328,15 +378,15 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" aria-labelledby="h-sf">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="mono dim">02</span><span class="mono">Savoir-faire</span></div>
+      <div class="s-label"><span class="num" data-n="2" data-t="4"></span><span class="slabel">Savoir-faire</span></div>
       <div class="s-body">
         <h2 id="h-sf">De l'idée à l'univers, du concept au mouvement.</h2>
         <div class="skills">
-          <div class="skill"><span class="mono dim">01</span><h3>Identité</h3><p>Logo, univers visuel, charte, mascotte.</p></div>
-          <div class="skill"><span class="mono dim">02</span><h3>Déclinaisons</h3><p>PowerPoint, slide decks, print.</p></div>
-          <div class="skill"><span class="mono dim">03</span><h3>Motion</h3><p>Motion design et vidéo, accélérés par l'IA générative.</p></div>
-          <div class="skill"><span class="mono dim">04</span><h3>Expérience</h3><p>Événements, fil rouge, photobooth.</p></div>
-          <div class="skill"><span class="mono dim">05</span><h3>Digital interne</h3><p>SharePoint et intranet.</p></div>
+          <div class="skill"><span class="num" data-n="1" data-t="5"></span><h3>Identité</h3><p>Logo, univers visuel, charte, mascotte.</p></div>
+          <div class="skill"><span class="num" data-n="2" data-t="5"></span><h3>Déclinaisons</h3><p>PowerPoint, slide decks, print.</p></div>
+          <div class="skill"><span class="num" data-n="3" data-t="5"></span><h3>Motion</h3><p>Motion design et vidéo, accélérés par l'IA générative.</p></div>
+          <div class="skill"><span class="num" data-n="4" data-t="5"></span><h3>Expérience</h3><p>Événements, fil rouge, photobooth.</p></div>
+          <div class="skill"><span class="num" data-n="5" data-t="5"></span><h3>Digital interne</h3><p>SharePoint et intranet.</p></div>
         </div>
       </div>
     </div>
@@ -345,7 +395,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" aria-labelledby="h-about">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="mono dim">03</span><span class="mono">À propos</span></div>
+      <div class="s-label"><span class="num" data-n="3" data-t="4"></span><span class="slabel">À propos</span></div>
       <div class="s-body">
         <h2 id="h-about">Huit ans de conseil, un œil de designer.</h2>
         <div class="about">
@@ -359,7 +409,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section contact" id="contact" aria-labelledby="h-contact">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="mono dim">04</span><span class="mono">Contact</span><span class="mono dim" id="ct-name" style="margin-top:18px"></span><button class="replay mono" id="ct-replay" type="button">↻ Rejouer</button></div>
+      <div class="s-label"><span class="num" data-n="4" data-t="4"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" style="margin-top:18px"></span><button class="replay mono" id="ct-replay" type="button">↻ Rejouer</button></div>
       <div class="s-body" id="ct-body"></div>
     </div>
   </section>
@@ -367,18 +417,15 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <footer class="c foot mono dim"><span>© 2026 Julie Ramier · Paris</span><span>Mentions légales</span></footer>
 </main>
 
-<nav class="switch" aria-label="Variantes du header à tester">
-  <span class="mono dim">Header</span>
-  <a href="#header-c" id="t-c">Ta compo</a>
-  <a href="#header-a" id="t-a">A · Mosaïque</a>
-  <a href="#header-b" id="t-b">B · Bazar organisé</a>
-  <span class="mono dim">Contact</span>
-  <button type="button" class="kbtn" data-k="1">1</button>
-  <button type="button" class="kbtn" data-k="2">2</button>
-  <button type="button" class="kbtn" data-k="3">3</button>
-  <button type="button" class="kbtn" data-k="4">4</button>
-  <button type="button" class="kbtn" data-k="5">5</button>
-  <button type="button" class="kbtn" data-k="6">6</button>
+<nav class="switch" aria-label="Variantes à tester">
+  <div class="grp"><span class="mono dim">Header</span>
+    <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
+  <div class="grp"><span class="mono dim">Contact</span>
+    <button type="button" class="kbtn" data-k="3">3</button><button type="button" class="kbtn" data-k="4">4</button><button type="button" class="kbtn wide" data-k="7">3 + 4</button></div>
+  <div class="grp"><span class="mono dim">Embargo</span>
+    <button type="button" class="ebtn" data-e="a">A</button><button type="button" class="ebtn" data-e="b">B</button><button type="button" class="ebtn" data-e="c">C</button></div>
+  <div class="grp"><span class="mono dim">Numéros</span>
+    <button type="button" class="nbtn" data-s="serif">1</button><button type="button" class="nbtn" data-s="fraction">2</button><button type="button" class="nbtn" data-s="grand">3</button><button type="button" class="nbtn" data-s="glyphe">4</button><button type="button" class="nbtn" data-s="mono" title="Version actuelle">0</button></div>
 </nav>
 
 <dialog id="detail" aria-labelledby="d-title">
@@ -407,7 +454,6 @@ const IMG = {
   evenement: `<div class="img"><img class="ph" src="${A}evenement-kaleidoscope.webp" alt="Visuel de l'événement interne"></div>`,
   sharepoint: `<div class="img i-sharepoint"><div class="bar"><i></i><i></i><i></i></div><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i></div></div>`,
   orbit: `<div class="img"><img class="ph" src="${A}orbit-logo-scene.webp" alt="Logo Orbit projeté sur un écran devant un auditoire"></div>`,
-  voeux: `<div class="img i-teaser"><img class="ph" src="${A}etoile.webp" alt=""><span class="embargo mono">Sous embargo</span></div>`,
   restaurant: `<div class="img" style="background:#fff"><img class="ph" style="object-fit:contain;padding:10%" src="${A}utah-logo.webp" alt="Logo Utah, coffee shop dog-friendly"></div>`,
 };
 const P = [
@@ -468,20 +514,67 @@ const headerC = `<div class="compo" id="compo">
   <div class="el glass" aria-hidden="true" style="--x:80%;--y:76.7%;--w:16.3%;--z:3;--d:20;--delay:.55s"><img class="floaty" style="--fd:-2.5s" src="${A}icone-calques.webp" alt=""></div>
 </div>`;
 
+/* Carte de vœux sous embargo : 3 idées */
+const daysToNewYear = () => { const now = new Date(), ny = new Date(now.getFullYear() + 1, 0, 1); return Math.ceil((ny - now) / 864e5); };
+const EMB = {
+  a: () => `<div class="img i-env"><div class="env"><div class="flap"></div><div class="seal"><img src="${A}etoile.webp" alt=""></div></div></div>`,
+  b: () => `<div class="img i-scratch"><div class="msg"><strong>Patience…<br>elle arrive avec la nouvelle année.</strong><span>Carte de vœux, encore sous scellés</span></div><canvas></canvas><span class="hint2 mono">Grattez</span></div>`,
+  c: () => `<div class="img i-count"><img class="glow2" src="${A}etoile.webp" alt=""><div class="cnt"><b>J-${daysToNewYear()}</b><span>avant les vœux</span></div></div>`,
+};
+const EMBMETA = { a: ["Carte de vœux", "Encore sous pli", "Cachetée"], b: ["Carte de vœux", "À gratter… sans rien révéler", "Bientôt"], c: ["Carte de vœux", "Dévoilée avec la nouvelle année", "Bientôt"] };
+let emb = "a";
+Object.defineProperty(IMG, "voeux", { get: () => EMB[emb](), enumerable: true });
+function initScratch(root) {
+  root.querySelectorAll(".i-scratch canvas").forEach(cv => {
+    const box = cv.parentElement, r = box.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+    cv.width = Math.max(1, r.width * dpr); cv.height = Math.max(1, r.height * dpr);
+    const g = cv.getContext("2d"); g.scale(dpr, dpr);
+    const grad = g.createLinearGradient(0, 0, r.width, r.height); grad.addColorStop(0, "#c9c4d6"); grad.addColorStop(.5, "#ece9f3"); grad.addColorStop(1, "#b7b0c8");
+    g.fillStyle = grad; g.fillRect(0, 0, r.width, r.height);
+    for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(80,70,110,${Math.random() * .12})`; g.fillRect(Math.random() * r.width, Math.random() * r.height, 1.5, 1.5); }
+    g.globalCompositeOperation = "destination-out";
+    let last = null;
+    cv.addEventListener("pointermove", e => { const b = cv.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+      g.lineWidth = 34; g.lineCap = "round"; g.beginPath(); g.moveTo(last ? last[0] : x, last ? last[1] : y); g.lineTo(x, y); g.stroke(); last = [x, y];
+      const h = box.querySelector(".hint2"); if (h) h.style.opacity = 0; });
+    cv.addEventListener("pointerleave", () => last = null);
+  });
+}
+
 /* Projets (contenu de page) */
+function renderProjects() {
 document.getElementById("projects").innerHTML = P.map(p => `
   <button class="shot proj" data-id="${p.id}" aria-label="Ouvrir le projet ${p.name}" style="height:auto">
     <div class="frame">${IMG[p.id]}</div>
     <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
   </button>`).join("");
+  initScratch(document.getElementById("projects"));
+}
+function setEmbargo(k) {
+  emb = k; const v = P.find(p => p.id === "voeux"); [v.name, v.disc, v.year] = EMBMETA[k];
+  renderProjects();
+  document.querySelectorAll(".ebtn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.e === k)));
+}
+document.querySelectorAll(".ebtn").forEach(b => b.addEventListener("click", () => { setEmbargo(b.dataset.e); document.querySelector('#projects [data-id="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" }); }));
+
+/* Numérotation */
+function setNum(st) {
+  document.documentElement.dataset.num = st;
+  document.querySelectorAll(".num").forEach(el => { const n = +el.dataset.n, t = +el.dataset.t;
+    el.textContent = st === "serif" ? `N°${n}` : st === "fraction" ? `${n}/${t}` : st === "grand" ? n : st === "glyphe" ? "✦" : String(n).padStart(2, "0"); });
+  document.querySelectorAll(".nbtn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st)));
+}
+document.querySelectorAll(".nbtn").forEach(b => b.addEventListener("click", () => { setNum(b.dataset.s); document.getElementById("projets").scrollIntoView({ behavior: "smooth" }); }));
+setNum("serif");
+setEmbargo("a");
 
 /* Routage entre les deux headers */
 const media = document.getElementById("media");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function route() {
-  const h = location.hash === "#header-a" ? "a" : location.hash === "#header-b" ? "b" : "c";
-  media.innerHTML = { a: headerA, b: headerB, c: headerC }[h];
-  ["a", "b", "c"].forEach(k => document.getElementById("t-" + k).toggleAttribute("aria-current", false));
+  const h = location.hash === "#header-a" ? "a" : "c";
+  media.innerHTML = { a: headerA, c: headerC }[h];
+  ["a", "c"].forEach(k => document.getElementById("t-" + k).toggleAttribute("aria-current", false));
   document.getElementById("t-" + h).setAttribute("aria-current", "page");
   const pile = document.getElementById("pile") || document.getElementById("compo");
   if (pile && !reduce) {
@@ -605,6 +698,14 @@ K[6] = { name: "Contour puis plein", html: `
         <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
       </div>`,
   init(root) { return playOnView(root.querySelector(".k6")); } };
+K[7] = { name: "Lueur + mots qui changent", html: `
+      <div class="k3"><div class="card"><span class="glow" aria-hidden="true"></span>
+        <div class="k4" style="display:grid;gap:clamp(32px,4vw,56px)">
+          <h2 id="h-contact">Un <span class="rot" aria-live="off"><span>logo</span></span><br>à faire vivre ?</h2>
+          <div class="dots" aria-hidden="true"></div>
+          <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
+        </div></div></div>`,
+  init(root) { const a = K[3].init(root), b = K[4].init(root); return { replay() { a.replay(); b.replay(); }, stop() { a.stop(); b.stop(); } }; } };
 let api = { replay() {}, stop() {} };
 function showContact(k) {
   api.stop(); current = k;
@@ -618,7 +719,7 @@ document.querySelectorAll(".kbtn").forEach(b => b.addEventListener("click", () =
   setTimeout(() => api.replay(), reduce ? 0 : 500);
 }));
 document.getElementById("ct-replay").addEventListener("click", () => api.replay());
-showContact(1);
+showContact(7);
 
 /* Fiche projet */
 const dlg = document.getElementById("detail");
@@ -631,6 +732,7 @@ document.addEventListener("click", e => {
   document.getElementById("d-sum").textContent = p.sum;
   document.getElementById("d-meta").innerHTML = p.meta.map(([k, v]) => `<dt>${k.toUpperCase()}</dt><dd>${v}</dd>`).join("");
   document.getElementById("d-cta").hidden = !!p.teaser;
+  initScratch(document.getElementById("d-vis"));
   const gal = document.getElementById("d-gal"); gal.hidden = !p.gallery;
   gal.innerHTML = (p.gallery || []).map((f, k) => `<img src="${A}${f}" alt="Visuel ${k + 1} du projet" tabindex="0" class="${k ? "" : "on"}">`).join("");
   gal.onclick = gal.onkeydown = e => { const im = e.target.closest("img"); if (!im || (e.type === "keydown" && e.key !== "Enter")) return;
