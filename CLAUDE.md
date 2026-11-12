@@ -15,6 +15,7 @@ Site portfolio personnel. Langue principale : français (anglais en option).
   5. Design SharePoint d'un programme interne
   6. Kaizo : atelier de branding, naming, logo, mascotte poulpe et identité d'une solution tech créée sans designer (2026)
   7. Orbit : marque FICTIVE créée pour tester les outils d'IA → toujours la présenter comme projet personnel / exploration IA, jamais comme projet client
+  9. Carte de vœux (visuel : l'étoile) : SOUS EMBARGO, ne rien montrer avant sa diffusion ; carte « Sous embargo » floutée en attendant
   8. Invitations animées : projet perso (business de templates de mariage, pas encore lancé — rester discret) + déclinaison BtoB à concevoir ; GIF « opening-door » attendu
 - **Confidentialité** : client aéronautique anonymisé (voir `docs/ux.md` §8).
 - **Chiffre clé** : événement interne de 200 personnes.
