@@ -216,10 +216,17 @@ a { color: inherit; }
 
 /* Bouton magnétique dans le header */
 .hero-row { align-items: center; gap: 8px 20px; padding-top: 0 !important; }
-.hero-orb.k2 .zone { width: clamp(128px, 9.5vw, 148px); }
-.hero-orb.k2 .orb { width: 100%; white-space: nowrap; }
-.hero-row { flex-wrap: nowrap !important; }
-.hero-orb .orb { text-decoration: none; font-size: 15px; }
+.mag { position: relative; overflow: hidden; isolation: isolate; transition: translate .8s var(--back), background .3s, color .3s; }
+.mag::before { content: ""; position: absolute; z-index: -1; left: var(--fx, 50%); top: var(--fy, 50%); width: 240%; aspect-ratio: 1; translate: -50% -50%; scale: 0; border-radius: 50%; background: var(--blush); transition: scale .6s var(--out); }
+.mag:hover::before, .mag:focus-visible::before { scale: 1; }
+.mag:hover { background: var(--chalk); border-color: var(--blush); color: var(--night); }
+.mag .lbl { display: inline-block; transition: translate .8s var(--back); }
+/* Mots qui changent dans la phrase du header */
+.rot2 { display: inline-grid; vertical-align: bottom; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; color: var(--blush); transition: width .8s var(--out); }
+.rot2 span { grid-area: 1 / 1; white-space: nowrap; transition: translate .9s var(--out), opacity .6s, filter .6s; }
+.rot2 span.out { translate: 0 -105%; opacity: 0; filter: blur(6px); }
+.rot2 span.in { translate: 0 105%; opacity: 0; filter: blur(6px); }
+@media (prefers-reduced-motion: reduce) { .rot2, .rot2 span, .mag, .mag .lbl { transition: none; } }
 
 /* Contact 1 · Révélation */
 .k1 .line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
@@ -315,16 +322,6 @@ a { color: inherit; }
 .switch .kbtn[aria-pressed="true"] { background: var(--blush); color: var(--night); }
 @media (max-width: 640px) { .switch { flex-wrap: wrap; justify-content: center; width: calc(100vw - 32px); border-radius: 22px; } }
 
-/* Aimant du bouton « Écrivez-moi » (header) */
-(() => {
-  const zone = document.getElementById("hero-zone"), orb = zone.querySelector(".orb"), lbl = zone.querySelector(".lbl");
-  if (reduce) return;
-  zone.addEventListener("pointermove", e => { const r = zone.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
-    orb.style.translate = `${dx * .35}px ${dy * .35}px`; lbl.style.translate = `${dx * .15}px ${dy * .15}px`;
-    const o = orb.getBoundingClientRect(); orb.style.setProperty("--fx", `${e.clientX - o.left}px`); orb.style.setProperty("--fy", `${e.clientY - o.top}px`); });
-  zone.addEventListener("pointerleave", () => { orb.style.translate = "0 0"; lbl.style.translate = "0 0"; });
-})();
-
 /* Fiche projet */
 dialog { border: 1px solid var(--rule); background: var(--slate); color: var(--chalk); border-radius: 22px; padding: 0; width: min(780px, calc(100vw - 32px)); max-height: calc(100vh - 48px); }
 dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
@@ -370,10 +367,10 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <div class="hero-text">
     <span class="mono dim">Designer graphique &amp; motion · Paris</span>
     <h1>Julie<br>Ramier</h1>
-    <p class="phrase">Je conçois des univers visuels qui se déclinent et prennent vie sur tous les supports.</p>
+    <p class="phrase">Je conçois des univers visuels qui se déclinent et prennent vie sur <span class="rot2" id="hero-rot"><span>tous les supports</span></span>.</p>
     <p class="sub">Logo, slides, motion, événement, SharePoint.<br>8&nbsp;ans en cabinet de conseil.</p>
     <div class="row hero-row">
-      <div class="k2 hero-orb"><div class="zone" id="hero-zone"><a class="orb" href="#contact"><span class="lbl">Écrivez-moi</span></a></div></div>
+      <a class="cta solid mag" href="#contact" id="hero-cta"><span class="lbl">Écrivez-moi <span aria-hidden="true">→</span></span></a>
       <span class="cta" title="Le CV sera ajouté au site">Télécharger mon CV</span>
     </div>
   </div>
@@ -426,7 +423,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section contact" id="contact" aria-labelledby="h-contact">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="4" data-t="4"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" style="margin-top:18px"></span><button class="replay mono" id="ct-replay" type="button">↻ Rejouer</button></div>
+      <div class="s-label"><span class="num" data-n="4" data-t="4"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" hidden></span><button class="replay mono" id="ct-replay" type="button" hidden>↻ Rejouer</button></div>
       <div class="s-body" id="ct-body"></div>
     </div>
   </section>
@@ -437,10 +434,6 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 <nav class="switch" aria-label="Variantes à tester">
   <div class="grp"><span class="mono dim">Header</span>
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
-  <div class="grp"><span class="mono dim">Contact</span>
-    <button type="button" class="kbtn" data-k="3">3</button><button type="button" class="kbtn" data-k="4">4</button></div>
-  <div class="grp"><span class="mono dim">Numéros</span>
-    <button type="button" class="nbtn wide" data-s="fraction">Fin</button><button type="button" class="nbtn wide" data-s="grand">Grand creux</button></div>
 </nav>
 
 <dialog id="detail" aria-labelledby="d-title">
@@ -726,7 +719,35 @@ document.querySelectorAll(".kbtn").forEach(b => b.addEventListener("click", () =
   setTimeout(() => api.replay(), reduce ? 0 : 500);
 }));
 document.getElementById("ct-replay").addEventListener("click", () => api.replay());
-showContact(4);
+showContact(3);
+
+/* Bouton « Écrivez-moi » du header : léger aimant + remplissage depuis le curseur */
+(() => {
+  const btn = document.getElementById("hero-cta"), lbl = btn.querySelector(".lbl");
+  btn.addEventListener("pointermove", e => { const r = btn.getBoundingClientRect();
+    btn.style.setProperty("--fx", `${e.clientX - r.left}px`); btn.style.setProperty("--fy", `${e.clientY - r.top}px`);
+    if (reduce) return; const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    btn.style.translate = `${dx * .18}px ${dy * .3}px`; lbl.style.translate = `${dx * .08}px ${dy * .12}px`; });
+  btn.addEventListener("pointerleave", () => { btn.style.translate = "0 0"; lbl.style.translate = "0 0"; });
+})();
+
+/* Mots qui changent dans la phrase du header */
+(() => {
+  const rot = document.getElementById("hero-rot"); if (reduce) return;
+  const words = ["une slide", "une affiche", "un écran", "un événement", "une vidéo", "tous les supports"];
+  let i = words.length - 1;
+  const measure = w => { const t = document.createElement("span"); t.textContent = w; t.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap"; rot.append(t); const width = t.getBoundingClientRect().width; t.remove(); return width; };
+  rot.style.width = measure(words[i]) + "px";
+  const step = () => {
+    const old = rot.querySelector("span:not(.out)"); i = (i + 1) % words.length;
+    const n = document.createElement("span"); n.textContent = words[i]; n.className = "in"; rot.append(n);
+    rot.style.width = measure(words[i]) + "px";
+    requestAnimationFrame(() => requestAnimationFrame(() => { n.classList.remove("in"); old.classList.add("out"); }));
+    setTimeout(() => old.remove(), 900);
+    setTimeout(step, i === words.length - 1 ? 4200 : 1900);
+  };
+  setTimeout(step, 3200);
+})();
 
 /* Fiche projet */
 const dlg = document.getElementById("detail");
