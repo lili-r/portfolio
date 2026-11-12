@@ -54,7 +54,7 @@ Titre : **Des projets qui avaient besoin d'une identité, et de la faire vivre.*
 
 ### Savoir-faire
 Label : SAVOIR-FAIRE
-Titre : **Une identité, puis tout ce qui la fait vivre.**
+Titre : **De l'idée à l'univers, du concept au mouvement.** (validé par Julie)
 - **01 Identité** : logo, univers visuel, charte. Le point de départ de tout le reste.
 - **02 Déclinaisons** : présentations PowerPoint, print, kits de communication. L'identité appliquée au quotidien, prête à être utilisée par les équipes.
 - **03 Motion** : motion design et vidéo, accélérés par l'IA générative et guidés par un œil de designer.
