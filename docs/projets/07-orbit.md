@@ -5,9 +5,9 @@
 - **Discipline** : création de logo
 - **Visuel** : logo Orbit projeté sur l'écran d'un auditorium (`visuels/orbit-logo-scene.webp`)
 - **Année** : [À COMPLÉTER]
-- **Contexte** : [À COMPLÉTER : pour qui ? client, projet personnel, concept ?]
+- **Contexte** : marque fictive, projet personnel pour tester les outils d'IA générative (à présenter comme tel, jamais comme un projet client)
 - **Rôle** : [À COMPLÉTER]
 - **Livrables** : logo [+ À COMPLÉTER : déclinaisons, animation, charte ?]
 - **Ce dont je suis le plus fière** : [À COMPLÉTER]
 
-Piste de titre : *« Orbit, un logo pensé pour la scène »* (à valider).
+Piste de titre : *« Orbit, une marque fictive pour explorer l'IA »* (à valider).

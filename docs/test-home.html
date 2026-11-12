@@ -398,7 +398,7 @@ const IMG = {
   evenement: `<div class="img"><img class="ph" src="${A}evenement-kaleidoscope.webp" alt="Visuel de l'événement interne"></div>`,
   sharepoint: `<div class="img i-sharepoint"><div class="bar"><i></i><i></i><i></i></div><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i></div></div>`,
   orbit: `<div class="img"><img class="ph" src="${A}orbit-logo-scene.webp" alt="Logo Orbit projeté sur un écran devant un auditoire"></div>`,
-  restaurant: `<div class="img i-restaurant"></div>`,
+  restaurant: `<div class="img" style="background:#fff"><img class="ph" style="object-fit:contain;padding:10%" src="${A}utah-logo.webp" alt="Logo Utah, coffee shop dog-friendly"></div>`,
 };
 const P = [
   { id: "programme", n: "01", gallery: ["programme-cnum.webp", "programme-sharepoint-portrait.webp", "programme-tampon.webp"], name: "Programme interne", year: "2024", disc: "Direction artistique · Mascotte · Événement",
@@ -415,10 +415,10 @@ const P = [
     title: "Un événement interne pour 200 personnes", sum: "Communication, slide decks et photobooth. Étude de cas en cours de rédaction.", meta: [["Public","200 participants"],["Livrables","Communication, slide decks, photobooth"]] },
   { id: "sharepoint", n: "05", name: "Intranet SharePoint", year: "—", disc: "Digital interne · UI",
     title: "L'espace SharePoint d'un programme interne", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Digital interne, UI"]] },
-  { id: "orbit", n: "07", name: "Orbit", year: "—", disc: "Création de logo",
-    title: "Orbit, un logo pensé pour la scène", sum: "Création du logo Orbit. Étude de cas en cours de rédaction.", meta: [["Disciplines","Création de logo, identité"]] },
-  { id: "restaurant", n: "06", name: "Restaurant", year: "—", disc: "Logo · Identité",
-    title: "Le logo d'un restaurant", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Logo, identité"]] },
+  { id: "orbit", n: "07", name: "Orbit", year: "—", disc: "Exploration IA · Logo",
+    title: "Orbit, une marque fictive pour explorer l'IA", sum: "Un projet personnel : créer une marque de bout en bout, du logo à sa mise en scène, pour tester ce que les outils d'IA générative apportent au travail de designer. Étude de cas en cours de rédaction.", meta: [["Type","Projet personnel, marque fictive"],["Disciplines","Création de logo, mise en scène, IA générative"]] },
+  { id: "restaurant", n: "06", name: "Utah", year: "—", disc: "Logo · Identité · Coffee shop",
+    title: "Utah, le logo d'un coffee shop dog-friendly", sum: "Création du logo d'Utah, un coffee shop qui accueille les chiens. Étude de cas en cours de rédaction.", meta: [["Disciplines","Logo, identité"]] },
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 const shot = id => id === "portrait"
