@@ -229,10 +229,6 @@ textarea.field { resize: vertical; min-height: 84px; }
 <nav class="switch" aria-label="Variantes à tester">
   <div class="grp" id="sw-name"><span>Nom</span>
     <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button><button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button><button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button></div>
-  <div class="grp" id="sw-entry"><span>Entrées</span>
-    <button type="button" data-e="a" aria-pressed="true">Équipes / Clients</button><button type="button" data-e="b" aria-pressed="false">Interne / Externe</button><button type="button" data-e="c" aria-pressed="false">Programme / Marque</button></div>
-  <div class="grp" id="sw-tr"><span>Transition</span>
-    <button type="button" data-t="fondu" aria-pressed="true">Fondu</button><button type="button" data-t="eclosion" aria-pressed="false">Éclosion</button><button type="button" data-t="vague" aria-pressed="false">Vague</button></div>
 </nav>
 
 <nav class="c nav" aria-label="Navigation du site">
@@ -258,13 +254,13 @@ textarea.field { resize: vertical; min-height: 84px; }
     <div class="starts">
       <button type="button" class="start" data-mode="interne" aria-pressed="true">
         <span class="tick" aria-hidden="true"></span>
-        <h3 id="st-i-t">À vos équipes</h3>
+        <h3 id="st-i-t">Vos équipes</h3>
         <p id="st-i-p">Communication interne : programme de transformation, nouvel outil, événement, onboarding.</p>
         <span class="spec">Ma spécialité depuis 8 ans</span>
       </button>
       <button type="button" class="start" data-mode="externe" aria-pressed="false">
         <span class="tick" aria-hidden="true"></span>
-        <h3 id="st-e-t">À vos clients</h3>
+        <h3 id="st-e-t">Vos clients</h3>
         <p id="st-e-p">Communication externe : marque, produit, lieu, nouvelle offre.</p>
       </button>
     </div>
@@ -479,7 +475,7 @@ $("pname").addEventListener("input", update);
 
 /* Point de départ + libellés à tester */
 const ENTRIES = {
-  a: { q: "À qui votre projet doit-il parler ?", i: ["À vos équipes", "Communication interne : programme de transformation, nouvel outil, événement, onboarding."], e: ["À vos clients", "Communication externe : marque, produit, lieu, nouvelle offre."] },
+  a: { q: "À qui votre projet doit-il parler ?", i: ["Vos équipes", "Communication interne : programme de transformation, nouvel outil, événement, onboarding."], e: ["Vos clients", "Communication externe : marque, produit, lieu, nouvelle offre."] },
   b: { q: "De quelle communication s'agit-il ?", i: ["Communication interne", "Un programme, une transformation, un outil ou un événement qui doit embarquer vos collaborateurs."], e: ["Communication externe", "Une marque, un produit, un lieu ou une offre qui doit se faire connaître et se faire aimer."] },
   c: { q: "Qu'est-ce qui doit prendre vie ?", i: ["Un programme interne", "Transformation, nouvelle organisation, outil à déployer, plan de formation."], e: ["Une marque", "Création ou refonte : une entreprise, un produit, un lieu, une offre."] },
 };
@@ -493,7 +489,6 @@ function setMode(m) { mode = m; const interne = m === "interne";
   $("q-cible-l").textContent = interne ? "Qui doit-on embarquer ?" : "À qui s'adresse-t-on ?";
   buildChips(); update(); }
 document.querySelectorAll(".start").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
-document.querySelectorAll("#sw-entry button").forEach(b => b.addEventListener("click", () => { setEntry(b.dataset.e); $("h1s").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); }));
 document.querySelectorAll("#sw-name button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("#sw-name button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
   document.querySelector("[data-name]").textContent = b.dataset.n; document.querySelector("[data-name-short]").textContent = b.dataset.n; }));
@@ -505,9 +500,7 @@ function buildChips() {
 
 /* ───────── Planche ───────── */
 const board = $("board"), hero = $("hero"), decos = [...hero.querySelectorAll(".deco")];
-let lastN = 0, trans = "fondu";
-document.querySelectorAll("#sw-tr button").forEach(b => b.addEventListener("click", () => {
-  trans = b.dataset.t; document.querySelectorAll("#sw-tr button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); }));
+let lastN = 0;
 
 /* Transition entre deux profils : on fige l'ancienne planche dans un calque « fantôme »
    posé par-dessus, on applique le nouveau profil dessous, puis le fantôme s'efface en douceur. */
@@ -523,26 +516,16 @@ function ghost() {
   return gh;
 }
 const SOFT = "cubic-bezier(.45,0,.2,1)";
+/* Éclosion (choix de Julie) : les anciennes formes se replient, les nouvelles s'ouvrent comme une fleur */
 function morph(gh) {
   const anims = [], tiles = [...gh.querySelector(".grid").children];
   const go = (el, k, o) => anims.push(el.animate(k, { fill: "both", easing: SOFT, ...o }));
-  if (trans === "fondu") {
-    /* fondu enchaîné en cascade : chaque carreau se dissout dans un léger flou, du haut vers le bas */
-    tiles.forEach((t, i) => go(t, [{ opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(7px)" }], { duration: 760, delay: i * 65 }));
-  } else if (trans === "eclosion") {
-    /* éclosion : les anciennes formes se replient sur elles-mêmes, les nouvelles s'ouvrent comme une fleur */
-    gh.querySelectorAll(".deco").forEach((d, i) => go(d, [{ scale: 1, rotate: "0deg" }, { scale: .2, rotate: "50deg" }], { duration: 420, delay: i * 40 }));
-    tiles.forEach((t, i) => go(t, [{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 60 + i * 35 }));
-    decos.forEach((d, i) => go(d, [{ scale: .15, rotate: "-50deg" }, { scale: 1, rotate: "0deg" }], { duration: 900, delay: 220 + i * 90, easing: "cubic-bezier(.2,.8,.2,1)" }));
-    go(board.querySelector(":scope > .grid .lockup"), [{ translate: "0 1.4cqw", opacity: .2 }, { translate: "0 0", opacity: 1 }], { duration: 760, delay: 200 });
-    board.querySelectorAll(":scope > .grid :is(.track span, .pictos .g, .pills i)").forEach((el, i) =>
-      go(el, [{ scale: .6, opacity: 0 }, { scale: 1, opacity: 1 }], { duration: 640, delay: 260 + (i % 14) * 28, easing: "cubic-bezier(.2,.8,.2,1)" }));
-  } else {
-    /* vague : une nappe très douce balaie la planche de haut en bas et dévoile le nouveau profil */
-    const m = [{ maskPosition: "0 100%", webkitMaskPosition: "0 100%" }, { maskPosition: "0 0%", webkitMaskPosition: "0 0%" }];
-    Object.assign(gh.style, { maskImage: "linear-gradient(transparent 38%, #000 62%)", webkitMaskImage: "linear-gradient(transparent 38%, #000 62%)", maskSize: "100% 300%", webkitMaskSize: "100% 300%" });
-    go(gh, m, { duration: 1100, easing: "cubic-bezier(.6,0,.3,1)" });
-  }
+  gh.querySelectorAll(".deco").forEach((d, i) => go(d, [{ scale: 1, rotate: "0deg" }, { scale: .2, rotate: "50deg" }], { duration: 420, delay: i * 40 }));
+  tiles.forEach((t, i) => go(t, [{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 60 + i * 35 }));
+  decos.forEach((d, i) => go(d, [{ scale: .15, rotate: "-50deg" }, { scale: 1, rotate: "0deg" }], { duration: 900, delay: 220 + i * 90, easing: "cubic-bezier(.2,.8,.2,1)" }));
+  go(board.querySelector(":scope > .grid .lockup"), [{ translate: "0 1.4cqw", opacity: .2 }, { translate: "0 0", opacity: 1 }], { duration: 760, delay: 200 });
+  board.querySelectorAll(":scope > .grid :is(.track span, .pictos .g, .pills i)").forEach((el, i) =>
+    go(el, [{ scale: .6, opacity: 0 }, { scale: 1, opacity: 1 }], { duration: 640, delay: 260 + (i % 14) * 28, easing: "cubic-bezier(.2,.8,.2,1)" }));
   Promise.all(anims.map(a => a.finished)).catch(() => {}).finally(() => {
     gh.remove();
     anims.forEach(a => { try { a.cancel(); } catch (e) {} });
