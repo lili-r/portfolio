@@ -1,0 +1,570 @@
+<title>Le Nuancier de Julie Ramier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1&family=Space+Mono&display=swap">
+<style>
+/* Layout : même grille 12 colonnes que l'accueil. Réglages à gauche (col. 1–6), aperçu collant à droite (col. 7–12), puis portrait et brief. Univers sombre de l'accueil, l'aperçu porte toute la couleur. */
+:root {
+  --night: #0f0f0e;
+  --slate: #191917;
+  --rule: #2a2926;
+  --chalk: #ecebe6;
+  --haze: #8f8b83;
+  --blush: #e7b9b6;
+  --ember: #e0532b;
+  --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-serif: "Fraunces", Georgia, serif;
+  --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --gap: clamp(16px, 2vw, 32px);
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --out: cubic-bezier(.16,1,.3,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--night); color: var(--chalk); }
+body { font-family: var(--f-body); font-size: 16px; line-height: 1.6; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 140px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 300; text-wrap: balance; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--blush); outline-offset: 3px; }
+.dim { color: var(--haze); }
+.c { max-width: 1280px; margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+.c > * { min-width: 0; }
+.num { font-family: var(--f-display); font-weight: 300; font-size: 22px; letter-spacing: -.02em; color: var(--haze); font-variant-numeric: tabular-nums; }
+
+/* Navigation (identique à l'accueil) */
+.nav { padding-block: 28px; align-items: center; }
+.nav .brand { grid-column: 1 / 4; font-size: 14px; }
+.nav ul { grid-column: 4 / 13; display: flex; justify-content: flex-end; gap: clamp(16px, 3vw, 40px); list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--haze); }
+.nav .here { color: var(--chalk); }
+
+/* Intro */
+.intro { padding-block: clamp(48px, 7vw, 112px) clamp(56px, 7vw, 104px); }
+.intro .eyebrow { grid-column: 1 / 13; color: var(--haze); font-size: 14px; margin-bottom: 20px; }
+.intro h1 { grid-column: 1 / 9; font-size: clamp(56px, 9vw, 136px); letter-spacing: -.06em; line-height: .86; }
+.intro .lead { grid-column: 1 / 7; margin-top: 32px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; }
+.intro .how { grid-column: 8 / 13; align-self: end; display: grid; gap: 12px; color: var(--haze); font-size: 15px; }
+.intro .how div { display: grid; grid-template-columns: 40px 1fr; border-top: 1px solid var(--rule); padding-top: 12px; }
+
+/* Étapes */
+.step { padding-block: 0 clamp(80px, 9vw, 140px); }
+.step-head { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); border-top: 1px solid var(--rule); padding-top: 24px; margin-bottom: clamp(32px, 4vw, 56px); }
+.step-head .lbl { grid-column: 1 / 4; display: grid; gap: 4px; align-content: start; }
+.step-head .lbl span:last-child { font-size: 14px; }
+.step-head h2 { grid-column: 4 / 13; font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; line-height: 1.02; max-width: 20ch; }
+
+/* 01 · point de départ */
+.starts { grid-column: 4 / 13; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.start { text-align: left; border: 1px solid var(--rule); background: var(--slate); border-radius: 20px; padding: clamp(20px, 2.4vw, 32px); cursor: pointer; display: grid; gap: 14px; transition: border-color .3s, background .3s; }
+.start h3 { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.035em; }
+.start p { color: var(--haze); font-size: 15px; }
+.start .spec { font-family: var(--f-serif); font-style: italic; font-size: 17px; color: var(--blush); }
+.start[aria-pressed="true"] { border-color: var(--chalk); background: #22211e; }
+.start .tick { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--haze); display: grid; place-items: center; }
+.start[aria-pressed="true"] .tick { background: var(--chalk); border-color: var(--chalk); }
+.start[aria-pressed="true"] .tick::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--night); }
+
+/* 02 · réglages + aperçu */
+.workbench { grid-column: 1 / 13; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); column-gap: clamp(32px, 5vw, 80px); align-items: start; }
+.controls { display: grid; gap: 4px; }
+.namefield { display: grid; gap: 8px; margin-bottom: 28px; }
+.namefield label { font-size: 14px; color: var(--haze); }
+.namefield input { width: 100%; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--f-display); font-size: 28px; font-weight: 300; letter-spacing: -.03em; }
+.namefield input:focus { outline: none; border-bottom-color: var(--chalk); }
+.group-title { font-size: 14px; color: var(--haze); padding-top: 28px; padding-bottom: 6px; }
+.slider { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 10px; padding-block: 18px; border-top: 1px solid var(--rule); }
+.slider .l, .slider .r { font-family: var(--f-display); font-size: 19px; letter-spacing: -.02em; transition: color .3s; color: var(--haze); }
+.slider .r { text-align: right; }
+.slider .l.on, .slider .r.on { color: var(--chalk); }
+.slider input { grid-column: 1 / -1; width: 100%; appearance: none; -webkit-appearance: none; height: 28px; background: transparent; cursor: pointer; }
+.slider input::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--chalk) var(--p, 50%), var(--rule) var(--p, 50%)); border-radius: 2px; }
+.slider input::-moz-range-track { height: 2px; background: var(--rule); border-radius: 2px; }
+.slider input::-moz-range-progress { height: 2px; background: var(--chalk); }
+.slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 50%; background: var(--chalk); border: 6px solid var(--night); box-shadow: 0 0 0 1px var(--chalk); transition: scale .2s; }
+.slider input::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--chalk); border: 6px solid var(--night); box-shadow: 0 0 0 1px var(--chalk); }
+.slider input:active::-webkit-slider-thumb { scale: 1.2; }
+.slider .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -8px; pointer-events: none; }
+.slider .ticks i { width: 1px; height: 6px; background: var(--rule); }
+.prog-only[hidden] { display: none; }
+
+/* Aperçu (spectaculaire) */
+.stage { position: sticky; top: calc(24px + env(safe-area-inset-top, 0px)); display: grid; gap: 12px; }
+.stage-cap { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--haze); }
+.pv { position: relative; overflow: hidden; border-radius: var(--pv-r, 18px); aspect-ratio: 4 / 5; max-width: 100%; background: var(--pv-bg); color: var(--pv-fg); transition: background .6s var(--ease), color .6s var(--ease), border-radius .6s var(--ease); isolation: isolate; }
+.pv::after { content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: var(--pv-grain, .2); mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.pv .shape { position: absolute; z-index: 0; border-radius: var(--sh-r); background: var(--c); width: var(--s); aspect-ratio: 1; left: var(--x); top: var(--y); opacity: var(--o, 1);
+  transition: border-radius .7s var(--ease), background .7s var(--ease), width .7s var(--ease), opacity .5s, left .9s var(--ease), top .9s var(--ease);
+  animation: float var(--dur, 8s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
+@keyframes float { from { transform: translate(calc(var(--amp) * -1), calc(var(--amp) * .6)) rotate(calc(var(--rot) * -1)); } to { transform: translate(var(--amp), calc(var(--amp) * -.8)) rotate(var(--rot)); } }
+.pv .lines { position: absolute; inset: 7%; z-index: 1; border: 1px solid currentColor; opacity: var(--lines-o, 0); border-radius: calc(var(--pv-r, 18px) * .6); transition: opacity .6s; pointer-events: none; }
+.pv .body { position: absolute; inset: 0; z-index: 2; padding: 8%; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; }
+.pv .top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: .8; }
+.pv .center { align-self: center; display: grid; gap: 14px; transform: rotate(var(--wm-rot, 0deg)) translate(var(--wm-x, 0), 0); transition: transform .7s var(--ease); }
+.pv .wm { position: relative; font-size: var(--wm-size, 60px); line-height: .92; letter-spacing: var(--wm-ls, -.04em); text-transform: var(--wm-tt, none); overflow-wrap: normal; word-break: normal; hyphens: none; transition: letter-spacing .6s var(--ease), font-size .6s var(--ease); }
+.pv .wm span { display: block; transition: opacity .35s var(--ease), filter .35s var(--ease), font-variation-settings .6s var(--ease), font-weight .6s; }
+.pv .wm span.off { opacity: 0; filter: blur(8px); }
+.pv .wm .serif { font-family: var(--f-serif); font-variation-settings: "SOFT" var(--soft, 0), "WONK" var(--wonk, 0), "opsz" 144; font-weight: var(--wght, 400); }
+.pv .wm .sans { position: absolute; inset: 0; font-family: var(--f-display); font-weight: var(--wght, 400); }
+.pv .tag { font-size: clamp(14px, 1.3vw, 18px); line-height: 1.3; max-width: 26ch; opacity: .92; }
+.pv .decl { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.pv .chip { border-radius: var(--ui-r, 999px); padding: 8px 14px; font-size: 12px; background: var(--pv-p); color: var(--pv-on-p); transition: border-radius .6s var(--ease), background .6s; }
+.pv .chip.ghost { background: transparent; border: 1px solid currentColor; color: inherit; }
+.pv .slide { width: 92px; aspect-ratio: 16 / 9; border-radius: calc(var(--ui-r2, 6px)); background: var(--pv-s); display: grid; align-content: end; padding: 6px; gap: 3px; transition: border-radius .6s var(--ease), background .6s; }
+.pv .slide i { display: block; height: 3px; width: 70%; background: var(--pv-p); border-radius: 2px; }
+.pv .slide i + i { width: 45%; opacity: .6; }
+.pv .people { display: flex; opacity: var(--people-o, 0); transition: opacity .6s; }
+.pv .people i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--pv-bg); margin-left: -7px; background: var(--pv-s); }
+.pv .people i:nth-child(2) { background: var(--pv-p); } .pv .people i:nth-child(3) { background: var(--pv-a); }
+.pv .megaphone { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding: 10px 8%; font-size: 12px; background: var(--pv-p); color: var(--pv-on-p); translate: 0 var(--mega-y, -100%); transition: translate .6s var(--ease); }
+.pv .timeline { display: flex; gap: 6px; align-items: center; }
+.pv .timeline i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .25; transition: opacity .4s; }
+.pv .timeline i.on { opacity: .9; }
+.swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.swatches div { height: 34px; border-radius: 8px; transition: background .6s var(--ease); }
+.stage .fonts { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--haze); }
+
+/* 03 · portrait */
+.portrait { grid-column: 4 / 13; display: grid; gap: 28px; }
+.portrait .says { font-family: var(--f-display); font-weight: 300; font-size: clamp(28px, 3.4vw, 48px); letter-spacing: -.04em; line-height: 1.08; }
+.portrait .says em { font-style: normal; color: var(--blush); }
+.traits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.traits div { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 6px; }
+.traits strong { font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: -.02em; }
+.traits span { color: var(--haze); font-size: 14px; }
+.open { background: var(--slate); border: 1px solid var(--rule); border-radius: 18px; padding: 22px 24px; display: grid; gap: 8px; }
+.open h3 { font-size: 22px; letter-spacing: -.02em; }
+.open p { color: var(--haze); font-size: 15px; }
+.copyrow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* 04 · brief */
+.brief { grid-column: 4 / 13; display: grid; gap: 34px; }
+.q { display: grid; gap: 12px; border: 0; padding: 0; margin: 0; }
+.q legend, .q > label { font-family: var(--f-display); font-size: 22px; letter-spacing: -.02em; padding: 0; }
+.q .hint { color: var(--haze); font-size: 14px; margin-top: -6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { position: relative; }
+.chips input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.chips span { display: inline-block; border: 1px solid var(--rule); border-radius: 999px; padding: 9px 16px; font-size: 14px; transition: background .2s, color .2s, border-color .2s; }
+.chips input:checked + span { background: var(--chalk); color: var(--night); border-color: var(--chalk); }
+.chips input:focus-visible + span { outline: 2px solid var(--blush); outline-offset: 2px; }
+.field { background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 10px 0; font-size: 17px; width: 100%; }
+.field:focus { outline: none; border-bottom-color: var(--chalk); }
+textarea.field { resize: vertical; min-height: 84px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 14px; color: var(--haze); align-items: start; }
+.consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--chalk); }
+.cta { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; border: 1px solid var(--chalk); border-radius: 999px; padding: 13px 22px; font-size: 14px; background: transparent; cursor: pointer; text-decoration: none; transition: background .25s, color .25s, border-color .25s; }
+.cta:hover { background: var(--chalk); color: var(--night); }
+.cta.solid { background: var(--chalk); color: var(--night); }
+.cta.solid:hover { background: var(--blush); border-color: var(--blush); }
+.err { color: var(--ember); font-size: 14px; min-height: 1.4em; }
+.sent { background: var(--slate); border: 1px solid var(--rule); border-radius: 22px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.sent h3 { font-size: clamp(28px, 3vw, 42px); letter-spacing: -.04em; }
+
+/* Mode équipe + atelier */
+.team { grid-column: 4 / 13; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.team h2 { font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; line-height: 1.02; }
+.team .txt { display: grid; gap: 18px; }
+.team .txt p { color: var(--haze); }
+.demo { background: var(--slate); border: 1px solid var(--rule); border-radius: 20px; padding: 24px; display: grid; gap: 22px; }
+.demo .row { display: grid; gap: 10px; }
+.demo .row .ends { display: flex; justify-content: space-between; font-size: 14px; color: var(--haze); }
+.demo .track { position: relative; height: 2px; background: var(--rule); }
+.demo .dot { position: absolute; top: 50%; width: 26px; height: 26px; translate: -50% -50%; border-radius: 50%; display: grid; place-items: center; font-size: 10px; color: var(--night); font-weight: 500; }
+.demo .gap { position: absolute; top: -4px; height: 10px; background: rgba(231,185,182,.18); border-radius: 4px; }
+.demo .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--haze); }
+.demo .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.demo .note { font-size: 13px; color: var(--haze); }
+
+/* Barre de test */
+.switch { row-gap: 0; }
+@media (max-width: 560px) { .switch { flex-wrap: nowrap; } .switch span { display: none; } .switch button { padding: 7px 10px; font-size: 12px; } }
+.switch { position: fixed; z-index: 30; left: 50%; translate: -50% 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(25,25,23,.94); border: 1px solid var(--rule); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,.5); max-width: calc(100vw - 32px); flex-wrap: wrap; justify-content: center; }
+.switch span { padding: 0 8px 0 12px; font-family: var(--f-mono); font-size: 11px; color: var(--haze); text-transform: uppercase; letter-spacing: .04em; }
+.switch button { border: 0; background: none; color: var(--haze); font-size: 13px; padding: 8px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.switch button[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
+
+@media (max-width: 960px) {
+  .intro h1, .intro .lead, .intro .how, .starts, .portrait, .brief, .team, .step-head { grid-column: 1 / -1; }
+  .intro .how { margin-top: 36px; }
+  .step-head { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
+  .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
+  .workbench { grid-template-columns: minmax(0, 1fr); }
+  .stage { position: sticky; top: 0; z-index: 4; background: var(--night); padding-block: 10px; grid-row: 1; }
+  .pv { aspect-ratio: 16 / 10; }
+  .pv .tag, .pv .decl .slide { display: none; }
+  .stage .swatches, .stage .fonts { display: none; }
+  .team { grid-template-columns: minmax(0, 1fr); }
+  .nav ul { display: none; }
+}
+@media (max-width: 560px) {
+  .starts, .traits, .two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv .shape { animation: none; }
+  .pv *, .pv { transition: none !important; }
+}
+</style>
+
+<nav class="c nav" aria-label="Navigation du site">
+  <span class="brand">Julie Ramier</span>
+  <ul><li>Projets</li><li>Savoir-faire</li><li class="here" data-name-short>Le Nuancier</li><li>À propos</li><li>Contact</li></ul>
+</nav>
+
+<header class="c intro">
+  <p class="eyebrow">Un outil gratuit, pour poser les bases d'une identité</p>
+  <h1 data-name>Le Nuancier</h1>
+  <p class="lead">Réglez la personnalité de votre programme ou de votre marque, voyez-la prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 5 minutes.</p>
+  <div class="how">
+    <div><span class="num">01</span><span>Choisissez votre point de départ</span></div>
+    <div><span class="num">02</span><span>Réglez les curseurs</span></div>
+    <div><span class="num">03</span><span>Lisez votre portrait</span></div>
+    <div><span class="num">04</span><span>Envoyez votre brief</span></div>
+  </div>
+</header>
+
+<main>
+  <!-- 01 -->
+  <section class="c step" aria-labelledby="h1s">
+    <div class="step-head"><div class="lbl"><span class="num">01</span><span>Point de départ</span></div><h2 id="h1s">Qu'est-ce qui doit prendre vie ?</h2></div>
+    <div class="starts">
+      <button type="button" class="start" data-mode="programme" aria-pressed="true">
+        <span class="tick" aria-hidden="true"></span>
+        <h3>Un programme interne</h3>
+        <p>Transformation, nouvelle organisation, outil à déployer, plan de formation : un projet qui doit embarquer des collaborateurs.</p>
+        <span class="spec">Ma spécialité depuis 8 ans</span>
+      </button>
+      <button type="button" class="start" data-mode="marque" aria-pressed="false">
+        <span class="tick" aria-hidden="true"></span>
+        <h3>Une marque</h3>
+        <p>Création ou refonte : une entreprise, un produit, un lieu, une offre qui doit se faire connaître et se faire aimer.</p>
+      </button>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="c step" aria-labelledby="h2s">
+    <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Bougez les curseurs. Il n'y a pas de mauvaise réponse.</h2></div>
+    <div class="workbench">
+      <div class="controls" id="controls">
+        <div class="namefield">
+          <label for="pname" id="pname-l">Nom du programme (facultatif)</label>
+          <input id="pname" type="text" maxlength="28" placeholder="Votre programme" autocomplete="off">
+        </div>
+      </div>
+      <aside class="stage" aria-label="Aperçu en direct">
+        <div class="stage-cap"><span>Aperçu en direct</span><span>Indicatif, pas une proposition finale</span></div>
+        <div class="pv" id="pv" aria-hidden="true">
+          <div class="megaphone">Annonce · Le programme démarre lundi</div>
+          <span class="shape" data-i="0"></span><span class="shape" data-i="1"></span><span class="shape" data-i="2"></span><span class="shape" data-i="3"></span><span class="shape" data-i="4"></span>
+          <div class="lines"></div>
+          <div class="body">
+            <div class="top"><span id="pv-kind">Programme interne</span><div class="timeline" id="tl"></div></div>
+            <div class="center">
+              <div class="wm" id="wm"><span class="serif">Votre programme</span><span class="sans">Votre programme</span></div>
+              <p class="tag" id="tag"></p>
+            </div>
+            <div class="decl">
+              <span class="chip">Découvrir</span><span class="chip ghost">En savoir plus</span>
+              <span class="slide"><i></i><i></i></span>
+              <span class="people"><i></i><i></i><i></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="swatches" id="sw"><div></div><div></div><div></div><div></div></div>
+        <div class="fonts"><span id="f-name">Typographie</span><span id="f-mood"></span></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="c step" aria-labelledby="h3s">
+    <div class="step-head"><div class="lbl"><span class="num">03</span><span>Votre portrait</span></div><h2 id="h3s">Voici ce que vos réglages racontent.</h2></div>
+    <div class="portrait">
+      <p class="says" id="says"></p>
+      <div class="traits" id="traits"></div>
+      <div class="open" id="open"></div>
+      <div class="copyrow"><button type="button" class="cta" id="copy">Copier mon portrait</button><span class="dim" id="copy-s" aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="c step" aria-labelledby="h4s">
+    <div class="step-head"><div class="lbl"><span class="num">04</span><span>Votre brief</span></div><h2 id="h4s">Encore quatre questions, et votre brief est prêt.</h2></div>
+    <form class="brief" id="brief" novalidate>
+      <fieldset class="q"><legend>Qui doit-on embarquer ?</legend>
+        <div class="chips" id="q-cible"></div></fieldset>
+      <div class="q"><label for="q-obj">Quel est l'objectif, en une phrase ?</label>
+        <textarea class="field" id="q-obj" placeholder="Ex. : faire adopter le nouvel outil par toutes les équipes d'ici juin"></textarea></div>
+      <fieldset class="q"><legend>De quoi aurez-vous besoin ?</legend><p class="hint">Plusieurs réponses possibles.</p>
+        <div class="chips" id="q-sup"></div></fieldset>
+      <div class="two">
+        <div class="q"><label for="q-when">Pour quand ?</label>
+          <select class="field" id="q-when"><option value="">Choisir</option><option>Moins d'un mois</option><option>1 à 3 mois</option><option>3 à 6 mois</option><option>Pas encore fixé</option></select></div>
+        <div class="q"><label for="q-budget">Une enveloppe ? <span class="dim">(facultatif)</span></label>
+          <select class="field" id="q-budget"><option value="">Je préfère en parler</option><option>Moins de 5 000 €</option><option>5 000 à 15 000 €</option><option>15 000 à 40 000 €</option><option>Plus de 40 000 €</option></select></div>
+      </div>
+      <div class="two">
+        <div class="q"><label for="q-name">Votre nom</label><input class="field" id="q-name" autocomplete="name"></div>
+        <div class="q"><label for="q-mail">Votre e-mail professionnel</label><input class="field" id="q-mail" type="email" autocomplete="email"></div>
+      </div>
+      <label class="consent"><input type="checkbox" id="q-ok"><span>J'accepte que Julie Ramier utilise ces informations pour me recontacter au sujet de mon projet. Elles ne sont ni revendues ni utilisées à d'autres fins.</span></label>
+      <p class="err" id="err" aria-live="polite"></p>
+      <div><button type="submit" class="cta solid">Envoyer mon brief à Julie →</button></div>
+    </form>
+    <div class="brief" id="sent" hidden>
+      <div class="sent">
+        <h3>Votre brief est prêt.</h3>
+        <p class="dim">Prototype : sur le site, ce bouton enverra le brief à Julie via un service de formulaire. Elle vous répond sous 48 h pour en parler.</p>
+        <div><button type="button" class="cta" id="again">Modifier mes réponses</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Équipe -->
+  <section class="c step" aria-labelledby="h5s">
+    <div class="step-head"><div class="lbl"><span class="num">05</span><span>Et en équipe ?</span></div><h2 id="h5s">Vous êtes plusieurs à porter le projet ?</h2></div>
+    <div class="team">
+      <div class="txt">
+        <p>Chacun règle ses curseurs de son côté. Les écarts montrent où vous êtes d'accord, et surtout où vous ne l'êtes pas encore.</p>
+        <p>Ces écarts deviennent le point de départ d'un <strong style="color:var(--chalk);font-weight:500">atelier de positionnement</strong>, que j'anime sur place ou à distance avec vos parties prenantes. Vous en sortez avec une direction partagée, prête à devenir une direction artistique.</p>
+        <div><a class="cta solid" href="#brief">Proposer un atelier →</a></div>
+      </div>
+      <div class="demo" aria-label="Exemple de comparaison en équipe">
+        <div class="legend"><span><i style="background:var(--blush)"></i>Direction</span><span><i style="background:#9fb4e6"></i>RH</span><span><i style="background:#c7d4a3"></i>Équipe projet</span></div>
+        <div class="row"><div class="ends"><span>Rassurant</span><span>Disruptif</span></div><div class="track"><span class="gap" style="left:22%;width:56%"></span><span class="dot" style="left:22%;background:#9fb4e6">RH</span><span class="dot" style="left:48%;background:#c7d4a3">P</span><span class="dot" style="left:78%;background:var(--blush)">D</span></div></div>
+        <div class="row"><div class="ends"><span>Sérieux</span><span>Ludique</span></div><div class="track"><span class="gap" style="left:58%;width:12%"></span><span class="dot" style="left:58%;background:var(--blush)">D</span><span class="dot" style="left:64%;background:#9fb4e6">RH</span><span class="dot" style="left:70%;background:#c7d4a3">P</span></div></div>
+        <div class="row"><div class="ends"><span>Descendant</span><span>Participatif</span></div><div class="track"><span class="gap" style="left:30%;width:52%"></span><span class="dot" style="left:30%;background:var(--blush)">D</span><span class="dot" style="left:66%;background:#c7d4a3">P</span><span class="dot" style="left:82%;background:#9fb4e6">RH</span></div></div>
+        <p class="note">Exemple fictif. Un écart large = un sujet à trancher en atelier.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="switch" aria-label="Nom de l'outil à tester">
+  <span>Nom</span>
+  <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button>
+  <button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button>
+  <button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button>
+</nav>
+
+<script>
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = v => Math.max(0, Math.min(1, v));
+
+/* Curseurs : [id, gauche, droite, valeur par défaut, programme seulement] */
+const SL = [
+  ["classique", "Classique", "Contemporain", 62],
+  ["ludique", "Sérieux", "Ludique", 58],
+  ["proche", "Institutionnel", "Proche", 66],
+  ["expressif", "Discret", "Expressif", 55],
+  ["emotion", "Rationnel", "Émotionnel", 60],
+  ["exclusif", "Accessible", "Exclusif", 30],
+  ["energie", "Calme", "Énergique", 50],
+  ["genereux", "Minimal", "Généreux", 45],
+  ["participatif", "Descendant", "Participatif", 70, true],
+  ["disruptif", "Rassurant", "Disruptif", 35, true],
+  ["duree", "Ponctuel", "Au long cours", 72, true],
+];
+/* Adjectifs pour le portrait (féminin pour « marque », masculin pour « programme ») */
+const ADJ = {
+  classique: [["classique", "classique"], ["contemporain", "contemporaine"]],
+  ludique: [["sérieux", "sérieuse"], ["ludique", "ludique"]],
+  proche: [["institutionnel", "institutionnelle"], ["proche des gens", "proche des gens"]],
+  expressif: [["discret", "discrète"], ["expressif", "expressive"]],
+  emotion: [["rationnel", "rationnelle"], ["émotionnel", "émotionnelle"]],
+  exclusif: [["accessible", "accessible"], ["exclusif", "exclusive"]],
+  energie: [["calme", "calme"], ["énergique", "énergique"]],
+  genereux: [["épuré", "épurée"], ["généreux", "généreuse"]],
+  participatif: [["porté par la direction", "portée par la direction"], ["participatif", "participative"]],
+  disruptif: [["rassurant", "rassurante"], ["disruptif", "disruptive"]],
+  duree: [["ponctuel", "ponctuelle"], ["installé dans la durée", "installée dans la durée"]],
+};
+const WHY = {
+  classique: ["s'appuie sur des codes établis", "regarde vers l'avant"], ludique: ["inspire confiance par la rigueur", "crée de la complicité"],
+  proche: ["parle avec autorité", "parle d'égal à égal"], expressif: ["s'efface derrière le message", "se remarque tout de suite"],
+  emotion: ["convainc par les faits", "touche avant d'expliquer"], exclusif: ["s'adresse à tous", "cultive la rareté"],
+  energie: ["prend le temps", "donne de l'élan"], genereux: ["va à l'essentiel", "en donne beaucoup à voir"],
+  participatif: ["fixe un cap clair", "fait participer chacun"], disruptif: ["sécurise le changement", "bouscule les habitudes"],
+  duree: ["marque un temps fort", "accompagne sur la durée"],
+};
+
+let mode = "programme";
+const V = Object.fromEntries(SL.map(s => [s[0], s[3]]));
+
+/* Construction des curseurs */
+const controls = document.getElementById("controls");
+const groups = [["Personnalité", SL.filter(s => !s[4])], ["Spécifique aux programmes internes", SL.filter(s => s[4])]];
+groups.forEach(([title, list], gi) => {
+  const wrap = document.createElement("div");
+  if (gi === 1) wrap.className = "prog-only";
+  wrap.innerHTML = `<p class="group-title">${title}</p>` + list.map(([id, l, r]) => `
+    <div class="slider">
+      <span class="l" id="${id}-l">${l}</span><span class="r" id="${id}-r">${r}</span>
+      <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}">
+      <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>`).join("");
+  controls.append(wrap);
+});
+controls.addEventListener("input", e => { if (e.target.type === "range") { V[e.target.id] = +e.target.value; update(); } });
+document.getElementById("pname").addEventListener("input", update);
+
+/* Point de départ */
+document.querySelectorAll(".start").forEach(b => b.addEventListener("click", () => {
+  mode = b.dataset.mode;
+  document.querySelectorAll(".start").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelector(".prog-only").hidden = mode !== "programme";
+  document.getElementById("pname-l").textContent = mode === "programme" ? "Nom du programme (facultatif)" : "Nom de la marque (facultatif)";
+  document.getElementById("pname").placeholder = mode === "programme" ? "Votre programme" : "Votre marque";
+  document.getElementById("pv-kind").textContent = mode === "programme" ? "Programme interne" : "Marque";
+  buildChips(); update();
+}));
+
+/* Brief : choix multiples selon le point de départ */
+function buildChips() {
+  const cible = mode === "programme" ? ["Tous les collaborateurs", "Managers", "Une population métier", "Nouveaux arrivants", "Direction"] : ["Grand public", "Clients professionnels", "Partenaires", "Talents à recruter", "Communauté locale"];
+  const sup = ["Logo / nom", "Charte graphique", "Mascotte", "Slides / PowerPoint", "Motion / vidéo", "Événement", "SharePoint / intranet", "Print"];
+  const mk = (name, arr) => arr.map((t, i) => `<label><input type="checkbox" name="${name}" id="${name}-${i}" value="${t}"><span>${t}</span></label>`).join("");
+  document.getElementById("q-cible").innerHTML = mk("cible", cible);
+  document.getElementById("q-sup").innerHTML = mk("sup", sup);
+}
+
+/* Aperçu */
+const pv = document.getElementById("pv");
+const shapes = [...pv.querySelectorAll(".shape")];
+const POS = [[62, 8], [-10, 58], [70, 66], [18, 20], [40, 82]];
+const hsl = (h, s, l) => `hsl(${((h % 360) + 360) % 360} ${s}% ${l}%)`;
+function tones(t) {
+  const p = t.proche > .5, l = t.ludique > .5;
+  if (mode === "programme") return p ? (l ? "On s'y met ensemble ? C'est parti." : "Avançons ensemble, pas à pas.") : (l ? "Le changement, version grand format." : "Construire durablement notre avenir commun.");
+  return p ? (l ? "Passez nous voir, on vous attend." : "Simplement là, quand vous en avez besoin.") : (l ? "L'audace, en toute confiance." : "L'exigence comme signature.");
+}
+function update() {
+  const t = Object.fromEntries(Object.entries(V).map(([k, v]) => [k, v / 100]));
+  const prog = mode === "programme";
+  const name = document.getElementById("pname").value.trim() || (prog ? "Votre programme" : "Votre marque");
+
+  /* Couleurs : rationnel = bleu froid, émotionnel = chaud ; discret = désaturé, expressif = saturé ; exclusif = fond profond */
+  const h = lerp(218, 14, t.emotion);
+  const sat = lerp(14, 82, t.expressif);
+  const bgL = lerp(93, 11, Math.pow(t.exclusif, .9));
+  const dark = bgL < 55;
+  const comp = lerp(28, 175, t.energie) * (t.disruptif > .6 && prog ? 1.25 : 1);
+  const bg = hsl(h, sat * .35, bgL);
+  const fg = dark ? "#f4f1ea" : "#16140f";
+  const P1 = hsl(h, sat, dark ? 62 : 50), P2 = hsl(h + comp, sat * .85, dark ? 70 : 62), P3 = hsl(h - 35, sat * .6, dark ? 40 : 80), P4 = hsl(h + comp / 2, sat * .5, dark ? 30 : 88);
+  const onP = (dark ? 62 : 50) > 58 ? "#16140f" : "#fff";
+  pv.style.setProperty("--pv-bg", bg); pv.style.setProperty("--pv-fg", fg);
+  pv.style.setProperty("--pv-p", P1); pv.style.setProperty("--pv-s", P3); pv.style.setProperty("--pv-a", P2); pv.style.setProperty("--pv-on-p", onP);
+  [P1, P2, P3, P4].forEach((c, i) => document.getElementById("sw").children[i].style.background = c);
+
+  /* Formes : sérieux = angles droits, ludique = rond ; minimal = peu et petit ; énergique = rapide et ample */
+  const count = Math.round(lerp(1, 5, t.genereux));
+  const r = `${lerp(2, 50, t.ludique)}%`;
+  shapes.forEach((s, i) => {
+    const [x, y] = POS[i];
+    const jitter = prog && t.disruptif > .55 ? (i % 2 ? 8 : -8) * (t.disruptif - .5) * 2 : 0;
+    s.style.setProperty("--x", `${x + jitter}%`); s.style.setProperty("--y", `${y - jitter}%`);
+    s.style.setProperty("--s", `${lerp(22, 48, t.genereux) * (i === 0 ? 1.2 : i === 4 ? .6 : .9)}%`);
+    s.style.setProperty("--c", [P1, P2, P3, P4, P2][i]);
+    s.style.setProperty("--sh-r", i === 1 && t.ludique > .5 ? "50% 50% 50% 0" : r);
+    s.style.setProperty("--o", i < count ? (t.expressif > .3 ? 1 : .55) : 0);
+    s.style.setProperty("--dur", `${lerp(14, 2.6, t.energie)}s`);
+    s.style.setProperty("--amp", `${lerp(2, 22, t.energie)}px`);
+    s.style.setProperty("--rot", `${lerp(0, 18, t.ludique * t.energie + .1)}deg`);
+    s.style.setProperty("--dl", `${-i * 1.3}s`);
+  });
+
+  /* Typographie : classique = Fraunces, contemporain = Inter Tight ; ludique = formes molles ; expressif = graisse ; exclusif = capitales espacées */
+  const wm = document.getElementById("wm");
+  wm.querySelectorAll("span").forEach(s => s.textContent = name);
+  const sansOn = t.classique >= .5;
+  wm.querySelector(".serif").classList.toggle("off", sansOn);
+  wm.querySelector(".sans").classList.toggle("off", !sansOn);
+  pv.style.setProperty("--soft", Math.round(t.ludique * 100));
+  pv.style.setProperty("--wonk", t.ludique > .6 ? 1 : 0);
+  pv.style.setProperty("--wght", Math.round(lerp(250, 860, t.expressif)));
+  const caps = t.exclusif > .66;
+  pv.style.setProperty("--wm-tt", caps ? "uppercase" : "none");
+  pv.style.setProperty("--wm-ls", caps ? `${lerp(.04, .18, (t.exclusif - .66) * 3)}em` : `${lerp(-.06, -.01, t.genereux)}em`);
+  const longest = Math.max(5, ...name.split(/\s+/).map(w => w.length));
+  const perChar = (caps ? .78 + parseFloat(lerp(.04, .18, Math.max(0, (t.exclusif - .66) * 3))) : .6) * lerp(.95, 1.08, t.expressif);
+  pv.style.setProperty("--wm-size", `${Math.min(19, 80 / (longest * perChar)).toFixed(2)}cqw`);
+  pv.style.setProperty("--wm-rot", `${prog && t.disruptif > .55 ? -lerp(0, 5, (t.disruptif - .55) / .45) : -t.ludique * 2.5}deg`);
+  pv.style.setProperty("--wm-x", prog && t.disruptif > .7 ? "4%" : "0");
+  pv.style.setProperty("--pv-r", `${lerp(2, 30, t.ludique)}px`);
+  pv.style.setProperty("--ui-r", t.ludique > .35 ? "999px" : `${lerp(0, 8, t.ludique * 2)}px`);
+  pv.style.setProperty("--ui-r2", `${lerp(0, 10, t.ludique)}px`);
+  pv.style.setProperty("--lines-o", t.exclusif > .55 ? ((t.exclusif - .55) * 1.6).toFixed(2) : 0);
+  pv.style.setProperty("--pv-grain", lerp(.08, .32, t.emotion).toFixed(2));
+  document.getElementById("tag").textContent = tones(t);
+
+  /* Spécifique programme : participatif = visages, descendant = bandeau d'annonce, durée = étapes */
+  pv.style.setProperty("--people-o", prog ? Math.max(0, (t.participatif - .4) * 1.7).toFixed(2) : 0);
+  pv.style.setProperty("--mega-y", prog && t.participatif < .35 ? "0%" : "-100%");
+  const steps = prog ? Math.round(lerp(1, 6, t.duree)) : 0;
+  document.getElementById("tl").innerHTML = prog ? Array.from({ length: 6 }, (_, i) => `<i class="${i < steps ? "on" : ""}"></i>`).join("") : "";
+
+  document.getElementById("f-name").textContent = t.classique < .45 ? "Typo à empattements, littéraire" : t.classique > .55 ? "Typo grotesque, contemporaine" : "Entre classique et contemporain";
+  document.getElementById("f-mood").textContent = `${t.emotion > .5 ? "Palette chaude" : "Palette froide"} · ${t.energie > .5 ? "mouvements vifs" : "mouvements lents"}`;
+
+  /* Libellés actifs */
+  SL.forEach(([id]) => { const v = V[id]; document.getElementById(id).style.setProperty("--p", v + "%");
+    document.getElementById(id + "-l").classList.toggle("on", v <= 45); document.getElementById(id + "-r").classList.toggle("on", v >= 55); });
+
+  portrait(t, name);
+}
+
+/* Portrait */
+function portrait(t, name) {
+  const prog = mode === "programme", g = prog ? 0 : 1;
+  const active = SL.filter(s => prog || !s[4]).map(([id]) => ({ id, v: t[id], d: Math.abs(t[id] - .5) }));
+  const top = [...active].sort((a, b) => b.d - a.d).slice(0, 3);
+  const words = top.map(x => ADJ[x.id][x.v > .5 ? 1 : 0][g]);
+  const list = words.length === 3 ? `${words[0]}, ${words[1]} et ${words[2]}` : words.join(" et ");
+  const subject = name.startsWith("Votre") ? (prog ? "Votre programme" : "Votre marque") : name;
+  document.getElementById("says").innerHTML = `${subject} est ${prog ? "un programme" : "une marque"} <em>${list}</em>.`;
+  document.getElementById("traits").innerHTML = top.map(x => { const s = SL.find(q => q[0] === x.id);
+    return `<div><strong>${x.v > .5 ? s[2] : s[1]}</strong><span>${prog ? "Il" : "Elle"} ${WHY[x.id][x.v > .5 ? 1 : 0]}.</span></div>`; }).join("");
+  const undecided = active.filter(x => x.d < .08).map(x => { const s = SL.find(q => q[0] === x.id); return `${s[1].toLowerCase()} ou ${s[2].toLowerCase()}`; });
+  document.getElementById("open").innerHTML = undecided.length
+    ? `<h3>${undecided.length > 1 ? "Des questions encore ouvertes" : "Une question encore ouverte"}</h3><p>Vous n'avez pas tranché entre ${undecided.slice(0, 3).join(", ")}. C'est souvent là que se joue la différence, et un très bon sujet d'atelier.</p>`
+    : `<h3>Vos choix sont tranchés</h3><p>C'est une base solide pour une direction artistique. Il reste à vérifier que toute l'équipe partage ces réglages.</p>`;
+}
+
+/* Copier le portrait */
+document.getElementById("copy").addEventListener("click", async () => {
+  const txt = document.getElementById("says").textContent + "\n" + SL.filter(s => mode === "programme" || !s[4]).map(([id, l, r]) => `${l} ${"·".repeat(Math.round(V[id] / 10))}|${"·".repeat(10 - Math.round(V[id] / 10))} ${r}`).join("\n");
+  const out = document.getElementById("copy-s");
+  try { await navigator.clipboard.writeText(txt); out.textContent = "Portrait copié."; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("says")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = "Texte sélectionné : copiez-le avec Ctrl + C."; }
+});
+
+/* Envoi du brief (prototype) */
+document.getElementById("brief").addEventListener("submit", e => {
+  e.preventDefault();
+  const err = document.getElementById("err");
+  const mail = document.getElementById("q-mail").value.trim();
+  if (!document.getElementById("q-name").value.trim()) return err.textContent = "Indiquez votre nom pour que Julie sache à qui répondre.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return err.textContent = "Cet e-mail semble incomplet. Vérifiez-le, par exemple prenom@entreprise.fr.";
+  if (!document.getElementById("q-ok").checked) return err.textContent = "Cochez la case de consentement pour pouvoir envoyer votre brief.";
+  err.textContent = "";
+  document.getElementById("brief").hidden = true; document.getElementById("sent").hidden = false;
+});
+document.getElementById("again").addEventListener("click", () => { document.getElementById("brief").hidden = false; document.getElementById("sent").hidden = true; });
+
+/* Nom de l'outil à tester */
+document.querySelectorAll(".switch button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".switch button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelector("[data-name]").textContent = b.dataset.n;
+  document.querySelector("[data-name-short]").textContent = b.dataset.n;
+  document.title = `${b.dataset.n} · Julie Ramier`;
+}));
+
+pv.style.containerType = "inline-size";
+buildChips(); update();
+</script>

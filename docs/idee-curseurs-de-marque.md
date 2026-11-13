@@ -1,6 +1,8 @@
 # Idée : page « curseurs de personnalité de marque »
 
-> Brainstorm v1. Rien n'est validé.
+> Brainstorm v1. Prototype : `docs/nuancier.html`.
+>
+> **Choix de Julie** : tester les 3 noms ; double point de départ (marque / programme interne), la niche « programme interne » mise en avant ; offre d'atelier affichée sans prix ; aperçu spectaculaire ; accès depuis le menu + recommandation : depuis la section Contact.
 
 ## L'idée en une phrase
 Une page interactive où un client règle des curseurs (Classique ↔ Contemporain, Sérieux ↔ Ludique…) pour poser la personnalité de sa marque ou de son programme. Il repart avec un brief clair, et il a une raison concrète d'écrire à Julie.
