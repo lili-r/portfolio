@@ -90,6 +90,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .prof strong { font-family: var(--f-display); font-weight: 400; font-size: clamp(20px, 1.9vw, 26px); letter-spacing: -.02em; }
 .prof-desc { grid-column: 1 / -1; font-size: 14px; color: var(--haze); }
 .board { container-type: inline-size; aspect-ratio: 3 / 4.05; max-height: calc(100vh - 104px); max-width: 100%; border-radius: var(--b-r, 16px); overflow: hidden; background: var(--b-bg); transition: background .7s var(--ease), border-radius .6s var(--ease); }
+.board { position: relative; }
+.ghost { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .grid { height: 100%; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: 5.4fr .9fr 2fr 1.25fr 3fr; gap: 1.5cqw; padding: 1.5cqw; }
 .tile { position: relative; overflow: hidden; min-width: 0; min-height: 0; border-radius: var(--t-r, 12px); transition: background .7s var(--ease), color .7s var(--ease), border-radius .6s var(--ease), rotate .7s var(--ease); }
 .board svg { display: block; width: 100%; height: 100%; overflow: visible; }
@@ -229,6 +231,8 @@ textarea.field { resize: vertical; min-height: 84px; }
     <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button><button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button><button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button></div>
   <div class="grp" id="sw-entry"><span>Entrées</span>
     <button type="button" data-e="a" aria-pressed="true">Équipes / Clients</button><button type="button" data-e="b" aria-pressed="false">Interne / Externe</button><button type="button" data-e="c" aria-pressed="false">Programme / Marque</button></div>
+  <div class="grp" id="sw-tr"><span>Transition</span>
+    <button type="button" data-t="fondu" aria-pressed="true">Fondu</button><button type="button" data-t="eclosion" aria-pressed="false">Éclosion</button><button type="button" data-t="vague" aria-pressed="false">Vague</button></div>
 </nav>
 
 <nav class="c nav" aria-label="Navigation du site">
@@ -501,7 +505,49 @@ function buildChips() {
 
 /* ───────── Planche ───────── */
 const board = $("board"), hero = $("hero"), decos = [...hero.querySelectorAll(".deco")];
-let lastN = 0;
+let lastN = 0, trans = "fondu";
+document.querySelectorAll("#sw-tr button").forEach(b => b.addEventListener("click", () => {
+  trans = b.dataset.t; document.querySelectorAll("#sw-tr button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); }));
+
+/* Transition entre deux profils : on fige l'ancienne planche dans un calque « fantôme »
+   posé par-dessus, on applique le nouveau profil dessous, puis le fantôme s'efface en douceur. */
+function ghost() {
+  const gh = document.createElement("div");
+  gh.className = "ghost"; gh.style.cssText = board.style.cssText;
+  const g = board.querySelector(".grid").cloneNode(true);
+  g.querySelectorAll("[id]").forEach(e => e.removeAttribute("id"));
+  gh.append(g); board.append(gh);
+  /* les animations continues (frise, formes qui ondulent) reprennent là où elles en étaient */
+  const live = [...board.querySelectorAll(":scope > .grid .track, :scope > .grid .deco svg")], copy = [...gh.querySelectorAll(".track, .deco svg")];
+  copy.forEach((el, i) => { const a = live[i]?.getAnimations()[0], b = el.getAnimations()[0]; if (a && b) b.currentTime = a.currentTime; });
+  return gh;
+}
+const SOFT = "cubic-bezier(.45,0,.2,1)";
+function morph(gh) {
+  const anims = [], tiles = [...gh.querySelector(".grid").children];
+  const go = (el, k, o) => anims.push(el.animate(k, { fill: "both", easing: SOFT, ...o }));
+  if (trans === "fondu") {
+    /* fondu enchaîné en cascade : chaque carreau se dissout dans un léger flou, du haut vers le bas */
+    tiles.forEach((t, i) => go(t, [{ opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(7px)" }], { duration: 760, delay: i * 65 }));
+  } else if (trans === "eclosion") {
+    /* éclosion : les anciennes formes se replient sur elles-mêmes, les nouvelles s'ouvrent comme une fleur */
+    gh.querySelectorAll(".deco").forEach((d, i) => go(d, [{ scale: 1, rotate: "0deg" }, { scale: .2, rotate: "50deg" }], { duration: 420, delay: i * 40 }));
+    tiles.forEach((t, i) => go(t, [{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 60 + i * 35 }));
+    decos.forEach((d, i) => go(d, [{ scale: .15, rotate: "-50deg" }, { scale: 1, rotate: "0deg" }], { duration: 900, delay: 220 + i * 90, easing: "cubic-bezier(.2,.8,.2,1)" }));
+    go(board.querySelector(":scope > .grid .lockup"), [{ translate: "0 1.4cqw", opacity: .2 }, { translate: "0 0", opacity: 1 }], { duration: 760, delay: 200 });
+    board.querySelectorAll(":scope > .grid :is(.track span, .pictos .g, .pills i)").forEach((el, i) =>
+      go(el, [{ scale: .6, opacity: 0 }, { scale: 1, opacity: 1 }], { duration: 640, delay: 260 + (i % 14) * 28, easing: "cubic-bezier(.2,.8,.2,1)" }));
+  } else {
+    /* vague : une nappe très douce balaie la planche de haut en bas et dévoile le nouveau profil */
+    const m = [{ maskPosition: "0 100%", webkitMaskPosition: "0 100%" }, { maskPosition: "0 0%", webkitMaskPosition: "0 0%" }];
+    Object.assign(gh.style, { maskImage: "linear-gradient(transparent 38%, #000 62%)", webkitMaskImage: "linear-gradient(transparent 38%, #000 62%)", maskSize: "100% 300%", webkitMaskSize: "100% 300%" });
+    go(gh, m, { duration: 1100, easing: "cubic-bezier(.6,0,.3,1)" });
+  }
+  Promise.all(anims.map(a => a.finished)).catch(() => {}).finally(() => {
+    gh.remove();
+    anims.forEach(a => { try { a.cancel(); } catch (e) {} });
+  });
+}
 const bit = id => V[id] >= 50 ? 1 : 0;
 function tone() {
   const emo = bit("communication"), exc = bit("positionnement"), interne = mode === "interne";
@@ -517,6 +563,7 @@ function update() {
   const on = c => cr(c, dark) >= cr(c, light) ? dark : light;
   const set = (k, v) => board.style.setProperty(k, v);
   const changed = n !== lastN;
+  const gh = changed && lastN && !reduce ? ghost() : null;
   const aff = V.expression / 100, aud = V.creativite / 100;
 
   /* Couleurs */
@@ -582,7 +629,7 @@ function update() {
   $("prof-n").textContent = `Profil ${String(n).padStart(2, "0")} sur 32`;
   $("prof-name").textContent = pname;
   $("prof-desc").textContent = desc;
-  if (changed && lastN && !reduce) board.animate([{ filter: "blur(10px)", opacity: .4 }, { filter: "blur(0)", opacity: 1 }], { duration: 480, easing: "cubic-bezier(.2,.7,.2,1)" });
+  if (gh) morph(gh);
 
   SL.forEach(([id]) => { const v = V[id]; $(id).style.setProperty("--p", v + "%"); $(id + "-l").classList.toggle("on", v < 50); $(id + "-r").classList.toggle("on", v >= 50); });
   lastN = n;

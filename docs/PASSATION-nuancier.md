@@ -10,7 +10,8 @@
 ## Prototype
 - Fichier : `docs/nuancier.html`, publié en artifact : https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ. Republier sur le même fichier pour garder le lien.
 - Parcours : 01 point de départ (À vos équipes / À vos clients) → 02 cinq curseurs + planche d'identité en direct → 03 portrait → 04 brief (envoi simulé) → 05 mode équipe + atelier de positionnement (sans prix).
-- Barre de test en haut : nom (Le Nuancier / Curseurs / Réglages de marque) et formulation des entrées.
+- Barre de test en haut : nom (Le Nuancier / Curseurs / Réglages de marque), formulation des entrées et **transition entre profils** (Fondu / Éclosion / Vague).
+- Transition : l'ancienne planche est figée dans un calque « fantôme » posé par-dessus, le nouveau profil s'installe dessous, puis le fantôme s'efface (fonctions `ghost()` et `morph()`). Désactivée si l'utilisateur a demandé moins d'animations.
 
 ## Décisions de Julie
 - Outil **simple, grand public, ludique**.
@@ -25,6 +26,7 @@
 1. Quelles ambiances ne correspondent pas à son idée du profil ?
 2. Garder ou non les marques en exemple sous les curseurs ?
 3. Garder ou retirer le choix interne / externe (il ne change plus que les textes) ?
+4. Quelle transition entre profils garder : Fondu, Éclosion ou Vague ?
 
 ## Règles
 - Pas d'écriture inclusive. Commits au nom de Julie Ramier, poussés sur `main`.
