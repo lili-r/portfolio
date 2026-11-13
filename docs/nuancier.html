@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@400;500&family=Outfit:wght@300..800&family=Plus+Jakarta+Sans:wght@400;600&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display&family=Fredoka:wght@400..700&family=Unbounded:wght@400..800&family=Syne:wght@500..800&family=Bricolage+Grotesque:wght@400..800&family=Instrument+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@400;500&family=Outfit:wght@300..800&family=Plus+Jakarta+Sans:wght@400;600&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display&family=Fredoka:wght@400..700&family=Unbounded:wght@400..800&family=Syne:wght@500..800&family=Bricolage+Grotesque:wght@400..800&family=Instrument+Serif&family=DotGothic16&display=swap">
 <style>
 /* Layout : même grille 12 colonnes que l'accueil. Réglages à gauche, planche d'identité collante à droite. La page reste sombre et neutre : toute la couleur vient de la planche, composée de nuances, de typographies et de formes choisies à la main. */
 :root {
@@ -71,6 +71,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .slider { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 10px; padding-block: 18px; border-top: 1px solid var(--rule); }
 .slider .l, .slider .r { font-family: var(--f-display); font-size: 19px; letter-spacing: -.02em; transition: color .3s; color: var(--haze); }
 .slider .r { text-align: right; }
+.slider small { display: block; font-family: var(--f-body); font-size: 12px; letter-spacing: 0; color: var(--haze); opacity: .75; margin-top: 2px; }
 .slider .l.on, .slider .r.on { color: var(--chalk); }
 .slider input { grid-column: 1 / -1; width: 100%; appearance: none; -webkit-appearance: none; height: 28px; background: transparent; cursor: pointer; }
 .slider input::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--chalk) var(--p, 50%), var(--rule) var(--p, 50%)); border-radius: 2px; }
@@ -84,7 +85,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Planche d'identité */
 .stage { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); display: grid; gap: 10px; }
-.stage-cap { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--haze); }
+.prof { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; }
+.prof-n { font-size: 13px; color: var(--haze); font-variant-numeric: tabular-nums; }
+.prof strong { font-family: var(--f-display); font-weight: 400; font-size: clamp(20px, 1.9vw, 26px); letter-spacing: -.02em; }
+.prof-desc { grid-column: 1 / -1; font-size: 14px; color: var(--haze); }
 .board { container-type: inline-size; aspect-ratio: 3 / 4.05; max-height: calc(100vh - 104px); max-width: 100%; border-radius: var(--b-r, 16px); overflow: hidden; background: var(--b-bg); transition: background .7s var(--ease), border-radius .6s var(--ease); }
 .grid { height: 100%; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: 5.4fr .9fr 2fr 1.25fr 3fr; gap: 1.5cqw; padding: 1.5cqw; }
 .tile { position: relative; overflow: hidden; min-width: 0; min-height: 0; border-radius: var(--t-r, 12px); transition: background .7s var(--ease), color .7s var(--ease), border-radius .6s var(--ease), rotate .7s var(--ease); }
@@ -130,7 +134,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .portrait { grid-column: 4 / 13; display: grid; gap: 28px; }
 .portrait .says { font-family: var(--f-display); font-weight: 300; font-size: clamp(28px, 3.4vw, 48px); letter-spacing: -.04em; line-height: 1.08; }
 .portrait .says em { font-style: normal; color: var(--blush); }
-.traits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.traits { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 960px) { .traits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .traits div { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 6px; align-content: start; }
 .traits strong { font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: -.02em; }
 .traits span { color: var(--haze); font-size: 14px; }
@@ -200,7 +205,7 @@ textarea.field { resize: vertical; min-height: 84px; }
   .hero { aspect-ratio: 16 / 8; }
   .band { height: 8cqw; }
   .pills { height: 11cqw; }
-  .mono, .wide, .typo, .pictos, .recipe, .stage-cap span:last-child { display: none; }
+  .mono, .wide, .typo, .pictos, .recipe, .prof-desc { display: none; }
   .team { grid-template-columns: minmax(0, 1fr); }
   .nav ul { display: none; }
 }
@@ -234,7 +239,7 @@ textarea.field { resize: vertical; min-height: 84px; }
 <header class="c intro">
   <p class="eyebrow">Un outil gratuit, pour poser les bases d'une identité</p>
   <h1 data-name>Le Nuancier</h1>
-  <p class="lead">Réglez la personnalité de votre projet, voyez-la prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 5 minutes.</p>
+  <p class="lead">Réglez cinq curseurs, découvrez le profil de votre projet parmi 32, voyez-le prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 3 minutes.</p>
   <div class="how">
     <div><span class="num">01</span><span>Choisissez votre point de départ</span></div>
     <div><span class="num">02</span><span>Réglez les curseurs</span></div>
@@ -262,7 +267,7 @@ textarea.field { resize: vertical; min-height: 84px; }
   </section>
 
   <section class="c step" aria-labelledby="h2s">
-    <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Bougez les curseurs. Il n'y a pas de mauvaise réponse.</h2></div>
+    <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Cinq curseurs. Il n'y a pas de mauvaise réponse.</h2></div>
     <div class="workbench">
       <div class="controls" id="controls">
         <div class="namefield">
@@ -271,7 +276,7 @@ textarea.field { resize: vertical; min-height: 84px; }
         </div>
       </div>
       <aside class="stage" aria-label="Aperçu en direct">
-        <div class="stage-cap"><span>Aperçu en direct</span><span>Une piste parmi d'autres, pas une proposition finale</span></div>
+        <div class="prof"><span class="prof-n" id="prof-n"></span><strong id="prof-name"></strong><span class="prof-desc" id="prof-desc"></span></div>
         <div class="board" id="board" aria-hidden="true">
           <div class="grid">
             <div class="tile hero" id="hero">
@@ -291,7 +296,7 @@ textarea.field { resize: vertical; min-height: 84px; }
             <div class="tile pictos" id="pictos"></div>
           </div>
         </div>
-        <p class="recipe" id="recipe"></p>
+        <p class="recipe">Une ambiance parmi d'autres, pas une proposition finale.</p>
       </aside>
     </div>
   </section>
@@ -365,134 +370,106 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lerp = (a, b, t) => a + (b - a) * t;
 const $ = id => document.getElementById(id);
 
-/* ───────── Curseurs : [id, gauche, droite, défaut, portée] ───────── */
+/* ───────── 5 curseurs : [id, gauche, droite, exemple gauche, exemple droit, défaut, ce que l'axe mesure] ───────── */
 const SL = [
-  ["classique", "Classique", "Contemporain", 62],
-  ["ludique", "Sérieux", "Ludique", 58],
-  ["proche", "Institutionnel", "Proche", 66],
-  ["expressif", "Discret", "Expressif", 55],
-  ["emotion", "Rationnel", "Émotionnel", 60],
-  ["exclusif", "Accessible", "Exclusif", 30],
-  ["energie", "Calme", "Énergique", 50],
-  ["genereux", "Minimal", "Généreux", 45],
-  ["participatif", "Descendant", "Participatif", 70, "interne"],
-  ["disruptif", "Rassurant", "Disruptif", 35, "interne"],
-  ["duree", "Ponctuel", "Au long cours", 72, "interne"],
-  ["international", "Local", "International", 40, "externe"],
-  ["public", "Pour initiés", "Grand public", 65, "externe"],
-  ["engagee", "Neutre", "Engagée", 50, "externe"],
+  ["style", "Classique", "Contemporain", "Hermès", "Nothing", 66, "Codes patrimoniaux ou esthétiques actuelles"],
+  ["expression", "Discret", "Affirmé", "Aesop", "Diesel", 38, "Intensité et présence visuelle"],
+  ["communication", "Rationnel", "Émotionnel", "IBM", "Disney", 62, "Logique et preuves, ou récit et ressenti"],
+  ["positionnement", "Accessible", "Exclusif", "IKEA", "Rolex", 30, "Proximité et ouverture, ou distinction et rareté"],
+  ["creativite", "Conventionnel", "Audacieux", "LinkedIn", "Balenciaga", 40, "Respect ou détournement des codes du secteur"],
 ];
-const ADJ = {
-  classique: [["classique", "classique"], ["contemporain", "contemporaine"]], ludique: [["sérieux", "sérieuse"], ["ludique", "ludique"]],
-  proche: [["institutionnel", "institutionnelle"], ["proche des gens", "proche des gens"]], expressif: [["discret", "discrète"], ["expressif", "expressive"]],
-  emotion: [["rationnel", "rationnelle"], ["émotionnel", "émotionnelle"]], exclusif: [["accessible", "accessible"], ["exclusif", "exclusive"]],
-  energie: [["calme", "calme"], ["énergique", "énergique"]], genereux: [["épuré", "épurée"], ["généreux", "généreuse"]],
-  participatif: [["porté par la direction", "portée par la direction"], ["participatif", "participative"]], disruptif: [["rassurant", "rassurante"], ["disruptif", "disruptive"]],
-  duree: [["ponctuel", "ponctuelle"], ["installé dans la durée", "installée dans la durée"]],
-  international: [["local", "locale"], ["international", "internationale"]], public: [["réservé aux initiés", "réservée aux initiés"], ["grand public", "grand public"]], engagee: [["neutre", "neutre"], ["engagé", "engagée"]],
-};
-const WHY = {
-  classique: ["s'appuie sur des codes établis", "regarde vers l'avant"], ludique: ["inspire confiance par la rigueur", "crée de la complicité"],
-  proche: ["parle avec autorité", "parle d'égal à égal"], expressif: ["s'efface derrière le message", "se remarque tout de suite"],
-  emotion: ["convainc par les faits", "touche avant d'expliquer"], exclusif: ["s'adresse à tous", "cultive la rareté"],
-  energie: ["prend le temps", "donne de l'élan"], genereux: ["va à l'essentiel", "en donne beaucoup à voir"],
-  participatif: ["fixe un cap clair", "fait participer chacun"], disruptif: ["sécurise le changement", "bouscule les habitudes"], duree: ["marque un temps fort", "accompagne sur la durée"],
-  international: ["s'ancre dans son territoire", "parle au monde entier"], public: ["s'adresse à des connaisseurs", "s'adresse au plus grand nombre"], engagee: ["reste en retrait des débats", "prend position"],
-};
 
-/* ───────── Nuances : palettes composées à la main ───────── */
-const PAL = [
-  { id: "pervenche", name: "Pervenche", bg: "#E9E1D3", tile: "#F5EFE4", dark: "#25221F", light: "#F5EFE4", cols: ["#7C8CE0", "#B9C3EE", "#E0633A", "#F1C9B0"], pos: { exclusif: 20, proche: 70, ludique: 60, emotion: 50, expressif: 55, energie: 50 } },
-  { id: "verger", name: "Verger", bg: "#EFE6D6", tile: "#F8F2E6", dark: "#2F4A35", light: "#F8F2E6", cols: ["#CFDDA5", "#E79DB6", "#DC6638", "#2F4A35"], pos: { exclusif: 25, proche: 78, ludique: 65, emotion: 78, expressif: 60, participatif: 80 } },
-  { id: "guimauve", name: "Guimauve", bg: "#7DB183", tile: "#F6EFE6", dark: "#161616", light: "#F6EFE6", cols: ["#F0C3CB", "#F2C14E", "#2E5B3A", "#E8734A"], pos: { ludique: 90, expressif: 80, emotion: 70, energie: 65, exclusif: 20, proche: 82 } },
-  { id: "atelier", name: "Atelier", bg: "#E7E2D5", tile: "#F3EFE4", dark: "#1F1D1A", light: "#F3EFE4", cols: ["#2F52B8", "#E9A0C4", "#3F9A52", "#E7A93C"], extra: ["#A77BD8", "#E0623A"], pos: { genereux: 85, participatif: 85, expressif: 70, ludique: 65, exclusif: 25, energie: 60 } },
-  { id: "institution", name: "Institution", bg: "#E9E5DB", tile: "#F5F2EA", dark: "#14203A", light: "#F5F2EA", cols: ["#1F3A6E", "#A9B8D4", "#C0452C", "#D8CDB6"], pos: { proche: 15, ludique: 15, classique: 20, emotion: 35, expressif: 40 } },
-  { id: "cobalt", name: "Cobalt", bg: "#E4E7E1", tile: "#F3F5F1", dark: "#16181D", light: "#F3F5F1", cols: ["#2743D9", "#C8D0F5", "#FF6B3D", "#BFC6BA"], pos: { classique: 85, ludique: 25, emotion: 15, expressif: 50, exclusif: 45 } },
-  { id: "maison", name: "Maison", bg: "#18211E", tile: "#222D29", dark: "#131A18", light: "#EDE6D6", cols: ["#C8A96A", "#3B4D46", "#8F3B2E", "#EDE6D6"], pos: { exclusif: 90, classique: 15, ludique: 10, expressif: 30, energie: 25 } },
-  { id: "minuit", name: "Minuit", bg: "#1B1A18", tile: "#262422", dark: "#141312", light: "#EDE5D8", cols: ["#7C8CE0", "#B9C3EE", "#EDE5D8", "#45413C"], pos: { exclusif: 82, classique: 85, expressif: 65, ludique: 45, energie: 55 } },
-  { id: "terre", name: "Terre", bg: "#E9DCC7", tile: "#F4EBDB", dark: "#2B211B", light: "#F4EBDB", cols: ["#B5533C", "#D9B89A", "#5E6B3E", "#E8C39B"], pos: { emotion: 85, energie: 20, proche: 70, classique: 35, ludique: 35, expressif: 45 } },
-  { id: "elan", name: "Élan", bg: "#EFE9DE", tile: "#F9F5EC", dark: "#141414", light: "#F9F5EC", cols: ["#FF4F2E", "#C9B8FF", "#141414", "#FFD3C7"], pos: { energie: 90, disruptif: 85, expressif: 85, classique: 80, ludique: 55 } },
-  { id: "lagon", name: "Lagon", bg: "#DFE9E5", tile: "#F0F6F3", dark: "#17302E", light: "#F0F6F3", cols: ["#2F7F7A", "#A9D3CC", "#F2B880", "#17302E"], pos: { energie: 15, emotion: 30, disruptif: 10, exclusif: 30, ludique: 35, expressif: 35 } },
-  { id: "soleil", name: "Soleil", bg: "#F6D34A", tile: "#FFF8E1", dark: "#1B1B1B", light: "#FFF8E1", cols: ["#2F52B8", "#F29FC5", "#E0623A", "#1B1B1B"], pos: { ludique: 88, energie: 88, expressif: 92, genereux: 80, exclusif: 15 } },
-  { id: "brume", name: "Brume", bg: "#E3E0D9", tile: "#F1EFEA", dark: "#2A2A28", light: "#F1EFEA", cols: ["#2A2A28", "#BDB8AD", "#B46A4A", "#8C8A84"], pos: { expressif: 8, genereux: 10, ludique: 22, energie: 25 } },
+/* ───────── 32 profils (fichier Excel de Julie) + ambiance visuelle composée à la main ─────────
+   pal : [fond de planche, carreaux clairs, couleur sombre, couleur claire, c1 (héros), c2, c3, c4]
+   f : police de titre, t : police de texte, m : famille de formes, cs : casse du nom */
+const S = "serif", G = "sans";
+const PROFILS = [
+  [1, "Institution rassurante", "Identité stable, claire et familière, privilégiant la simplicité et les codes établis.", ["#ECE5D8","#F6F1E8","#2B2824","#F6F1E8","#8E2F2B","#CBBFA8","#6A645B","#E4D9C6"], "Fraunces", "Inter", "grille", "none", S],
+  [2, "Tradition réinventée", "Héritage reconnaissable revisité par des cadrages et traitements créatifs.", ["#E7E1D5","#F4EFE6","#1D2740","#F4EFE6","#2C3E66","#B8322A","#8EA3C2","#D9CBB0"], "DM Serif Display", "Inter", "trait", "none", S],
+  [3, "Excellence institutionnelle", "Prestige, précision et héritage ; le savoir-faire parle de lui-même.", ["#141A2C","#1D2540","#0E1322","#EEE7D7","#1D2540","#C9A96A","#3A4566","#EEE7D7"], "Cormorant Garamond", "Inter", "arche", "caps", S],
+  [4, "Avant-garde confidentielle", "Minimalisme codifié et détournement subtil des conventions du luxe.", ["#EFEDE8","#FAF9F6","#161616","#FAF9F6","#161616","#D8D5CE","#8D8A84","#FFFFFF"], "Instrument Serif", "Inter", "points", "caps", S],
+  [5, "Tradition chaleureuse", "Nostalgie, authenticité, proximité et transmission.", ["#F3EADB","#FBF5EA","#5A2E1F","#FBF5EA","#C8323A","#F0D29C","#7A4A2A","#EAD9C0"], "Fraunces", "Plus Jakarta Sans", "rond", "none", S, { soft: 100 }],
+  [6, "Poésie inattendue", "Univers narratif sensible, avec motifs et détails créatifs inattendus.", ["#EEE6D6","#F8F2E7","#1E1C1A","#F8F2E7","#1E1C1A","#C4B39A","#6D7F5C","#B07A55"], "Instrument Serif", "Inter", "arche", "none", S],
+  [7, "Luxe silencieux", "Raffinement retenu, matières nobles et photographie douce.", ["#E8E0D2","#F3EEE5","#4A4037","#F3EEE5","#A88B6A","#D8CBB7","#6E6255","#F3EEE5"], "Cormorant Garamond", "Inter", "arche", "caps", S],
+  [8, "Romantisme avant-gardiste", "Savoir-faire patrimonial associé à des concepts artistiques singuliers.", ["#ECE3D3","#F7F0E4","#33302A","#F7F0E4","#B5533C","#8A9A6B","#E8C9A0","#3C3A33"], "Fraunces", "Inter", "rond", "none", S, { soft: 60 }],
+  [9, "Autorité populaire", "Codes visuels immédiatement identifiables et cohérence de marque.", ["#F3EEE6","#FFFFFF","#1A1A1A","#FFFFFF","#D3232C","#1A1A1A","#F2D2CF","#FFFFFF"], "DM Serif Display", "Inter", "trait", "none", S],
+  [10, "Manifeste populaire", "Autorité historique et narration graphique ambitieuse.", ["#F1EEE6","#FBFAF6","#111111","#FBFAF6","#111111","#D9D4C7","#C23B22","#8C877C"], "DM Serif Display", "Inter", "grille", "none", S],
+  [11, "Prestige assumé", "Excellence statutaire, symboles forts et reconnaissance immédiate.", ["#0F3B2E","#164B3B","#0A2A20","#F1E9D2","#145240","#C8A24A","#F1E9D2","#2E6B55"], "Cormorant Garamond", "Inter", "etoile", "caps", S],
+  [12, "Pouvoir disruptif", "Performance et précision, avec expérimentations créatives.", ["#1B1B1D","#262629","#121214","#F2F2F2","#C8102E","#C9CBCE","#F2F2F2","#3A3B3E"], "DM Serif Display", "Inter", "trait", "caps", S],
+  [13, "Icône populaire", "Identité fédératrice, ludique et intergénérationnelle.", ["#FFD43B","#FFF6D6","#1A1A1A","#FFFFFF","#E3242B","#1F5FC8","#1E8C3A","#FFFFFF"], "Fraunces", "Plus Jakarta Sans", "module", "none", S, { soft: 100, w: 800 }],
+  [14, "Tradition flamboyante", "Motifs historiques, couleurs, extravagance et réinterprétation.", ["#1F4D3A","#275E48","#14352A","#F3E8D3","#C8323A","#E9A0B5","#D9B45A","#F3E8D3"], "DM Serif Display", "Inter", "etoile", "none", S],
+  [15, "Prestige théâtral", "Opulence, références historiques et mise en scène dramatique.", ["#140F0D","#211915","#0D0A08","#F1E3C4","#7E1A22","#C9A24A","#F1E3C4","#3B2A20"], "Cormorant Garamond", "Inter", "arche", "caps", S],
+  [16, "Baroque rebelle", "Romantisme sombre, références historiques et création radicale.", ["#0E0D0D","#1A1818","#0A0909","#E8E1D3","#5E0F18","#E8E1D3","#B9A27A","#4A4446"], "Instrument Serif", "Inter", "etoile", "caps", S],
+  [17, "Modernité fonctionnelle", "Clarté, modularité et expérience intuitive.", ["#EDF0F5","#F8FAFC","#1F2937","#FFFFFF","#DCE5F4","#4C7BE0","#F2B84B","#E86A5A"], "Outfit", "Plus Jakarta Sans", "module", "none", G],
+  [18, "Innovation invisible", "Innovation fonctionnelle et simplicité apparente ; accessible par l'usage, pas par le prix.", ["#E4E4E1","#F2F2EF","#1A1A1A","#F2F2EF","#F2F2EF","#FF5A1F","#1A1A1A","#4C8CF5"], "Inter Tight", "Inter", "grille", "lower", G, { w: 500 }],
+  [19, "Minimalisme premium", "Packaging épuré, hiérarchie typographique et matériaux soignés.", ["#EAE3D5","#F4EFE6","#2A2620","#F4EFE6","#F4EFE6","#6B4A2B","#A39A7F","#D8CDB6"], "Inter Tight", "Inter", "arche", "caps", G, { w: 300 }],
+  [20, "Futurisme confidentiel", "Technologie expérimentale et sophistication sans surcharge.", ["#1C1C1E","#26262A","#141416","#EDEDE8","#26262A","#B8B8B4","#8A6F4E","#EDEDE8"], "Inter Tight", "Inter", "arche", "caps", G, { w: 300 }],
+  [21, "Douceur moderne", "Formes accueillantes, douceur et communication empathique.", ["#F7EDE3","#FFF8F1","#3A2A22","#FFF8F1","#F6C7C7","#F28C4B","#9DB7F2","#F7D27A"], "Fredoka", "Plus Jakarta Sans", "rond", "lower", G],
+  [22, "Sensibilité alternative", "Ton humain et codes alternatifs, avec une pointe d'insolence.", ["#F0EDE4","#FAF8F2","#1B2A4A","#FAF8F2","#FAF8F2","#1B2A4A","#E9A27C","#9DB2A2"], "Bricolage Grotesque", "Inter", "trait", "none", G, { w: 800 }],
+  [23, "Élégance contemporaine", "Minimalisme sensible et sophistication sans ostentation.", ["#E4DFD7","#F1EEE9","#2B2926","#F1EEE9","#F1EEE9","#B6AEA2","#2B2926","#8C857A"], "Inter Tight", "Inter", "arche", "caps", G, { w: 300 }],
+  [24, "Art contemporain silencieux", "Composition artistique et partis pris subtils.", ["#F3F2EF","#FBFBF9","#1A1A1A","#FBFBF9","#FBFBF9","#2743D9","#1A1A1A","#D7D4CD"], "Syne", "Inter", "trait", "caps", G],
+  [25, "Leader moderne", "Identité modulaire, cohérente et facilement identifiable.", ["#E9EEF8","#F7F9FD","#12245C","#FFFFFF","#2B5BE0","#9FC2FF","#12245C","#FFFFFF"], "Outfit", "Plus Jakarta Sans", "module", "none", G, { w: 600 }],
+  [26, "Innovation radicale", "Langage technologique détourné et identité distinctive.", ["#0E0E0E","#1A1A1A","#0A0A0A","#F5F5F5","#F5F5F5","#E8352B","#6E6E6E","#2A2A2A"], "DotGothic16", "Inter", "points", "caps", G],
+  [27, "Performance premium", "Démonstration produit, précision et finition haut de gamme.", ["#0B0B0C","#18181A","#0B0B0C","#F5F5F7","#18181A","#2F6BFF","#8E8E93","#F5F5F7"], "Inter Tight", "Inter", "arche", "none", G, { w: 600 }],
+  [28, "Avant-garde technologique", "Ingénierie, matériau iconique et expérimentation premium.", ["#CFCFCB","#E2E2DE","#1A1A1A","#F2F2EF","#1A1A1A","#E6F04A","#F2F2EF","#8E8E8A"], "Syne", "Inter", "grille", "caps", G],
+  [29, "Énergie collective", "Messages fédérateurs et photographies sportives puissantes.", ["#111111","#1E1E1E","#0A0A0A","#FFFFFF","#FF5A1F","#FFFFFF","#D7F34A","#2A2A2A"], "Unbounded", "Inter", "trait", "caps", G],
+  [30, "Créativité populaire", "Couleurs vibrantes, typographies géantes et expérience personnalisée.", ["#F5E23A","#FFF7C2","#121212","#FFFFFF","#FF4FB3","#2D46B9","#121212","#1ED760"], "Unbounded", "Inter", "etoile", "lower", G],
+  [31, "Luxe spectaculaire", "Univers iconique, désirabilité et mise en scène ambitieuse.", ["#4A3326","#5A3F30","#2A1C14","#E9DCC4","#5A3F30","#C9A46A","#E9DCC4","#8C5A3A"], "Cormorant Garamond", "Inter", "module", "caps", S],
+  [32, "Luxe provocateur", "Concepts radicaux, détournement des codes et esthétique de rupture.", ["#0A0A0A","#161616","#0A0A0A","#FFFFFF","#FFFFFF","#3A3A3A","#9AA0A6","#E8E8E8"], "Inter Tight", "Inter", "trait", "caps", G, { w: 800, ls: -0.04 }],
 ];
-/* ───────── Typographies : duos choisis à la main ───────── */
-const FONTS = [
-  { id: "outfit", name: "Outfit", text: "Plus Jakarta Sans", w: .57, wt: [300, 700], caps: true, pos: { classique: 80, ludique: 55, proche: 65, exclusif: 30, expressif: 50 } },
-  { id: "fredoka", name: "Fredoka", text: "Plus Jakarta Sans", w: .6, wt: [400, 700], pos: { ludique: 90, proche: 80, exclusif: 10, classique: 70, expressif: 65 } },
-  { id: "bricolage", name: "Bricolage Grotesque", text: "Inter", w: .54, wt: [400, 800], pos: { classique: 70, ludique: 60, proche: 80, expressif: 70, emotion: 72 } },
-  { id: "intertight", name: "Inter Tight", text: "Inter", w: .52, wt: [300, 800], caps: true, pos: { classique: 85, ludique: 18, proche: 35, emotion: 25, expressif: 45 } },
-  { id: "unbounded", name: "Unbounded", text: "Inter", w: .8, wt: [400, 800], caps: true, pos: { classique: 95, expressif: 90, energie: 85, ludique: 50 } },
-  { id: "syne", name: "Syne", text: "Inter", w: .62, wt: [500, 800], caps: true, pos: { classique: 92, disruptif: 90, expressif: 75, energie: 70 } },
-  { id: "fraunces", name: "Fraunces", text: "Plus Jakarta Sans", w: .56, wt: [300, 800], serif: true, pos: { classique: 22, ludique: 60, proche: 70, exclusif: 30, emotion: 70 } },
-  { id: "dmserif", name: "DM Serif Display", text: "Inter", w: .5, wt: [400, 400], serif: true, pos: { classique: 15, proche: 20, ludique: 20, expressif: 65, exclusif: 45 } },
-  { id: "cormorant", name: "Cormorant Garamond", text: "Inter", w: .46, wt: [400, 600], caps: true, serif: true, pos: { classique: 8, exclusif: 90, ludique: 10, expressif: 25 } },
-  { id: "instrument", name: "Instrument Serif", text: "Inter Tight", w: .44, wt: [400, 400], caps: true, serif: true, pos: { classique: 28, exclusif: 65, energie: 20, ludique: 30, expressif: 40 } },
-];
-/* ───────── Formes : six familles ───────── */
+const FW = { "Fraunces": .56, "DM Serif Display": .5, "Cormorant Garamond": .46, "Instrument Serif": .44, "Outfit": .57, "Fredoka": .6, "Bricolage Grotesque": .54, "Inter Tight": .52, "Syne": .64, "Unbounded": .8, "DotGothic16": .62 };
+
+/* ───────── Familles de formes ───────── */
 const STAR = "M50 4Q56 44 96 50Q56 56 50 96Q44 56 4 50Q44 44 50 4Z";
 const BLADE = "M4 4H48V48A44 44 0 0 1 4 4Z";
-const MOTIFS = [
-  { id: "module", name: "formes modulaires", pos: { participatif: 80, classique: 75, ludique: 55, genereux: 60 }, g: [
-    `<g class="ga">${[0, 90, 180, 270].map(r => `<path d="${BLADE}" transform="rotate(${r} 50 50)"/>`).join("")}</g>`,
+const MOTIFS = {
+  module: [`<g class="ga">${[0, 90, 180, 270].map(r => `<path d="${BLADE}" transform="rotate(${r} 50 50)"/>`).join("")}</g>`,
     `<path class="ga" d="M48 96H6A42 42 0 0 1 48 54Z"/><path class="ga" d="M52 96H94A42 42 0 0 0 52 54Z"/><circle class="gb" cx="50" cy="28" r="22"/>`,
     `<path class="ga" d="M10 48A40 40 0 0 1 90 48Z"/><path class="gb" d="M10 94A40 40 0 0 1 90 94Z"/>`,
-    `<rect class="ga" x="6" y="6" width="88" height="88" rx="24"/><path class="gb" d="M50 16Q55 45 84 50Q55 55 50 84Q45 55 16 50Q45 45 50 16Z"/>`] },
-  { id: "rond", name: "formes rondes", pos: { ludique: 82, proche: 75, energie: 45, classique: 55 }, g: [
-    `<circle class="ga" cx="50" cy="27" r="25"/><circle class="ga" cx="73" cy="50" r="25"/><circle class="ga" cx="50" cy="73" r="25"/><circle class="ga" cx="27" cy="50" r="25"/><circle class="gb" cx="50" cy="50" r="13"/>`,
+    `<rect class="ga" x="6" y="6" width="88" height="88" rx="24"/><path class="gb" d="M50 16Q55 45 84 50Q55 55 50 84Q45 55 16 50Q45 45 50 16Z"/>`],
+  rond: [`<circle class="ga" cx="50" cy="27" r="25"/><circle class="ga" cx="73" cy="50" r="25"/><circle class="ga" cx="50" cy="73" r="25"/><circle class="ga" cx="27" cy="50" r="25"/><circle class="gb" cx="50" cy="50" r="13"/>`,
     `<circle class="ga" cx="34" cy="60" r="28"/><circle class="ga" cx="64" cy="56" r="30"/><circle class="ga" cx="50" cy="38" r="26"/><path class="sd" stroke-width="8" stroke-linecap="round" d="M10 70C22 42 38 44 36 62C34 78 52 78 54 60C56 42 72 44 70 62C68 76 84 72 92 60"/>`,
     `<rect class="ga" x="6" y="18" width="88" height="28" rx="14"/><rect class="gb" x="6" y="54" width="88" height="28" rx="14"/>`,
-    `<path class="ga" d="M8 56A42 42 0 0 1 92 56Z"/><circle class="gb" cx="50" cy="74" r="15"/>`] },
-  { id: "etoile", name: "étincelles", pos: { energie: 82, expressif: 80, ludique: 60 }, g: [
-    `<path class="ga" d="${STAR}"/>`,
+    `<path class="ga" d="M8 56A42 42 0 0 1 92 56Z"/><circle class="gb" cx="50" cy="74" r="15"/>`],
+  etoile: [`<path class="ga" d="${STAR}"/>`,
     `<path class="ga" d="${STAR}" transform="translate(0 26) scale(.72)"/><path class="gb" d="${STAR}" transform="translate(58 2) scale(.4)"/>`,
     `<path class="ga" d="${STAR}"/><path class="gb" d="${STAR}" transform="translate(50 50) rotate(45) scale(.5) translate(-50 -50)"/>`,
-    `<path class="sa" stroke-width="24" stroke-linecap="round" d="M16 84Q40 18 86 24"/>`] },
-  { id: "grille", name: "formes géométriques", pos: { ludique: 15, emotion: 22, proche: 25, classique: 70 }, g: [
-    `<rect class="ga" x="6" y="6" width="41" height="41"/><rect class="gb" x="53" y="6" width="41" height="41"/><rect class="gb" x="6" y="53" width="41" height="41"/><rect class="ga" x="53" y="53" width="41" height="41"/>`,
+    `<path class="sa" stroke-width="22" stroke-linecap="round" d="M16 84Q40 18 86 24"/>`],
+  grille: [`<rect class="ga" x="6" y="6" width="41" height="41"/><rect class="gb" x="53" y="6" width="41" height="41"/><rect class="gb" x="6" y="53" width="41" height="41"/><rect class="ga" x="53" y="53" width="41" height="41"/>`,
     `<path class="ga" d="M8 92V8A84 84 0 0 1 92 92Z"/><rect class="gb" x="62" y="8" width="30" height="30"/>`,
     `<rect class="ga" x="10" y="42" width="22" height="50"/><rect class="gb" x="39" y="24" width="22" height="68"/><rect class="ga" x="68" y="8" width="22" height="84"/>`,
-    `<rect class="ga" x="38" y="8" width="24" height="84"/><rect class="ga" x="8" y="38" width="84" height="24"/>`] },
-  { id: "arche", name: "arches et filets", pos: { classique: 15, exclusif: 75, energie: 20, ludique: 25 }, g: [
-    `<path class="ga" d="M20 94V46A30 30 0 0 1 80 46V94Z"/>`,
+    `<rect class="ga" x="38" y="8" width="24" height="84"/><rect class="ga" x="8" y="38" width="84" height="24"/>`],
+  arche: [`<path class="ga" d="M20 94V46A30 30 0 0 1 80 46V94Z"/>`,
     `<path class="sa" stroke-width="3" d="M16 94V46A34 34 0 0 1 84 46V94"/><path class="sb" stroke-width="3" d="M32 94V50A18 18 0 0 1 68 50V94"/>`,
     `<circle class="sa" stroke-width="3" cx="50" cy="50" r="42"/><circle class="gb" cx="50" cy="50" r="11"/>`,
-    `<path class="ga" d="M10 66A40 40 0 0 1 90 66Z"/><path class="sb" stroke-width="3" stroke-linecap="round" d="M6 80H94"/>`] },
-  { id: "trait", name: "traits libres", pos: { disruptif: 90, energie: 75, classique: 85, ludique: 60 }, g: [
-    `<path class="sa" stroke-width="12" stroke-linecap="round" d="M8 62C20 20 40 20 38 54C36 84 60 84 60 52C60 22 80 24 92 44"/>`,
+    `<path class="ga" d="M10 66A40 40 0 0 1 90 66Z"/><path class="sb" stroke-width="3" stroke-linecap="round" d="M6 80H94"/>`],
+  trait: [`<path class="sa" stroke-width="12" stroke-linecap="round" d="M8 62C20 20 40 20 38 54C36 84 60 84 60 52C60 22 80 24 92 44"/>`,
     `<path class="sa" stroke-width="12" stroke-linecap="round" d="M14 84L40 16M66 84L92 16"/><path class="sb" stroke-width="12" stroke-linecap="round" d="M40 84L66 16"/>`,
     `<path class="ga" d="M4 52A40 40 0 0 1 84 52Z"/><path class="gb" d="M16 52A40 40 0 0 0 96 52Z"/>`,
-    `<path class="sa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" d="M8 68L29 32L50 68L71 32L92 68"/>`] },
-];
+    `<path class="sa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" d="M8 68L29 32L50 68L71 32L92 68"/>`],
+  points: [`<g class="ga"><circle cx="30" cy="30" r="11"/><circle cx="70" cy="30" r="11"/><circle cx="30" cy="70" r="11"/><circle cx="70" cy="70" r="11"/></g>`,
+    `<g class="ga">${[0,1,2,3,4].map(y => [0,1,2,3,4].filter(x => (x + y) % 2 === 0).map(x => `<circle cx="${14 + x * 18}" cy="${14 + y * 18}" r="6"/>`).join("")).join("")}</g>`,
+    `<circle class="sa" stroke-width="3" cx="50" cy="50" r="40"/><circle class="gb" cx="50" cy="50" r="9"/>`,
+    `<g class="ga">${[0,1,2,3,4].map(x => `<circle cx="${14 + x * 18}" cy="50" r="6"/>`).join("")}</g>`],
+};
 const svg = inner => `<svg viewBox="0 0 100 100" aria-hidden="true">${inner}</svg>`;
 
-/* Couleur : contraste */
 const lum = h => { const n = parseInt(h.slice(1), 16); const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
 const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
-const on = (p, c) => cr(c, p.dark) >= cr(c, p.light) ? p.dark : p.light;
-function nearest(list, t) {
-  let best = list[0], bd = Infinity;
-  for (const o of list) { let s = 0, n = 0; for (const k in o.pos) { if (!(k in t)) continue; const d = t[k] * 100 - o.pos[k]; s += d * d; n++; } const d = n ? s / n : Infinity; if (d < bd) { bd = d; best = o; } }
-  return best;
-}
 
-let mode = "interne", entry = "a";
-const V = Object.fromEntries(SL.map(s => [s[0], s[3]]));
-const active = () => SL.filter(s => !s[4] || s[4] === mode);
+let mode = "interne";
+const V = Object.fromEntries(SL.map(s => [s[0], s[5]]));
 
-/* Construction des curseurs */
+/* Curseurs */
 const controls = $("controls");
-[["Personnalité", undefined], ["Spécifique à la communication interne", "interne"], ["Spécifique à la communication externe", "externe"]].forEach(([title, scope]) => {
-  const wrap = document.createElement("div");
-  if (scope) { wrap.dataset.scope = scope; wrap.hidden = scope !== mode; }
-  wrap.innerHTML = `<p class="group-title">${title}</p>` + SL.filter(s => s[4] === scope).map(([id, l, r]) => `
-    <div class="slider">
-      <span class="l" id="${id}-l">${l}</span><span class="r" id="${id}-r">${r}</span>
-      <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}">
-      <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    </div>`).join("");
-  controls.append(wrap);
-});
+const wrap = document.createElement("div");
+wrap.innerHTML = SL.map(([id, l, r, el, er]) => `
+  <div class="slider">
+    <span class="l" id="${id}-l">${l}<small>ex. ${el}</small></span><span class="r" id="${id}-r">${r}<small>ex. ${er}</small></span>
+    <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}">
+    <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>`).join("");
+controls.append(wrap);
 controls.addEventListener("input", e => { if (e.target.type === "range") { V[e.target.id] = +e.target.value; update(); } });
 $("pname").addEventListener("input", update);
 
@@ -502,155 +479,136 @@ const ENTRIES = {
   b: { q: "De quelle communication s'agit-il ?", i: ["Communication interne", "Un programme, une transformation, un outil ou un événement qui doit embarquer vos collaborateurs."], e: ["Communication externe", "Une marque, un produit, un lieu ou une offre qui doit se faire connaître et se faire aimer."] },
   c: { q: "Qu'est-ce qui doit prendre vie ?", i: ["Un programme interne", "Transformation, nouvelle organisation, outil à déployer, plan de formation."], e: ["Une marque", "Création ou refonte : une entreprise, un produit, un lieu, une offre."] },
 };
-function setEntry(k) {
-  entry = k; const E = ENTRIES[k];
+function setEntry(k) { const E = ENTRIES[k];
   $("h1s").textContent = E.q; $("st-i-t").textContent = E.i[0]; $("st-i-p").textContent = E.i[1]; $("st-e-t").textContent = E.e[0]; $("st-e-p").textContent = E.e[1];
-  document.querySelectorAll("#sw-entry button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.e === k)));
-}
-function setMode(m) {
-  mode = m; const interne = m === "interne";
+  document.querySelectorAll("#sw-entry button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.e === k))); }
+function setMode(m) { mode = m; const interne = m === "interne";
   document.querySelectorAll(".start").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.mode === m)));
-  controls.querySelectorAll("[data-scope]").forEach(w => w.hidden = w.dataset.scope !== m);
   $("pname-l").textContent = interne ? "Nom du programme (facultatif)" : "Nom de la marque (facultatif)";
   $("pname").placeholder = interne ? "Votre programme" : "Votre marque";
   $("q-cible-l").textContent = interne ? "Qui doit-on embarquer ?" : "À qui s'adresse-t-on ?";
-  buildChips(); update();
-}
+  buildChips(); update(); }
 document.querySelectorAll(".start").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
 document.querySelectorAll("#sw-entry button").forEach(b => b.addEventListener("click", () => { setEntry(b.dataset.e); $("h1s").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); }));
 document.querySelectorAll("#sw-name button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("#sw-name button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-  document.querySelector("[data-name]").textContent = b.dataset.n; document.querySelector("[data-name-short]").textContent = b.dataset.n;
-  scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
-}));
-
+  document.querySelector("[data-name]").textContent = b.dataset.n; document.querySelector("[data-name-short]").textContent = b.dataset.n; }));
 function buildChips() {
   const cible = mode === "interne" ? ["Tous les collaborateurs", "Managers", "Une population métier", "Nouveaux arrivants", "Direction"] : ["Grand public", "Clients professionnels", "Partenaires", "Talents à recruter", "Communauté locale"];
   const sup = ["Logo / nom", "Charte graphique", "Mascotte", "Slides / PowerPoint", "Motion / vidéo", "Événement", "SharePoint / intranet", "Print"];
   const mk = (name, arr) => arr.map((t, i) => `<label><input type="checkbox" name="${name}" id="${name}-${i}" value="${t}"><span>${t}</span></label>`).join("");
-  $("q-cible").innerHTML = mk("cible", cible); $("q-sup").innerHTML = mk("sup", sup);
-}
+  $("q-cible").innerHTML = mk("cible", cible); $("q-sup").innerHTML = mk("sup", sup); }
 
 /* ───────── Planche ───────── */
 const board = $("board"), hero = $("hero"), decos = [...hero.querySelectorAll(".deco")];
-let last = { pal: "", font: "", motif: "" }, look = {};
-function tone(t) {
-  const p = t.proche > .5, l = t.ludique > .5;
-  if (mode === "interne") return p ? (l ? "On s'y met ensemble ? C'est parti." : "Avançons ensemble, pas à pas.") : (l ? "Le changement, version grand format." : "Construire durablement notre avenir commun.");
-  return p ? (l ? "Passez nous voir, on vous attend." : "Simplement là, quand vous en avez besoin.") : (l ? "L'audace, en toute confiance." : "L'exigence comme signature.");
+let lastN = 0;
+const bit = id => V[id] >= 50 ? 1 : 0;
+function tone() {
+  const emo = bit("communication"), exc = bit("positionnement"), interne = mode === "interne";
+  if (interne) return emo ? (exc ? "Un projet qui nous ressemble." : "On s'y met ensemble ? C'est parti.") : (exc ? "L'exigence, partagée par tous." : "Clair, simple, pour tout le monde.");
+  return emo ? (exc ? "Une émotion rare." : "Ensemble, on va plus loin.") : (exc ? "La précision comme signature." : "L'essentiel, bien fait.");
 }
 function update() {
-  const t = {}; active().forEach(s => t[s[0]] = V[s[0]] / 100);
   const interne = mode === "interne";
   const name = $("pname").value.trim() || (interne ? "Votre programme" : "Votre marque");
-  const p = nearest(PAL, t), f = nearest(FONTS, t), m = nearest(MOTIFS, t);
-  const S = (k, v) => board.style.setProperty(k, v);
+  const n = 1 + bit("style") * 16 + bit("expression") * 8 + bit("communication") * 4 + bit("positionnement") * 2 + bit("creativite");
+  const [, pname, desc, pal, font, text, motif, cs, kind, opt = {}] = PROFILS[n - 1];
+  const [bg, tile, dark, light, c1, c2, c3, c4] = pal;
+  const on = c => cr(c, dark) >= cr(c, light) ? dark : light;
+  const set = (k, v) => board.style.setProperty(k, v);
+  const changed = n !== lastN;
+  const aff = V.expression / 100, aud = V.creativite / 100;
 
   /* Couleurs */
-  const discret = t.expressif < .3;
-  const heroBg = discret ? p.tile : p.cols[0];
-  const heroFg = discret && cr(p.cols[0], heroBg) >= 3 ? p.cols[0] : on(p, heroBg);
-  const darkBoard = lum(p.bg) < .2;
-  const wideBg = darkBoard ? p.light : p.dark;
-  const wideFg = [p.cols[1], p.cols[0], p.cols[3]].find(c => cr(c, wideBg) >= 3.2) || on(p, wideBg);
-  S("--b-bg", p.bg); S("--tile", p.tile); S("--tile-fg", on(p, p.tile));
-  S("--hero-bg", heroBg); S("--hero-fg", heroFg);
-  S("--mono-bg", p.cols[2]); S("--mono-fg", on(p, p.cols[2]));
-  S("--wide-bg", wideBg); S("--wide-fg", wideFg);
-  S("--typo-bg", p.cols[1]); S("--typo-fg", on(p, p.cols[1]));
-  if (last.pal !== p.id) {
-    const seen = new Set();
-    $("pills").innerHTML = [p.light, ...p.cols, p.dark].filter(c => !seen.has(c) && seen.add(c)).map(c => `<i style="background:${c}"></i>`).join("");
-  }
+  const heroFg = cr(c2, c1) >= 3 && bit("expression") === 0 ? c2 : on(c1);
+  set("--b-bg", bg); set("--tile", tile); set("--tile-fg", on(tile));
+  set("--hero-bg", c1); set("--hero-fg", heroFg);
+  set("--mono-bg", c2); set("--mono-fg", on(c2));
+  const wideBg = lum(bg) < .2 ? light : dark;
+  set("--wide-bg", wideBg); set("--wide-fg", [c2, c4, c3, c1].find(c => cr(c, wideBg) >= 3.2) || on(wideBg));
+  const typoBg = cr(c3, bg) > 1.15 ? c3 : c4;
+  set("--typo-bg", typoBg); set("--typo-fg", on(typoBg));
 
   /* Formes */
-  const cand = (discret ? [p.cols[0], p.cols[1], p.cols[2]] : [p.cols[1], p.cols[2], p.cols[3], p.tile, p.cols[0]]).filter(c => c !== heroBg && cr(c, heroBg) >= 1.18);
-  const count = t.genereux < .12 ? 0 : 1 + Math.round(t.genereux * 3);
-  if (last.motif !== m.id) decos.forEach((d, i) => d.innerHTML = svg(m.g[i % m.g.length]));
+  const G = MOTIFS[motif];
+  const cand = [c2, c3, c4, tile].filter(c => cr(c, c1) >= 1.18);
+  const count = Math.max(1, Math.round(lerp(0, 4, aff)));
+  if (changed) decos.forEach((d, i) => d.innerHTML = svg(G[i % G.length]));
   decos.forEach((d, i) => { const a = cand[i % cand.length], b = cand[(i + 1) % cand.length];
-    d.style.setProperty("--a", a); d.style.setProperty("--b", b); d.style.setProperty("--d", on(p, a)); d.style.setProperty("--o", i < count ? 1 : 0); });
-  S("--dur", `${lerp(16, 2.4, t.energie).toFixed(1)}s`); S("--rot", `${lerp(2, 26, t.energie * (.5 + t.ludique * .5)).toFixed(1)}deg`); S("--amp", `${lerp(1, 10, t.energie).toFixed(1)}px`);
-
-  const bandCols = [p.cols[0], p.cols[2], p.cols[1], p.cols[3], ...(p.extra || [])].filter(c => cr(c, p.bg) >= 1.22);
-  if (last.motif !== m.id || last.pal !== p.id) {
+    d.style.setProperty("--a", a); d.style.setProperty("--b", b); d.style.setProperty("--d", on(a)); d.style.setProperty("--o", i < count ? 1 : 0); });
+  set("--dur", `${lerp(14, 4, aud).toFixed(1)}s`); set("--rot", `${lerp(3, 18, aud).toFixed(1)}deg`); set("--amp", `${lerp(1, 7, aff).toFixed(1)}px`);
+  if (changed) {
+    const bandCols = [c1, c2, c3, c4, dark].filter((c, i, a) => a.indexOf(c) === i && cr(c, bg) >= 1.22);
     const half = Array.from({ length: 14 }, (_, i) => { const a = bandCols[i % bandCols.length], b = bandCols[(i + 1) % bandCols.length];
-      return `<span style="--a:${a};--b:${b};--d:${on(p, a)}">${svg(m.g[i % m.g.length])}</span>`; }).join("");
+      return `<span style="--a:${a};--b:${b};--d:${on(a)}">${svg(G[i % G.length])}</span>`; }).join("");
     $("track").innerHTML = `<div>${half}</div><div>${half}</div>`;
+    const seen = new Set();
+    $("pills").innerHTML = [light, c1, c2, c3, c4, dark].filter(c => !seen.has(c) && seen.add(c)).map(c => `<i style="background:${c}"></i>`).join("");
+    const pc = [c2, c3, c1].map(c => cr(c, tile) < 1.25 ? on(tile) : c);
+    $("pictos").innerHTML = [0, 3, 1].map((gi, i) => `<figure><div class="g" style="--a:${pc[i]};--b:${pc[(i + 1) % 3] === pc[i] ? tile : pc[(i + 1) % 3]};--d:${on(pc[i])}">${svg(G[gi])}</div><figcaption></figcaption></figure>`).join("");
   }
-  S("--band-gap", `${lerp(7, 1.2, t.genereux).toFixed(1)}cqw`); S("--band-dur", `${lerp(120, 14, t.energie).toFixed(0)}s`); S("--band-play", t.energie < .1 ? "paused" : "running");
-
-  const picCols = p.extra ? [p.cols[0], p.extra[1], p.cols[2]] : [p.cols[0], p.cols[2], p.cols[1]];
-  const labels = interne
-    ? (t.participatif > .6 ? ["Ateliers", "Feedback", "Décisions partagées"] : t.participatif < .4 ? ["Le cap", "Les étapes", "Les repères"] : ["Comprendre", "Essayer", "Adopter"])
-    : (t.public > .6 ? ["Pour tous", "Tous les jours", "Près de vous"] : t.public < .4 ? ["Savoir-faire", "Sur mesure", "Le cercle"] : ["L'offre", "Le lieu", "La communauté"]);
-  if (!interne && t.engagee > .65) labels[2] = "Nos engagements";
-  if (last.motif !== m.id || last.pal !== p.id) {
-    $("pictos").innerHTML = [0, 3, 1].map((gi, i) => { let a = picCols[i]; if (cr(a, p.tile) < 1.25) a = on(p, p.tile); let b = picCols[(i + 1) % 3]; if (cr(b, a) < 1.2) b = p.tile;
-      return `<figure><div class="g" style="--a:${a};--b:${b};--d:${on(p, a)}">${svg(m.g[gi])}</div><figcaption></figcaption></figure>`; }).join("");
-  }
+  set("--band-gap", `${lerp(6, 1.6, aff).toFixed(1)}cqw`); set("--band-dur", `${lerp(80, 22, aud).toFixed(0)}s`);
+  const labels = interne ? (bit("communication") ? ["Ensemble", "Partager", "Célébrer"] : ["Le cap", "Les étapes", "Les repères"])
+    : (bit("positionnement") ? ["Savoir-faire", "Sur mesure", "Le cercle"] : ["Pour tous", "Tous les jours", "Près de vous"]);
   $("pictos").querySelectorAll("figcaption").forEach((c, i) => c.textContent = labels[i]);
 
   /* Typographie */
-  const stack = `"${f.name}", ${f.serif ? "Georgia, serif" : '"Helvetica Neue", Arial, sans-serif'}`;
-  S("--f-d", stack); S("--f-t", `"${f.text}", "Helvetica Neue", Arial, sans-serif`);
-  const wT = t.expressif, weight = Math.round(lerp(f.wt[0], f.wt[1], wT));
-  const caps = t.exclusif > .68 && f.caps, lower = !caps && t.ludique > .76 && !f.serif;
-  const capsK = caps ? 1.22 + lerp(.06, .16, (t.exclusif - .68) / .32) : 1;
-  const cw = f.w * lerp(.97, 1.1, wT) * capsK;
+  const stack = `"${font}", ${kind === S ? "Georgia, serif" : '"Helvetica Neue", Arial, sans-serif'}`;
+  set("--f-d", stack); set("--f-t", `"${text}", "Helvetica Neue", Arial, sans-serif`);
+  const caps = cs === "caps", lower = cs === "lower";
+  const ls = opt.ls ?? (caps ? (opt.w >= 700 ? -.01 : lerp(.12, .06, aff)) : kind === S ? -.01 : -.025);
+  const cw = (FW[font] || .55) * (caps ? (kind === S ? 1.5 : 1.36) + Math.max(0, ls) * 1.2 : 1) * (opt.w >= 700 ? 1.08 : 1);
   const words = name.split(/\s+/), longest = Math.max(4, ...words.map(w => w.length));
   const maxSize = [22, 14.5, 10.5][Math.min(words.length, 3) - 1];
-  S("--wm-w", weight); S("--wm-tt", caps ? "uppercase" : lower ? "lowercase" : "none");
-  S("--wm-ls", caps ? `${lerp(.06, .16, (t.exclusif - .68) / .32).toFixed(3)}em` : f.id === "unbounded" ? "-.03em" : f.serif ? "-.01em" : "-.025em");
-  S("--wm-size", `${Math.min(maxSize, 82 / (longest * cw)).toFixed(2)}cqw`);
-  S("--wide-size", `${Math.min(6.4, 54 / (name.length * cw)).toFixed(2)}cqw`);
-  S("--soft", Math.round(t.ludique * 100));
+  set("--wm-w", opt.w || (kind === S ? 400 : 500)); set("--wm-tt", caps ? "uppercase" : lower ? "lowercase" : "none");
+  set("--wm-ls", `${ls}em`); set("--soft", opt.soft || 0);
+  set("--wm-size", `${Math.min(maxSize, 82 / (longest * cw)).toFixed(2)}cqw`);
+  set("--wide-size", `${Math.min(6.4, 54 / (name.length * cw)).toFixed(2)}cqw`);
   $("wm").textContent = name; $("wide").textContent = name;
   const ini = words.slice(0, 2).map(w => w[0]).join(""); $("mono").textContent = lower ? ini.toLowerCase() : ini.toUpperCase();
-  $("fn-d").textContent = f.name; $("fn-t").textContent = f.text;
-  if (last.font !== f.id && last.font && !reduce) $("wm").animate([{ opacity: .15, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0)" }], { duration: 420, easing: "cubic-bezier(.2,.7,.2,1)" });
+  $("fn-d").textContent = font; $("fn-t").textContent = text;
 
-  /* Détails */
-  const tiltOn = interne && t.disruptif > .55, k = tiltOn ? (t.disruptif - .55) / .45 : 0;
-  S("--wm-rot", `${tiltOn ? (-4 * k).toFixed(1) : (-1.5 * Math.max(0, t.ludique - .6) / .4).toFixed(1)}deg`);
-  board.querySelectorAll(".tile").forEach((el, i) => el.style.rotate = `${(i % 2 ? 1 : -1) * 1.3 * k}deg`);
-  S("--t-r", `${lerp(2, 26, t.ludique).toFixed(0)}px`); S("--b-r", `${lerp(4, 30, t.ludique).toFixed(0)}px`);
-  S("--pill-r", t.ludique > .35 ? "999px" : `${lerp(0, 10, t.ludique / .35).toFixed(0)}px`);
-  S("--frame-o", t.exclusif > .6 ? ((t.exclusif - .6) * 1.4).toFixed(2) : 0);
-  $("tag").textContent = tone(t);
-  $("b-kind").textContent = interne ? "Programme interne" : t.international > .6 ? "FR · EN · ES" : t.international < .4 ? "Fait ici" : "Marque";
-  const steps = interne ? Math.round(lerp(1, 6, t.duree)) : 0;
-  $("tl").innerHTML = interne ? Array.from({ length: 6 }, (_, i) => `<i class="${i < steps ? "on" : ""}"></i>`).join("") : "";
-  $("recipe").innerHTML = `<span>Nuance <b>${p.name}</b></span><span>Typo <b>${f.name}</b> + ${f.text}</span><span><b>${m.name[0].toUpperCase() + m.name.slice(1)}</b></span>`;
+  /* Détails : audacieux = légère rotation, accessible = arrondis, exclusif = filet */
+  const acc = 1 - V.positionnement / 100;
+  set("--wm-rot", `${bit("creativite") ? (-lerp(0, 4, (aud - .5) * 2)).toFixed(1) : 0}deg`);
+  set("--t-r", `${lerp(2, 24, acc).toFixed(0)}px`); set("--b-r", `${lerp(4, 28, acc).toFixed(0)}px`);
+  set("--pill-r", acc > .4 ? "999px" : `${lerp(0, 10, acc / .4).toFixed(0)}px`);
+  set("--frame-o", V.positionnement > 55 ? ((V.positionnement - 55) / 45 * .6).toFixed(2) : 0);
+  $("tag").textContent = tone();
+  $("b-kind").textContent = interne ? "Programme interne" : "Marque";
+  $("tl").innerHTML = "";
 
-  SL.forEach(([id]) => { const v = V[id]; $(id).style.setProperty("--p", v + "%"); $(id + "-l").classList.toggle("on", v <= 45); $(id + "-r").classList.toggle("on", v >= 55); });
-  last = { pal: p.id, font: f.id, motif: m.id }; look = { p, f, m };
-  portrait(t, name);
+  /* Profil affiché */
+  $("prof-n").textContent = `Profil ${String(n).padStart(2, "0")} sur 32`;
+  $("prof-name").textContent = pname;
+  $("prof-desc").textContent = desc;
+  if (changed && lastN && !reduce) board.animate([{ filter: "blur(10px)", opacity: .4 }, { filter: "blur(0)", opacity: 1 }], { duration: 480, easing: "cubic-bezier(.2,.7,.2,1)" });
+
+  SL.forEach(([id]) => { const v = V[id]; $(id).style.setProperty("--p", v + "%"); $(id + "-l").classList.toggle("on", v < 50); $(id + "-r").classList.toggle("on", v >= 50); });
+  lastN = n;
+  portrait(n, pname, desc, name);
 }
 
 /* ───────── Portrait ───────── */
-function portrait(t, name) {
-  const interne = mode === "interne", g = interne ? 0 : 1;
-  const act = active().map(([id]) => ({ id, v: t[id], d: Math.abs(t[id] - .5) }));
-  const top = [...act].sort((a, b) => b.d - a.d).slice(0, 3);
-  const words = top.map(x => ADJ[x.id][x.v > .5 ? 1 : 0][g]);
+function portrait(n, pname, desc, name) {
+  const interne = mode === "interne";
   const subject = name.startsWith("Votre") ? (interne ? "Votre programme" : "Votre marque") : name;
-  $("says").innerHTML = `${subject} est ${interne ? "un programme" : "une marque"} <em>${words[0]}, ${words[1]} et ${words[2]}</em>.`;
-  $("traits").innerHTML = top.map(x => { const s = SL.find(q => q[0] === x.id);
-    return `<div><strong>${x.v > .5 ? s[2] : s[1]}</strong><span>${interne ? "Il" : "Elle"} ${WHY[x.id][x.v > .5 ? 1 : 0]}.</span></div>`; }).join("");
-  $("piste").innerHTML = `<span class="dim">Piste visuelle pressentie :</span> nuance <b>${look.p.name}</b>, typographie <b>${look.f.name}</b>, ${look.m.name}.`;
-  const und = act.filter(x => x.d < .08).map(x => { const s = SL.find(q => q[0] === x.id); return `${s[1].toLowerCase()} ou ${s[2].toLowerCase()}`; });
+  $("says").innerHTML = `${subject} a le profil <em>${pname.toLowerCase()}</em>.`;
+  $("traits").innerHTML = SL.map(([id, l, r, , , , what]) => { const v = V[id], right = v >= 50, force = Math.abs(v - 50);
+    return `<div><strong>${right ? r : l}</strong><span>${force < 10 ? "De justesse" : force < 30 ? "Plutôt" : "Clairement"} · ${what}.</span></div>`; }).join("");
+  $("piste").innerHTML = `<span class="dim">L'ambiance :</span> ${desc}`;
+  const und = SL.filter(([id]) => Math.abs(V[id] - 50) < 10).map(([, l, r]) => `${l.toLowerCase()} ou ${r.toLowerCase()}`);
   $("open").innerHTML = und.length
-    ? `<h3>${und.length > 1 ? "Des questions encore ouvertes" : "Une question encore ouverte"}</h3><p>Vous n'avez pas tranché entre ${und.slice(0, 3).join(", ")}. C'est souvent là que se joue la différence, et un très bon sujet d'atelier.</p>`
+    ? `<h3>${und.length > 1 ? "Des questions encore ouvertes" : "Une question encore ouverte"}</h3><p>Vous hésitez entre ${und.join(", ")}. Un petit déplacement suffit à changer de profil : c'est souvent là que se joue la différence, et un très bon sujet d'atelier.</p>`
     : `<h3>Vos choix sont tranchés</h3><p>C'est une base solide pour une direction artistique. Il reste à vérifier que toute l'équipe partage ces réglages.</p>`;
 }
 
 $("copy").addEventListener("click", async () => {
-  const txt = `${$("says").textContent}\n${$("piste").textContent}\n` + active().map(([id, l, r]) => `${l} ${"·".repeat(Math.round(V[id] / 10))}|${"·".repeat(10 - Math.round(V[id] / 10))} ${r}`).join("\n");
+  const txt = `${$("says").textContent}\n${$("piste").textContent}\n` + SL.map(([id, l, r]) => `${l} ${"·".repeat(Math.round(V[id] / 10))}|${"·".repeat(10 - Math.round(V[id] / 10))} ${r}`).join("\n");
   const out = $("copy-s");
   try { await navigator.clipboard.writeText(txt); out.textContent = "Portrait copié."; }
   catch { const r = document.createRange(); r.selectNodeContents($("says")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = "Texte sélectionné : copiez-le avec Ctrl + C."; }
 });
-
 $("brief").addEventListener("submit", e => {
   e.preventDefault();
   const err = $("err"), mail = $("q-mail").value.trim();

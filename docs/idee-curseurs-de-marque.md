@@ -87,3 +87,11 @@ Outil gratuit → brief reçu → **atelier de positionnement** (à définir : d
 - **6 familles de formes** : modulaires, rondes, étincelles, géométriques, arches et filets, traits libres.
 - **Deux entrées** : communication interne / communication externe. 3 libellés à tester : « À vos équipes / À vos clients », « Communication interne / externe », « Un programme interne / Une marque ».
 - **Curseurs propres à l'externe** : Local ↔ International, Pour initiés ↔ Grand public, Neutre ↔ Engagée.
+
+## Version 3 du prototype : 5 curseurs, 32 profils (choix de Julie)
+- **Objectif** : un outil simple, grand public et ludique.
+- **5 curseurs**, chacun avec deux marques en exemple : Classique ↔ Contemporain (Hermès / Nothing), Discret ↔ Affirmé (Aesop / Diesel), Rationnel ↔ Émotionnel (IBM / Disney), Accessible ↔ Exclusif (IKEA / Rolex), Conventionnel ↔ Audacieux (LinkedIn / Balenciaga).
+- **32 profils** issus du fichier de Julie (`docs/nuancier-32-profils.xlsx`) : chaque curseur est soit à gauche, soit à droite, ce qui donne 2⁵ = 32 combinaisons.
+- **Chaque profil a son ambiance composée à la main** : palette, typographie, famille de formes, casse du nom. Elle s'inspire des marques de référence du fichier sans jamais les nommer ni les copier.
+- **Sur la planche, aucun nom de marque** : seulement le nom du profil (« Douceur moderne », « Luxe silencieux »…) et sa description.
+- **Ce qui varie en continu dans un même profil** : nombre de formes et rythme (Affirmé), vitesse et rotation (Audacieux), arrondis et filet (Accessible ↔ Exclusif).
