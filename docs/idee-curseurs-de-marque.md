@@ -77,3 +77,13 @@ Outil gratuit → brief reçu → **atelier de positionnement** (à définir : d
 - Afficher l'offre « atelier de positionnement » (avec ou sans prix) ?
 - Quel niveau d'aperçu : simple ou spectaculaire ?
 - Où la page vit-elle : entrée dans le menu, lien depuis le contact, depuis les études de cas ?
+
+## Version 2 du prototype (retours de Julie)
+- **Constat** : l'aperçu de la v1 était ludique mais pas beau. Les couleurs calculées ne « matchaient » pas (exemple : accessible + participatif).
+- **Règle** : quel que soit le réglage, le rendu doit être beau. Rien n'est calculé au hasard : tout est choisi à la main, puis sélectionné par les curseurs.
+- **Aperçu = planche d'identité**, comme une vraie charte : logo sur couleur, frise de motifs, monogramme, logo en réserve, palette en pastilles, duo typographique, pictogrammes.
+- **13 nuances** (palettes nommées) : Pervenche, Verger, Guimauve, Atelier, Institution, Cobalt, Maison, Minuit, Terre, Élan, Lagon, Soleil, Brume. Les 4 premières viennent des références de Julie (`docs/img/nuancier-refs/`).
+- **10 typographies** en duos (titre + texte) : Outfit, Fredoka, Bricolage Grotesque, Inter Tight, Unbounded, Syne, Fraunces, DM Serif Display, Cormorant Garamond, Instrument Serif.
+- **6 familles de formes** : modulaires, rondes, étincelles, géométriques, arches et filets, traits libres.
+- **Deux entrées** : communication interne / communication externe. 3 libellés à tester : « À vos équipes / À vos clients », « Communication interne / externe », « Un programme interne / Une marque ».
+- **Curseurs propres à l'externe** : Local ↔ International, Pour initiés ↔ Grand public, Neutre ↔ Engagée.

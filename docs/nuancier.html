@@ -2,9 +2,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1&family=Space+Mono&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@400;500&family=Outfit:wght@300..800&family=Plus+Jakarta+Sans:wght@400;600&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display&family=Fredoka:wght@400..700&family=Unbounded:wght@400..800&family=Syne:wght@500..800&family=Bricolage+Grotesque:wght@400..800&family=Instrument+Serif&display=swap">
 <style>
-/* Layout : même grille 12 colonnes que l'accueil. Réglages à gauche (col. 1–6), aperçu collant à droite (col. 7–12), puis portrait et brief. Univers sombre de l'accueil, l'aperçu porte toute la couleur. */
+/* Layout : même grille 12 colonnes que l'accueil. Réglages à gauche, planche d'identité collante à droite. La page reste sombre et neutre : toute la couleur vient de la planche, composée de nuances, de typographies et de formes choisies à la main. */
 :root {
   --night: #0f0f0e;
   --slate: #191917;
@@ -15,17 +15,14 @@
   --ember: #e0532b;
   --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --f-serif: "Fraunces", Georgia, serif;
-  --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
   --gap: clamp(16px, 2vw, 32px);
   --ease: cubic-bezier(.2,.7,.2,1);
-  --out: cubic-bezier(.16,1,.3,1);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body { background: var(--night); color: var(--chalk); }
-body { font-family: var(--f-body); font-size: 16px; line-height: 1.6; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 140px; }
-h1, h2, h3, p { margin: 0; }
+body { font-family: var(--f-body); font-size: 16px; line-height: 1.6; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 96px; }
+h1, h2, h3, p, figure { margin: 0; }
 h1, h2, h3 { font-family: var(--f-display); font-weight: 300; text-wrap: balance; }
 button, input, select, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--blush); outline-offset: 3px; }
@@ -34,13 +31,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .c > * { min-width: 0; }
 .num { font-family: var(--f-display); font-weight: 300; font-size: 22px; letter-spacing: -.02em; color: var(--haze); font-variant-numeric: tabular-nums; }
 
-/* Navigation (identique à l'accueil) */
 .nav { padding-block: 28px; align-items: center; }
 .nav .brand { grid-column: 1 / 4; font-size: 14px; }
 .nav ul { grid-column: 4 / 13; display: flex; justify-content: flex-end; gap: clamp(16px, 3vw, 40px); list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--haze); }
 .nav .here { color: var(--chalk); }
 
-/* Intro */
 .intro { padding-block: clamp(48px, 7vw, 112px) clamp(56px, 7vw, 104px); }
 .intro .eyebrow { grid-column: 1 / 13; color: var(--haze); font-size: 14px; margin-bottom: 20px; }
 .intro h1 { grid-column: 1 / 9; font-size: clamp(56px, 9vw, 136px); letter-spacing: -.06em; line-height: .86; }
@@ -48,25 +43,24 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .intro .how { grid-column: 8 / 13; align-self: end; display: grid; gap: 12px; color: var(--haze); font-size: 15px; }
 .intro .how div { display: grid; grid-template-columns: 40px 1fr; border-top: 1px solid var(--rule); padding-top: 12px; }
 
-/* Étapes */
 .step { padding-block: 0 clamp(80px, 9vw, 140px); }
 .step-head { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); border-top: 1px solid var(--rule); padding-top: 24px; margin-bottom: clamp(32px, 4vw, 56px); }
 .step-head .lbl { grid-column: 1 / 4; display: grid; gap: 4px; align-content: start; }
 .step-head .lbl span:last-child { font-size: 14px; }
 .step-head h2 { grid-column: 4 / 13; font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; line-height: 1.02; max-width: 20ch; }
 
-/* 01 · point de départ */
+/* 01 */
 .starts { grid-column: 4 / 13; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
-.start { text-align: left; border: 1px solid var(--rule); background: var(--slate); border-radius: 20px; padding: clamp(20px, 2.4vw, 32px); cursor: pointer; display: grid; gap: 14px; transition: border-color .3s, background .3s; }
+.start { text-align: left; border: 1px solid var(--rule); background: var(--slate); border-radius: 20px; padding: clamp(20px, 2.4vw, 32px); cursor: pointer; display: grid; gap: 14px; align-content: start; transition: border-color .3s, background .3s; }
 .start h3 { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.035em; }
 .start p { color: var(--haze); font-size: 15px; }
-.start .spec { font-family: var(--f-serif); font-style: italic; font-size: 17px; color: var(--blush); }
+.start .spec { font-family: "Fraunces", Georgia, serif; font-style: italic; font-size: 17px; color: var(--blush); }
 .start[aria-pressed="true"] { border-color: var(--chalk); background: #22211e; }
 .start .tick { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--haze); display: grid; place-items: center; }
 .start[aria-pressed="true"] .tick { background: var(--chalk); border-color: var(--chalk); }
 .start[aria-pressed="true"] .tick::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--night); }
 
-/* 02 · réglages + aperçu */
+/* 02 · réglages */
 .workbench { grid-column: 1 / 13; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); column-gap: clamp(32px, 5vw, 80px); align-items: start; }
 .controls { display: grid; gap: 4px; }
 .namefield { display: grid; gap: 8px; margin-bottom: 28px; }
@@ -87,61 +81,69 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .slider input:active::-webkit-slider-thumb { scale: 1.2; }
 .slider .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -8px; pointer-events: none; }
 .slider .ticks i { width: 1px; height: 6px; background: var(--rule); }
-.prog-only[hidden] { display: none; }
 
-/* Aperçu (spectaculaire) */
-.stage { position: sticky; top: calc(24px + env(safe-area-inset-top, 0px)); display: grid; gap: 12px; }
+/* Planche d'identité */
+.stage { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); display: grid; gap: 10px; }
 .stage-cap { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--haze); }
-.pv { position: relative; overflow: hidden; border-radius: var(--pv-r, 18px); aspect-ratio: 4 / 5; max-width: 100%; background: var(--pv-bg); color: var(--pv-fg); transition: background .6s var(--ease), color .6s var(--ease), border-radius .6s var(--ease); isolation: isolate; }
-.pv::after { content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: var(--pv-grain, .2); mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-.pv .shape { position: absolute; z-index: 0; border-radius: var(--sh-r); background: var(--c); width: var(--s); aspect-ratio: 1; left: var(--x); top: var(--y); opacity: var(--o, 1);
-  transition: border-radius .7s var(--ease), background .7s var(--ease), width .7s var(--ease), opacity .5s, left .9s var(--ease), top .9s var(--ease);
-  animation: float var(--dur, 8s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
-@keyframes float { from { transform: translate(calc(var(--amp) * -1), calc(var(--amp) * .6)) rotate(calc(var(--rot) * -1)); } to { transform: translate(var(--amp), calc(var(--amp) * -.8)) rotate(var(--rot)); } }
-.pv .lines { position: absolute; inset: 7%; z-index: 1; border: 1px solid currentColor; opacity: var(--lines-o, 0); border-radius: calc(var(--pv-r, 18px) * .6); transition: opacity .6s; pointer-events: none; }
-.pv .body { position: absolute; inset: 0; z-index: 2; padding: 8%; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; }
-.pv .top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: .8; }
-.pv .center { align-self: center; display: grid; gap: 14px; transform: rotate(var(--wm-rot, 0deg)) translate(var(--wm-x, 0), 0); transition: transform .7s var(--ease); }
-.pv .wm { position: relative; font-size: var(--wm-size, 60px); line-height: .92; letter-spacing: var(--wm-ls, -.04em); text-transform: var(--wm-tt, none); overflow-wrap: normal; word-break: normal; hyphens: none; transition: letter-spacing .6s var(--ease), font-size .6s var(--ease); }
-.pv .wm span { display: block; transition: opacity .35s var(--ease), filter .35s var(--ease), font-variation-settings .6s var(--ease), font-weight .6s; }
-.pv .wm span.off { opacity: 0; filter: blur(8px); }
-.pv .wm .serif { font-family: var(--f-serif); font-variation-settings: "SOFT" var(--soft, 0), "WONK" var(--wonk, 0), "opsz" 144; font-weight: var(--wght, 400); }
-.pv .wm .sans { position: absolute; inset: 0; font-family: var(--f-display); font-weight: var(--wght, 400); }
-.pv .tag { font-size: clamp(14px, 1.3vw, 18px); line-height: 1.3; max-width: 26ch; opacity: .92; }
-.pv .decl { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
-.pv .chip { border-radius: var(--ui-r, 999px); padding: 8px 14px; font-size: 12px; background: var(--pv-p); color: var(--pv-on-p); transition: border-radius .6s var(--ease), background .6s; }
-.pv .chip.ghost { background: transparent; border: 1px solid currentColor; color: inherit; }
-.pv .slide { width: 92px; aspect-ratio: 16 / 9; border-radius: calc(var(--ui-r2, 6px)); background: var(--pv-s); display: grid; align-content: end; padding: 6px; gap: 3px; transition: border-radius .6s var(--ease), background .6s; }
-.pv .slide i { display: block; height: 3px; width: 70%; background: var(--pv-p); border-radius: 2px; }
-.pv .slide i + i { width: 45%; opacity: .6; }
-.pv .people { display: flex; opacity: var(--people-o, 0); transition: opacity .6s; }
-.pv .people i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--pv-bg); margin-left: -7px; background: var(--pv-s); }
-.pv .people i:nth-child(2) { background: var(--pv-p); } .pv .people i:nth-child(3) { background: var(--pv-a); }
-.pv .megaphone { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding: 10px 8%; font-size: 12px; background: var(--pv-p); color: var(--pv-on-p); translate: 0 var(--mega-y, -100%); transition: translate .6s var(--ease); }
-.pv .timeline { display: flex; gap: 6px; align-items: center; }
-.pv .timeline i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .25; transition: opacity .4s; }
-.pv .timeline i.on { opacity: .9; }
-.swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.swatches div { height: 34px; border-radius: 8px; transition: background .6s var(--ease); }
-.stage .fonts { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--haze); }
+.board { container-type: inline-size; aspect-ratio: 3 / 4.05; max-height: calc(100vh - 104px); max-width: 100%; border-radius: var(--b-r, 16px); overflow: hidden; background: var(--b-bg); transition: background .7s var(--ease), border-radius .6s var(--ease); }
+.grid { height: 100%; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: 5.4fr .9fr 2fr 1.25fr 3fr; gap: 1.5cqw; padding: 1.5cqw; }
+.tile { position: relative; overflow: hidden; min-width: 0; min-height: 0; border-radius: var(--t-r, 12px); transition: background .7s var(--ease), color .7s var(--ease), border-radius .6s var(--ease), rotate .7s var(--ease); }
+.board svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.board svg * { transition: fill .7s var(--ease), stroke .7s var(--ease); }
+.ga { fill: var(--a); } .gb { fill: var(--b); }
+.sa { stroke: var(--a); fill: none; } .sb { stroke: var(--b); fill: none; } .sd { stroke: var(--d); fill: none; }
 
-/* 03 · portrait */
+.hero { grid-column: 1 / -1; background: var(--hero-bg); color: var(--hero-fg); display: grid; place-items: center; text-align: center; }
+.hero .frame { position: absolute; inset: 2.2cqw; z-index: 1; border: 1px solid currentColor; opacity: var(--frame-o, 0); border-radius: calc(var(--t-r, 12px) * .6); pointer-events: none; transition: opacity .6s; }
+.hero .corner { position: absolute; left: 3.4cqw; top: 3cqw; z-index: 3; display: flex; align-items: center; gap: 1.6cqw; font-family: var(--f-t); font-size: clamp(10px, 2cqw, 13px); }
+.tl { display: flex; gap: .9cqw; } .tl i { width: 1.1cqw; height: 1.1cqw; min-width: 5px; min-height: 5px; border-radius: 50%; background: currentColor; opacity: .25; } .tl i.on { opacity: .9; }
+.deco { position: absolute; z-index: 1; width: var(--w); aspect-ratio: 1; opacity: var(--o, 1); transition: opacity .5s; }
+.deco svg { animation: sway var(--dur, 9s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
+@keyframes sway { from { rotate: calc(var(--rot, 8deg) * -1); translate: 0 calc(var(--amp, 4px) * -1); } to { rotate: var(--rot, 8deg); translate: 0 var(--amp, 4px); } }
+.lockup { position: relative; z-index: 2; display: grid; gap: 2.2cqw; justify-items: center; padding-inline: 7cqw; rotate: var(--wm-rot, 0deg); transition: rotate .7s var(--ease); }
+.wm { font-family: var(--f-d); font-weight: var(--wm-w, 500); font-size: var(--wm-size, 12cqw); line-height: .96; letter-spacing: var(--wm-ls, -.02em); text-transform: var(--wm-tt, none); font-variation-settings: "SOFT" var(--soft, 0); transition: font-weight .5s, letter-spacing .5s, font-size .5s var(--ease); }
+.tag { font-family: var(--f-t); font-size: clamp(11px, 2.5cqw, 16px); line-height: 1.3; max-width: 34ch; opacity: .92; }
+
+.band { grid-column: 1 / -1; overflow: hidden; display: flex; align-items: center; }
+.track { display: flex; height: 100%; width: max-content; animation: slide var(--band-dur, 40s) linear infinite; animation-play-state: var(--band-play, running); }
+.track > div { display: flex; height: 100%; gap: var(--band-gap, 2cqw); padding-right: var(--band-gap, 2cqw); align-items: center; }
+.track span { height: 82%; aspect-ratio: 1; flex: none; }
+@keyframes slide { to { translate: -50% 0; } }
+
+.mono { grid-column: 1 / 3; background: var(--mono-bg); color: var(--mono-fg); display: grid; place-items: center; font-family: var(--f-d); font-weight: var(--wm-w, 500); font-size: 10cqw; line-height: 1; letter-spacing: -.02em; font-variation-settings: "SOFT" var(--soft, 0); }
+.wide { grid-column: 3 / 7; background: var(--wide-bg); color: var(--wide-fg); display: grid; place-items: center; font-family: var(--f-d); font-weight: var(--wm-w, 500); font-size: var(--wide-size, 6cqw); letter-spacing: var(--wm-ls, -.02em); text-transform: var(--wm-tt, none); white-space: nowrap; font-variation-settings: "SOFT" var(--soft, 0); }
+.pills { grid-column: 1 / -1; background: var(--tile); display: flex; gap: 1.5cqw; padding: 1.8cqw 2.4cqw; }
+.pills i { flex: 1; border-radius: var(--pill-r, 999px); transition: background .7s var(--ease), border-radius .6s var(--ease); box-shadow: inset 0 0 0 1px rgba(127,127,127,.22); }
+.typo { grid-column: 1 / 4; background: var(--typo-bg); color: var(--typo-fg); display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-inline: 2.4cqw; gap: 1cqw; }
+.typo div { display: grid; gap: .8cqw; justify-items: center; min-width: 0; }
+.typo b { font-weight: 500; font-size: 8.4cqw; line-height: 1; }
+.typo #aa-d { font-family: var(--f-d); font-variation-settings: "SOFT" var(--soft, 0); } .typo #aa-t { font-family: var(--f-t); }
+.typo span { font-family: var(--f-t); font-size: clamp(8px, 1.7cqw, 11.5px); text-align: center; line-height: 1.2; }
+.pictos { grid-column: 4 / 7; background: var(--tile); color: var(--tile-fg); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.8cqw; padding: 2.8cqw 2.4cqw; align-content: center; }
+.pictos figure { display: grid; gap: 1.5cqw; justify-items: start; min-width: 0; }
+.pictos .g { width: 64%; aspect-ratio: 1; }
+.pictos figcaption { font-family: var(--f-t); font-size: clamp(9px, 1.85cqw, 12.5px); line-height: 1.25; }
+.recipe { font-size: 13px; color: var(--haze); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.recipe b { font-weight: 500; color: var(--chalk); }
+
+/* 03 */
 .portrait { grid-column: 4 / 13; display: grid; gap: 28px; }
 .portrait .says { font-family: var(--f-display); font-weight: 300; font-size: clamp(28px, 3.4vw, 48px); letter-spacing: -.04em; line-height: 1.08; }
 .portrait .says em { font-style: normal; color: var(--blush); }
 .traits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
-.traits div { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 6px; }
+.traits div { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 6px; align-content: start; }
 .traits strong { font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: -.02em; }
 .traits span { color: var(--haze); font-size: 14px; }
+.piste { border-top: 1px solid var(--rule); padding-top: 16px; font-size: 16px; }
+.piste b { font-weight: 500; }
 .open { background: var(--slate); border: 1px solid var(--rule); border-radius: 18px; padding: 22px 24px; display: grid; gap: 8px; }
 .open h3 { font-size: 22px; letter-spacing: -.02em; }
 .open p { color: var(--haze); font-size: 15px; }
 .copyrow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
-/* 04 · brief */
+/* 04 */
 .brief { grid-column: 4 / 13; display: grid; gap: 34px; }
-.q { display: grid; gap: 12px; border: 0; padding: 0; margin: 0; }
+.q { display: grid; gap: 12px; border: 0; padding: 0; margin: 0; min-width: 0; }
 .q legend, .q > label { font-family: var(--f-display); font-size: 22px; letter-spacing: -.02em; padding: 0; }
 .q .hint { color: var(--haze); font-size: 14px; margin-top: -6px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -150,13 +152,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .chips span { display: inline-block; border: 1px solid var(--rule); border-radius: 999px; padding: 9px 16px; font-size: 14px; transition: background .2s, color .2s, border-color .2s; }
 .chips input:checked + span { background: var(--chalk); color: var(--night); border-color: var(--chalk); }
 .chips input:focus-visible + span { outline: 2px solid var(--blush); outline-offset: 2px; }
-.field { background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 10px 0; font-size: 17px; width: 100%; }
+.field { background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 10px 0; font-size: 17px; width: 100%; min-width: 0; }
 .field:focus { outline: none; border-bottom-color: var(--chalk); }
+select.field option { background: var(--slate); }
 textarea.field { resize: vertical; min-height: 84px; }
 .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
 .consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 14px; color: var(--haze); align-items: start; }
 .consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--chalk); }
-.cta { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; border: 1px solid var(--chalk); border-radius: 999px; padding: 13px 22px; font-size: 14px; background: transparent; cursor: pointer; text-decoration: none; transition: background .25s, color .25s, border-color .25s; }
+.cta { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; border: 1px solid var(--chalk); border-radius: 999px; padding: 13px 22px; font-size: 14px; background: transparent; cursor: pointer; text-decoration: none; color: var(--chalk); transition: background .25s, color .25s, border-color .25s; }
 .cta:hover { background: var(--chalk); color: var(--night); }
 .cta.solid { background: var(--chalk); color: var(--night); }
 .cta.solid:hover { background: var(--blush); border-color: var(--blush); }
@@ -164,50 +167,64 @@ textarea.field { resize: vertical; min-height: 84px; }
 .sent { background: var(--slate); border: 1px solid var(--rule); border-radius: 22px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
 .sent h3 { font-size: clamp(28px, 3vw, 42px); letter-spacing: -.04em; }
 
-/* Mode équipe + atelier */
+/* 05 */
 .team { grid-column: 4 / 13; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
-.team h2 { font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; line-height: 1.02; }
 .team .txt { display: grid; gap: 18px; }
 .team .txt p { color: var(--haze); }
 .demo { background: var(--slate); border: 1px solid var(--rule); border-radius: 20px; padding: 24px; display: grid; gap: 22px; }
 .demo .row { display: grid; gap: 10px; }
 .demo .row .ends { display: flex; justify-content: space-between; font-size: 14px; color: var(--haze); }
-.demo .track { position: relative; height: 2px; background: var(--rule); }
+.demo .trk { position: relative; height: 2px; background: var(--rule); margin-block: 12px; }
 .demo .dot { position: absolute; top: 50%; width: 26px; height: 26px; translate: -50% -50%; border-radius: 50%; display: grid; place-items: center; font-size: 10px; color: var(--night); font-weight: 500; }
-.demo .gap { position: absolute; top: -4px; height: 10px; background: rgba(231,185,182,.18); border-radius: 4px; }
+.demo .gp { position: absolute; top: -4px; height: 10px; background: rgba(231,185,182,.18); border-radius: 4px; }
 .demo .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--haze); }
 .demo .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .demo .note { font-size: 13px; color: var(--haze); }
 
 /* Barre de test */
-.switch { row-gap: 0; }
-@media (max-width: 560px) { .switch { flex-wrap: nowrap; } .switch span { display: none; } .switch button { padding: 7px 10px; font-size: 12px; } }
-.switch { position: fixed; z-index: 30; left: 50%; translate: -50% 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(25,25,23,.94); border: 1px solid var(--rule); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,.5); max-width: calc(100vw - 32px); flex-wrap: wrap; justify-content: center; }
-.switch span { padding: 0 8px 0 12px; font-family: var(--f-mono); font-size: 11px; color: var(--haze); text-transform: uppercase; letter-spacing: .04em; }
-.switch button { border: 0; background: none; color: var(--haze); font-size: 13px; padding: 8px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.switch { width: fit-content; margin: 14px auto 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2px 4px; padding: 4px; border-radius: 22px; background: rgba(25,25,23,.94); border: 1px solid var(--rule); max-width: 100%; }
+.switch .grp { display: inline-flex; align-items: center; gap: 2px; }
+.switch .grp + .grp { border-left: 1px solid var(--rule); padding-left: 4px; }
+.switch span { padding: 0 6px 0 10px; font-size: 12px; color: var(--haze); }
+.switch button { border: 0; background: none; color: var(--haze); font-size: 13px; padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .switch button[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
 
 @media (max-width: 960px) {
-  .intro h1, .intro .lead, .intro .how, .starts, .portrait, .brief, .team, .step-head { grid-column: 1 / -1; }
+  .intro h1, .intro .lead, .intro .how, .starts, .portrait, .brief, .team, .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
   .intro .how { margin-top: 36px; }
-  .step-head { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
-  .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
+  .step-head { row-gap: 10px; }
   .workbench { grid-template-columns: minmax(0, 1fr); }
-  .stage { position: sticky; top: 0; z-index: 4; background: var(--night); padding-block: 10px; grid-row: 1; }
-  .pv { aspect-ratio: 16 / 10; }
-  .pv .tag, .pv .decl .slide { display: none; }
-  .stage .swatches, .stage .fonts { display: none; }
+  .stage { top: 0; z-index: 4; background: var(--night); padding-block: 10px; grid-row: 1; }
+  .board { aspect-ratio: auto; max-height: none; }
+  .grid { grid-template-rows: auto auto auto; height: auto; }
+  .hero { aspect-ratio: 16 / 8; }
+  .band { height: 8cqw; }
+  .pills { height: 11cqw; }
+  .mono, .wide, .typo, .pictos, .recipe, .stage-cap span:last-child { display: none; }
   .team { grid-template-columns: minmax(0, 1fr); }
   .nav ul { display: none; }
 }
 @media (max-width: 560px) {
   .starts, .traits, .two { grid-template-columns: minmax(0, 1fr); }
+  .switch span { display: none; }
+  .switch { width: auto; }
+  .switch .grp { flex-wrap: wrap; justify-content: center; }
+  .switch .grp + .grp { border-left: 0; padding-left: 0; }
+  .switch button { padding: 6px 8px; font-size: 12px; }
+  .nav .brand { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pv .shape { animation: none; }
-  .pv *, .pv { transition: none !important; }
+  .deco svg, .track { animation: none; }
+  .board, .board * { transition: none !important; }
 }
 </style>
+
+<nav class="switch" aria-label="Variantes à tester">
+  <div class="grp" id="sw-name"><span>Nom</span>
+    <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button><button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button><button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button></div>
+  <div class="grp" id="sw-entry"><span>Entrées</span>
+    <button type="button" data-e="a" aria-pressed="true">Équipes / Clients</button><button type="button" data-e="b" aria-pressed="false">Interne / Externe</button><button type="button" data-e="c" aria-pressed="false">Programme / Marque</button></div>
+</nav>
 
 <nav class="c nav" aria-label="Navigation du site">
   <span class="brand">Julie Ramier</span>
@@ -217,7 +234,7 @@ textarea.field { resize: vertical; min-height: 84px; }
 <header class="c intro">
   <p class="eyebrow">Un outil gratuit, pour poser les bases d'une identité</p>
   <h1 data-name>Le Nuancier</h1>
-  <p class="lead">Réglez la personnalité de votre programme ou de votre marque, voyez-la prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 5 minutes.</p>
+  <p class="lead">Réglez la personnalité de votre projet, voyez-la prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 5 minutes.</p>
   <div class="how">
     <div><span class="num">01</span><span>Choisissez votre point de départ</span></div>
     <div><span class="num">02</span><span>Réglez les curseurs</span></div>
@@ -227,75 +244,73 @@ textarea.field { resize: vertical; min-height: 84px; }
 </header>
 
 <main>
-  <!-- 01 -->
   <section class="c step" aria-labelledby="h1s">
-    <div class="step-head"><div class="lbl"><span class="num">01</span><span>Point de départ</span></div><h2 id="h1s">Qu'est-ce qui doit prendre vie ?</h2></div>
+    <div class="step-head"><div class="lbl"><span class="num">01</span><span>Point de départ</span></div><h2 id="h1s">À qui votre projet doit-il parler ?</h2></div>
     <div class="starts">
-      <button type="button" class="start" data-mode="programme" aria-pressed="true">
+      <button type="button" class="start" data-mode="interne" aria-pressed="true">
         <span class="tick" aria-hidden="true"></span>
-        <h3>Un programme interne</h3>
-        <p>Transformation, nouvelle organisation, outil à déployer, plan de formation : un projet qui doit embarquer des collaborateurs.</p>
+        <h3 id="st-i-t">À vos équipes</h3>
+        <p id="st-i-p">Communication interne : programme de transformation, nouvel outil, événement, onboarding.</p>
         <span class="spec">Ma spécialité depuis 8 ans</span>
       </button>
-      <button type="button" class="start" data-mode="marque" aria-pressed="false">
+      <button type="button" class="start" data-mode="externe" aria-pressed="false">
         <span class="tick" aria-hidden="true"></span>
-        <h3>Une marque</h3>
-        <p>Création ou refonte : une entreprise, un produit, un lieu, une offre qui doit se faire connaître et se faire aimer.</p>
+        <h3 id="st-e-t">À vos clients</h3>
+        <p id="st-e-p">Communication externe : marque, produit, lieu, nouvelle offre.</p>
       </button>
     </div>
   </section>
 
-  <!-- 02 -->
   <section class="c step" aria-labelledby="h2s">
     <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Bougez les curseurs. Il n'y a pas de mauvaise réponse.</h2></div>
     <div class="workbench">
       <div class="controls" id="controls">
         <div class="namefield">
           <label for="pname" id="pname-l">Nom du programme (facultatif)</label>
-          <input id="pname" type="text" maxlength="28" placeholder="Votre programme" autocomplete="off">
+          <input id="pname" type="text" maxlength="26" placeholder="Votre programme" autocomplete="off">
         </div>
       </div>
       <aside class="stage" aria-label="Aperçu en direct">
-        <div class="stage-cap"><span>Aperçu en direct</span><span>Indicatif, pas une proposition finale</span></div>
-        <div class="pv" id="pv" aria-hidden="true">
-          <div class="megaphone">Annonce · Le programme démarre lundi</div>
-          <span class="shape" data-i="0"></span><span class="shape" data-i="1"></span><span class="shape" data-i="2"></span><span class="shape" data-i="3"></span><span class="shape" data-i="4"></span>
-          <div class="lines"></div>
-          <div class="body">
-            <div class="top"><span id="pv-kind">Programme interne</span><div class="timeline" id="tl"></div></div>
-            <div class="center">
-              <div class="wm" id="wm"><span class="serif">Votre programme</span><span class="sans">Votre programme</span></div>
-              <p class="tag" id="tag"></p>
+        <div class="stage-cap"><span>Aperçu en direct</span><span>Une piste parmi d'autres, pas une proposition finale</span></div>
+        <div class="board" id="board" aria-hidden="true">
+          <div class="grid">
+            <div class="tile hero" id="hero">
+              <span class="deco" style="--w:30%;right:-6%;top:-17%;--dl:0s"></span>
+              <span class="deco" style="--w:28%;left:-8%;bottom:-27%;--dl:-3s"></span>
+              <span class="deco" style="--w:14%;right:12%;bottom:-11%;--dl:-5s"></span>
+              <span class="deco" style="--w:9%;right:36%;bottom:-7%;--dl:-1.5s"></span>
+              <div class="frame"></div>
+              <div class="corner"><span id="b-kind">Programme interne</span><span class="tl" id="tl"></span></div>
+              <div class="lockup"><div class="wm" id="wm">Votre programme</div><p class="tag" id="tag"></p></div>
             </div>
-            <div class="decl">
-              <span class="chip">Découvrir</span><span class="chip ghost">En savoir plus</span>
-              <span class="slide"><i></i><i></i></span>
-              <span class="people"><i></i><i></i><i></i></span>
-            </div>
+            <div class="band"><div class="track" id="track"></div></div>
+            <div class="tile mono"><span id="mono">VP</span></div>
+            <div class="tile wide"><span id="wide">Votre programme</span></div>
+            <div class="tile pills" id="pills"></div>
+            <div class="tile typo"><div><b id="aa-d">Aa</b><span id="fn-d"></span></div><div><b id="aa-t">Aa</b><span id="fn-t"></span></div></div>
+            <div class="tile pictos" id="pictos"></div>
           </div>
         </div>
-        <div class="swatches" id="sw"><div></div><div></div><div></div><div></div></div>
-        <div class="fonts"><span id="f-name">Typographie</span><span id="f-mood"></span></div>
+        <p class="recipe" id="recipe"></p>
       </aside>
     </div>
   </section>
 
-  <!-- 03 -->
   <section class="c step" aria-labelledby="h3s">
     <div class="step-head"><div class="lbl"><span class="num">03</span><span>Votre portrait</span></div><h2 id="h3s">Voici ce que vos réglages racontent.</h2></div>
     <div class="portrait">
       <p class="says" id="says"></p>
       <div class="traits" id="traits"></div>
+      <p class="piste" id="piste"></p>
       <div class="open" id="open"></div>
       <div class="copyrow"><button type="button" class="cta" id="copy">Copier mon portrait</button><span class="dim" id="copy-s" aria-live="polite"></span></div>
     </div>
   </section>
 
-  <!-- 04 -->
   <section class="c step" aria-labelledby="h4s">
     <div class="step-head"><div class="lbl"><span class="num">04</span><span>Votre brief</span></div><h2 id="h4s">Encore quatre questions, et votre brief est prêt.</h2></div>
     <form class="brief" id="brief" novalidate>
-      <fieldset class="q"><legend>Qui doit-on embarquer ?</legend>
+      <fieldset class="q"><legend id="q-cible-l">Qui doit-on embarquer ?</legend>
         <div class="chips" id="q-cible"></div></fieldset>
       <div class="q"><label for="q-obj">Quel est l'objectif, en une phrase ?</label>
         <textarea class="field" id="q-obj" placeholder="Ex. : faire adopter le nouvel outil par toutes les équipes d'ici juin"></textarea></div>
@@ -324,7 +339,6 @@ textarea.field { resize: vertical; min-height: 84px; }
     </div>
   </section>
 
-  <!-- Équipe -->
   <section class="c step" aria-labelledby="h5s">
     <div class="step-head"><div class="lbl"><span class="num">05</span><span>Et en équipe ?</span></div><h2 id="h5s">Vous êtes plusieurs à porter le projet ?</h2></div>
     <div class="team">
@@ -335,28 +349,23 @@ textarea.field { resize: vertical; min-height: 84px; }
       </div>
       <div class="demo" aria-label="Exemple de comparaison en équipe">
         <div class="legend"><span><i style="background:var(--blush)"></i>Direction</span><span><i style="background:#9fb4e6"></i>RH</span><span><i style="background:#c7d4a3"></i>Équipe projet</span></div>
-        <div class="row"><div class="ends"><span>Rassurant</span><span>Disruptif</span></div><div class="track"><span class="gap" style="left:22%;width:56%"></span><span class="dot" style="left:22%;background:#9fb4e6">RH</span><span class="dot" style="left:48%;background:#c7d4a3">P</span><span class="dot" style="left:78%;background:var(--blush)">D</span></div></div>
-        <div class="row"><div class="ends"><span>Sérieux</span><span>Ludique</span></div><div class="track"><span class="gap" style="left:58%;width:12%"></span><span class="dot" style="left:58%;background:var(--blush)">D</span><span class="dot" style="left:64%;background:#9fb4e6">RH</span><span class="dot" style="left:70%;background:#c7d4a3">P</span></div></div>
-        <div class="row"><div class="ends"><span>Descendant</span><span>Participatif</span></div><div class="track"><span class="gap" style="left:30%;width:52%"></span><span class="dot" style="left:30%;background:var(--blush)">D</span><span class="dot" style="left:66%;background:#c7d4a3">P</span><span class="dot" style="left:82%;background:#9fb4e6">RH</span></div></div>
+        <div class="row"><div class="ends"><span>Rassurant</span><span>Disruptif</span></div><div class="trk"><span class="gp" style="left:22%;width:56%"></span><span class="dot" style="left:22%;background:#9fb4e6">RH</span><span class="dot" style="left:48%;background:#c7d4a3">P</span><span class="dot" style="left:78%;background:var(--blush)">D</span></div></div>
+        <div class="row"><div class="ends"><span>Sérieux</span><span>Ludique</span></div><div class="trk"><span class="gp" style="left:58%;width:12%"></span><span class="dot" style="left:56%;background:var(--blush)">D</span><span class="dot" style="left:64%;background:#9fb4e6">RH</span><span class="dot" style="left:72%;background:#c7d4a3">P</span></div></div>
+        <div class="row"><div class="ends"><span>Descendant</span><span>Participatif</span></div><div class="trk"><span class="gp" style="left:30%;width:52%"></span><span class="dot" style="left:30%;background:var(--blush)">D</span><span class="dot" style="left:66%;background:#c7d4a3">P</span><span class="dot" style="left:82%;background:#9fb4e6">RH</span></div></div>
         <p class="note">Exemple fictif. Un écart large = un sujet à trancher en atelier.</p>
       </div>
     </div>
   </section>
 </main>
 
-<nav class="switch" aria-label="Nom de l'outil à tester">
-  <span>Nom</span>
-  <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button>
-  <button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button>
-  <button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button>
-</nav>
+
 
 <script>
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lerp = (a, b, t) => a + (b - a) * t;
-const clamp01 = v => Math.max(0, Math.min(1, v));
+const $ = id => document.getElementById(id);
 
-/* Curseurs : [id, gauche, droite, valeur par défaut, programme seulement] */
+/* ───────── Curseurs : [id, gauche, droite, défaut, portée] ───────── */
 const SL = [
   ["classique", "Classique", "Contemporain", 62],
   ["ludique", "Sérieux", "Ludique", 58],
@@ -366,43 +375,117 @@ const SL = [
   ["exclusif", "Accessible", "Exclusif", 30],
   ["energie", "Calme", "Énergique", 50],
   ["genereux", "Minimal", "Généreux", 45],
-  ["participatif", "Descendant", "Participatif", 70, true],
-  ["disruptif", "Rassurant", "Disruptif", 35, true],
-  ["duree", "Ponctuel", "Au long cours", 72, true],
+  ["participatif", "Descendant", "Participatif", 70, "interne"],
+  ["disruptif", "Rassurant", "Disruptif", 35, "interne"],
+  ["duree", "Ponctuel", "Au long cours", 72, "interne"],
+  ["international", "Local", "International", 40, "externe"],
+  ["public", "Pour initiés", "Grand public", 65, "externe"],
+  ["engagee", "Neutre", "Engagée", 50, "externe"],
 ];
-/* Adjectifs pour le portrait (féminin pour « marque », masculin pour « programme ») */
 const ADJ = {
-  classique: [["classique", "classique"], ["contemporain", "contemporaine"]],
-  ludique: [["sérieux", "sérieuse"], ["ludique", "ludique"]],
-  proche: [["institutionnel", "institutionnelle"], ["proche des gens", "proche des gens"]],
-  expressif: [["discret", "discrète"], ["expressif", "expressive"]],
-  emotion: [["rationnel", "rationnelle"], ["émotionnel", "émotionnelle"]],
-  exclusif: [["accessible", "accessible"], ["exclusif", "exclusive"]],
-  energie: [["calme", "calme"], ["énergique", "énergique"]],
-  genereux: [["épuré", "épurée"], ["généreux", "généreuse"]],
-  participatif: [["porté par la direction", "portée par la direction"], ["participatif", "participative"]],
-  disruptif: [["rassurant", "rassurante"], ["disruptif", "disruptive"]],
+  classique: [["classique", "classique"], ["contemporain", "contemporaine"]], ludique: [["sérieux", "sérieuse"], ["ludique", "ludique"]],
+  proche: [["institutionnel", "institutionnelle"], ["proche des gens", "proche des gens"]], expressif: [["discret", "discrète"], ["expressif", "expressive"]],
+  emotion: [["rationnel", "rationnelle"], ["émotionnel", "émotionnelle"]], exclusif: [["accessible", "accessible"], ["exclusif", "exclusive"]],
+  energie: [["calme", "calme"], ["énergique", "énergique"]], genereux: [["épuré", "épurée"], ["généreux", "généreuse"]],
+  participatif: [["porté par la direction", "portée par la direction"], ["participatif", "participative"]], disruptif: [["rassurant", "rassurante"], ["disruptif", "disruptive"]],
   duree: [["ponctuel", "ponctuelle"], ["installé dans la durée", "installée dans la durée"]],
+  international: [["local", "locale"], ["international", "internationale"]], public: [["réservé aux initiés", "réservée aux initiés"], ["grand public", "grand public"]], engagee: [["neutre", "neutre"], ["engagé", "engagée"]],
 };
 const WHY = {
   classique: ["s'appuie sur des codes établis", "regarde vers l'avant"], ludique: ["inspire confiance par la rigueur", "crée de la complicité"],
   proche: ["parle avec autorité", "parle d'égal à égal"], expressif: ["s'efface derrière le message", "se remarque tout de suite"],
   emotion: ["convainc par les faits", "touche avant d'expliquer"], exclusif: ["s'adresse à tous", "cultive la rareté"],
   energie: ["prend le temps", "donne de l'élan"], genereux: ["va à l'essentiel", "en donne beaucoup à voir"],
-  participatif: ["fixe un cap clair", "fait participer chacun"], disruptif: ["sécurise le changement", "bouscule les habitudes"],
-  duree: ["marque un temps fort", "accompagne sur la durée"],
+  participatif: ["fixe un cap clair", "fait participer chacun"], disruptif: ["sécurise le changement", "bouscule les habitudes"], duree: ["marque un temps fort", "accompagne sur la durée"],
+  international: ["s'ancre dans son territoire", "parle au monde entier"], public: ["s'adresse à des connaisseurs", "s'adresse au plus grand nombre"], engagee: ["reste en retrait des débats", "prend position"],
 };
 
-let mode = "programme";
+/* ───────── Nuances : palettes composées à la main ───────── */
+const PAL = [
+  { id: "pervenche", name: "Pervenche", bg: "#E9E1D3", tile: "#F5EFE4", dark: "#25221F", light: "#F5EFE4", cols: ["#7C8CE0", "#B9C3EE", "#E0633A", "#F1C9B0"], pos: { exclusif: 20, proche: 70, ludique: 60, emotion: 50, expressif: 55, energie: 50 } },
+  { id: "verger", name: "Verger", bg: "#EFE6D6", tile: "#F8F2E6", dark: "#2F4A35", light: "#F8F2E6", cols: ["#CFDDA5", "#E79DB6", "#DC6638", "#2F4A35"], pos: { exclusif: 25, proche: 78, ludique: 65, emotion: 78, expressif: 60, participatif: 80 } },
+  { id: "guimauve", name: "Guimauve", bg: "#7DB183", tile: "#F6EFE6", dark: "#161616", light: "#F6EFE6", cols: ["#F0C3CB", "#F2C14E", "#2E5B3A", "#E8734A"], pos: { ludique: 90, expressif: 80, emotion: 70, energie: 65, exclusif: 20, proche: 82 } },
+  { id: "atelier", name: "Atelier", bg: "#E7E2D5", tile: "#F3EFE4", dark: "#1F1D1A", light: "#F3EFE4", cols: ["#2F52B8", "#E9A0C4", "#3F9A52", "#E7A93C"], extra: ["#A77BD8", "#E0623A"], pos: { genereux: 85, participatif: 85, expressif: 70, ludique: 65, exclusif: 25, energie: 60 } },
+  { id: "institution", name: "Institution", bg: "#E9E5DB", tile: "#F5F2EA", dark: "#14203A", light: "#F5F2EA", cols: ["#1F3A6E", "#A9B8D4", "#C0452C", "#D8CDB6"], pos: { proche: 15, ludique: 15, classique: 20, emotion: 35, expressif: 40 } },
+  { id: "cobalt", name: "Cobalt", bg: "#E4E7E1", tile: "#F3F5F1", dark: "#16181D", light: "#F3F5F1", cols: ["#2743D9", "#C8D0F5", "#FF6B3D", "#BFC6BA"], pos: { classique: 85, ludique: 25, emotion: 15, expressif: 50, exclusif: 45 } },
+  { id: "maison", name: "Maison", bg: "#18211E", tile: "#222D29", dark: "#131A18", light: "#EDE6D6", cols: ["#C8A96A", "#3B4D46", "#8F3B2E", "#EDE6D6"], pos: { exclusif: 90, classique: 15, ludique: 10, expressif: 30, energie: 25 } },
+  { id: "minuit", name: "Minuit", bg: "#1B1A18", tile: "#262422", dark: "#141312", light: "#EDE5D8", cols: ["#7C8CE0", "#B9C3EE", "#EDE5D8", "#45413C"], pos: { exclusif: 82, classique: 85, expressif: 65, ludique: 45, energie: 55 } },
+  { id: "terre", name: "Terre", bg: "#E9DCC7", tile: "#F4EBDB", dark: "#2B211B", light: "#F4EBDB", cols: ["#B5533C", "#D9B89A", "#5E6B3E", "#E8C39B"], pos: { emotion: 85, energie: 20, proche: 70, classique: 35, ludique: 35, expressif: 45 } },
+  { id: "elan", name: "Élan", bg: "#EFE9DE", tile: "#F9F5EC", dark: "#141414", light: "#F9F5EC", cols: ["#FF4F2E", "#C9B8FF", "#141414", "#FFD3C7"], pos: { energie: 90, disruptif: 85, expressif: 85, classique: 80, ludique: 55 } },
+  { id: "lagon", name: "Lagon", bg: "#DFE9E5", tile: "#F0F6F3", dark: "#17302E", light: "#F0F6F3", cols: ["#2F7F7A", "#A9D3CC", "#F2B880", "#17302E"], pos: { energie: 15, emotion: 30, disruptif: 10, exclusif: 30, ludique: 35, expressif: 35 } },
+  { id: "soleil", name: "Soleil", bg: "#F6D34A", tile: "#FFF8E1", dark: "#1B1B1B", light: "#FFF8E1", cols: ["#2F52B8", "#F29FC5", "#E0623A", "#1B1B1B"], pos: { ludique: 88, energie: 88, expressif: 92, genereux: 80, exclusif: 15 } },
+  { id: "brume", name: "Brume", bg: "#E3E0D9", tile: "#F1EFEA", dark: "#2A2A28", light: "#F1EFEA", cols: ["#2A2A28", "#BDB8AD", "#B46A4A", "#8C8A84"], pos: { expressif: 8, genereux: 10, ludique: 22, energie: 25 } },
+];
+/* ───────── Typographies : duos choisis à la main ───────── */
+const FONTS = [
+  { id: "outfit", name: "Outfit", text: "Plus Jakarta Sans", w: .57, wt: [300, 700], caps: true, pos: { classique: 80, ludique: 55, proche: 65, exclusif: 30, expressif: 50 } },
+  { id: "fredoka", name: "Fredoka", text: "Plus Jakarta Sans", w: .6, wt: [400, 700], pos: { ludique: 90, proche: 80, exclusif: 10, classique: 70, expressif: 65 } },
+  { id: "bricolage", name: "Bricolage Grotesque", text: "Inter", w: .54, wt: [400, 800], pos: { classique: 70, ludique: 60, proche: 80, expressif: 70, emotion: 72 } },
+  { id: "intertight", name: "Inter Tight", text: "Inter", w: .52, wt: [300, 800], caps: true, pos: { classique: 85, ludique: 18, proche: 35, emotion: 25, expressif: 45 } },
+  { id: "unbounded", name: "Unbounded", text: "Inter", w: .8, wt: [400, 800], caps: true, pos: { classique: 95, expressif: 90, energie: 85, ludique: 50 } },
+  { id: "syne", name: "Syne", text: "Inter", w: .62, wt: [500, 800], caps: true, pos: { classique: 92, disruptif: 90, expressif: 75, energie: 70 } },
+  { id: "fraunces", name: "Fraunces", text: "Plus Jakarta Sans", w: .56, wt: [300, 800], serif: true, pos: { classique: 22, ludique: 60, proche: 70, exclusif: 30, emotion: 70 } },
+  { id: "dmserif", name: "DM Serif Display", text: "Inter", w: .5, wt: [400, 400], serif: true, pos: { classique: 15, proche: 20, ludique: 20, expressif: 65, exclusif: 45 } },
+  { id: "cormorant", name: "Cormorant Garamond", text: "Inter", w: .46, wt: [400, 600], caps: true, serif: true, pos: { classique: 8, exclusif: 90, ludique: 10, expressif: 25 } },
+  { id: "instrument", name: "Instrument Serif", text: "Inter Tight", w: .44, wt: [400, 400], caps: true, serif: true, pos: { classique: 28, exclusif: 65, energie: 20, ludique: 30, expressif: 40 } },
+];
+/* ───────── Formes : six familles ───────── */
+const STAR = "M50 4Q56 44 96 50Q56 56 50 96Q44 56 4 50Q44 44 50 4Z";
+const BLADE = "M4 4H48V48A44 44 0 0 1 4 4Z";
+const MOTIFS = [
+  { id: "module", name: "formes modulaires", pos: { participatif: 80, classique: 75, ludique: 55, genereux: 60 }, g: [
+    `<g class="ga">${[0, 90, 180, 270].map(r => `<path d="${BLADE}" transform="rotate(${r} 50 50)"/>`).join("")}</g>`,
+    `<path class="ga" d="M48 96H6A42 42 0 0 1 48 54Z"/><path class="ga" d="M52 96H94A42 42 0 0 0 52 54Z"/><circle class="gb" cx="50" cy="28" r="22"/>`,
+    `<path class="ga" d="M10 48A40 40 0 0 1 90 48Z"/><path class="gb" d="M10 94A40 40 0 0 1 90 94Z"/>`,
+    `<rect class="ga" x="6" y="6" width="88" height="88" rx="24"/><path class="gb" d="M50 16Q55 45 84 50Q55 55 50 84Q45 55 16 50Q45 45 50 16Z"/>`] },
+  { id: "rond", name: "formes rondes", pos: { ludique: 82, proche: 75, energie: 45, classique: 55 }, g: [
+    `<circle class="ga" cx="50" cy="27" r="25"/><circle class="ga" cx="73" cy="50" r="25"/><circle class="ga" cx="50" cy="73" r="25"/><circle class="ga" cx="27" cy="50" r="25"/><circle class="gb" cx="50" cy="50" r="13"/>`,
+    `<circle class="ga" cx="34" cy="60" r="28"/><circle class="ga" cx="64" cy="56" r="30"/><circle class="ga" cx="50" cy="38" r="26"/><path class="sd" stroke-width="8" stroke-linecap="round" d="M10 70C22 42 38 44 36 62C34 78 52 78 54 60C56 42 72 44 70 62C68 76 84 72 92 60"/>`,
+    `<rect class="ga" x="6" y="18" width="88" height="28" rx="14"/><rect class="gb" x="6" y="54" width="88" height="28" rx="14"/>`,
+    `<path class="ga" d="M8 56A42 42 0 0 1 92 56Z"/><circle class="gb" cx="50" cy="74" r="15"/>`] },
+  { id: "etoile", name: "étincelles", pos: { energie: 82, expressif: 80, ludique: 60 }, g: [
+    `<path class="ga" d="${STAR}"/>`,
+    `<path class="ga" d="${STAR}" transform="translate(0 26) scale(.72)"/><path class="gb" d="${STAR}" transform="translate(58 2) scale(.4)"/>`,
+    `<path class="ga" d="${STAR}"/><path class="gb" d="${STAR}" transform="translate(50 50) rotate(45) scale(.5) translate(-50 -50)"/>`,
+    `<path class="sa" stroke-width="24" stroke-linecap="round" d="M16 84Q40 18 86 24"/>`] },
+  { id: "grille", name: "formes géométriques", pos: { ludique: 15, emotion: 22, proche: 25, classique: 70 }, g: [
+    `<rect class="ga" x="6" y="6" width="41" height="41"/><rect class="gb" x="53" y="6" width="41" height="41"/><rect class="gb" x="6" y="53" width="41" height="41"/><rect class="ga" x="53" y="53" width="41" height="41"/>`,
+    `<path class="ga" d="M8 92V8A84 84 0 0 1 92 92Z"/><rect class="gb" x="62" y="8" width="30" height="30"/>`,
+    `<rect class="ga" x="10" y="42" width="22" height="50"/><rect class="gb" x="39" y="24" width="22" height="68"/><rect class="ga" x="68" y="8" width="22" height="84"/>`,
+    `<rect class="ga" x="38" y="8" width="24" height="84"/><rect class="ga" x="8" y="38" width="84" height="24"/>`] },
+  { id: "arche", name: "arches et filets", pos: { classique: 15, exclusif: 75, energie: 20, ludique: 25 }, g: [
+    `<path class="ga" d="M20 94V46A30 30 0 0 1 80 46V94Z"/>`,
+    `<path class="sa" stroke-width="3" d="M16 94V46A34 34 0 0 1 84 46V94"/><path class="sb" stroke-width="3" d="M32 94V50A18 18 0 0 1 68 50V94"/>`,
+    `<circle class="sa" stroke-width="3" cx="50" cy="50" r="42"/><circle class="gb" cx="50" cy="50" r="11"/>`,
+    `<path class="ga" d="M10 66A40 40 0 0 1 90 66Z"/><path class="sb" stroke-width="3" stroke-linecap="round" d="M6 80H94"/>`] },
+  { id: "trait", name: "traits libres", pos: { disruptif: 90, energie: 75, classique: 85, ludique: 60 }, g: [
+    `<path class="sa" stroke-width="12" stroke-linecap="round" d="M8 62C20 20 40 20 38 54C36 84 60 84 60 52C60 22 80 24 92 44"/>`,
+    `<path class="sa" stroke-width="12" stroke-linecap="round" d="M14 84L40 16M66 84L92 16"/><path class="sb" stroke-width="12" stroke-linecap="round" d="M40 84L66 16"/>`,
+    `<path class="ga" d="M4 52A40 40 0 0 1 84 52Z"/><path class="gb" d="M16 52A40 40 0 0 0 96 52Z"/>`,
+    `<path class="sa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" d="M8 68L29 32L50 68L71 32L92 68"/>`] },
+];
+const svg = inner => `<svg viewBox="0 0 100 100" aria-hidden="true">${inner}</svg>`;
+
+/* Couleur : contraste */
+const lum = h => { const n = parseInt(h.slice(1), 16); const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
+const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+const on = (p, c) => cr(c, p.dark) >= cr(c, p.light) ? p.dark : p.light;
+function nearest(list, t) {
+  let best = list[0], bd = Infinity;
+  for (const o of list) { let s = 0, n = 0; for (const k in o.pos) { if (!(k in t)) continue; const d = t[k] * 100 - o.pos[k]; s += d * d; n++; } const d = n ? s / n : Infinity; if (d < bd) { bd = d; best = o; } }
+  return best;
+}
+
+let mode = "interne", entry = "a";
 const V = Object.fromEntries(SL.map(s => [s[0], s[3]]));
+const active = () => SL.filter(s => !s[4] || s[4] === mode);
 
 /* Construction des curseurs */
-const controls = document.getElementById("controls");
-const groups = [["Personnalité", SL.filter(s => !s[4])], ["Spécifique aux programmes internes", SL.filter(s => s[4])]];
-groups.forEach(([title, list], gi) => {
+const controls = $("controls");
+[["Personnalité", undefined], ["Spécifique à la communication interne", "interne"], ["Spécifique à la communication externe", "externe"]].forEach(([title, scope]) => {
   const wrap = document.createElement("div");
-  if (gi === 1) wrap.className = "prog-only";
-  wrap.innerHTML = `<p class="group-title">${title}</p>` + list.map(([id, l, r]) => `
+  if (scope) { wrap.dataset.scope = scope; wrap.hidden = scope !== mode; }
+  wrap.innerHTML = `<p class="group-title">${title}</p>` + SL.filter(s => s[4] === scope).map(([id, l, r]) => `
     <div class="slider">
       <span class="l" id="${id}-l">${l}</span><span class="r" id="${id}-r">${r}</span>
       <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}">
@@ -411,160 +494,172 @@ groups.forEach(([title, list], gi) => {
   controls.append(wrap);
 });
 controls.addEventListener("input", e => { if (e.target.type === "range") { V[e.target.id] = +e.target.value; update(); } });
-document.getElementById("pname").addEventListener("input", update);
+$("pname").addEventListener("input", update);
 
-/* Point de départ */
-document.querySelectorAll(".start").forEach(b => b.addEventListener("click", () => {
-  mode = b.dataset.mode;
-  document.querySelectorAll(".start").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-  document.querySelector(".prog-only").hidden = mode !== "programme";
-  document.getElementById("pname-l").textContent = mode === "programme" ? "Nom du programme (facultatif)" : "Nom de la marque (facultatif)";
-  document.getElementById("pname").placeholder = mode === "programme" ? "Votre programme" : "Votre marque";
-  document.getElementById("pv-kind").textContent = mode === "programme" ? "Programme interne" : "Marque";
+/* Point de départ + libellés à tester */
+const ENTRIES = {
+  a: { q: "À qui votre projet doit-il parler ?", i: ["À vos équipes", "Communication interne : programme de transformation, nouvel outil, événement, onboarding."], e: ["À vos clients", "Communication externe : marque, produit, lieu, nouvelle offre."] },
+  b: { q: "De quelle communication s'agit-il ?", i: ["Communication interne", "Un programme, une transformation, un outil ou un événement qui doit embarquer vos collaborateurs."], e: ["Communication externe", "Une marque, un produit, un lieu ou une offre qui doit se faire connaître et se faire aimer."] },
+  c: { q: "Qu'est-ce qui doit prendre vie ?", i: ["Un programme interne", "Transformation, nouvelle organisation, outil à déployer, plan de formation."], e: ["Une marque", "Création ou refonte : une entreprise, un produit, un lieu, une offre."] },
+};
+function setEntry(k) {
+  entry = k; const E = ENTRIES[k];
+  $("h1s").textContent = E.q; $("st-i-t").textContent = E.i[0]; $("st-i-p").textContent = E.i[1]; $("st-e-t").textContent = E.e[0]; $("st-e-p").textContent = E.e[1];
+  document.querySelectorAll("#sw-entry button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.e === k)));
+}
+function setMode(m) {
+  mode = m; const interne = m === "interne";
+  document.querySelectorAll(".start").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.mode === m)));
+  controls.querySelectorAll("[data-scope]").forEach(w => w.hidden = w.dataset.scope !== m);
+  $("pname-l").textContent = interne ? "Nom du programme (facultatif)" : "Nom de la marque (facultatif)";
+  $("pname").placeholder = interne ? "Votre programme" : "Votre marque";
+  $("q-cible-l").textContent = interne ? "Qui doit-on embarquer ?" : "À qui s'adresse-t-on ?";
   buildChips(); update();
+}
+document.querySelectorAll(".start").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+document.querySelectorAll("#sw-entry button").forEach(b => b.addEventListener("click", () => { setEntry(b.dataset.e); $("h1s").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); }));
+document.querySelectorAll("#sw-name button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#sw-name button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelector("[data-name]").textContent = b.dataset.n; document.querySelector("[data-name-short]").textContent = b.dataset.n;
+  scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 }));
 
-/* Brief : choix multiples selon le point de départ */
 function buildChips() {
-  const cible = mode === "programme" ? ["Tous les collaborateurs", "Managers", "Une population métier", "Nouveaux arrivants", "Direction"] : ["Grand public", "Clients professionnels", "Partenaires", "Talents à recruter", "Communauté locale"];
+  const cible = mode === "interne" ? ["Tous les collaborateurs", "Managers", "Une population métier", "Nouveaux arrivants", "Direction"] : ["Grand public", "Clients professionnels", "Partenaires", "Talents à recruter", "Communauté locale"];
   const sup = ["Logo / nom", "Charte graphique", "Mascotte", "Slides / PowerPoint", "Motion / vidéo", "Événement", "SharePoint / intranet", "Print"];
   const mk = (name, arr) => arr.map((t, i) => `<label><input type="checkbox" name="${name}" id="${name}-${i}" value="${t}"><span>${t}</span></label>`).join("");
-  document.getElementById("q-cible").innerHTML = mk("cible", cible);
-  document.getElementById("q-sup").innerHTML = mk("sup", sup);
+  $("q-cible").innerHTML = mk("cible", cible); $("q-sup").innerHTML = mk("sup", sup);
 }
 
-/* Aperçu */
-const pv = document.getElementById("pv");
-const shapes = [...pv.querySelectorAll(".shape")];
-const POS = [[62, 8], [-10, 58], [70, 66], [18, 20], [40, 82]];
-const hsl = (h, s, l) => `hsl(${((h % 360) + 360) % 360} ${s}% ${l}%)`;
-function tones(t) {
+/* ───────── Planche ───────── */
+const board = $("board"), hero = $("hero"), decos = [...hero.querySelectorAll(".deco")];
+let last = { pal: "", font: "", motif: "" }, look = {};
+function tone(t) {
   const p = t.proche > .5, l = t.ludique > .5;
-  if (mode === "programme") return p ? (l ? "On s'y met ensemble ? C'est parti." : "Avançons ensemble, pas à pas.") : (l ? "Le changement, version grand format." : "Construire durablement notre avenir commun.");
+  if (mode === "interne") return p ? (l ? "On s'y met ensemble ? C'est parti." : "Avançons ensemble, pas à pas.") : (l ? "Le changement, version grand format." : "Construire durablement notre avenir commun.");
   return p ? (l ? "Passez nous voir, on vous attend." : "Simplement là, quand vous en avez besoin.") : (l ? "L'audace, en toute confiance." : "L'exigence comme signature.");
 }
 function update() {
-  const t = Object.fromEntries(Object.entries(V).map(([k, v]) => [k, v / 100]));
-  const prog = mode === "programme";
-  const name = document.getElementById("pname").value.trim() || (prog ? "Votre programme" : "Votre marque");
+  const t = {}; active().forEach(s => t[s[0]] = V[s[0]] / 100);
+  const interne = mode === "interne";
+  const name = $("pname").value.trim() || (interne ? "Votre programme" : "Votre marque");
+  const p = nearest(PAL, t), f = nearest(FONTS, t), m = nearest(MOTIFS, t);
+  const S = (k, v) => board.style.setProperty(k, v);
 
-  /* Couleurs : rationnel = bleu froid, émotionnel = chaud ; discret = désaturé, expressif = saturé ; exclusif = fond profond */
-  const h = lerp(218, 14, t.emotion);
-  const sat = lerp(14, 82, t.expressif);
-  const bgL = lerp(93, 11, Math.pow(t.exclusif, .9));
-  const dark = bgL < 55;
-  const comp = lerp(28, 175, t.energie) * (t.disruptif > .6 && prog ? 1.25 : 1);
-  const bg = hsl(h, sat * .35, bgL);
-  const fg = dark ? "#f4f1ea" : "#16140f";
-  const P1 = hsl(h, sat, dark ? 62 : 50), P2 = hsl(h + comp, sat * .85, dark ? 70 : 62), P3 = hsl(h - 35, sat * .6, dark ? 40 : 80), P4 = hsl(h + comp / 2, sat * .5, dark ? 30 : 88);
-  const onP = (dark ? 62 : 50) > 58 ? "#16140f" : "#fff";
-  pv.style.setProperty("--pv-bg", bg); pv.style.setProperty("--pv-fg", fg);
-  pv.style.setProperty("--pv-p", P1); pv.style.setProperty("--pv-s", P3); pv.style.setProperty("--pv-a", P2); pv.style.setProperty("--pv-on-p", onP);
-  [P1, P2, P3, P4].forEach((c, i) => document.getElementById("sw").children[i].style.background = c);
+  /* Couleurs */
+  const discret = t.expressif < .3;
+  const heroBg = discret ? p.tile : p.cols[0];
+  const heroFg = discret && cr(p.cols[0], heroBg) >= 3 ? p.cols[0] : on(p, heroBg);
+  const darkBoard = lum(p.bg) < .2;
+  const wideBg = darkBoard ? p.light : p.dark;
+  const wideFg = [p.cols[1], p.cols[0], p.cols[3]].find(c => cr(c, wideBg) >= 3.2) || on(p, wideBg);
+  S("--b-bg", p.bg); S("--tile", p.tile); S("--tile-fg", on(p, p.tile));
+  S("--hero-bg", heroBg); S("--hero-fg", heroFg);
+  S("--mono-bg", p.cols[2]); S("--mono-fg", on(p, p.cols[2]));
+  S("--wide-bg", wideBg); S("--wide-fg", wideFg);
+  S("--typo-bg", p.cols[1]); S("--typo-fg", on(p, p.cols[1]));
+  if (last.pal !== p.id) {
+    const seen = new Set();
+    $("pills").innerHTML = [p.light, ...p.cols, p.dark].filter(c => !seen.has(c) && seen.add(c)).map(c => `<i style="background:${c}"></i>`).join("");
+  }
 
-  /* Formes : sérieux = angles droits, ludique = rond ; minimal = peu et petit ; énergique = rapide et ample */
-  const count = Math.round(lerp(1, 5, t.genereux));
-  const r = `${lerp(2, 50, t.ludique)}%`;
-  shapes.forEach((s, i) => {
-    const [x, y] = POS[i];
-    const jitter = prog && t.disruptif > .55 ? (i % 2 ? 8 : -8) * (t.disruptif - .5) * 2 : 0;
-    s.style.setProperty("--x", `${x + jitter}%`); s.style.setProperty("--y", `${y - jitter}%`);
-    s.style.setProperty("--s", `${lerp(22, 48, t.genereux) * (i === 0 ? 1.2 : i === 4 ? .6 : .9)}%`);
-    s.style.setProperty("--c", [P1, P2, P3, P4, P2][i]);
-    s.style.setProperty("--sh-r", i === 1 && t.ludique > .5 ? "50% 50% 50% 0" : r);
-    s.style.setProperty("--o", i < count ? (t.expressif > .3 ? 1 : .55) : 0);
-    s.style.setProperty("--dur", `${lerp(14, 2.6, t.energie)}s`);
-    s.style.setProperty("--amp", `${lerp(2, 22, t.energie)}px`);
-    s.style.setProperty("--rot", `${lerp(0, 18, t.ludique * t.energie + .1)}deg`);
-    s.style.setProperty("--dl", `${-i * 1.3}s`);
-  });
+  /* Formes */
+  const cand = (discret ? [p.cols[0], p.cols[1], p.cols[2]] : [p.cols[1], p.cols[2], p.cols[3], p.tile, p.cols[0]]).filter(c => c !== heroBg && cr(c, heroBg) >= 1.18);
+  const count = t.genereux < .12 ? 0 : 1 + Math.round(t.genereux * 3);
+  if (last.motif !== m.id) decos.forEach((d, i) => d.innerHTML = svg(m.g[i % m.g.length]));
+  decos.forEach((d, i) => { const a = cand[i % cand.length], b = cand[(i + 1) % cand.length];
+    d.style.setProperty("--a", a); d.style.setProperty("--b", b); d.style.setProperty("--d", on(p, a)); d.style.setProperty("--o", i < count ? 1 : 0); });
+  S("--dur", `${lerp(16, 2.4, t.energie).toFixed(1)}s`); S("--rot", `${lerp(2, 26, t.energie * (.5 + t.ludique * .5)).toFixed(1)}deg`); S("--amp", `${lerp(1, 10, t.energie).toFixed(1)}px`);
 
-  /* Typographie : classique = Fraunces, contemporain = Inter Tight ; ludique = formes molles ; expressif = graisse ; exclusif = capitales espacées */
-  const wm = document.getElementById("wm");
-  wm.querySelectorAll("span").forEach(s => s.textContent = name);
-  const sansOn = t.classique >= .5;
-  wm.querySelector(".serif").classList.toggle("off", sansOn);
-  wm.querySelector(".sans").classList.toggle("off", !sansOn);
-  pv.style.setProperty("--soft", Math.round(t.ludique * 100));
-  pv.style.setProperty("--wonk", t.ludique > .6 ? 1 : 0);
-  pv.style.setProperty("--wght", Math.round(lerp(250, 860, t.expressif)));
-  const caps = t.exclusif > .66;
-  pv.style.setProperty("--wm-tt", caps ? "uppercase" : "none");
-  pv.style.setProperty("--wm-ls", caps ? `${lerp(.04, .18, (t.exclusif - .66) * 3)}em` : `${lerp(-.06, -.01, t.genereux)}em`);
-  const longest = Math.max(5, ...name.split(/\s+/).map(w => w.length));
-  const perChar = (caps ? .78 + parseFloat(lerp(.04, .18, Math.max(0, (t.exclusif - .66) * 3))) : .6) * lerp(.95, 1.08, t.expressif);
-  pv.style.setProperty("--wm-size", `${Math.min(19, 80 / (longest * perChar)).toFixed(2)}cqw`);
-  pv.style.setProperty("--wm-rot", `${prog && t.disruptif > .55 ? -lerp(0, 5, (t.disruptif - .55) / .45) : -t.ludique * 2.5}deg`);
-  pv.style.setProperty("--wm-x", prog && t.disruptif > .7 ? "4%" : "0");
-  pv.style.setProperty("--pv-r", `${lerp(2, 30, t.ludique)}px`);
-  pv.style.setProperty("--ui-r", t.ludique > .35 ? "999px" : `${lerp(0, 8, t.ludique * 2)}px`);
-  pv.style.setProperty("--ui-r2", `${lerp(0, 10, t.ludique)}px`);
-  pv.style.setProperty("--lines-o", t.exclusif > .55 ? ((t.exclusif - .55) * 1.6).toFixed(2) : 0);
-  pv.style.setProperty("--pv-grain", lerp(.08, .32, t.emotion).toFixed(2));
-  document.getElementById("tag").textContent = tones(t);
+  const bandCols = [p.cols[0], p.cols[2], p.cols[1], p.cols[3], ...(p.extra || [])].filter(c => cr(c, p.bg) >= 1.22);
+  if (last.motif !== m.id || last.pal !== p.id) {
+    const half = Array.from({ length: 14 }, (_, i) => { const a = bandCols[i % bandCols.length], b = bandCols[(i + 1) % bandCols.length];
+      return `<span style="--a:${a};--b:${b};--d:${on(p, a)}">${svg(m.g[i % m.g.length])}</span>`; }).join("");
+    $("track").innerHTML = `<div>${half}</div><div>${half}</div>`;
+  }
+  S("--band-gap", `${lerp(7, 1.2, t.genereux).toFixed(1)}cqw`); S("--band-dur", `${lerp(120, 14, t.energie).toFixed(0)}s`); S("--band-play", t.energie < .1 ? "paused" : "running");
 
-  /* Spécifique programme : participatif = visages, descendant = bandeau d'annonce, durée = étapes */
-  pv.style.setProperty("--people-o", prog ? Math.max(0, (t.participatif - .4) * 1.7).toFixed(2) : 0);
-  pv.style.setProperty("--mega-y", prog && t.participatif < .35 ? "0%" : "-100%");
-  const steps = prog ? Math.round(lerp(1, 6, t.duree)) : 0;
-  document.getElementById("tl").innerHTML = prog ? Array.from({ length: 6 }, (_, i) => `<i class="${i < steps ? "on" : ""}"></i>`).join("") : "";
+  const picCols = p.extra ? [p.cols[0], p.extra[1], p.cols[2]] : [p.cols[0], p.cols[2], p.cols[1]];
+  const labels = interne
+    ? (t.participatif > .6 ? ["Ateliers", "Feedback", "Décisions partagées"] : t.participatif < .4 ? ["Le cap", "Les étapes", "Les repères"] : ["Comprendre", "Essayer", "Adopter"])
+    : (t.public > .6 ? ["Pour tous", "Tous les jours", "Près de vous"] : t.public < .4 ? ["Savoir-faire", "Sur mesure", "Le cercle"] : ["L'offre", "Le lieu", "La communauté"]);
+  if (!interne && t.engagee > .65) labels[2] = "Nos engagements";
+  if (last.motif !== m.id || last.pal !== p.id) {
+    $("pictos").innerHTML = [0, 3, 1].map((gi, i) => { let a = picCols[i]; if (cr(a, p.tile) < 1.25) a = on(p, p.tile); let b = picCols[(i + 1) % 3]; if (cr(b, a) < 1.2) b = p.tile;
+      return `<figure><div class="g" style="--a:${a};--b:${b};--d:${on(p, a)}">${svg(m.g[gi])}</div><figcaption></figcaption></figure>`; }).join("");
+  }
+  $("pictos").querySelectorAll("figcaption").forEach((c, i) => c.textContent = labels[i]);
 
-  document.getElementById("f-name").textContent = t.classique < .45 ? "Typo à empattements, littéraire" : t.classique > .55 ? "Typo grotesque, contemporaine" : "Entre classique et contemporain";
-  document.getElementById("f-mood").textContent = `${t.emotion > .5 ? "Palette chaude" : "Palette froide"} · ${t.energie > .5 ? "mouvements vifs" : "mouvements lents"}`;
+  /* Typographie */
+  const stack = `"${f.name}", ${f.serif ? "Georgia, serif" : '"Helvetica Neue", Arial, sans-serif'}`;
+  S("--f-d", stack); S("--f-t", `"${f.text}", "Helvetica Neue", Arial, sans-serif`);
+  const wT = t.expressif, weight = Math.round(lerp(f.wt[0], f.wt[1], wT));
+  const caps = t.exclusif > .68 && f.caps, lower = !caps && t.ludique > .76 && !f.serif;
+  const capsK = caps ? 1.22 + lerp(.06, .16, (t.exclusif - .68) / .32) : 1;
+  const cw = f.w * lerp(.97, 1.1, wT) * capsK;
+  const words = name.split(/\s+/), longest = Math.max(4, ...words.map(w => w.length));
+  const maxSize = [22, 14.5, 10.5][Math.min(words.length, 3) - 1];
+  S("--wm-w", weight); S("--wm-tt", caps ? "uppercase" : lower ? "lowercase" : "none");
+  S("--wm-ls", caps ? `${lerp(.06, .16, (t.exclusif - .68) / .32).toFixed(3)}em` : f.id === "unbounded" ? "-.03em" : f.serif ? "-.01em" : "-.025em");
+  S("--wm-size", `${Math.min(maxSize, 82 / (longest * cw)).toFixed(2)}cqw`);
+  S("--wide-size", `${Math.min(6.4, 54 / (name.length * cw)).toFixed(2)}cqw`);
+  S("--soft", Math.round(t.ludique * 100));
+  $("wm").textContent = name; $("wide").textContent = name;
+  const ini = words.slice(0, 2).map(w => w[0]).join(""); $("mono").textContent = lower ? ini.toLowerCase() : ini.toUpperCase();
+  $("fn-d").textContent = f.name; $("fn-t").textContent = f.text;
+  if (last.font !== f.id && last.font && !reduce) $("wm").animate([{ opacity: .15, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0)" }], { duration: 420, easing: "cubic-bezier(.2,.7,.2,1)" });
 
-  /* Libellés actifs */
-  SL.forEach(([id]) => { const v = V[id]; document.getElementById(id).style.setProperty("--p", v + "%");
-    document.getElementById(id + "-l").classList.toggle("on", v <= 45); document.getElementById(id + "-r").classList.toggle("on", v >= 55); });
+  /* Détails */
+  const tiltOn = interne && t.disruptif > .55, k = tiltOn ? (t.disruptif - .55) / .45 : 0;
+  S("--wm-rot", `${tiltOn ? (-4 * k).toFixed(1) : (-1.5 * Math.max(0, t.ludique - .6) / .4).toFixed(1)}deg`);
+  board.querySelectorAll(".tile").forEach((el, i) => el.style.rotate = `${(i % 2 ? 1 : -1) * 1.3 * k}deg`);
+  S("--t-r", `${lerp(2, 26, t.ludique).toFixed(0)}px`); S("--b-r", `${lerp(4, 30, t.ludique).toFixed(0)}px`);
+  S("--pill-r", t.ludique > .35 ? "999px" : `${lerp(0, 10, t.ludique / .35).toFixed(0)}px`);
+  S("--frame-o", t.exclusif > .6 ? ((t.exclusif - .6) * 1.4).toFixed(2) : 0);
+  $("tag").textContent = tone(t);
+  $("b-kind").textContent = interne ? "Programme interne" : t.international > .6 ? "FR · EN · ES" : t.international < .4 ? "Fait ici" : "Marque";
+  const steps = interne ? Math.round(lerp(1, 6, t.duree)) : 0;
+  $("tl").innerHTML = interne ? Array.from({ length: 6 }, (_, i) => `<i class="${i < steps ? "on" : ""}"></i>`).join("") : "";
+  $("recipe").innerHTML = `<span>Nuance <b>${p.name}</b></span><span>Typo <b>${f.name}</b> + ${f.text}</span><span><b>${m.name[0].toUpperCase() + m.name.slice(1)}</b></span>`;
 
+  SL.forEach(([id]) => { const v = V[id]; $(id).style.setProperty("--p", v + "%"); $(id + "-l").classList.toggle("on", v <= 45); $(id + "-r").classList.toggle("on", v >= 55); });
+  last = { pal: p.id, font: f.id, motif: m.id }; look = { p, f, m };
   portrait(t, name);
 }
 
-/* Portrait */
+/* ───────── Portrait ───────── */
 function portrait(t, name) {
-  const prog = mode === "programme", g = prog ? 0 : 1;
-  const active = SL.filter(s => prog || !s[4]).map(([id]) => ({ id, v: t[id], d: Math.abs(t[id] - .5) }));
-  const top = [...active].sort((a, b) => b.d - a.d).slice(0, 3);
+  const interne = mode === "interne", g = interne ? 0 : 1;
+  const act = active().map(([id]) => ({ id, v: t[id], d: Math.abs(t[id] - .5) }));
+  const top = [...act].sort((a, b) => b.d - a.d).slice(0, 3);
   const words = top.map(x => ADJ[x.id][x.v > .5 ? 1 : 0][g]);
-  const list = words.length === 3 ? `${words[0]}, ${words[1]} et ${words[2]}` : words.join(" et ");
-  const subject = name.startsWith("Votre") ? (prog ? "Votre programme" : "Votre marque") : name;
-  document.getElementById("says").innerHTML = `${subject} est ${prog ? "un programme" : "une marque"} <em>${list}</em>.`;
-  document.getElementById("traits").innerHTML = top.map(x => { const s = SL.find(q => q[0] === x.id);
-    return `<div><strong>${x.v > .5 ? s[2] : s[1]}</strong><span>${prog ? "Il" : "Elle"} ${WHY[x.id][x.v > .5 ? 1 : 0]}.</span></div>`; }).join("");
-  const undecided = active.filter(x => x.d < .08).map(x => { const s = SL.find(q => q[0] === x.id); return `${s[1].toLowerCase()} ou ${s[2].toLowerCase()}`; });
-  document.getElementById("open").innerHTML = undecided.length
-    ? `<h3>${undecided.length > 1 ? "Des questions encore ouvertes" : "Une question encore ouverte"}</h3><p>Vous n'avez pas tranché entre ${undecided.slice(0, 3).join(", ")}. C'est souvent là que se joue la différence, et un très bon sujet d'atelier.</p>`
+  const subject = name.startsWith("Votre") ? (interne ? "Votre programme" : "Votre marque") : name;
+  $("says").innerHTML = `${subject} est ${interne ? "un programme" : "une marque"} <em>${words[0]}, ${words[1]} et ${words[2]}</em>.`;
+  $("traits").innerHTML = top.map(x => { const s = SL.find(q => q[0] === x.id);
+    return `<div><strong>${x.v > .5 ? s[2] : s[1]}</strong><span>${interne ? "Il" : "Elle"} ${WHY[x.id][x.v > .5 ? 1 : 0]}.</span></div>`; }).join("");
+  $("piste").innerHTML = `<span class="dim">Piste visuelle pressentie :</span> nuance <b>${look.p.name}</b>, typographie <b>${look.f.name}</b>, ${look.m.name}.`;
+  const und = act.filter(x => x.d < .08).map(x => { const s = SL.find(q => q[0] === x.id); return `${s[1].toLowerCase()} ou ${s[2].toLowerCase()}`; });
+  $("open").innerHTML = und.length
+    ? `<h3>${und.length > 1 ? "Des questions encore ouvertes" : "Une question encore ouverte"}</h3><p>Vous n'avez pas tranché entre ${und.slice(0, 3).join(", ")}. C'est souvent là que se joue la différence, et un très bon sujet d'atelier.</p>`
     : `<h3>Vos choix sont tranchés</h3><p>C'est une base solide pour une direction artistique. Il reste à vérifier que toute l'équipe partage ces réglages.</p>`;
 }
 
-/* Copier le portrait */
-document.getElementById("copy").addEventListener("click", async () => {
-  const txt = document.getElementById("says").textContent + "\n" + SL.filter(s => mode === "programme" || !s[4]).map(([id, l, r]) => `${l} ${"·".repeat(Math.round(V[id] / 10))}|${"·".repeat(10 - Math.round(V[id] / 10))} ${r}`).join("\n");
-  const out = document.getElementById("copy-s");
+$("copy").addEventListener("click", async () => {
+  const txt = `${$("says").textContent}\n${$("piste").textContent}\n` + active().map(([id, l, r]) => `${l} ${"·".repeat(Math.round(V[id] / 10))}|${"·".repeat(10 - Math.round(V[id] / 10))} ${r}`).join("\n");
+  const out = $("copy-s");
   try { await navigator.clipboard.writeText(txt); out.textContent = "Portrait copié."; }
-  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("says")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = "Texte sélectionné : copiez-le avec Ctrl + C."; }
+  catch { const r = document.createRange(); r.selectNodeContents($("says")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = "Texte sélectionné : copiez-le avec Ctrl + C."; }
 });
 
-/* Envoi du brief (prototype) */
-document.getElementById("brief").addEventListener("submit", e => {
+$("brief").addEventListener("submit", e => {
   e.preventDefault();
-  const err = document.getElementById("err");
-  const mail = document.getElementById("q-mail").value.trim();
-  if (!document.getElementById("q-name").value.trim()) return err.textContent = "Indiquez votre nom pour que Julie sache à qui répondre.";
+  const err = $("err"), mail = $("q-mail").value.trim();
+  if (!$("q-name").value.trim()) return err.textContent = "Indiquez votre nom pour que Julie sache à qui répondre.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return err.textContent = "Cet e-mail semble incomplet. Vérifiez-le, par exemple prenom@entreprise.fr.";
-  if (!document.getElementById("q-ok").checked) return err.textContent = "Cochez la case de consentement pour pouvoir envoyer votre brief.";
-  err.textContent = "";
-  document.getElementById("brief").hidden = true; document.getElementById("sent").hidden = false;
+  if (!$("q-ok").checked) return err.textContent = "Cochez la case de consentement pour pouvoir envoyer votre brief.";
+  err.textContent = ""; $("brief").hidden = true; $("sent").hidden = false;
 });
-document.getElementById("again").addEventListener("click", () => { document.getElementById("brief").hidden = false; document.getElementById("sent").hidden = true; });
+$("again").addEventListener("click", () => { $("brief").hidden = false; $("sent").hidden = true; });
 
-/* Nom de l'outil à tester */
-document.querySelectorAll(".switch button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll(".switch button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-  document.querySelector("[data-name]").textContent = b.dataset.n;
-  document.querySelector("[data-name-short]").textContent = b.dataset.n;
-  document.title = `${b.dataset.n} · Julie Ramier`;
-}));
-
-pv.style.containerType = "inline-size";
 buildChips(); update();
 </script>
