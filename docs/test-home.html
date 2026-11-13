@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Space+Mono&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
+@view-transition { navigation: auto; }
 /* Layout : un seul conteneur 12 colonnes pour tout le site. Header = texte (col. 1–5) + images seules (col. 7–12). Sections = label (col. 1–3) + contenu (col. 4–12), beaucoup d'air. */
 :root {
   --night: #0f0f0e;
@@ -42,6 +43,7 @@ a { color: inherit; }
 /* Navigation du site */
 .nav { padding-block: 28px; align-items: center; }
 .nav .brand { grid-column: 1 / 4; font-size: 14px; }
+.nav ul a { text-decoration: none; } .nav ul a:hover { color: var(--chalk); }
 .nav ul { grid-column: 4 / 13; display: flex; justify-content: flex-end; gap: clamp(16px, 3vw, 40px); list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--haze); }
 
 /* Header */
@@ -360,7 +362,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 
 <nav class="c nav" aria-label="Navigation du site">
   <span class="brand">Julie Ramier</span>
-  <ul><li>Projets</li><li>Savoir-faire</li><li>À propos</li><li>Contact</li></ul>
+  <ul><li><a href="#projets">Projets</a></li><li><a href="#savoir-faire">Savoir-faire</a></li><li><a href="#a-propos">À propos</a></li><li><a href="#contact">Contact</a></li></ul>
 </nav>
 
 <header class="c hero">
@@ -389,7 +391,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     </div>
   </section>
 
-  <section class="section" aria-labelledby="h-sf">
+  <section class="section" id="savoir-faire" aria-labelledby="h-sf">
     <div class="c">
       <div class="rule"></div>
       <div class="s-label"><span class="num" data-n="2" data-t="4"></span><span class="slabel">Savoir-faire</span></div>
@@ -406,7 +408,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     </div>
   </section>
 
-  <section class="section" aria-labelledby="h-about">
+  <section class="section" id="a-propos" aria-labelledby="h-about">
     <div class="c">
       <div class="rule"></div>
       <div class="s-label"><span class="num" data-n="3" data-t="4"></span><span class="slabel">À propos</span></div>
@@ -436,20 +438,6 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
 </nav>
 
-<dialog id="detail" aria-labelledby="d-title">
-  <button class="close" id="d-close" aria-label="Fermer la fiche">×</button>
-  <div class="dlg">
-    <div class="dlg-vis" id="d-vis"></div>
-    <div class="dlg-body">
-      <span class="mono dim" id="d-label"></span>
-      <h2 id="d-title"></h2>
-      <p id="d-sum"></p>
-      <dl id="d-meta"></dl>
-      <div class="gal" id="d-gal" hidden></div>
-      <div id="d-cta"><span class="cta solid">Lire l'étude de cas <span aria-hidden="true">→</span></span></div>
-    </div>
-  </div>
-</dialog>
 
 <script>
 const wave = [5,9,14,8,18,26,12,20,28,16,10,22,14,7,11,5].map(h => `<i style="height:${h * 3.4}%"></i>`).join("");
@@ -552,7 +540,7 @@ function initScratch(root) {
 /* Projets (contenu de page) */
 function renderProjects() {
 document.getElementById("projects").innerHTML = P.map(p => `
-  <button class="shot proj" data-id="${p.id}" aria-label="Ouvrir le projet ${p.name}" style="height:auto">
+  <button class="shot proj" data-id="${p.id}" aria-label="${p.teaser ? "Carte de vœux sous embargo, à gratter" : "Ouvrir le projet " + p.name}" style="height:auto">
     <div class="frame">${IMG[p.id]}</div>
     <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
   </button>`).join("");
@@ -749,25 +737,18 @@ showContact(3);
   setTimeout(step, 3200);
 })();
 
-/* Fiche projet */
-const dlg = document.getElementById("detail");
+/* Ouverture d'un projet : vraie page (projet.html#id) */
 document.addEventListener("click", e => {
   const c = e.target.closest("[data-id]"); if (!c) return;
-  const p = byId[c.dataset.id];
-  document.getElementById("d-vis").innerHTML = IMG[p.id];
-  document.getElementById("d-label").textContent = `${p.n} · ${p.disc}`;
-  document.getElementById("d-title").textContent = p.title;
-  document.getElementById("d-sum").textContent = p.sum;
-  document.getElementById("d-meta").innerHTML = p.meta.map(([k, v]) => `<dt>${k.toUpperCase()}</dt><dd>${v}</dd>`).join("");
-  document.getElementById("d-cta").hidden = !!p.teaser;
-  initScratch(document.getElementById("d-vis"));
-  const gal = document.getElementById("d-gal"); gal.hidden = !p.gallery;
-  gal.innerHTML = (p.gallery || []).map((f, k) => `<img src="${A}${f}" alt="Visuel ${k + 1} du projet" tabindex="0" class="${k ? "" : "on"}">`).join("");
-  gal.onclick = gal.onkeydown = e => { const im = e.target.closest("img"); if (!im || (e.type === "keydown" && e.key !== "Enter")) return;
-    gal.querySelectorAll("img").forEach(x => x.classList.toggle("on", x === im));
-    document.getElementById("d-vis").innerHTML = `<div class="img"><img class="ph" style="object-fit:contain;background:#1d1c1a" src="${im.src}" alt=""></div>`; };
-  dlg.showModal();
+  const id = c.dataset.id;
+  if (id === "voeux") { // sous embargo : pas de page, on va gratter la carte
+    if (!c.closest("#projects")) document.querySelector('#projects [data-id="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  try { sessionStorage.setItem("home", location.pathname + location.search); } catch {}
+  const vis = c.querySelector(".frame") || c.querySelector("img") || c;
+  vis.style.viewTransitionName = "projet-visuel";
+  location.href = "projet.html#" + id;
 });
-document.getElementById("d-close").addEventListener("click", () => dlg.close());
-dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+addEventListener("pageshow", () => document.querySelectorAll("[style*='view-transition-name']").forEach(el => el.style.viewTransitionName = ""));
 </script>

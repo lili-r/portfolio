@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projet Julie Ramier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400&family=Inter:wght@400;500&display=swap">
+<style>
+/* Page projet : même conteneur 12 colonnes que l'accueil. Label de section (col. 1–3) + contenu (col. 4–12). */
+@view-transition { navigation: auto; }
+:root {
+  --night: #0f0f0e; --slate: #191917; --rule: #2a2926; --chalk: #ecebe6; --haze: #8f8b83;
+  --sage: #8c9d78; --blush: #e7b9b6; --ember: #e0532b; --bone: #dcd8cf;
+  --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --container: 1280px; --gap: clamp(16px, 2vw, 32px); --section: clamp(96px, 11vw, 168px);
+  --out: cubic-bezier(.16,1,.3,1); --back: cubic-bezier(.34,1.56,.64,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--night); color: var(--chalk); }
+body { margin: 0; font-family: var(--f-body); font-size: 16px; line-height: 1.6; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; font-weight: 300; font-family: var(--f-display); }
+p { text-wrap: pretty; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; }
+.dim { color: var(--haze); }
+[hidden] { display: none !important; }
+
+.c { max-width: var(--container); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+.c > * { min-width: 0; }
+
+/* Navigation */
+.nav { padding-block: 28px; align-items: center; position: sticky; top: 0; z-index: 10; background: linear-gradient(var(--night) 60%, transparent); }
+.nav .brand { grid-column: 1 / 4; font-size: 14px; text-decoration: none; }
+.nav ul { grid-column: 4 / 13; display: flex; justify-content: flex-end; gap: clamp(16px, 3vw, 40px); list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--haze); }
+.nav ul a { text-decoration: none; transition: color .2s; } .nav ul a:hover { color: var(--chalk); }
+
+/* Boutons */
+.cta { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; border: 1px solid var(--chalk); border-radius: 999px; padding: 13px 22px; font-size: 14px; text-decoration: none; cursor: pointer; background: transparent; transition: background .25s, color .25s, border-color .25s; }
+.cta:hover { background: var(--chalk); color: var(--night); }
+.cta.solid { background: var(--chalk); color: var(--night); }
+.mag { position: relative; overflow: hidden; isolation: isolate; transition: translate .8s var(--back), background .3s, color .3s; }
+.mag::before { content: ""; position: absolute; z-index: -1; left: var(--fx, 50%); top: var(--fy, 50%); width: 240%; aspect-ratio: 1; translate: -50% -50%; scale: 0; border-radius: 50%; background: var(--blush); transition: scale .6s var(--out); }
+.mag:hover::before, .mag:focus-visible::before { scale: 1; }
+.mag:hover { border-color: var(--blush); color: var(--night); }
+.mag .lbl { display: inline-block; transition: translate .8s var(--back); }
+
+/* En-tête du projet */
+.back { grid-column: 1 / -1; justify-self: start; display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--haze); text-decoration: none; padding: 6px 0; transition: color .2s, gap .3s var(--out); }
+.back:hover { color: var(--chalk); gap: 12px; }
+.p-head { padding-block: clamp(24px, 4vw, 56px) clamp(40px, 5vw, 72px); row-gap: 28px; }
+.p-label { grid-column: 1 / 4; display: grid; gap: 4px; align-content: start; padding-top: 14px; }
+.p-label .num, .slabel { font-family: var(--f-display); font-weight: 300; font-size: 22px; letter-spacing: -.02em; }
+.p-label .num { color: var(--haze); font-variant-numeric: tabular-nums; }
+.p-label .disc { color: var(--haze); font-size: 14px; max-width: 22ch; }
+.p-title { grid-column: 4 / 13; display: grid; gap: 28px; }
+.p-title h1 { font-size: clamp(44px, 6.6vw, 104px); letter-spacing: -.055em; line-height: .92; max-width: 15ch; }
+.p-title .sum { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; max-width: 46ch; }
+
+/* Sélecteur Essentiel / En profondeur */
+.modes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.seg { display: inline-flex; padding: 4px; border: 1px solid var(--rule); border-radius: 999px; position: relative; }
+.seg button { position: relative; z-index: 1; border: 0; background: none; padding: 9px 18px; border-radius: 999px; font-size: 14px; color: var(--haze); cursor: pointer; transition: color .3s; }
+.seg button[aria-pressed="true"] { color: var(--night); }
+.seg .pill { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: var(--chalk); transition: translate .5s var(--out), width .5s var(--out); }
+.modes .hint { font-size: 14px; color: var(--haze); }
+
+/* Visuel principal */
+.hero-vis { grid-column: 1 / -1; aspect-ratio: 16 / 8; border-radius: 18px; overflow: hidden; background: var(--slate); view-transition-name: projet-visuel; }
+.hero-vis img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-vis.contain img { object-fit: contain; padding: 8%; }
+.hero-vis.light { background: #fff; }
+
+/* Fiche technique */
+.fiche { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 24px var(--gap); margin: clamp(32px, 4vw, 56px) 0 0; padding-top: 24px; border-top: 1px solid var(--rule); }
+.fiche div { display: grid; gap: 6px; align-content: start; }
+.fiche dt { font-size: 13px; color: var(--haze); }
+.fiche dd { margin: 0; font-size: 15px; line-height: 1.5; }
+
+/* Sections */
+.sec { padding-top: var(--section); }
+.sec .s-label { grid-column: 1 / 4; padding-top: 8px; }
+.sec .s-body { grid-column: 4 / 13; display: grid; gap: 28px; align-content: start; }
+.sec h2 { font-size: clamp(32px, 4vw, 58px); letter-spacing: -.045em; line-height: 1.02; max-width: 20ch; }
+.sec .lead { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; max-width: 58ch; color: var(--bone); }
+.sec .lead + .lead { margin-top: -8px; }
+.deep[hidden] { display: none; }
+.deep.enter { animation: rise .9s var(--out) both; }
+@keyframes rise { from { opacity: 0; translate: 0 24px; } }
+
+.bul { list-style: none; margin: 0; padding: 0; display: grid; max-width: 64ch; }
+.bul li { padding: 16px 0 16px 28px; border-top: 1px solid var(--rule); position: relative; color: var(--bone); }
+.bul li:last-child { border-bottom: 1px solid var(--rule); }
+.bul li::before { content: ""; position: absolute; left: 2px; top: 27px; width: 8px; height: 8px; border-radius: 50%; background: var(--blush); }
+
+.steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.step { border-top: 1px solid var(--rule); padding-top: 20px; display: grid; gap: 10px; align-content: start; }
+.step .n { font-family: var(--f-display); font-weight: 300; font-size: 22px; color: var(--haze); font-variant-numeric: tabular-nums; }
+.step h3 { font-size: clamp(22px, 2vw, 28px); letter-spacing: -.03em; line-height: 1.15; }
+.step p { color: var(--haze); max-width: 46ch; }
+
+/* Galerie des réalisations */
+.gallery { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); margin-top: clamp(32px, 4vw, 56px); }
+.gallery figure { margin: 0; display: grid; gap: 12px; align-content: start; }
+.gallery .fr { border-radius: 14px; overflow: hidden; background: var(--slate); aspect-ratio: var(--ar, 4 / 3); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: scale .9s var(--out); }
+.gallery .fr.contain img { object-fit: contain; padding: 8%; }
+.gallery .fr.light { background: #fff; }
+.gallery figure:hover img { scale: 1.02; }
+.gallery figcaption { font-size: 13px; color: var(--haze); }
+.gallery .w12 { grid-column: span 12; } .gallery .w7 { grid-column: span 7; } .gallery .w5 { grid-column: span 5; } .gallery .w6 { grid-column: span 6; } .gallery .w4 { grid-column: span 4; } .gallery .w8 { grid-column: span 8; }
+.gallery .todo-fr { border: 1px dashed #4a4844; background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.015) 14px 28px); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--haze); font-size: 14px; }
+
+/* Ce dont je suis le plus fière */
+.proud { margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); border-radius: 24px; background: radial-gradient(80% 120% at 85% 0%, rgba(231,185,182,.16), transparent 60%), var(--slate); }
+.proud .s-label { grid-column: 2 / 4; }
+.proud .s-body { grid-column: 4 / 12; }
+.proud .slabel { color: var(--blush); }
+.proud h2 { font-size: clamp(32px, 4.4vw, 64px); letter-spacing: -.045em; line-height: 1.02; max-width: 18ch; }
+.proud .lead { color: var(--chalk); }
+
+/* À compléter (visible dans le prototype uniquement) */
+.todo { display: inline-block; font-size: 13px; line-height: 1.4; color: var(--blush); border: 1px dashed rgba(231,185,182,.5); border-radius: 8px; padding: 4px 10px; }
+.note { font-size: 13px; color: var(--haze); font-style: italic; }
+
+/* Invitation à la lecture en profondeur */
+.more { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--f-display); font-size: clamp(20px, 1.8vw, 26px); font-weight: 300; letter-spacing: -.02em; color: var(--chalk); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 6px; transition: text-decoration-color .3s; }
+.more:hover { text-decoration-color: var(--blush); }
+
+/* Fin de page */
+.end { padding-top: var(--section); }
+.end .s-body { grid-column: 4 / 13; display: grid; gap: 28px; }
+.end h2 { font-size: clamp(40px, 5.6vw, 84px); letter-spacing: -.055em; line-height: .95; max-width: 14ch; }
+.end .row { display: flex; flex-wrap: wrap; gap: 12px; }
+.next { grid-column: 1 / -1; margin-top: var(--section); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: end; text-decoration: none; border-top: 1px solid var(--rule); padding-top: 28px; }
+.next .t { display: grid; gap: 8px; padding-bottom: 8px; }
+.next .t > span { font-size: 14px; color: var(--haze); }
+.next .t strong { font-family: var(--f-display); font-weight: 300; font-size: clamp(36px, 4.6vw, 68px); letter-spacing: -.05em; line-height: 1; }
+.next .t em { font-style: normal; color: var(--haze); font-size: 14px; }
+.next .arrow { display: inline-block; transition: translate .5s var(--out); }
+.next:hover .arrow { translate: 10px 0; }
+.next .fr { aspect-ratio: 16 / 7; border-radius: 14px; overflow: hidden; background: var(--slate); }
+.next .fr img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.7); transition: filter .5s, scale .9s var(--out); }
+.next .fr.contain img { object-fit: contain; padding: 6%; }
+.next .fr.light { background: #fff; }
+.next:hover .fr img { filter: none; scale: 1.03; }
+
+.foot { padding-top: clamp(64px, 8vw, 120px); font-size: 13px; color: var(--haze); }
+.foot > * { grid-column: span 6; } .foot > :last-child { text-align: right; }
+
+/* Apparition à l'arrivée */
+.in > * { animation: rise 1s var(--out) both; }
+.in > *:nth-child(2) { animation-delay: .08s; } .in > *:nth-child(3) { animation-delay: .16s; } .in > *:nth-child(4) { animation-delay: .24s; }
+
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .nav .brand { grid-column: 1 / -1; }
+  .p-label, .p-title, .sec .s-label, .sec .s-body, .proud .s-label, .proud .s-body, .end .s-body { grid-column: 1 / -1; }
+  .proud { padding-inline: 20px; }
+  .sec .s-label, .proud .s-label { padding: 0 0 16px; }
+  .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .gallery > * { grid-column: 1 / -1 !important; }
+  .next { grid-template-columns: minmax(0, 1fr); }
+  .foot > * { grid-column: 1 / -1; text-align: left !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .in > *, .deep.enter { animation: none; }
+  .seg .pill, .mag, .mag .lbl, .gallery img, .next .fr img { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="c nav" aria-label="Navigation du site">
+  <a class="brand" href="index.html" data-home>Julie Ramier</a>
+  <ul><li><a href="index.html#projets" data-home>Projets</a></li><li><a href="index.html#savoir-faire" data-home>Savoir-faire</a></li><li><a href="index.html#a-propos" data-home>À propos</a></li><li><a href="index.html#contact" data-home>Contact</a></li></ul>
+</nav>
+
+<main id="page"></main>
+
+<script>
+const A = "assets/";
+const todo = t => `<span class="todo">À compléter : ${t}</span>`;
+
+/* Contenu des études de cas (tiré de docs/projets/*.md) */
+const PROJETS = [
+  { id: "programme", n: "01", name: "Programme interne",
+    disc: "Direction artistique · Identité · Motion · Événement",
+    title: "Un programme de transformation, rendu clair et désirable",
+    sum: "Comment embarquer plus de 100 000 collaborateurs dans un programme de changement qui suscitait des réticences ? J'ai conçu son univers visuel, avec une charte et une mascotte, puis je l'ai fait vivre sur tous les supports, à la tête d'une équipe de 4 designers.",
+    hero: { src: "programme-cnum.webp", alt: "Visuel clé du programme interne" },
+    fiche: [["Client", "Groupe aéronautique international"], ["Année", "2024"], ["Rôle", "Directrice artistique & lead design · Cheffe de projet événement"], ["Équipe", "4 designers"], ["Livrables", "Charte, mascotte, supports d'apprentissage, vidéo, SharePoint, PPT animé, slide decks, événement"]],
+    deep: [
+      { label: "Contexte", h: "Plus de 100 000 collaborateurs à embarquer, et un changement qui inquiétait.",
+        p: ["Le groupe lançait un programme appelé à transformer en profondeur ses façons de travailler. Il ne suffisait pas de l'annoncer : il fallait que chacun le comprenne, s'y retrouve et ait envie d'y prendre part."] },
+      { label: "Le défi", h: "Parler à tout le monde, sans perdre personne.",
+        list: ["Rendre lisible un programme complexe", "Lever les réticences en donnant au programme un visage accessible", "Créer un univers assez solide pour que 4 designers le déclinent sur des dizaines de supports", "S'intégrer aux codes et aux circuits de validation d'un grand groupe"] },
+      { label: "Démarche", h: "Challenger l'existant, puis construire un système.",
+        steps: [["Auditer avant de dessiner", "J'ai commencé par analyser les supports existants : repérer leurs points faibles et la manière de les challenger. Cet audit a fixé le cap de la nouvelle direction artistique."],
+                ["Créer l'univers", "Une charte graphique et une mascotte. La mascotte avait un rôle précis : rendre les supports d'apprentissage ludiques et reconnaissables au premier coup d'œil."],
+                ["Décliner partout", "SharePoint, PowerPoint animé, slide decks, vidéo en motion design : la même identité, adaptée à chaque usage et produite avec mon équipe de 4 designers."],
+                ["Faire vivre", "Pour l'événement interne, j'ai assuré la conception et l'organisation en tant que cheffe de projet, et j'ai construit le fil rouge qui reliait chaque moment de la journée."]] },
+      { label: "Le système", h: "Une charte et une mascotte, pensées pour être déclinées.",
+        gallery: [{ todo: "Charte : palette, typographie, grille", w: 7 }, { todo: "La mascotte et ses déclinaisons", w: 5 }] },
+      { label: "Mener l'équipe", h: "Une direction, quatre designers, une seule voix.",
+        p: ["J'ai encadré une équipe de 4 designers : je fixais la direction artistique, je répartissais les productions et je veillais à la cohérence de chaque support, de la slide à la vidéo."] },
+    ],
+    gallery: [
+      { src: "programme-sharepoint-portrait.webp", alt: "Page de l'espace SharePoint du programme", cap: "L'espace SharePoint", w: 7, ar: "862 / 492" },
+      { src: "programme-tampon.webp", alt: "Tampon graphique du programme", cap: "Le tampon, signature du programme", w: 5, ar: "4 / 3", contain: true },
+      { todo: "Supports d'apprentissage", w: 4 }, { todo: "Extrait de la vidéo motion", w: 4 }, { todo: "Photo de l'événement", w: 4 },
+    ],
+    produced: ["Une identité complète : charte et mascotte", "Des supports d'apprentissage ludiques", "Un espace SharePoint dédié au programme", "Une vidéo en motion design, des PowerPoint animés et des slide decks", "Un événement interne, de la conception au fil rouge"],
+    proud: { h: "Faire d'un programme redouté un projet qu'on comprend, et qui donne envie.",
+      p: ["Au départ, le programme suscitait des réticences en interne. Ma plus grande fierté, c'est d'avoir contribué à le rendre clair et désirable.", "Et de l'avoir fait de l'intérieur : très vite, je ne faisais plus qu'une équipe avec les équipes du groupe. Participer à un programme qui va profondément changer l'entreprise, c'est le genre de projet qui donne tout son sens à mon métier."] },
+    learned: todo("1 ou 2 phrases, par exemple ce que ce projet t'a appris sur l'accompagnement du changement (optionnel)"),
+    confidential: true },
+
+  { id: "kaizo", n: "02", name: "Kaizo",
+    disc: "Atelier de branding · Naming · Identité · Motion",
+    title: "Kaizo, donner un visage à un produit tech",
+    sum: "Une solution déjà développée par une équipe tech, mais sans designer : pas de nom définitif, pas d'identité, rien pour donner envie de l'utiliser. J'ai réuni les parties prenantes en atelier pour lui trouver un nom, puis je lui ai donné un visage : un logo, une identité et une mascotte poulpe.",
+    hero: { src: "kaizo-poulpe.webp", alt: "Mascotte poulpe de Kaizo", contain: true },
+    fiche: [["Année", "2026"], ["Rôle", "Directrice artistique · Animation d'ateliers"], ["Livrables", "Atelier de branding, nom, logo, logo animé, mascotte, identité visuelle"], ["Produit", todo("ce que fait l'outil, pour qui")]],
+    deep: [
+      { label: "Contexte", h: "Un produit qui fonctionnait, mais que personne n'avait encore dessiné.",
+        p: ["La solution avait été développée par une équipe technique, sans designer. Elle marchait, mais elle n'avait ni direction visuelle cohérente ni véritable identité, et son nom provisoire ne convainquait pas."] },
+      { label: "Le défi", h: "Donner une identité à un produit qui existe déjà.",
+        list: ["Challenger le nom provisoire et en trouver un que toutes les parties prenantes portent", "Créer une direction visuelle cohérente pour une solution conçue sans designer", "Rendre le produit accessible et attachant, pour faciliter son adoption"] },
+      { label: "Démarche", h: "Faire émerger le nom ensemble, puis lui donner vie.",
+        steps: [["Réunir les parties prenantes", "J'ai conçu et animé un atelier de branding avec les acteurs du projet, pour qu'ils construisent ensemble ce que le produit devait incarner."],
+                ["Trouver le nom", "Le nom provisoire a été challengé en atelier. Kaizo en est sorti. " + todo("pourquoi Kaizo ? origine, sens")],
+                ["Créer le visage", "Un logo, une identité visuelle et une mascotte : un poulpe. " + todo("pourquoi un poulpe ?")],
+                ["L'animer", "Un logo animé, pour que la mascotte et la marque prennent vie à l'écran."]] },
+      { label: "Le système", h: "Un logo, un poulpe et ses expressions.",
+        gallery: [{ todo: "Logo et palette", w: 6 }, { todo: "Le poulpe et ses expressions", w: 6 }] },
+    ],
+    gallery: [
+      { src: "kaizo-poulpe.webp", alt: "Mascotte poulpe de Kaizo", cap: "La mascotte", w: 6, ar: "1 / 1", contain: true },
+      { todo: "Logo animé (vidéo)", w: 6, ar: "1 / 1" },
+      { todo: "Déclinaisons : écrans, supports", w: 12, ar: "16 / 7" },
+    ],
+    proud: { h: "Rendre attachant un produit tech, pour qu'on ait envie de l'adopter.",
+      p: ["Au départ, c'était un outil efficace mais froid, pensé par des ingénieurs pour des ingénieurs. Ma fierté, c'est de l'avoir rendu attendrissant. Avec un nom qui sonne juste et un petit poulpe pour l'incarner, le produit a cessé d'être un outil de plus : il est devenu quelqu'un qu'on a envie de rencontrer. Et c'est ce qui accélère son adoption."] },
+    learned: todo("optionnel") },
+
+  { id: "onboarding", n: "03", name: "Onboarding en IA",
+    disc: "Motion · Vidéo · IA générative",
+    title: "Une vidéo d'onboarding réalisée en IA générative",
+    sum: "L'IA pour aller vite, le regard de designer pour que ce soit juste. " + todo("pour qui, dans quel but"),
+    hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
+    fiche: [["Année", todo("année")], ["Rôle", todo("ton rôle")], ["Outils", todo("outils d'IA utilisés")], ["Livrables", "Vidéo d'onboarding"]],
+    deep: [
+      { label: "Contexte", h: "Accueillir les nouveaux arrivants, en vidéo.", p: [todo("le contexte, le public, la durée de la vidéo")] },
+      { label: "Démarche", h: "Ce que fait l'IA, ce que fait la designer.", p: [todo("script, storyboard, génération, montage, motion : qui fait quoi")] },
+    ],
+    gallery: [{ src: "onboarding-video.webp", alt: "Image extraite de la vidéo", cap: "Image extraite de la vidéo", w: 12, ar: "1200 / 679" }, { todo: "La vidéo elle-même, ou un extrait", w: 6 }, { todo: "Storyboard", w: 6 }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+
+  { id: "evenement", n: "04", name: "Événement interne",
+    disc: "Communication · Slide decks · Photobooth",
+    title: "Une journée pour 200 personnes, et chaque support y contribuait",
+    sum: "Communication, slide decks et photobooth pour un événement interne de 200 participants. " + todo("contexte de l'événement"),
+    hero: { src: "evenement-kaleidoscope.webp", alt: "Visuel de l'événement interne" },
+    fiche: [["Public", "200 participants"], ["Année", todo("année")], ["Rôle", todo("ton rôle")], ["Livrables", "Communication, slide decks, photobooth"]],
+    deep: [
+      { label: "Contexte", h: "Un moment où les gens s'approprient le projet.", p: [todo("même événement que le projet 01 ? objectifs de la journée")] },
+      { label: "Démarche", h: "Du premier mail au photobooth.", p: [todo("les supports créés et le fonctionnement du photobooth")] },
+    ],
+    gallery: [{ src: "evenement-kaleidoscope.webp", alt: "Visuel de l'événement", cap: "Le visuel de l'événement", w: 5, ar: "800 / 887" }, { todo: "Photos de l'événement", w: 7, ar: "800 / 887" }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] }, confidential: true },
+
+  { id: "sharepoint", n: "05", name: "Intranet SharePoint",
+    disc: "Digital interne · UI",
+    title: "Un espace où l'information se trouve du premier coup",
+    sum: "L'espace SharePoint d'un programme interne. " + todo("le problème à résoudre"),
+    hero: { src: "programme-sharepoint-portrait.webp", alt: "Page SharePoint du programme" },
+    fiche: [["Année", todo("année")], ["Rôle", todo("arborescence, maquette, intégration ?")], ["Livrables", "Espace SharePoint"]],
+    deep: [{ label: "Démarche", h: "Ranger avant de dessiner.", p: [todo("ta démarche")] }],
+    gallery: [{ todo: "Captures anonymisées de l'espace SharePoint", w: 12, ar: "16 / 7" }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] }, confidential: true },
+
+  { id: "restaurant", n: "06", name: "Utah",
+    disc: "Logo · Identité · Coffee shop",
+    title: "Utah, le logo d'un coffee shop dog-friendly",
+    sum: "Création du logo d'Utah, un coffee shop qui accueille les chiens. " + todo("comment le projet est arrivé"),
+    hero: { src: "utah-logo.webp", alt: "Logo Utah, coffee shop dog-friendly", contain: true, light: true },
+    fiche: [["Année", todo("année")], ["Livrables", "Logo " + todo("et autres supports ?")]],
+    deep: [{ label: "Contexte", h: "Un café où les chiens sont les bienvenus.", p: [todo("pourquoi « Utah » ? comment le logo dit « dog-friendly » ?")] }],
+    gallery: [{ src: "utah-logo.webp", alt: "Logo Utah", cap: "Le logo", w: 7, ar: "946 / 663", contain: true, light: true }, { todo: "Le logo en situation : enseigne, gobelet…", w: 5, ar: "946 / 663" }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+
+  { id: "orbit", n: "07", name: "Orbit",
+    disc: "Projet personnel · Exploration IA · Logo",
+    title: "Orbit, une marque fictive pour explorer l'IA",
+    sum: "Un projet personnel : créer une marque de bout en bout, du logo à sa mise en scène, pour tester ce que les outils d'IA générative apportent au travail de designer.",
+    hero: { src: "orbit-logo-scene.webp", alt: "Logo Orbit projeté sur un écran devant un auditoire" },
+    fiche: [["Type", "Projet personnel, marque fictive"], ["Année", todo("année")], ["Outils", todo("outils d'IA testés")], ["Livrables", "Logo " + todo("déclinaisons ?")]],
+    deep: [{ label: "L'exploration", h: "Ce que l'IA change, et ce qu'elle ne change pas.", p: [todo("ce que tu cherchais à vérifier, et ce que tu en as retenu")] }],
+    gallery: [{ src: "orbit-logo-scene.webp", alt: "Logo Orbit mis en scène", cap: "Le logo mis en scène", w: 12, ar: "1400 / 699" }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+];
+
+/* Rendu */
+const fr = (g, cls = "") => g.todo
+  ? `<div class="fr todo-fr" style="--ar:${g.ar || "4 / 3"}">${g.todo}<br><span class="todo" style="margin-top:8px">Visuel à fournir</span></div>`
+  : `<div class="fr${g.contain ? " contain" : ""}${g.light ? " light" : ""}" style="--ar:${g.ar || "4 / 3"}"><img src="${A}${g.src}" alt="${g.alt}" loading="lazy"></div>`;
+const gallery = list => `<div class="gallery">${list.map(g => `<figure class="w${g.w || 12}">${fr(g)}${g.cap ? `<figcaption>${g.cap}</figcaption>` : ""}</figure>`).join("")}</div>`;
+const section = (s, deep) => `
+  <section class="c sec${deep ? " deep" : ""}"${deep ? " data-deep" : ""} aria-label="${s.label}">
+    <div class="s-label"><span class="slabel">${s.label}</span></div>
+    <div class="s-body">
+      <h2>${s.h}</h2>
+      ${(s.p || []).map(t => `<p class="lead">${t}</p>`).join("")}
+      ${s.list ? `<ul class="bul">${s.list.map(t => `<li>${t}</li>`).join("")}</ul>` : ""}
+      ${s.steps ? `<div class="steps">${s.steps.map(([h, t], i) => `<div class="step"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${h}</h3><p>${t}</p></div>`).join("")}</div>` : ""}
+    </div>
+    ${s.gallery ? gallery(s.gallery) : ""}
+  </section>`;
+
+function render(id) {
+  const list = PROJETS, i = Math.max(0, list.findIndex(p => p.id === id)), p = list[i], nx = list[(i + 1) % list.length];
+  document.title = `${p.name}, Julie Ramier`;
+  const hv = p.hero;
+  document.getElementById("page").innerHTML = `
+  <header class="c p-head in">
+    <a class="back" href="index.html#projets" data-home><span aria-hidden="true">←</span> Tous les projets</a>
+    <div class="p-label"><span class="num">${p.n}</span><span class="disc">${p.disc}</span></div>
+    <div class="p-title">
+      <h1>${p.title}</h1>
+      <p class="sum">${p.sum}</p>
+      <div class="modes">
+        <div class="seg" role="group" aria-label="Mode de lecture"><span class="pill" aria-hidden="true"></span><button type="button" data-mode="essentiel">Essentiel</button><button type="button" data-mode="profondeur">En profondeur</button></div>
+        <span class="hint" id="mode-hint"></span>
+      </div>
+    </div>
+  </header>
+  <div class="c">
+    <div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"><img src="${A}${hv.src}" alt="${hv.alt}"></div>
+    <dl class="fiche">${p.fiche.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+  </div>
+
+  ${p.deep.map(s => section(s, true)).join("")}
+
+  <section class="c sec" aria-label="Réalisations">
+    <div class="s-label"><span class="slabel">Réalisations</span></div>
+    <div class="s-body"><h2>Ce que j'ai livré.</h2></div>
+    ${gallery(p.gallery)}
+  </section>
+
+  ${p.produced ? section({ label: "Ce que le projet a produit", h: "Une identité, et tout ce qui la fait vivre.", list: p.produced }, true) : ""}
+
+  <section class="c proud" aria-label="Ce dont je suis le plus fière">
+    <div class="s-label"><span class="slabel">Ce dont je suis le plus fière</span></div>
+    <div class="s-body" style="display:grid;gap:24px">
+      <h2>${p.proud.h}</h2>
+      ${p.proud.p.map(t => `<p class="lead">${t}</p>`).join("")}
+    </div>
+  </section>
+
+  ${p.learned ? section({ label: "Ce que j'en retiens", h: "Avec le recul.", p: [p.learned] }, true) : ""}
+
+  <section class="c sec" id="invite" aria-label="Lecture en profondeur">
+    <div class="s-body" style="grid-column:4/13"><button class="more" type="button" id="go-deep">Envie de voir comment j'ai travaillé ? Passer en lecture en profondeur <span aria-hidden="true">↓</span></button></div>
+  </section>
+
+  <section class="c end" aria-labelledby="h-end">
+    <div class="s-body">
+      ${p.confidential ? `<p class="note">Certains éléments ont été modifiés pour des raisons de confidentialité.</p>` : ""}
+      <h2 id="h-end">Un projet similaire&nbsp;? Parlons-en.</h2>
+      <div class="row"><a class="cta solid mag" href="index.html#contact" data-home id="end-cta"><span class="lbl">Écrivez-moi <span aria-hidden="true">→</span></span></a><a class="cta" href="index.html#projets" data-home>Tous les projets</a></div>
+    </div>
+    <a class="next" href="#${nx.id}" aria-label="Projet suivant : ${nx.name}">
+      <div class="t"><span>Projet suivant</span><strong>${nx.name} <span class="arrow" aria-hidden="true">→</span></strong><em>${nx.disc}</em></div>
+      <div class="fr${nx.hero.contain ? " contain" : ""}${nx.hero.light ? " light" : ""}"><img src="${A}${nx.hero.src}" alt="" loading="lazy"></div>
+    </a>
+  </section>
+
+  <footer class="c foot"><span>© 2026 Julie Ramier · Paris</span><span>Mentions légales</span></footer>`;
+  wire();
+}
+
+/* Mode de lecture : mémorisé, partageable avec ?lecture=profondeur */
+const store = { get: () => { try { return localStorage.getItem("lecture"); } catch { return null; } }, set: v => { try { localStorage.setItem("lecture", v); } catch {} } };
+let mode = new URLSearchParams(location.search).get("lecture") === "profondeur" ? "profondeur" : (store.get() || "essentiel");
+function setMode(m, animate) {
+  mode = m; store.set(m);
+  const deep = m === "profondeur";
+  document.querySelectorAll("[data-deep]").forEach(s => { s.hidden = !deep; s.classList.toggle("enter", deep && animate); });
+  document.getElementById("invite").hidden = deep;
+  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+  document.getElementById("mode-hint").textContent = deep ? "Toute la démarche, étape par étape." : "L'essentiel en 1 minute.";
+  const on = document.querySelector(`.seg button[data-mode="${m}"]`), pill = document.querySelector(".seg .pill");
+  pill.style.width = on.offsetWidth + "px"; pill.style.translate = on.offsetLeft + "px 0";
+}
+function wire() {
+  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode, true)));
+  document.getElementById("go-deep").addEventListener("click", () => { const y = scrollY; setMode("profondeur", true); scrollTo({ top: y }); document.querySelector("[data-deep]")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  setMode(mode, false);
+  const btn = document.getElementById("end-cta"), lbl = btn.querySelector(".lbl"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  btn.addEventListener("pointermove", e => { const r = btn.getBoundingClientRect();
+    btn.style.setProperty("--fx", `${e.clientX - r.left}px`); btn.style.setProperty("--fy", `${e.clientY - r.top}px`);
+    if (reduce) return; const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    btn.style.translate = `${dx * .18}px ${dy * .3}px`; lbl.style.translate = `${dx * .08}px ${dy * .12}px`; });
+  btn.addEventListener("pointerleave", () => { btn.style.translate = "0 0"; lbl.style.translate = "0 0"; });
+}
+
+/* Retour à l'accueil : l'adresse de l'accueil est notée au clic sur un projet */
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-home]"); if (!a) return;
+  const hash = a.getAttribute("href").split("#")[1];
+  let home = null;
+  try { home = sessionStorage.getItem("home"); } catch {}
+  if (!home) try { const ref = document.referrer && new URL(document.referrer); if (ref && ref.origin === location.origin && !/projet\.html/.test(ref.pathname)) home = ref.pathname + ref.search; } catch {}
+  if (home) { e.preventDefault(); location.href = home + (hash ? "#" + hash : ""); }
+});
+
+const go = () => { const id = location.hash.slice(1); render(id); scrollTo({ top: 0 }); };
+addEventListener("hashchange", () => document.startViewTransition ? document.startViewTransition(go) : go());
+render(location.hash.slice(1));
+</script>
+</body>
+</html>
