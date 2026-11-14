@@ -22,6 +22,9 @@
 - Niche prioritaire : la communication interne, mais l'externe reste proposé.
 - Transition entre profils : **Éclosion** (Fondu et Vague écartés).
 - Entrées : **« Vos équipes » / « Vos clients »**.
+- **Cadrage pédagogique** : le Nuancier est un slider de personnalité ludique, pour comprendre l'impact de chaque axe. Ce n'est **pas une proposition graphique** : le graphisme vient ensuite, après l'étude du projet et une proposition commerciale. Avertissements placés dans l'intro (« À savoir »), sous le titre 02, au-dessus de la planche (« Aperçu pédagogique »), dans le portrait (« Un portrait, pas un logo ») et dans le brief (« Et après ? »).
+- Chaque curseur a une question simple et une ligne « Sur l'aperçu, ce curseur change… » ; sous la planche, un message en direct explique l'effet du dernier curseur bougé ou annonce le nouveau profil. Le milieu de chaque curseur est marqué.
+- Mention « Ma spécialité depuis 8 ans » retirée de l'entrée « Vos équipes ».
 - Atelier affiché sans prix. Accès prévu : menu + section Contact du portfolio.
 
 ## Questions en attente (posées à Julie)

@@ -47,6 +47,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .step-head { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); border-top: 1px solid var(--rule); padding-top: 24px; margin-bottom: clamp(32px, 4vw, 56px); }
 .step-head .lbl { grid-column: 1 / 4; display: grid; gap: 4px; align-content: start; }
 .step-head .lbl span:last-child { font-size: 14px; }
+.notice { display: grid; gap: 6px; border: 1px solid var(--rule); border-radius: 16px; padding: 16px 20px; background: var(--slate); color: var(--haze); font-size: 15px; line-height: 1.5; }
+.notice b { color: var(--chalk); font-weight: 500; }
+.intro .notice { grid-column: 1 / 7; margin-top: 28px; align-self: start; }
+.step-head .sub { grid-column: 4 / 13; margin-top: 18px; max-width: 58ch; color: var(--haze); font-size: 16px; line-height: 1.5; }
 .step-head h2 { grid-column: 4 / 13; font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; line-height: 1.02; max-width: 20ch; }
 
 /* 01 */
@@ -54,7 +58,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .start { text-align: left; border: 1px solid var(--rule); background: var(--slate); border-radius: 20px; padding: clamp(20px, 2.4vw, 32px); cursor: pointer; display: grid; gap: 14px; align-content: start; transition: border-color .3s, background .3s; }
 .start h3 { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.035em; }
 .start p { color: var(--haze); font-size: 15px; }
-.start .spec { font-family: "Fraunces", Georgia, serif; font-style: italic; font-size: 17px; color: var(--blush); }
 .start[aria-pressed="true"] { border-color: var(--chalk); background: #22211e; }
 .start .tick { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--haze); display: grid; place-items: center; }
 .start[aria-pressed="true"] .tick { background: var(--chalk); border-color: var(--chalk); }
@@ -82,6 +85,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .slider input:active::-webkit-slider-thumb { scale: 1.2; }
 .slider .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -8px; pointer-events: none; }
 .slider .ticks i { width: 1px; height: 6px; background: var(--rule); }
+.slider .ticks i:nth-child(3) { height: 12px; margin-top: -3px; background: var(--haze); }
+.slider .ask { grid-column: 1 / -1; font-size: 15px; color: var(--chalk); }
+.slider .fx { grid-column: 1 / -1; font-size: 13px; color: var(--haze); transition: color .3s; }
+.slider .fx b { font-weight: 500; }
+.slider.live .fx { color: var(--chalk); }
 
 /* Planche d'identité */
 .stage { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); display: grid; gap: 10px; }
@@ -130,6 +138,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .pictos .g { width: 64%; aspect-ratio: 1; }
 .pictos figcaption { font-family: var(--f-t); font-size: clamp(9px, 1.85cqw, 12.5px); line-height: 1.25; }
 .recipe { font-size: 13px; color: var(--haze); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.stamp { justify-self: start; font-size: 12px; color: var(--chalk); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px; }
+.impact { font-size: 14px; color: var(--haze); min-height: 2.6em; line-height: 1.35; }
+.impact b { color: var(--chalk); font-weight: 500; }
 .recipe b { font-weight: 500; color: var(--chalk); }
 
 /* 03 */
@@ -197,7 +208,7 @@ textarea.field { resize: vertical; min-height: 84px; }
 .switch button[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
 
 @media (max-width: 960px) {
-  .intro h1, .intro .lead, .intro .how, .starts, .portrait, .brief, .team, .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
+  .intro h1, .intro .lead, .intro .notice, .step-head .sub, .intro .how, .starts, .portrait, .brief, .team, .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
   .intro .how { margin-top: 36px; }
   .step-head { row-gap: 10px; }
   .workbench { grid-template-columns: minmax(0, 1fr); }
@@ -237,9 +248,10 @@ textarea.field { resize: vertical; min-height: 84px; }
 </nav>
 
 <header class="c intro">
-  <p class="eyebrow">Un outil gratuit, pour poser les bases d'une identité</p>
+  <p class="eyebrow">Un outil gratuit et ludique, pour cerner la personnalité de votre projet</p>
   <h1 data-name>Le Nuancier</h1>
-  <p class="lead">Réglez cinq curseurs, découvrez le profil de votre projet parmi 32, voyez-le prendre forme sous vos yeux, et repartez avec un brief clair. Comptez 3 minutes.</p>
+  <p class="lead">Le Nuancier est un jeu de curseurs de personnalité. Réglez-en cinq, voyez l'effet de chacun sur une ambiance visuelle, découvrez votre profil parmi 32 et repartez avec un brief clair. Comptez 3 minutes.</p>
+  <p class="notice"><span><b>À savoir.</b> Les visuels que vous allez voir ne sont pas une proposition graphique. Ils servent à comprendre l'impact de chaque axe. Le graphisme vient dans un second temps, après l'étude de votre projet et une proposition commerciale.</span></p>
   <div class="how">
     <div><span class="num">01</span><span>Choisissez votre point de départ</span></div>
     <div><span class="num">02</span><span>Réglez les curseurs</span></div>
@@ -256,7 +268,6 @@ textarea.field { resize: vertical; min-height: 84px; }
         <span class="tick" aria-hidden="true"></span>
         <h3 id="st-i-t">Vos équipes</h3>
         <p id="st-i-p">Communication interne : programme de transformation, nouvel outil, événement, onboarding.</p>
-        <span class="spec">Ma spécialité depuis 8 ans</span>
       </button>
       <button type="button" class="start" data-mode="externe" aria-pressed="false">
         <span class="tick" aria-hidden="true"></span>
@@ -267,7 +278,7 @@ textarea.field { resize: vertical; min-height: 84px; }
   </section>
 
   <section class="c step" aria-labelledby="h2s">
-    <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Cinq curseurs. Il n'y a pas de mauvaise réponse.</h2></div>
+    <div class="step-head"><div class="lbl"><span class="num">02</span><span>Réglages</span></div><h2 id="h2s">Cinq curseurs. Il n'y a pas de mauvaise réponse.</h2><p class="sub">Répondez pour votre projet, pas pour l'image qui vous plaît le plus : l'aperçu sert seulement à montrer ce que chaque axe fait bouger.</p></div>
     <div class="workbench">
       <div class="controls" id="controls">
         <div class="namefield">
@@ -276,6 +287,7 @@ textarea.field { resize: vertical; min-height: 84px; }
         </div>
       </div>
       <aside class="stage" aria-label="Aperçu en direct">
+        <p class="stamp">Aperçu pédagogique · pas une proposition graphique</p>
         <div class="prof"><span class="prof-n" id="prof-n"></span><strong id="prof-name"></strong><span class="prof-desc" id="prof-desc"></span></div>
         <div class="board" id="board" aria-hidden="true">
           <div class="grid">
@@ -296,7 +308,7 @@ textarea.field { resize: vertical; min-height: 84px; }
             <div class="tile pictos" id="pictos"></div>
           </div>
         </div>
-        <p class="recipe">Une ambiance parmi d'autres, pas une proposition finale.</p>
+        <p class="impact" id="impact" aria-live="polite">Bougez un curseur pour voir ce qu'il change.</p>
       </aside>
     </div>
   </section>
@@ -307,6 +319,7 @@ textarea.field { resize: vertical; min-height: 84px; }
       <p class="says" id="says"></p>
       <div class="traits" id="traits"></div>
       <p class="piste" id="piste"></p>
+      <p class="notice"><span><b>Un portrait, pas un logo.</b> Ce texte décrit une personnalité. L'identité visuelle de votre projet se construira ensuite, avec vous, à partir de ce portrait.</span></p>
       <div class="open" id="open"></div>
       <div class="copyrow"><button type="button" class="cta" id="copy">Copier mon portrait</button><span class="dim" id="copy-s" aria-live="polite"></span></div>
     </div>
@@ -331,6 +344,7 @@ textarea.field { resize: vertical; min-height: 84px; }
         <div class="q"><label for="q-name">Votre nom</label><input class="field" id="q-name" autocomplete="name"></div>
         <div class="q"><label for="q-mail">Votre e-mail professionnel</label><input class="field" id="q-mail" type="email" autocomplete="email"></div>
       </div>
+      <p class="notice"><span><b>Et après ?</b> Julie étudie votre brief et vous rappelle, puis vous adresse une proposition commerciale. Le travail graphique ne commence qu'une fois le projet cadré ensemble.</span></p>
       <label class="consent"><input type="checkbox" id="q-ok"><span>J'accepte que Julie Ramier utilise ces informations pour me recontacter au sujet de mon projet. Elles ne sont ni revendues ni utilisées à d'autres fins.</span></label>
       <p class="err" id="err" aria-live="polite"></p>
       <div><button type="submit" class="cta solid">Envoyer mon brief à Julie →</button></div>
@@ -370,13 +384,18 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lerp = (a, b, t) => a + (b - a) * t;
 const $ = id => document.getElementById(id);
 
-/* ───────── 5 curseurs : [id, gauche, droite, exemple gauche, exemple droit, défaut, ce que l'axe mesure] ───────── */
+/* ───────── 5 curseurs : [id, gauche, droite, exemple gauche, exemple droit, défaut, ce que l'axe mesure, question, effet sur l'aperçu] ───────── */
 const SL = [
-  ["style", "Classique", "Contemporain", "Hermès", "Nothing", 66, "Codes patrimoniaux ou esthétiques actuelles"],
-  ["expression", "Discret", "Affirmé", "Aesop", "Diesel", 38, "Intensité et présence visuelle"],
-  ["communication", "Rationnel", "Émotionnel", "IBM", "Disney", 62, "Logique et preuves, ou récit et ressenti"],
-  ["positionnement", "Accessible", "Exclusif", "IKEA", "Rolex", 30, "Proximité et ouverture, ou distinction et rareté"],
-  ["creativite", "Conventionnel", "Audacieux", "LinkedIn", "Balenciaga", 40, "Respect ou détournement des codes du secteur"],
+  ["style", "Classique", "Contemporain", "Hermès", "Nothing", 66, "Codes patrimoniaux ou esthétiques actuelles",
+    "Votre projet s'appuie-t-il sur un héritage, ou regarde-t-il vers demain ?", "les typographies : à empattements côté classique, linéaires côté contemporain"],
+  ["expression", "Discret", "Affirmé", "Aesop", "Diesel", 38, "Intensité et présence visuelle",
+    "Doit-il se faire remarquer, ou se laisser découvrir ?", "le nombre de formes, leur rythme et la force des contrastes"],
+  ["communication", "Rationnel", "Émotionnel", "IBM", "Disney", 62, "Logique et preuves, ou récit et ressenti",
+    "Doit-il convaincre par les faits, ou toucher par l'émotion ?", "le ton de l'accroche et la chaleur de l'ambiance"],
+  ["positionnement", "Accessible", "Exclusif", "IKEA", "Rolex", 30, "Proximité et ouverture, ou distinction et rareté",
+    "S'adresse-t-il à tout le monde, ou à un cercle choisi ?", "les arrondis : doux quand c'est accessible, nets et cadrés d'un filet quand c'est exclusif"],
+  ["creativite", "Conventionnel", "Audacieux", "LinkedIn", "Balenciaga", 40, "Respect ou détournement des codes du secteur",
+    "Doit-il rassurer en suivant les codes, ou surprendre en les bousculant ?", "le mouvement : plus vif, avec un nom légèrement incliné quand c'est audacieux"],
 ];
 
 /* ───────── 32 profils (fichier Excel de Julie) + ambiance visuelle composée à la main ─────────
@@ -463,14 +482,17 @@ const V = Object.fromEntries(SL.map(s => [s[0], s[5]]));
 /* Curseurs */
 const controls = $("controls");
 const wrap = document.createElement("div");
-wrap.innerHTML = SL.map(([id, l, r, el, er]) => `
-  <div class="slider">
+wrap.innerHTML = SL.map(([id, l, r, el, er, , , ask, fx]) => `
+  <div class="slider" id="${id}-box">
+    <p class="ask" id="${id}-ask">${ask}</p>
     <span class="l" id="${id}-l">${l}<small>ex. ${el}</small></span><span class="r" id="${id}-r">${r}<small>ex. ${er}</small></span>
-    <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}">
+    <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}" aria-describedby="${id}-ask">
     <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="fx">Sur l'aperçu, ce curseur change ${fx}.</p>
   </div>`).join("");
 controls.append(wrap);
-controls.addEventListener("input", e => { if (e.target.type === "range") { V[e.target.id] = +e.target.value; update(); } });
+let moved = "";
+controls.addEventListener("input", e => { if (e.target.type === "range") { V[e.target.id] = +e.target.value; moved = e.target.id; update(); } });
 $("pname").addEventListener("input", update);
 
 /* Point de départ + libellés à tester */
@@ -613,6 +635,13 @@ function update() {
   $("prof-name").textContent = pname;
   $("prof-desc").textContent = desc;
   if (gh) morph(gh);
+  if (moved) {
+    const [, l, r, , , , , , fx] = SL.find(x => x[0] === moved), side = V[moved] >= 50 ? r : l;
+    $("impact").innerHTML = changed
+      ? `Vous passez du côté <b>${side}</b> : nouveau profil, <b>${pname}</b>.`
+      : `<b>${side}</b> : ce curseur fait varier ${fx.split(" : ")[0]}. Passez le milieu pour changer de profil.`;
+    SL.forEach(([id]) => $(id + "-box").classList.toggle("live", id === moved));
+  }
 
   SL.forEach(([id]) => { const v = V[id]; $(id).style.setProperty("--p", v + "%"); $(id + "-l").classList.toggle("on", v < 50); $(id + "-r").classList.toggle("on", v >= 50); });
   lastN = n;
