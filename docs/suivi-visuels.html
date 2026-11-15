@@ -1,0 +1,133 @@
+<title>Suivi des visuels</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&display=swap">
+<style>
+/* Tableau de suivi : même univers que le portfolio (fond sombre, rose). Résumé par projet, puis planche de la page Figma C-NUM triée par statut. */
+:root {
+  --night: #0f0f0e; --slate: #191917; --rule: #2a2926; --chalk: #ecebe6; --haze: #8f8b83;
+  --blush: #e7b9b6; --ok: #9cc58a; --warn: #e8c46a; --no: #e2836c;
+  --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--night); color: var(--chalk); font-family: var(--f-body); font-size: 15px; line-height: 1.55; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 96px; }
+.wrap { max-width: 1180px; margin-inline: auto; display: grid; gap: 64px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 300; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(36px, 5vw, 60px); letter-spacing: -.045em; line-height: 1; }
+h2 { font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -.03em; }
+p { margin: 0; max-width: 66ch; }
+.dim { color: var(--haze); }
+header { display: grid; gap: 14px; }
+.rule-box { border: 1px solid var(--rule); border-radius: 14px; padding: 16px 20px; display: grid; gap: 6px; background: var(--slate); max-width: 760px; }
+.rule-box b { color: var(--blush); font-weight: 500; }
+
+/* Avancement par projet */
+.projects { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.prow { display: grid; grid-template-columns: 44px minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.6fr); gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.prow .n { font-family: var(--f-display); font-size: 20px; color: var(--haze); font-variant-numeric: tabular-nums; }
+.prow .name { font-family: var(--f-display); font-size: 20px; letter-spacing: -.02em; }
+.bar { height: 8px; border-radius: 99px; background: var(--rule); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--blush); border-radius: 99px; }
+.count { font-size: 13px; color: var(--haze); font-variant-numeric: tabular-nums; margin-top: 6px; }
+.missing { font-size: 13px; color: var(--haze); }
+
+/* Planche */
+.group { display: grid; gap: 20px; }
+.ghead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+.board { columns: 4 200px; column-gap: 16px; }
+.card { break-inside: avoid; margin: 0 0 20px; display: grid; gap: 8px; }
+.card img { width: 100%; height: auto; display: block; border-radius: 10px; background: var(--slate); }
+.card .t { font-size: 14px; }
+.card .r { font-size: 12.5px; color: var(--haze); line-height: 1.45; }
+.chip { justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 10px; border-radius: 99px; border: 1px solid currentColor; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.ok { color: var(--ok); } .warn { color: var(--warn); } .no { color: var(--no); } .todo { color: var(--haze); }
+.excluded img { filter: grayscale(.4); opacity: .75; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; }
+
+@media (max-width: 700px) {
+  .prow { grid-template-columns: 36px minmax(0, 1fr); }
+  .prow > :nth-child(n+3) { grid-column: 2; }
+  .board { columns: 2 140px; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="dim">Portfolio Julie Ramier · page privée de suivi</span>
+    <h1>Suivi des visuels</h1>
+    <p class="dim">Ce qui est déjà sur les pages projet, ce qui attend la validation de la com, et ce qui manque encore. Mis à jour le 15 novembre 2026.</p>
+    <div class="rule-box">
+      <span><b>Règle de publication</b> : design seul. Aucun vrai contenu texte, aucun visage de collaborateur, jamais le nom ni le logo du groupe.</span>
+      <span class="dim">Les visuels écartés sont floutés ici pour ne pas circuler.</span>
+    </div>
+  </header>
+
+  <section class="group" aria-labelledby="h-av">
+    <h2 id="h-av">Avancement par projet</h2>
+    <div class="projects" id="projects"></div>
+  </section>
+
+  <section class="group" aria-labelledby="h-cnum">
+    <div class="ghead"><h2 id="h-cnum">C-NUM : la page Figma, visuel par visuel</h2></div>
+    <div class="legend">
+      <span class="chip ok">Sur la page, conforme</span>
+      <span class="chip warn">Sur la page, à faire valider</span>
+      <span class="chip todo">À classer</span>
+      <span class="chip no">Écarté</span>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+</div>
+
+<script>
+const S = "suivi/";
+const PROJ = [
+  { n: "01", name: "C-NUM", have: 11, need: 12, txt: "Texte complet", miss: "Newsletter C-News (design seul, textes floutés)" },
+  { n: "02", name: "Kaizo", have: 1, need: 5, txt: "Texte presque complet", miss: "Logo animé, logo et palette, expressions du poulpe, déclinaisons" },
+  { n: "03", name: "Onboarding IA", have: 1, need: 3, txt: "Texte à rédiger", miss: "La vidéo ou un extrait, storyboard" },
+  { n: "04", name: "Événement interne", have: 1, need: 2, txt: "Texte à rédiger", miss: "Supports de l'événement, sans visage" },
+  { n: "05", name: "Intranet SharePoint", have: 0, need: 2, txt: "Texte à rédiger", miss: "Captures anonymisées, sans visage ni texte réel" },
+  { n: "06", name: "Utah", have: 1, need: 2, txt: "Texte à rédiger", miss: "Le logo en situation" },
+  { n: "07", name: "Orbit", have: 1, need: 1, txt: "Texte à rédiger", miss: "Rien côté visuels" },
+];
+document.getElementById("projects").innerHTML = PROJ.map(p => `
+  <div class="prow">
+    <span class="n">${p.n}</span>
+    <div><div class="name">${p.name}</div><div class="count">${p.txt}</div></div>
+    <div><div class="bar" role="img" aria-label="${p.have} visuels sur ${p.need}"><i style="width:${Math.round(p.have / p.need * 100)}%"></i></div><div class="count">${p.have} / ${p.need} visuels</div></div>
+    <div class="missing">${p.have >= p.need ? "Complet" : "Manque : " + p.miss}</div>
+  </div>`).join("");
+
+const ST = { ok: "Conforme", warn: "À faire valider", todo: "À classer", no: "Écarté" };
+const V = [
+  ["cnum-intro-poster", "Film d'introduction", "warn", "Sous-titres retirés. Reste : avions et moteurs, visage sur le billet final."],
+  ["cnum-univers", "Univers (haut de page)", "warn", "Photos de personnes retirées, il ne reste que les formes."],
+  ["cnum-palette", "Palette", "warn", "Les noms de couleur citent les métiers."],
+  ["cnum-personnages", "Personnages", "ok", "Design seul."],
+  ["cnum-roles", "Cartes rôle", "warn", "Paragraphe réel de la 3e carte flouté."],
+  ["cnum-signaletique", "Signalétique", "ok", "« L'inauguration, C par là »."],
+  ["cnum-plateau", "Plateau de jeu", "warn", "Intitulés du process de tickets visibles."],
+  ["cnum-goodies", "Goodies (gourde)", "ok", "Design seul."],
+  ["cnum-visuel-evenement", "Visuel d'événement", "warn", "Photo d'atelier : on reconnaît des avions."],
+  ["programme-cnum", "Visuel clé", "warn", "Montre un moteur d'avion."],
+  ["carte-responsable", "Carte rôle « Responsable solution »", "todo", "Même série que les cartes rôle : à ajouter au montage des 3 ?"],
+  ["onboarding-frame", "« Onboarding Project »", "todo", "Plutôt le projet 03 ?"],
+  ["x-invitation-1", "Invitation (mail)", "no", "Vrai texte, nom d'une personne, date, lieu."],
+  ["x-invitation-2", "Invitation (variante)", "no", "Vrai texte, nom d'une personne, date, lieu."],
+  ["x-photobooth", "Photo photobooth", "no", "Visage d'une collaboratrice."],
+  ["x-regie", "Photo de régie", "no", "Le nom du client est lisible à l'écran."],
+  ["x-cminut", "Bandeau C-MINUT", "no", "Photos du client, logos sur les tenues."],
+  ["x-sharepoint", "Capture SharePoint", "no", "Visage d'une personne."],
+];
+document.getElementById("board").innerHTML = V.map(([f, t, s, r]) => `
+  <figure class="card${s === "no" ? " excluded" : ""}">
+    <img src="${S}${f}.webp" alt="${s === "no" ? "Aperçu flouté : " : ""}${t}" loading="lazy">
+    <span class="chip ${s}">${ST[s]}</span>
+    <span class="t">${t}</span>
+    <span class="r">${r}</span>
+  </figure>`).join("");
+</script>
