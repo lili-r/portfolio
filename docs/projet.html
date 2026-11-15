@@ -253,7 +253,7 @@ const PROJETS = [
     disc: "Direction artistique · Motion design · Communication interne · Événementiel",
     title: "Un programme de transformation, rendu clair et désirable",
     sum: "Comment rendre lisible un programme de transformation numérique qui touche plus de 3 000 collaborateurs et des métiers très différents ? J'ai d'abord pris le lead d'une équipe de designers pour poser l'univers du programme, puis je l'ai décliné sur tous les formats : print, slide decks, motion design, newsletters, SharePoint. Et je l'ai fait vivre au-delà des écrans, en concevant et en coordonnant ses événements.",
-    hero: { ar: "16 / 9", src: "cnum-univers.webp", alt: "Univers graphique C-NUM : formes, personnages métiers et motif de turbine" },
+    hero: { ar: "16 / 9", src: "cnum-univers.webp", alt: "Univers graphique C-NUM : formes, couleurs et motif de turbine" },
     fiche: [["Client", "Groupe industriel international"], ["Années", "2024–2025"], ["Durée", "2 ans, puis des missions ponctuelles"],
             ["Rôle", "Design lead au lancement · Direction artistique · Motion design · Conception et coordination d'événements"],
             ["Équipe", "Lead d'une équipe de designers " + todo("combien ?") + ", puis les équipes communication, projet et métiers du client"],
@@ -282,15 +282,16 @@ const PROJETS = [
         gallery: [{ src: "cnum-palette.webp", alt: "Palette C-NUM : un orange signature et une couleur par domaine métier", cap: "La palette : un orange signature, et une couleur par domaine métier", w: 12, ar: "1580 / 480", light: true },
                   { src: "cnum-personnages.webp", alt: "Les dix mascottes C-NUM, de Mme Pédagogue à M. Prudent", cap: "Les personnages : dix mascottes, dix façons d'aborder le changement", w: 12, ar: "1600 / 680", light: true }] },
     ],
-    film: { video: "cnum-intro.mp4", poster: "cnum-univers.webp", cap: "Le film d'introduction du programme" },
+    film: { video: "cnum-intro.mp4", poster: "cnum-intro-poster.webp", cap: "Le film d'introduction du programme" },
     planche: true,
     gallery: [
       { src: "cnum-roles.webp", alt: "Cartes rôle illustrées avec les mascottes : key user, expert solution, garant méthodes et outils", cap: "Les cartes rôle, pour expliquer qui fait quoi", w: 12, ar: "1560 / 760", light: true },
       { src: "cnum-signaletique.webp", alt: "Panneaux de signalétique « L'inauguration, C par là »", cap: "La signalétique de l'inauguration", w: 6, ar: "1200 / 1698", light: true },
       { src: "cnum-plateau.webp", alt: "Plateau de jeu sur les rôles, les catégories de demande et le process de tickets", cap: "Un jeu de plateau pour comprendre le support", w: 6, ar: "786 / 1183" },
+      { src: "cnum-goodies.webp", alt: "Gourde noire illustrée avec une mascotte C-NUM", cap: "Les goodies de l'événement", w: 6, ar: "556 / 946" },
+      { src: "cnum-visuel-evenement.webp", alt: "Visuel d'événement : photo d'atelier en noir et blanc dans des formes rondes", cap: "Un visuel d'événement", w: 6, ar: "1 / 1" },
       { src: "programme-cnum.webp", alt: "Visuel clé C-NUM", cap: "Le visuel clé", w: 7, ar: "16 / 9" },
-      { src: "programme-sharepoint-portrait.webp", alt: "Page du site SharePoint du programme", cap: "La refonte du site SharePoint", w: 5, ar: "16 / 9" },
-      { todo: "Newsletter C-News", w: 6 }, { todo: "Événement : photobooth, animations", w: 6 },
+      { todo: "Newsletter C-News (design seul, textes floutés)", w: 6 },
     ],
     after: [
       { label: "Livrables", h: "Tout ce que le programme a produit.",
@@ -363,7 +364,7 @@ const PROJETS = [
     disc: "Digital interne · UI",
     title: "Un espace où l'information se trouve du premier coup",
     sum: "L'espace SharePoint d'un programme interne. " + todo("le problème à résoudre"),
-    hero: { src: "programme-sharepoint-portrait.webp", alt: "Page SharePoint du programme" },
+    hero: { todo: "Capture SharePoint anonymisée, sans visage ni texte réel", src: "programme-tampon.webp", alt: "" },
     fiche: [["Année", todo("année")], ["Rôle", todo("arborescence, maquette, intégration ?")], ["Livrables", "Espace SharePoint"]],
     deep: [{ label: "Démarche", h: "Ranger avant de dessiner.", p: [todo("ta démarche")] }],
     gallery: [{ todo: "Captures anonymisées de l'espace SharePoint", w: 12, ar: "16 / 7" }],
@@ -440,7 +441,7 @@ function render(id) {
     </div>
   </header>
   <div class="c">
-    <div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"${hv.ar ? ` style="aspect-ratio:${hv.ar}"` : ""}><img src="${A}${hv.src}" alt="${hv.alt}"></div>
+    ${hv.todo ? `<div class="hero-vis todo-fr" style="display:grid;place-items:center;align-content:center;gap:10px;border:1px dashed #4a4844;color:var(--haze);text-align:center;padding:24px">${hv.todo}<span class="todo">Visuel à fournir</span></div>` : `<div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"${hv.ar ? ` style="aspect-ratio:${hv.ar}"` : ""}><img src="${A}${hv.src}" alt="${hv.alt}"></div>`}
     <dl class="fiche">${p.fiche.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
   </div>
 
@@ -478,7 +479,7 @@ function render(id) {
     </div>
     <a class="next" href="#${nx.id}" aria-label="Projet suivant : ${nx.name}, ${nx.title}">
       <div class="top"><b>Projet suivant</b><span class="count">${nx.n} / ${String(list.length).padStart(2, "0")}</span></div>
-      <div class="fr${nx.hero.contain ? " contain" : ""}${nx.hero.light ? " light" : ""}"><img src="${A}${nx.hero.src}" alt="" loading="lazy"><span class="go" aria-hidden="true">Voir le projet →</span></div>
+      <div class="fr${nx.hero.contain ? " contain" : ""}${nx.hero.light ? " light" : ""}">${nx.hero.todo ? "" : `<img src="${A}${nx.hero.src}" alt="" loading="lazy">`}<span class="go" aria-hidden="true">Voir le projet →</span></div>
       <div class="who"><span class="num">${nx.n}</span>${year(nx) ? `<span>${year(nx)}</span>` : ""}</div>
       <div class="what">
         <strong>${nx.name} <span class="arrow" aria-hidden="true">→</span></strong>
@@ -525,6 +526,7 @@ function wireVideos() {
     if (v.error) return fail();
     v.addEventListener("error", fail);
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); }
+    else if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: .3 }).observe(v);
     b.addEventListener("click", () => { v.muted = !v.muted; if (!v.muted) v.play(); b.setAttribute("aria-pressed", String(!v.muted)); b.textContent = v.muted ? "Activer le son" : "Couper le son"; });
   });
 }
