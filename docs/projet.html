@@ -103,6 +103,11 @@ button { font: inherit; color: inherit; }
 .step .n { font-family: var(--f-display); font-weight: 300; font-size: 22px; color: var(--haze); font-variant-numeric: tabular-nums; }
 .step h3 { font-size: clamp(22px, 2vw, 28px); letter-spacing: -.03em; line-height: 1.15; }
 .step p { color: var(--haze); max-width: 46ch; }
+.step p strong, .bul strong { color: var(--chalk); font-weight: 500; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.stats div { border-top: 1px solid var(--rule); padding-top: 18px; display: grid; gap: 6px; align-content: start; }
+.stats b { font-family: var(--f-display); font-weight: 200; font-size: clamp(44px, 5vw, 76px); letter-spacing: -.055em; line-height: .9; font-variant-numeric: tabular-nums; }
+.stats span { color: var(--haze); font-size: 14px; }
 
 /* Galerie des réalisations */
 .gallery { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); margin-top: clamp(32px, 4vw, 56px); }
@@ -177,6 +182,7 @@ button { font: inherit; color: inherit; }
   .sec .s-label, .proud .s-label { padding: 0 0 16px; }
   .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
   .steps { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
   .gallery > * { grid-column: 1 / -1 !important; }
   .next .who, .next .what { grid-column: 1 / -1; } .next .fr { aspect-ratio: 4 / 3; } .next .fr .go { translate: 0 0; opacity: 1; }
   .foot > * { grid-column: 1 / -1; text-align: left !important; }
@@ -203,36 +209,54 @@ const todo = t => `<span class="todo">À compléter : ${t}</span>`;
 
 /* Contenu des études de cas (tiré de docs/projets/*.md) */
 const PROJETS = [
-  { id: "programme", n: "01", name: "Programme interne",
-    disc: "Direction artistique · Identité · Motion · Événement",
+  { id: "programme", n: "01", name: "C-NUM",
+    disc: "Direction artistique · Motion design · Communication interne · Événementiel",
     title: "Un programme de transformation, rendu clair et désirable",
-    sum: "Comment embarquer plus de 100 000 collaborateurs dans un programme de changement qui suscitait des réticences ? J'ai conçu son univers visuel, avec une charte et une mascotte, puis je l'ai fait vivre sur tous les supports, à la tête d'une équipe de 4 designers.",
-    hero: { src: "programme-cnum.webp", alt: "Visuel clé du programme interne" },
-    fiche: [["Client", "Groupe aéronautique international"], ["Année", "2024"], ["Rôle", "Directrice artistique & lead design · Cheffe de projet événement"], ["Équipe", "4 designers"], ["Livrables", "Charte, mascotte, supports d'apprentissage, vidéo, SharePoint, PPT animé, slide decks, événement"]],
+    sum: "Comment rendre lisible un programme de transformation numérique qui touche plus de 3 000 collaborateurs et des métiers très différents ? J'ai d'abord pris le lead d'une équipe de designers pour poser l'univers du programme, puis je l'ai décliné sur tous les formats : print, slide decks, motion design, newsletters, SharePoint. Et je l'ai fait vivre au-delà des écrans, en concevant et en coordonnant ses événements.",
+    hero: { src: "programme-cnum.webp", alt: "Visuel clé du programme C-NUM" },
+    fiche: [["Client", "Groupe industriel international"], ["Années", "2024–2025"], ["Durée", "2 ans, puis des missions ponctuelles"],
+            ["Rôle", "Design lead au lancement · Direction artistique · Motion design · Conception et coordination d'événements"],
+            ["Équipe", "Lead d'une équipe de designers " + todo("combien ?") + ", puis les équipes communication, projet et métiers du client"],
+            ["Outils", "Illustrator · Photoshop · After Effects · Premiere Pro · PowerPoint · SharePoint"]],
     deep: [
-      { label: "Contexte", h: "Plus de 100 000 collaborateurs à embarquer, et un changement qui inquiétait.",
-        p: ["Le groupe lançait un programme appelé à transformer en profondeur ses façons de travailler. Il ne suffisait pas de l'annoncer : il fallait que chacun le comprenne, s'y retrouve et ait envie d'y prendre part."] },
-      { label: "Le défi", h: "Parler à tout le monde, sans perdre personne.",
-        list: ["Rendre lisible un programme complexe", "Lever les réticences en donnant au programme un visage accessible", "Créer un univers assez solide pour que 4 designers le déclinent sur des dizaines de supports", "S'intégrer aux codes et aux circuits de validation d'un grand groupe"] },
-      { label: "Démarche", h: "Challenger l'existant, puis construire un système.",
-        steps: [["Auditer avant de dessiner", "J'ai commencé par analyser les supports existants : repérer leurs points faibles et la manière de les challenger. Cet audit a fixé le cap de la nouvelle direction artistique."],
-                ["Créer l'univers", "Une charte graphique et une mascotte. La mascotte avait un rôle précis : rendre les supports d'apprentissage ludiques et reconnaissables au premier coup d'œil."],
-                ["Décliner partout", "SharePoint, PowerPoint animé, slide decks, vidéo en motion design : la même identité, adaptée à chaque usage et produite avec mon équipe de 4 designers."],
-                ["Faire vivre", "Pour l'événement interne, j'ai assuré la conception et l'organisation en tant que cheffe de projet, et j'ai construit le fil rouge qui reliait chaque moment de la journée."]] },
-      { label: "Le système", h: "Une charte et une mascotte, pensées pour être déclinées.",
-        gallery: [{ todo: "Charte : palette, typographie, grille", w: 7 }, { todo: "La mascotte et ses déclinaisons", w: 5 }] },
-      { label: "Mener l'équipe", h: "Une direction, quatre designers, une seule voix.",
-        p: ["J'ai encadré une équipe de 4 designers : je fixais la direction artistique, je répartissais les productions et je veillais à la cohérence de chaque support, de la slide à la vidéo."] },
+      { label: "Contexte", h: "Plus de 3 000 utilisateurs, 150 outils, cinq métiers : une transformation d'abord humaine.",
+        p: ["Un grand groupe industriel international fait évoluer ses outils, ses méthodes de travail et la circulation des données entre ses métiers. Le programme C-NUM, pour Continuité Numérique, accompagne le déploiement d'une plateforme collaborative qui relie les équipes et les informations tout au long du cycle de vie des produits.",
+            "La transformation concerne plus de 3 000 utilisateurs, environ 150 outils et cinq domaines métiers : conception, fabrication, montage, qualité et services. Mais l'enjeu est d'abord humain : chacun doit comprendre ce qui change, se l'approprier et avoir envie d'y prendre part. La communication devait donc rendre le programme lisible, accessible et concret."] },
+      { label: "Le défi", h: "Simplifier sans dénaturer, fédérer sans uniformiser.",
+        list: ["<strong>Simplifier sans dénaturer</strong> : transformer des sujets industriels et numériques complexes en messages clairs, adaptés à des publics très différents.",
+               "<strong>Fédérer autour d'une direction commune</strong> : guider une équipe de designers au lancement et garantir la cohérence de toutes les productions.",
+               "<strong>Faire vivre l'univers sur de nombreux formats</strong> : adapter chaque contenu au message, au métier et au canal, sans perdre l'identité du programme.",
+               "<strong>Faire de la communication une expérience</strong> : imaginer des événements et des dispositifs participatifs qui rendent la transformation concrète et humaine."] },
+      { label: "Démarche", h: "Comprendre, incarner, expliquer, faire vivre.",
+        steps: [["Poser les bases et fédérer l'équipe", "Tout a commencé par un audit de l'existant et des interviews, pour identifier les bons axes de communication. En parallèle, j'ai pris le lead d'une équipe de designers pour structurer les premières productions et poser un langage visuel cohérent, capable d'accompagner le programme dans la durée."],
+                ["Donner un visage au programme", "Pour rendre la communication moins institutionnelle, nous avons créé des mascottes. Elles incarnent les messages, introduisent les informations et apportent une dimension humaine à des sujets très techniques. Elles sont devenues des repères de l'univers C-NUM, réutilisables sur tous les supports."],
+                ["Expliquer, animer, déployer", "Vidéos de présentation des métiers, glossaire animé des concepts techniques : le motion design rend les notions complexes plus simples et plus vivantes. En parallèle, l'univers se décline dans les newsletters, les affiches, les bannières et le site SharePoint. Chaque support répond à un besoin précis, avec des codes visuels communs."],
+                ["Imaginer et orchestrer les événements", "J'ai participé à la conception des événements de bout en bout : recherche d'idées, concepts, direction artistique, organisation et coordination des intervenants. Animations participatives, photobooth, scénographie : ces temps forts ont fait vivre C-NUM autrement, en créant des moments de rencontre et d'échange avec les collaborateurs."]] },
+      { label: "Le système", h: "Un univers visuel pensé pour vivre sur tous les supports.",
+        cards: [["Identité graphique", "Un langage commun : principes de composition, couleurs, typographies et éléments graphiques, pour que chaque communication soit reconnaissable."],
+                ["Motion design", "Des principes d'animation et de narration visuelle, pour les vidéos pédagogiques, les présentations métiers et les formats courts."],
+                ["Éditorial et digital", "Newsletters, affiches, bannières et site SharePoint : des supports imprimés et numériques qui parlent la même langue."],
+                ["Événementiel", "Des concepts, des dispositifs visuels et des animations qui prolongent l'univers dans des expériences physiques et collectives."]],
+        p: ["Quatre composantes complémentaires, qui forment un écosystème de communication cohérent, capable de s'adapter à des besoins et des contextes très différents."],
+        gallery: [{ todo: "Charte graphique et guide d'utilisation", w: 7 }, { todo: "Les mascottes et personnages", w: 5 }] },
     ],
     gallery: [
-      { src: "programme-sharepoint-portrait.webp", alt: "Page de l'espace SharePoint du programme", cap: "L'espace SharePoint", w: 7, ar: "862 / 492" },
+      { src: "programme-sharepoint-portrait.webp", alt: "Page du site SharePoint du programme", cap: "La refonte du site SharePoint", w: 7, ar: "862 / 492" },
       { src: "programme-tampon.webp", alt: "Tampon graphique du programme", cap: "Le tampon, signature du programme", w: 5, ar: "4 / 3", contain: true },
-      { todo: "Supports d'apprentissage", w: 4 }, { todo: "Extrait de la vidéo motion", w: 4 }, { todo: "Photo de l'événement", w: 4 },
+      { todo: "Vidéo métier ou glossaire animé", w: 8, ar: "16 / 9" }, { todo: "Newsletter C-News", w: 4, ar: "3 / 4" },
+      { todo: "Affiches et bannières", w: 4 }, { todo: "Événement : photobooth, scénographie", w: 8, ar: "16 / 9" },
     ],
-    produced: ["Une identité complète : charte et mascotte", "Des supports d'apprentissage ludiques", "Un espace SharePoint dédié au programme", "Une vidéo en motion design, des PowerPoint animés et des slide decks", "Un événement interne, de la conception au fil rouge"],
-    proud: { h: "Faire d'un programme redouté un projet qu'on comprend, et qui donne envie.",
-      p: ["Au départ, le programme suscitait des réticences en interne. Ma plus grande fierté, c'est d'avoir contribué à le rendre clair et désirable.", "Et de l'avoir fait de l'intérieur : très vite, je ne faisais plus qu'une équipe avec les équipes du groupe. Participer à un programme qui va profondément changer l'entreprise, c'est le genre de projet qui donne tout son sens à mon métier."] },
-    learned: todo("1 ou 2 phrases, par exemple ce que ce projet t'a appris sur l'accompagnement du changement (optionnel)"),
+    after: [
+      { label: "Livrables", h: "Tout ce que le programme a produit.",
+        list: ["Univers graphique et déclinaisons de l'identité", "Charte graphique, guide d'utilisation et guide d'adoption", "Mascottes et personnages illustrés", "Vidéos métiers et animations pédagogiques", "Glossaire animé des concepts techniques", "Newsletters C-News", "Affiches, bannières et supports imprimés", "Refonte du site SharePoint du programme", "Concepts, identités et supports visuels des événements", "Animations participatives, photobooth et contenus vidéo", "Éléments de scénographie et de signalétique"] },
+      { label: "En chiffres", h: "L'envergure du programme.",
+        stats: [["3 000+", "utilisateurs concernés"], ["~150", "outils dans l'écosystème"], ["5", "domaines métiers"], ["2 ans", "d'accompagnement"]],
+        note: "Ces chiffres décrivent l'envergure du programme, pas un résultat attribuable à la seule communication." },
+    ],
+    proud: { h: "Comprendre les métiers de l'intérieur, pour mieux raconter leur transformation.",
+      p: ["Ma plus grande fierté, c'est d'avoir fait vivre un univers créatif complet : du pilotage d'une équipe de designers jusqu'à la conception de contenus et d'expériences événementielles.",
+          "Et de l'avoir fait au plus près des équipes. En m'intégrant à elles, j'ai compris leurs problématiques de l'intérieur, et j'ai pu proposer des exemples qui leur parlent vraiment."] },
+    learned: { h: "Comprendre, raconter, puis donner forme.", p: "C-NUM résume bien ma façon de travailler : comprendre un sujet, trouver comment le raconter, puis imaginer toutes les formes qu'il peut prendre. Il m'a aussi permis de conjuguer création, leadership et coordination, de la conception graphique jusqu'aux expériences collectives." },
     confidential: true },
 
   { id: "kaizo", n: "02", name: "Kaizo",
@@ -332,12 +356,15 @@ const section = (s, deep) => `
       <h2>${s.h}</h2>
       ${(s.p || []).map(t => `<p class="lead">${t}</p>`).join("")}
       ${s.list ? `<ul class="bul">${s.list.map(t => `<li>${t}</li>`).join("")}</ul>` : ""}
+      ${s.cards ? `<div class="steps">${s.cards.map(([h, t]) => `<div class="step"><h3>${h}</h3><p>${t}</p></div>`).join("")}</div>` : ""}
+      ${s.stats ? `<div class="stats">${s.stats.map(([n, t]) => `<div><b>${n}</b><span>${t}</span></div>`).join("")}</div>` : ""}
+      ${s.note ? `<p class="note">${s.note}</p>` : ""}
       ${s.steps ? `<div class="steps">${s.steps.map(([h, t], i) => `<div class="step"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${h}</h3><p>${t}</p></div>`).join("")}</div>` : ""}
     </div>
     ${s.gallery ? gallery(s.gallery) : ""}
   </section>`;
 
-const year = p => { const f = p.fiche.find(([k]) => k === "Année"); return f && !/todo/.test(f[1]) ? f[1] : ""; };
+const year = p => { const f = p.fiche.find(([k]) => /^Année/.test(k)); return f && !/todo/.test(f[1]) ? f[1] : ""; };
 function render(id) {
   const list = PROJETS, i = Math.max(0, list.findIndex(p => p.id === id)), p = list[i], nx = list[(i + 1) % list.length];
   document.title = `${p.name}, Julie Ramier`;
@@ -368,6 +395,7 @@ function render(id) {
     ${gallery(p.gallery)}
   </section>
 
+  ${(p.after || []).map(x => section(x, true)).join("")}
   ${p.produced ? section({ label: "Ce que le projet a produit", h: "Une identité, et tout ce qui la fait vivre.", list: p.produced }, true) : ""}
 
   <section class="c proud" aria-label="Ce dont je suis le plus fière">
@@ -378,7 +406,7 @@ function render(id) {
     </div>
   </section>
 
-  ${p.learned ? section({ label: "Ce que j'en retiens", h: "Avec le recul.", p: [p.learned] }, true) : ""}
+  ${p.learned ? section({ label: "Ce que j'en retiens", h: p.learned.h || "Avec le recul.", p: [p.learned.p || p.learned] }, true) : ""}
 
   <section class="c sec" id="invite" aria-label="Lecture en profondeur">
     <div class="s-body" style="grid-column:4/13"><button class="more" type="button" id="go-deep">Envie de voir comment j'ai travaillé ? Passer en lecture en profondeur <span aria-hidden="true">↓</span></button></div>
