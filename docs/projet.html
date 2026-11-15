@@ -161,6 +161,36 @@ button { font: inherit; color: inherit; }
 .gallery .todo-fr { border: 1px dashed #4a4844; background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.015) 14px 28px); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--haze); font-size: 14px; }
 
 /* Ce dont je suis le plus fière */
+/* Focus charte */
+.focus .s-body { gap: 28px; }
+.focus .slabel { color: var(--blush); }
+.flow { display: grid; gap: 16px; padding-top: 8px; }
+.flow .from { font-family: var(--f-display); font-weight: 300; font-size: clamp(20px, 1.8vw, 26px); letter-spacing: -.02em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font-size: 14px; border: 1px solid var(--rule); border-radius: 999px; padding: 7px 14px; color: var(--bone); }
+.chips span:first-child { background: var(--blush); border-color: var(--blush); color: var(--night); }
+.flow a { justify-self: start; font-size: 14px; color: var(--haze); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 5px; }
+.flow a:hover { color: var(--chalk); text-decoration-color: var(--blush); }
+
+/* Process vidéo (étapes cliquables) */
+.proc { grid-column: 4 / 13; display: grid; gap: 24px; margin-top: clamp(32px, 4vw, 48px); }
+.steps-nav { display: grid; grid-template-columns: repeat(var(--k), minmax(0, 1fr)); position: relative; list-style: none; margin: 0; padding: 0; }
+.steps-nav::before { content: ""; position: absolute; left: 0; right: 0; top: 17px; height: 1px; background: var(--rule); }
+.steps-nav button { position: relative; display: grid; justify-items: start; gap: 10px; background: none; border: 0; padding: 0 8px 0 0; cursor: pointer; text-align: left; color: var(--haze); font-size: 13px; line-height: 1.3; }
+.steps-nav .dot { width: 35px; height: 35px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--rule); background: var(--night); font-family: var(--f-display); font-size: 14px; font-variant-numeric: tabular-nums; transition: background .3s, color .3s, border-color .3s; }
+.steps-nav button[aria-selected="true"] { color: var(--chalk); }
+.steps-nav button[aria-selected="true"] .dot { background: var(--chalk); color: var(--night); border-color: var(--chalk); }
+.steps-nav button:hover .dot { border-color: var(--blush); }
+.panel { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: start; }
+.panel .vis { border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--slate); }
+.panel .vis img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.panel .vis.todo-tile { border: 1px dashed #4a4844; background: none; display: grid; place-items: center; align-content: center; gap: 8px; color: var(--haze); font-size: 14px; text-align: center; padding: 16px; }
+.panel .txt { display: grid; gap: 14px; align-content: start; }
+.panel h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; line-height: 1.1; }
+.panel .who { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; color: var(--bone); border-top: 1px solid var(--rule); padding-top: 14px; }
+.panel .who b { font-weight: 500; color: var(--haze); font-size: 13px; }
+.panel .who .me { color: var(--chalk); }
+.panel.enter { animation: rise .6s var(--out) both; }
 .proud { margin-top: var(--section); padding-block: clamp(56px, 7vw, 112px); border-radius: 24px; background: radial-gradient(80% 120% at 85% 0%, rgba(231,185,182,.16), transparent 60%), var(--slate); }
 .proud .s-label { grid-column: 2 / 4; }
 .proud .s-body { grid-column: 4 / 12; }
@@ -218,6 +248,7 @@ button { font: inherit; color: inherit; }
   .nav .brand { grid-column: 1 / -1; }
   .p-label, .p-title, .sec .s-label, .sec .s-body, .proud .s-label, .proud .s-body, .end .s-body { grid-column: 1 / -1; }
   .proud { padding-inline: 20px; }
+  .proc { grid-column: 1 / -1; } .panel { grid-template-columns: minmax(0, 1fr); } .steps-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; } .steps-nav::before { display: none; }
   .sec .s-label, .proud .s-label { padding: 0 0 16px; }
   .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
   .steps { grid-template-columns: minmax(0, 1fr); }
@@ -278,10 +309,17 @@ const PROJETS = [
                 ["Éditorial et digital", "Newsletters, affiches, bannières et site SharePoint : des supports imprimés et numériques qui parlent la même langue."],
                 ["Événementiel", "Des concepts, des dispositifs visuels et des animations qui prolongent l'univers dans des expériences physiques et collectives."]],
         p: ["Quatre composantes complémentaires, qui forment un écosystème de communication cohérent, capable de s'adapter à des besoins et des contextes très différents."],
-        planche: true, cols: 2,
-        gallery: [{ src: "cnum-palette.webp", alt: "Palette C-NUM : un orange signature et une couleur par domaine métier", cap: "La palette : un orange signature, et une couleur par domaine métier", w: 12, ar: "1580 / 480", light: true },
-                  { src: "cnum-personnages.webp", alt: "Les dix mascottes C-NUM, de Mme Pédagogue à M. Prudent", cap: "Les personnages : dix mascottes, dix façons d'aborder le changement", w: 12, ar: "1600 / 680", light: true }] },
+      },
     ],
+    focus: { label: "Focus : la charte", h: "Une charte au cœur du programme, déclinée partout.",
+      p: ["Tout part de la charte graphique. Un C ouvert, une couleur par domaine métier, des formes simples et une famille de personnages : un langage assez solide pour garantir la cohérence, et assez souple pour que chaque équipe puisse s'en servir.",
+          "Pour qu'elle vive au-delà de l'équipe design, je l'ai accompagnée d'un guide d'utilisation et d'un guide d'adoption. " + todo("à ajuster avec le document de charte")],
+      items: [{ src: "cnum-palette.webp", alt: "Palette C-NUM : un orange signature et une couleur par domaine métier", cap: "La palette : un orange signature, et une couleur par domaine métier", ar: "1580 / 480", light: true },
+              { src: "cnum-personnages.webp", alt: "Les dix mascottes C-NUM", cap: "Les personnages : dix mascottes, dix façons d'aborder le changement", ar: "1600 / 680", light: true },
+              { todo: "Le C et ses règles d'usage (extrait de la charte)", ar: "16 / 9" },
+              { todo: "Guide d'utilisation et guide d'adoption (extraits)", ar: "16 / 9" }],
+      flowTitle: "Une charte, et toutes ses déclinaisons :",
+      flow: ["La charte", "Film motion", "Glossaire animé", "Signalétique", "Cartes rôle", "Jeu de plateau", "Newsletters", "SharePoint", "Goodies", "Événements"] },
     film: { video: "cnum-intro.mp4", poster: "cnum-intro-poster.webp", cap: "Le film d'introduction du programme" },
     planche: true,
     gallery: [
@@ -342,8 +380,17 @@ const PROJETS = [
     fiche: [["Année", todo("année")], ["Rôle", todo("ton rôle")], ["Outils", todo("outils d'IA utilisés")], ["Livrables", "Vidéo d'onboarding"]],
     deep: [
       { label: "Contexte", h: "Accueillir les nouveaux arrivants, en vidéo.", p: [todo("le contexte, le public, la durée de la vidéo")] },
-      { label: "Démarche", h: "Ce que fait l'IA, ce que fait la designer.", p: [todo("script, storyboard, génération, montage, motion : qui fait quoi")] },
     ],
+    process: { label: "Fabrication", h: "De l'idée au film, en six étapes.",
+      p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer. " + todo("à valider : l'ordre et le contenu des étapes")],
+      steps: [
+        { t: "Script", d: "Écrire ce que la vidéo doit faire comprendre, scène par scène, et le ton juste pour les nouveaux arrivants.", ia: "Propose des pistes et des variantes de formulation.", moi: "Je fixe le message, le rythme et je tranche.", todo: "Extrait du script" },
+        { t: "Casting des personnages", d: "Définir les personnages avant tout le reste, pour qu'ils restent les mêmes d'une image à l'autre.", ia: "Génère des propositions de visages, de styles et de tenues.", moi: "Je choisis, je fixe une fiche par personnage et je garde la cohérence.", todo: "Planche de casting des personnages" },
+        { t: "Génération des images", d: "Produire les décors et les plans clés, dans une direction artistique commune.", ia: "Génère les images à partir de mes consignes.", moi: "Je dirige le style, je sélectionne et je retouche.", todo: "Sélection d'images générées" },
+        { t: "Storyboard", d: "Assembler les images en séquence pour valider le récit avant d'animer.", ia: "Comble les plans manquants.", moi: "Je construis le découpage et le fais valider.", todo: "Storyboard" },
+        { t: "Animation", d: "Donner du mouvement aux plans validés.", ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", todo: "Extrait animé" },
+        { t: "Montage final", d: "Monter, rythmer, ajouter la musique, la voix et les titres.", ia: "Aide sur la voix ou la musique, si besoin.", moi: "Je monte, je rythme et je livre le film.", src: "onboarding-video.webp", alt: "Image extraite de la vidéo finale" },
+      ] },
     gallery: [{ src: "onboarding-video.webp", alt: "Image extraite de la vidéo", cap: "Image extraite de la vidéo", w: 12, ar: "1200 / 679" }, { todo: "La vidéo elle-même, ou un extrait", w: 6 }, { todo: "Storyboard", w: 6 }],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
 
@@ -405,6 +452,30 @@ const tile = g => {
 };
 const planche = (list, cls = "") => `<div class="planche ${cls}">${list.map(tile).join("")}</div>`;
 const film = g => `<figure class="film"><div class="fr vid"><video src="${A}${g.video}" poster="${A}${g.poster}" muted autoplay loop playsinline preload="metadata" aria-label="${g.cap}"></video><button class="snd" type="button" aria-pressed="false">Activer le son</button></div><figcaption>${g.cap}</figcaption></figure>`;
+const focus = f => `
+  <section class="c sec focus" aria-label="${f.label}">
+    <div class="s-label"><span class="slabel">${f.label}</span></div>
+    <div class="s-body">
+      <h2>${f.h}</h2>
+      ${f.p.map(t => `<p class="lead">${t}</p>`).join("")}
+    </div>
+    ${planche(f.items, "two")}
+    <div class="s-body flow" style="grid-column:4/13">
+      <span class="from">${f.flowTitle}</span>
+      <div class="chips">${f.flow.map(t => `<span>${t}</span>`).join("")}</div>
+      <a href="#realisations" data-scroll>Voir les déclinaisons ↓</a>
+    </div>
+  </section>`;
+const proc = f => `
+  <section class="c sec" aria-label="${f.label}">
+    <div class="s-label"><span class="slabel">${f.label}</span></div>
+    <div class="s-body"><h2>${f.h}</h2>${f.p.map(t => `<p class="lead">${t}</p>`).join("")}</div>
+    <div class="proc" data-proc>
+      <div class="steps-nav" role="tablist" aria-label="Étapes de fabrication" style="--k:${f.steps.length}">${f.steps.map((st, i) => `<button type="button" role="tab" id="pt-${i}" aria-controls="pp" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}" data-i="${i}"><span class="dot">${String(i + 1).padStart(2, "0")}</span>${st.t}</button>`).join("")}</div>
+      <div class="panel" id="pp" role="tabpanel" aria-labelledby="pt-0"></div>
+    </div>
+  </section>`;
+let PROC = null;
 const gallery = list => `<div class="gallery">${list.map(g => `<figure class="w${g.w || 12}">${fr(g)}${g.cap ? `<figcaption>${g.cap}</figcaption>` : ""}</figure>`).join("")}</div>`;
 const section = (s, deep) => `
   <section class="c sec${deep ? " deep" : ""}"${deep ? " data-deep" : ""} aria-label="${s.label}">
@@ -424,9 +495,10 @@ const section = (s, deep) => `
 const year = p => { const f = p.fiche.find(([k]) => /^Année/.test(k)); return f && !/todo/.test(f[1]) ? f[1] : ""; };
 function render(id) {
   LB = [];
+  PROC = null;
   const list = PROJETS, i = Math.max(0, list.findIndex(p => p.id === id)), p = list[i], nx = list[(i + 1) % list.length];
   document.title = `${p.name}, Julie Ramier`;
-  const hv = p.hero;
+  const hv = p.hero; PROC = p.process || null;
   document.getElementById("page").innerHTML = `
   <header class="c p-head in">
     <a class="back" href="index.html#projets" data-home><span aria-hidden="true">←</span> Tous les projets</a>
@@ -447,7 +519,9 @@ function render(id) {
 
   ${p.deep.map(s => section(s, true)).join("")}
 
-  <section class="c sec" aria-label="Réalisations">
+  ${p.focus ? focus(p.focus) : ""}
+  ${p.process ? proc(p.process) : ""}
+  <section class="c sec" id="realisations" aria-label="Réalisations">
     <div class="s-label"><span class="slabel">Réalisations</span></div>
     <div class="s-body"><h2>Ce que j'ai livré.</h2></div>
     ${p.film ? film(p.film) : ""}
@@ -530,8 +604,27 @@ function wireVideos() {
     b.addEventListener("click", () => { v.muted = !v.muted; if (!v.muted) v.play(); b.setAttribute("aria-pressed", String(!v.muted)); b.textContent = v.muted ? "Activer le son" : "Couper le son"; });
   });
 }
+function wireProc() {
+  const box = document.querySelector("[data-proc]"); if (!box || !PROC) return;
+  const tabs = [...box.querySelectorAll('[role="tab"]')], panel = box.querySelector(".panel");
+  const show = (i, anim) => {
+    const st = PROC.steps[i];
+    tabs.forEach((b, k) => { b.setAttribute("aria-selected", String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+    panel.setAttribute("aria-labelledby", "pt-" + i);
+    panel.innerHTML = `${st.src ? `<div class="vis"><img src="${A}${st.src}" alt="${st.alt || st.t}"></div>` : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`}
+      <div class="txt"><h3>${st.t}</h3><p class="lead" style="font-size:16px">${st.d}</p>
+      <div class="who"><b>L'IA</b><span>${st.ia}</span><b>Moi</b><span class="me">${st.moi}</span></div></div>`;
+    panel.classList.remove("enter"); if (anim) { void panel.offsetWidth; panel.classList.add("enter"); }
+  };
+  tabs.forEach((b, i) => { b.addEventListener("click", () => show(i, true)); b.addEventListener("keydown", e => {
+    const k = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!k) return;
+    const j = (i + k + tabs.length) % tabs.length; tabs[j].focus(); show(j, true); }); });
+  show(0, false);
+}
 function wire() {
   wireVideos();
+  wireProc();
+  document.querySelectorAll("[data-scroll]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); document.getElementById("realisations").scrollIntoView({ behavior: "smooth" }); }));
   lightbox();
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode, true)));
   document.getElementById("go-deep").addEventListener("click", () => { const y = scrollY; setMode("profondeur", true); scrollTo({ top: y }); document.querySelector("[data-deep]")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
