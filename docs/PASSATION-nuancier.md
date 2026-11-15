@@ -10,7 +10,8 @@
 ## Prototype
 - Fichier : `docs/nuancier.html`, publié en artifact : https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ. Republier sur le même fichier pour garder le lien.
 - Parcours : 01 point de départ (Vos équipes / Vos clients) → 02 cinq curseurs + planche d'identité en direct → 03 portrait → 04 brief (envoi simulé) → 05 mode équipe + atelier de positionnement (sans prix).
-- Barre de test en haut : nom seulement (Le Nuancier / Curseurs / Réglages de marque).
+- Barre de test en haut : aperçu (**Planche** / **Moodboard**, version schématique : couleurs avec codes, duo typo, formes, position des 5 axes) et nom (Le Nuancier / Curseurs / Réglages de marque).
+- Section « Pourquoi ce jeu ? » après l'intro : texte de Julie sur l'atelier qui ouvre ses projets.
 - Transition : l'ancienne planche est figée dans un calque « fantôme » posé par-dessus, le nouveau profil s'installe dessous, puis le fantôme s'efface en « éclosion » : les anciennes formes se replient, les nouvelles s'ouvrent (fonctions `ghost()` et `morph()`). Désactivée si l'utilisateur a demandé moins d'animations.
 
 ## Décisions de Julie
@@ -23,11 +24,13 @@
 - Transition entre profils : **Éclosion** (Fondu et Vague écartés).
 - Entrées : **« Vos équipes » / « Vos clients »**.
 - **Cadrage pédagogique** : le Nuancier est un slider de personnalité ludique, pour comprendre l'impact de chaque axe. Ce n'est **pas une proposition graphique** : le graphisme vient ensuite, après l'étude du projet et une proposition commerciale. Avertissements placés dans l'intro (« À savoir »), sous le titre 02, au-dessus de la planche (« Aperçu pédagogique »), dans le portrait (« Un portrait, pas un logo ») et dans le brief (« Et après ? »).
-- Chaque curseur a une question simple et une ligne « Sur l'aperçu, ce curseur change… » ; sous la planche, un message en direct explique l'effet du dernier curseur bougé ou annonce le nouveau profil. Le milieu de chaque curseur est marqué.
+- Chaque curseur a une question simple (discrète, elle s'éclaire sur le curseur manipulé) ; sous la planche, un message en direct explique l'effet du dernier curseur bougé ou annonce le nouveau profil. Le milieu de chaque curseur est marqué.
 - Mention « Ma spécialité depuis 8 ans » retirée de l'entrée « Vos équipes ».
+- Profil 1 « Institution rassurante » retouché d'après la référence de Julie (papeterie minimaliste) : kraft, bordeaux, noir, blanc papier ; typo linéaire en capitales ; nouvelle famille de formes « épure » (lignes de cahier, étiquette, cercle, point).
 - Atelier affiché sans prix. Accès prévu : menu + section Contact du portfolio.
 
 ## Questions en attente (posées à Julie)
+0. Planche ou Moodboard (ou les deux, au choix de l'utilisateur) ?
 1. Quelles ambiances ne correspondent pas à son idée du profil ?
 2. Garder ou non les marques en exemple sous les curseurs ?
 3. Garder ou retirer le choix interne / externe (il ne change plus que les textes) ?

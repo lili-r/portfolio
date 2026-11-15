@@ -43,6 +43,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .intro .how { grid-column: 8 / 13; align-self: end; display: grid; gap: 12px; color: var(--haze); font-size: 15px; }
 .intro .how div { display: grid; grid-template-columns: 40px 1fr; border-top: 1px solid var(--rule); padding-top: 12px; }
 
+.why { padding-block: 0 clamp(72px, 8vw, 120px); }
+.why .lbl { grid-column: 1 / 4; font-size: 14px; font-weight: 400; color: var(--haze); padding-top: 10px; }
+.why p { grid-column: 4 / 13; font-family: var(--f-display); font-weight: 300; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.3; letter-spacing: -.02em; max-width: 40ch; }
 .step { padding-block: 0 clamp(80px, 9vw, 140px); }
 .step-head { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); border-top: 1px solid var(--rule); padding-top: 24px; margin-bottom: clamp(32px, 4vw, 56px); }
 .step-head .lbl { grid-column: 1 / 4; display: grid; gap: 4px; align-content: start; }
@@ -86,10 +89,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .slider .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -8px; pointer-events: none; }
 .slider .ticks i { width: 1px; height: 6px; background: var(--rule); }
 .slider .ticks i:nth-child(3) { height: 12px; margin-top: -3px; background: var(--haze); }
-.slider .ask { grid-column: 1 / -1; font-size: 15px; color: var(--chalk); }
-.slider .fx { grid-column: 1 / -1; font-size: 13px; color: var(--haze); transition: color .3s; }
-.slider .fx b { font-weight: 500; }
-.slider.live .fx { color: var(--chalk); }
+.slider .ask { grid-column: 1 / -1; font-size: 14px; color: var(--haze); transition: color .3s; }
+.slider.live .ask { color: var(--chalk); }
 
 /* Planche d'identité */
 .stage { position: sticky; top: calc(20px + env(safe-area-inset-top, 0px)); display: grid; gap: 10px; }
@@ -138,6 +139,30 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .pictos .g { width: 64%; aspect-ratio: 1; }
 .pictos figcaption { font-family: var(--f-t); font-size: clamp(9px, 1.85cqw, 12.5px); line-height: 1.25; }
 .recipe { font-size: 13px; color: var(--haze); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.mood { container-type: inline-size; aspect-ratio: 3 / 4.05; max-height: calc(100vh - 104px); border-radius: 16px; background: #E8E5DE; color: #1B1A18; padding: 3.4cqw; display: grid; gap: 2.4cqw; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr auto; font-family: var(--f-body); }
+.mood[hidden] { display: none; }
+.m-lbl { display: block; font-size: max(10px, 1.9cqw); letter-spacing: .08em; text-transform: uppercase; color: #77736b; margin-bottom: 1.8cqw; }
+.m-head { grid-column: 1 / -1; display: grid; gap: .8cqw; padding: .6cqw .4cqw 0; }
+.m-head strong { font-family: var(--f-display); font-weight: 400; font-size: 6.4cqw; letter-spacing: -.035em; line-height: 1; }
+.m-head span:last-child { font-size: max(11px, 2.4cqw); color: #55524c; }
+.m-card { background: #FBFAF7; border: 1px solid #D6D2C9; border-radius: 2cqw; padding: 2.6cqw; min-width: 0; min-height: 0; }
+.m-pal { grid-column: 1 / -1; }
+#m-pal { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.6cqw; }
+#m-pal div { display: grid; gap: 1cqw; font-size: max(9px, 1.7cqw); color: #55524c; }
+#m-pal i { aspect-ratio: 1; border-radius: 1.2cqw; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); transition: background .6s var(--ease); }
+#m-typo { display: grid; gap: 2.4cqw; }
+#m-typo div { display: grid; grid-template-columns: auto 1fr; align-items: baseline; column-gap: 2.4cqw; font-size: max(10px, 2cqw); color: #55524c; }
+#m-typo b { font-size: 11cqw; font-weight: 500; line-height: 1; color: #1B1A18; }
+#m-forms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4cqw; height: calc(100% - 4cqw); align-content: center; }
+#m-forms div { width: 13cqw; aspect-ratio: 1; justify-self: center; }
+.m-axes { grid-column: 1 / -1; }
+#m-axes { display: grid; gap: 1.6cqw; }
+#m-axes div { display: grid; grid-template-columns: 22% 1fr 22%; align-items: center; gap: 2cqw; font-size: max(10px, 2cqw); color: #77736b; }
+#m-axes div span:last-child { text-align: right; }
+#m-axes .on { color: #1B1A18; font-weight: 500; }
+#m-axes i { position: relative; height: 1px; background: #BDB8AE; }
+#m-axes i::before { content: ""; position: absolute; left: 50%; top: -4px; width: 1px; height: 9px; background: #BDB8AE; }
+#m-axes i::after { content: ""; position: absolute; left: var(--x); top: 50%; width: 2.2cqw; height: 2.2cqw; min-width: 9px; min-height: 9px; border-radius: 50%; background: #1B1A18; translate: -50% -50%; transition: left .3s var(--ease); }
 .stamp { justify-self: start; font-size: 12px; color: var(--chalk); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px; }
 .impact { font-size: 14px; color: var(--haze); min-height: 2.6em; line-height: 1.35; }
 .impact b { color: var(--chalk); font-weight: 500; }
@@ -208,7 +233,7 @@ textarea.field { resize: vertical; min-height: 84px; }
 .switch button[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
 
 @media (max-width: 960px) {
-  .intro h1, .intro .lead, .intro .notice, .step-head .sub, .intro .how, .starts, .portrait, .brief, .team, .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
+  .why .lbl, .why p, .intro h1, .intro .lead, .intro .notice, .step-head .sub, .intro .how, .starts, .portrait, .brief, .team, .step-head .lbl, .step-head h2 { grid-column: 1 / -1; }
   .intro .how { margin-top: 36px; }
   .step-head { row-gap: 10px; }
   .workbench { grid-template-columns: minmax(0, 1fr); }
@@ -218,7 +243,8 @@ textarea.field { resize: vertical; min-height: 84px; }
   .hero { aspect-ratio: 16 / 8; }
   .band { height: 8cqw; }
   .pills { height: 11cqw; }
-  .mono, .wide, .typo, .pictos, .recipe, .prof-desc { display: none; }
+  .mono, .wide, .typo, .pictos, .recipe, .prof-desc, .m-typo, .m-forms { display: none; }
+  .mood { aspect-ratio: auto; max-height: none; grid-template-rows: auto; }
   .team { grid-template-columns: minmax(0, 1fr); }
   .nav ul { display: none; }
 }
@@ -238,6 +264,8 @@ textarea.field { resize: vertical; min-height: 84px; }
 </style>
 
 <nav class="switch" aria-label="Variantes à tester">
+  <div class="grp" id="sw-view"><span>Aperçu</span>
+    <button type="button" data-v="board" aria-pressed="true">Planche</button><button type="button" data-v="mood" aria-pressed="false">Moodboard</button></div>
   <div class="grp" id="sw-name"><span>Nom</span>
     <button type="button" data-n="Le Nuancier" aria-pressed="true">Le Nuancier</button><button type="button" data-n="Curseurs" aria-pressed="false">Curseurs</button><button type="button" data-n="Réglages de marque" aria-pressed="false">Réglages de marque</button></div>
 </nav>
@@ -259,6 +287,11 @@ textarea.field { resize: vertical; min-height: 84px; }
     <div><span class="num">04</span><span>Envoyez votre brief</span></div>
   </div>
 </header>
+
+<section class="c why" aria-labelledby="why-t">
+  <h2 class="lbl" id="why-t">Pourquoi ce jeu ?</h2>
+  <p>J'aime commencer mes projets par un atelier, et cet exercice en fait toujours partie. Il donne de belles pistes pour démarrer, une direction claire pour la suite de la collaboration, et il révèle l'état d'esprit du projet. Les participants l'apprécient : il permet de prendre de la hauteur et de mettre d'accord toutes les parties prenantes. Je vous le propose ici en libre-service.</p>
+</section>
 
 <main>
   <section class="c step" aria-labelledby="h1s">
@@ -307,6 +340,13 @@ textarea.field { resize: vertical; min-height: 84px; }
             <div class="tile typo"><div><b id="aa-d">Aa</b><span id="fn-d"></span></div><div><b id="aa-t">Aa</b><span id="fn-t"></span></div></div>
             <div class="tile pictos" id="pictos"></div>
           </div>
+        </div>
+        <div class="mood" id="mood" aria-hidden="true" hidden>
+          <div class="m-head"><span class="m-lbl">Moodboard</span><strong id="m-name"></strong><span id="m-desc"></span></div>
+          <div class="m-card m-pal"><span class="m-lbl">Couleurs</span><div id="m-pal"></div></div>
+          <div class="m-card m-typo"><span class="m-lbl">Typographies</span><div id="m-typo"></div></div>
+          <div class="m-card m-forms"><span class="m-lbl">Formes</span><div id="m-forms"></div></div>
+          <div class="m-card m-axes"><span class="m-lbl">Personnalité</span><div id="m-axes"></div></div>
         </div>
         <p class="impact" id="impact" aria-live="polite">Bougez un curseur pour voir ce qu'il change.</p>
       </aside>
@@ -403,7 +443,7 @@ const SL = [
    f : police de titre, t : police de texte, m : famille de formes, cs : casse du nom */
 const S = "serif", G = "sans";
 const PROFILS = [
-  [1, "Institution rassurante", "Identité stable, claire et familière, privilégiant la simplicité et les codes établis.", ["#ECE5D8","#F6F1E8","#2B2824","#F6F1E8","#8E2F2B","#CBBFA8","#6A645B","#E4D9C6"], "Fraunces", "Inter", "grille", "none", S],
+  [1, "Institution rassurante", "Identité stable, claire et familière, privilégiant la simplicité et les codes établis.", ["#EFEBE3","#FBFAF7","#161616","#FBFAF7","#C8AD84","#7F0019","#161616","#E6DAC5"], "Inter Tight", "Inter", "epure", "caps", G, { w: 600 }],
   [2, "Tradition réinventée", "Héritage reconnaissable revisité par des cadrages et traitements créatifs.", ["#E7E1D5","#F4EFE6","#1D2740","#F4EFE6","#2C3E66","#B8322A","#8EA3C2","#D9CBB0"], "DM Serif Display", "Inter", "trait", "none", S],
   [3, "Excellence institutionnelle", "Prestige, précision et héritage ; le savoir-faire parle de lui-même.", ["#141A2C","#1D2540","#0E1322","#EEE7D7","#1D2540","#C9A96A","#3A4566","#EEE7D7"], "Cormorant Garamond", "Inter", "arche", "caps", S],
   [4, "Avant-garde confidentielle", "Minimalisme codifié et détournement subtil des conventions du luxe.", ["#EFEDE8","#FAF9F6","#161616","#FAF9F6","#161616","#D8D5CE","#8D8A84","#FFFFFF"], "Instrument Serif", "Inter", "points", "caps", S],
@@ -466,6 +506,10 @@ const MOTIFS = {
     `<path class="sa" stroke-width="12" stroke-linecap="round" d="M14 84L40 16M66 84L92 16"/><path class="sb" stroke-width="12" stroke-linecap="round" d="M40 84L66 16"/>`,
     `<path class="ga" d="M4 52A40 40 0 0 1 84 52Z"/><path class="gb" d="M16 52A40 40 0 0 0 96 52Z"/>`,
     `<path class="sa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" d="M8 68L29 32L50 68L71 32L92 68"/>`],
+  epure: [`<path class="sa" stroke-width="4" d="M12 30H88M12 50H88M12 70H88"/>`,
+    `<rect class="ga" x="16" y="30" width="68" height="40"/><path class="sb" stroke-width="4" d="M28 50H60"/>`,
+    `<circle class="sa" stroke-width="4" cx="50" cy="50" r="34"/>`,
+    `<circle class="ga" cx="50" cy="50" r="16"/>`],
   points: [`<g class="ga"><circle cx="30" cy="30" r="11"/><circle cx="70" cy="30" r="11"/><circle cx="30" cy="70" r="11"/><circle cx="70" cy="70" r="11"/></g>`,
     `<g class="ga">${[0,1,2,3,4].map(y => [0,1,2,3,4].filter(x => (x + y) % 2 === 0).map(x => `<circle cx="${14 + x * 18}" cy="${14 + y * 18}" r="6"/>`).join("")).join("")}</g>`,
     `<circle class="sa" stroke-width="3" cx="50" cy="50" r="40"/><circle class="gb" cx="50" cy="50" r="9"/>`,
@@ -482,13 +526,12 @@ const V = Object.fromEntries(SL.map(s => [s[0], s[5]]));
 /* Curseurs */
 const controls = $("controls");
 const wrap = document.createElement("div");
-wrap.innerHTML = SL.map(([id, l, r, el, er, , , ask, fx]) => `
+wrap.innerHTML = SL.map(([id, l, r, el, er, , , ask]) => `
   <div class="slider" id="${id}-box">
     <p class="ask" id="${id}-ask">${ask}</p>
     <span class="l" id="${id}-l">${l}<small>ex. ${el}</small></span><span class="r" id="${id}-r">${r}<small>ex. ${er}</small></span>
     <input type="range" id="${id}" min="0" max="100" value="${V[id]}" aria-label="${l} ou ${r}" aria-describedby="${id}-ask">
     <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <p class="fx">Sur l'aperçu, ce curseur change ${fx}.</p>
   </div>`).join("");
 controls.append(wrap);
 let moved = "";
@@ -522,7 +565,22 @@ function buildChips() {
 
 /* ───────── Planche ───────── */
 const board = $("board"), hero = $("hero"), decos = [...hero.querySelectorAll(".deco")];
-let lastN = 0;
+let lastN = 0, view = "board";
+document.querySelectorAll("#sw-view button").forEach(b => b.addEventListener("click", () => {
+  view = b.dataset.v; document.querySelectorAll("#sw-view button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  board.hidden = view !== "board"; $("mood").hidden = view !== "mood"; }));
+
+/* Moodboard : la même personnalité, en version schématique */
+function mood(pname, desc, cols, stack, text, G, changed) {
+  $("m-name").textContent = pname; $("m-desc").textContent = desc;
+  $("m-pal").innerHTML = cols.map(c => `<div><i style="background:${c}"></i>${c.toUpperCase()}</div>`).join("");
+  $("m-typo").innerHTML = `<div><b style="font-family:${stack.replace(/"/g, "'")}">Aa</b><span>Titres<br>${stack.split(",")[0].replace(/"/g, "")}</span></div>`
+    + `<div><b style="font-family:'${text}', sans-serif">Aa</b><span>Textes<br>${text}</span></div>`;
+  if (changed) $("m-forms").innerHTML = G.map(g => `<div style="--a:#1B1A18;--b:#9C978D;--d:#FBFAF7">${svg(g)}</div>`).join("");
+  $("m-axes").innerHTML = SL.map(([id, l, r]) => `<div><span class="${V[id] < 50 ? "on" : ""}">${l}</span><i style="--x:${V[id]}%"></i><span class="${V[id] >= 50 ? "on" : ""}">${r}</span></div>`).join("");
+  if (changed && lastN && !reduce && view === "mood")
+    $("mood").querySelectorAll(".m-card").forEach((c, i) => c.animate([{ opacity: 0, translate: "0 1.2cqw" }, { opacity: 1, translate: "0 0" }], { duration: 600, delay: i * 70, easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards" }));
+}
 
 /* Transition entre deux profils : on fige l'ancienne planche dans un calque « fantôme »
    posé par-dessus, on applique le nouveau profil dessous, puis le fantôme s'efface en douceur. */
@@ -635,6 +693,7 @@ function update() {
   $("prof-name").textContent = pname;
   $("prof-desc").textContent = desc;
   if (gh) morph(gh);
+  { const seen = new Set(); mood(pname, desc, [light, c1, c2, c3, c4, dark].filter(c => !seen.has(c) && seen.add(c)), stack, text, G, changed); }
   if (moved) {
     const [, l, r, , , , , , fx] = SL.find(x => x[0] === moved), side = V[moved] >= 50 ? r : l;
     $("impact").innerHTML = changed
