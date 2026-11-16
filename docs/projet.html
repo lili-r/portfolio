@@ -632,8 +632,8 @@ function render(id) {
   ${(p.after || []).map(x => section(x, true)).join("")}
   ${p.produced ? section({ label: "Ce que le projet a produit", h: "Une identité, et tout ce qui la fait vivre.", list: p.produced }, true) : ""}
 
-  <section class="c proud" aria-label="La fierté du projet">
-    <div class="s-label"><span class="slabel">La fierté du projet</span></div>
+  <section class="c proud" aria-label="Ce dont je suis le plus fière">
+    <div class="s-label"><span class="slabel">Ce dont je suis le plus fière</span></div>
     <div class="s-body" style="display:grid;gap:24px">
       <h2>${p.proud.h}</h2>
       ${p.proud.p.map(t => `<p class="lead">${t}</p>`).join("")}
@@ -649,8 +649,8 @@ function render(id) {
   <section class="c end" aria-labelledby="h-end">
     <div class="s-body">
       ${p.confidential ? `<p class="note">Certains éléments ont été modifiés pour des raisons de confidentialité.</p>` : ""}
-      <h2 id="h-end">Un projet similaire en tête&nbsp;?</h2>
-      <div class="row"><a class="cta solid mag" href="index.html#contact" data-home id="end-cta"><span class="lbl">Prendre contact <span aria-hidden="true">→</span></span></a><a class="cta" href="index.html#projets" data-home>Tous les projets</a></div>
+      <h2 id="h-end">Un projet similaire&nbsp;? Parlons-en.</h2>
+      <div class="row"><a class="cta solid mag" href="index.html#contact" data-home id="end-cta"><span class="lbl">Écrivez-moi <span aria-hidden="true">→</span></span></a><a class="cta" href="index.html#projets" data-home>Tous les projets</a></div>
     </div>
     <a class="next" href="#${nx.id}" aria-label="Projet suivant : ${nx.name}, ${nx.title}">
       <div class="top"><b>Projet suivant</b><span class="count">${nx.n} / ${String(list.length).padStart(2, "0")}</span></div>

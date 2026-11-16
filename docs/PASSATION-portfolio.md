@@ -22,7 +22,9 @@
 - Orbit = projet fictif : ne jamais le présenter comme un projet client.
 - Business de templates de mariage (GIF « opening-door » attendu, jamais reçu) : rester discret.
 - Pas d'écriture inclusive. Ton chaleureux, design, structuré, « sympa mais pro ».
-- **Forme neutre, pas de « je »** (choix de Julie, 16/11) : tournures impersonnelles ou nominales. CTA « Prendre contact ». Label « La fierté du projet ».
+- **Dosage du « je »** (choix de Julie, 16/11) : un mélange. Trop de « je » fait narcissique, pas du tout fait froid.
+  - Forme neutre pour les descriptions (accroche, à propos, résumés, démarches) : « Des univers visuels conçus pour se décliner sur… », « Huit ans de design en cabinet de conseil… ».
+  - « Je » pour les moments personnels : CTA « Écrivez-moi » / « Parlons de votre projet », label « Ce dont je suis le plus fière », « Un projet similaire ? Parlons-en. ».
 - Règle visuels clients : design seul, aucun vrai texte, aucun visage de collaborateur, jamais le nom/logo du groupe (voir `docs/validation-com.md`).
 - Méthode de Julie : tester d'abord, figer les règles ensuite (`docs/da.md` reste à écrire).
 - Commits au nom de Julie Ramier, poussés sur `main` à chaque étape.
