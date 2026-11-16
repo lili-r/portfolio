@@ -194,6 +194,17 @@ button { font: inherit; color: inherit; }
 .play:hover { background: var(--blush); border-color: var(--blush); }
 .play svg { width: 12px; height: 12px; }
 .panel .vis video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+.proc { list-style: none; padding: 0; counter-reset: none; }
+.pstep { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--gap); align-items: start; border-top: 1px solid var(--rule); padding-top: 24px; }
+.pstep + .pstep { margin-top: clamp(28px, 3.5vw, 48px); }
+.ptxt { display: grid; gap: 10px; align-content: start; }
+.ptxt .n { font-family: var(--f-display); font-weight: 300; font-size: 22px; color: var(--haze); font-variant-numeric: tabular-nums; }
+.ptxt h3 { font-size: clamp(22px, 2vw, 28px); letter-spacing: -.03em; line-height: 1.15; }
+.ptxt p { color: var(--bone); max-width: 42ch; }
+.pstep .vis { border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--slate); }
+.pstep .vis img, .pstep .vis video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pstep .vis.todo-tile { border: 1px dashed #4a4844; background: none; display: grid; place-items: center; align-content: center; gap: 8px; color: var(--haze); font-size: 14px; text-align: center; padding: 16px; }
+.pstep .vis.script { aspect-ratio: auto; max-height: 420px; overflow: auto; background: #f3f0e8; color: #1d1c1a; padding: clamp(20px, 3vw, 32px); font-family: "Courier Prime", "Courier New", Courier, monospace; font-size: 14px; line-height: 1.55; display: grid; gap: 12px; align-content: start; }
 .panel .txt { display: grid; gap: 14px; align-content: start; }
 .panel h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; line-height: 1.1; }
 .panel .who { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; color: var(--bone); border-top: 1px solid var(--rule); padding-top: 14px; }
@@ -257,7 +268,7 @@ button { font: inherit; color: inherit; }
   .nav .brand { grid-column: 1 / -1; }
   .p-label, .p-title, .sec .s-label, .sec .s-body, .proud .s-label, .proud .s-body, .end .s-body { grid-column: 1 / -1; }
   .proud { padding-inline: 20px; }
-  .proc { grid-column: 1 / -1; } .panel { grid-template-columns: minmax(0, 1fr); } .steps-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; } .steps-nav::before { display: none; }
+  .proc { grid-column: 1 / -1; } .pstep { grid-template-columns: minmax(0, 1fr); } .panel { grid-template-columns: minmax(0, 1fr); } .steps-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; } .steps-nav::before { display: none; }
   .sec .s-label, .proud .s-label { padding: 0 0 16px; }
   .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
   .steps { grid-template-columns: minmax(0, 1fr); }
@@ -383,15 +394,15 @@ const PROJETS = [
 
   { id: "onboarding", n: "03", name: "Onboarding en IA",
     disc: "Motion · Vidéo · IA générative",
-    title: "Un thriller de bureau pour parler de données",
-    sum: "Un faux thriller, avec téléphone jaune, alerte générale et compte à rebours, pour faire passer les bonnes pratiques de Data Management sans faire un cours. Tout est généré par IA, de l'image au son, et chaque choix reste un choix de designer. " + todo("pour qui, dans quel cadre"),
+    title: "Un thriller pour sensibiliser aux données",
+    sum: "Un thriller de bureau, volontairement décalé, pour sensibiliser les nouveaux arrivants à la gestion des données. Téléphone jaune, alerte générale, compte à rebours : tout est généré par IA, au service d'une idée simple. De petits gestes peuvent avoir de gros impacts.",
     hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
-    fiche: [["Année", todo("année")], ["Rôle", "Productrice · " + todo("script, DA, montage ?")], ["Durée", "2 minutes"], ["Outils", "Nano Banana, Stable Diffusion, ElevenLabs " + todo("à confirmer")], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
+    fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "ChatGPT · Seedance · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
     deep: [
-      { label: "Contexte", h: "Accueillir les nouveaux arrivants, en vidéo.", p: [todo("le contexte, le public, l'objectif du film")] },
+      { label: "Contexte", h: "Sensibiliser aux données dès le premier jour.", p: ["L'onboarding est un moment clé pour ce grand groupe industriel : c'est là que se prennent les bonnes habitudes. Le film devait sensibiliser les nouveaux arrivants à la gestion des données, avec humour et second degré, pour montrer que des gestes anodins du quotidien peuvent avoir de grandes conséquences."] },
     ],
     process: { label: "Fabrication", h: "De l'idée au film, en six étapes.",
-      p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer. Cliquez sur une étape pour la voir."],
+      p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer."],
       steps: [
         { t: "Script", d: "Tout commence par l'écriture : un faux thriller de bureau, avec ses codes (musique, voix off, tension), pour parler de bonnes pratiques Data sans faire un cours.",
           ia: "Propose des pistes et des variantes de répliques.", moi: "J'écris le récit, je fixe le ton et le rythme.",
@@ -415,12 +426,14 @@ const PROJETS = [
         { t: "Animation", d: "Les plans validés prennent vie : mouvements de caméra, gestes, expressions.",
           ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
         { t: "Montage final", d: "Montage, musique, voix off, sous-titres et générique : un film de deux minutes. Il est juste en dessous, en entier.",
-          ia: "Génère les voix et l'ambiance sonore.", moi: "Je monte, je rythme et je livre le film.", src: "onboarding-poster.webp", alt: "Image du film final" },
+          ia: "", moi: "", src: "onboarding-final.webp", alt: "Image extraite du film final" },
       ] },
     film: { video: "onboarding-ia.mp4", poster: "onboarding-poster.webp", cap: "Le film complet, avec un générique en noms de fantaisie" },
     planche: true,
     gallery: [],
-    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+    proud: { h: "Faire sourire d'un sujet sérieux, sans jamais le prendre à la légère.",
+      p: ["Nous sommes partis de situations réelles, travaillées avec les équipes internes : des gestes du quotidien que beaucoup font sans y penser, parce qu'ils semblent sans conséquence.",
+          "Ma fierté, c'est d'avoir poussé ces scènes dans un univers surréaliste, assez fort pour marquer les esprits, et d'avoir offert au groupe un format qui sort de ses communications internes habituelles."] } },
 
   { id: "evenement", n: "04", name: "Événement interne",
     disc: "Communication · Slide decks · Photobooth",
@@ -494,14 +507,20 @@ const focus = f => `
       <a href="#realisations" data-scroll>Voir les déclinaisons ↓</a>
     </div>
   </section>`;
+const visOf = st => st.script ? `<div class="vis script" tabindex="0" aria-label="Extrait du script">${st.script}</div>`
+  : st.clip ? `<div class="vis"><video src="${A}${st.clip.src}" poster="${A}${st.clip.poster}" muted playsinline preload="metadata" aria-label="${st.t}" data-clip="${st.clip.start || 0},${st.clip.end || ""}"></video></div>`
+  : st.src ? `<div class="vis"${st.contain ? ' style="aspect-ratio:auto;background:none"' : ""}><img src="${A}${st.src}" alt="${st.alt || st.t}" loading="lazy"${st.contain ? ' style="height:auto"' : ""}></div>`
+  : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`;
 const proc = f => `
   <section class="c sec" aria-label="${f.label}">
     <div class="s-label"><span class="slabel">${f.label}</span></div>
     <div class="s-body"><h2>${f.h}</h2>${f.p.map(t => `<p class="lead">${t}</p>`).join("")}</div>
-    <div class="proc" data-proc>
-      <div class="steps-nav" role="tablist" aria-label="Étapes de fabrication" style="--k:${f.steps.length}">${f.steps.map((st, i) => `<button type="button" role="tab" id="pt-${i}" aria-controls="pp" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}" data-i="${i}"><span class="dot">${String(i + 1).padStart(2, "0")}</span>${st.t}</button>`).join("")}</div>
-      <div class="panel" id="pp" role="tabpanel" aria-labelledby="pt-0"></div>
-    </div>
+    <ol class="proc" data-proc>${f.steps.map((st, i) => `
+      <li class="pstep" data-i="${i}">
+        <div class="ptxt"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${st.t}</h3><p>${st.d}</p>
+          ${st.listen ? `<button class="play" type="button" data-listen><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>${st.listen.label}</button>` : ""}</div>
+        ${visOf(st)}
+      </li>`).join("")}</ol>
   </section>`;
 let PROC = null;
 const gallery = list => `<div class="gallery">${list.map(g => `<figure class="w${g.w || 12}">${fr(g)}${g.cap ? `<figcaption>${g.cap}</figcaption>` : ""}</figure>`).join("")}</div>`;
@@ -551,7 +570,6 @@ function render(id) {
   ${p.process ? proc(p.process) : ""}
   <section class="c sec" id="realisations" aria-label="Réalisations">
     <div class="s-label"><span class="slabel">Réalisations</span></div>
-    <div class="s-body"><h2>Ce que j'ai livré.</h2></div>
     ${p.film ? film(p.film) : ""}
     ${p.planche ? planche(p.gallery) : gallery(p.gallery)}
   </section>
@@ -634,38 +652,22 @@ function wireVideos() {
 }
 function wireProc() {
   const box = document.querySelector("[data-proc]"); if (!box || !PROC) return;
-  const tabs = [...box.querySelectorAll('[role="tab"]')], panel = box.querySelector(".panel");
-  const show = (i, anim) => {
-    const st = PROC.steps[i];
-    tabs.forEach((b, k) => { b.setAttribute("aria-selected", String(k === i)); b.tabIndex = k === i ? 0 : -1; });
-    panel.setAttribute("aria-labelledby", "pt-" + i);
-    const vis = st.script ? `<div class="vis script" tabindex="0" aria-label="Extrait du script">${st.script}</div>`
-      : st.clip ? `<div class="vis"><video src="${A}${st.clip.src}" poster="${A}${st.clip.poster}" muted playsinline preload="metadata" aria-label="${st.t}"></video></div>`
-      : st.src ? `<div class="vis"${st.contain ? ' style="aspect-ratio:auto;background:none"' : ""}><img src="${A}${st.src}" alt="${st.alt || st.t}"${st.contain ? ' style="height:auto"' : ""}></div>` : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`;
-    panel.innerHTML = `${vis}
-      <div class="txt"><h3>${st.t}</h3><p class="lead" style="font-size:16px">${st.d}</p>
-      <div class="who"><b>L'IA</b><span>${st.ia}</span><b>Moi</b><span class="me">${st.moi}</span></div>
-      ${st.listen ? `<button class="play" type="button" data-listen><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>${st.listen.label}</button>` : ""}</div>`;
-    const v = panel.querySelector("video");
-    if (v && st.clip) { const { start = 0, end } = st.clip; v.currentTime = start;
-      v.addEventListener("timeupdate", () => { if (end && v.currentTime >= end) v.currentTime = start; });
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { v.loop = !end; v.play().catch(() => {}); } }
-    const lb = panel.querySelector("[data-listen]");
-    if (lb) lb.addEventListener("click", () => {
-      const L = st.listen, box = panel.querySelector(".vis");
-      box.className = "vis"; box.removeAttribute("tabindex");
-      box.innerHTML = `<video src="${A}${L.src}" poster="${A}${L.poster}" playsinline controls aria-label="${L.label}"></video>`;
-      const vv = box.querySelector("video"); vv.currentTime = L.start || 0;
-      vv.addEventListener("timeupdate", () => { if (L.end && vv.currentTime >= L.end) vv.pause(); });
-      vv.play().catch(() => {});
-      lb.hidden = true;
-    });
-    panel.classList.remove("enter"); if (anim) { void panel.offsetWidth; panel.classList.add("enter"); }
-  };
-  tabs.forEach((b, i) => { b.addEventListener("click", () => show(i, true)); b.addEventListener("keydown", e => {
-    const k = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!k) return;
-    const j = (i + k + tabs.length) % tabs.length; tabs[j].focus(); show(j, true); }); });
-  show(0, false);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  box.querySelectorAll("video[data-clip]").forEach(v => {
+    const [start, end] = v.dataset.clip.split(",").map(Number);
+    v.addEventListener("loadedmetadata", () => { v.currentTime = start; });
+    v.addEventListener("timeupdate", () => { if (end && v.currentTime >= end) v.currentTime = start; });
+    if (!reduce && "IntersectionObserver" in window) new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: .4 }).observe(v);
+  });
+  box.querySelectorAll("[data-listen]").forEach(btn => btn.addEventListener("click", () => {
+    const li = btn.closest(".pstep"), st = PROC.steps[+li.dataset.i], L = st.listen, vis = li.querySelector(".vis");
+    vis.className = "vis"; vis.removeAttribute("tabindex");
+    vis.innerHTML = `<video src="${A}${L.src}" poster="${A}${L.poster}" playsinline controls aria-label="${L.label}"></video>`;
+    const vv = vis.querySelector("video");
+    vv.addEventListener("loadedmetadata", () => { vv.currentTime = L.start || 0; vv.play().catch(() => {}); }, { once: true });
+    vv.addEventListener("timeupdate", () => { if (L.end && vv.currentTime >= L.end) vv.pause(); });
+    btn.hidden = true;
+  }));
 }
 function wire() {
   wireVideos();
