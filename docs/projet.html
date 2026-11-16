@@ -204,7 +204,39 @@ button { font: inherit; color: inherit; }
 .pstep .vis { border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--slate); }
 .pstep .vis img, .pstep .vis video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pstep .vis.todo-tile { border: 1px dashed #4a4844; background: none; display: grid; place-items: center; align-content: center; gap: 8px; color: var(--haze); font-size: 14px; text-align: center; padding: 16px; }
-.pstep .vis.script { aspect-ratio: auto; max-height: 420px; overflow: auto; background: #f3f0e8; color: #1d1c1a; padding: clamp(20px, 3vw, 32px); font-family: "Courier Prime", "Courier New", Courier, monospace; font-size: 14px; line-height: 1.55; display: grid; gap: 12px; align-content: start; }
+.strip { grid-column: 4 / 13; list-style: none; margin: clamp(28px, 3.5vw, 44px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; }
+.stile { all: unset; cursor: pointer; display: grid; gap: 10px; width: 100%; }
+.stile .sv { aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; background: var(--slate); display: grid; place-items: center; border: 1px solid var(--rule); transition: border-color .3s; }
+.stile .sv img { width: 100%; height: 100%; object-fit: cover; display: block; transition: scale .8s var(--out); }
+.stile .sdoc { font-family: var(--f-display); font-size: 15px; color: var(--haze); padding: 10px; text-align: center; }
+.stile .sdoc.vg { width: 100%; height: 100%; display: grid; place-items: center; padding: 0; background: radial-gradient(70% 90% at 85% 10%, #f0b4a4, transparent 60%), radial-gradient(80% 90% at 10% 40%, #a98bc9, transparent 65%), linear-gradient(160deg, #6d5a8f, #2b2638); }
+.stile .sdoc.vg svg { width: 56%; height: 56%; }
+.stile .sl { font-size: 13px; color: var(--bone); line-height: 1.35; display: grid; gap: 2px; }
+.stile .sl b { font-family: var(--f-display); font-weight: 300; color: var(--haze); font-size: 13px; }
+.stile:hover .sv, .stile:focus-visible .sv { border-color: var(--blush); }
+.stile:hover .sv img { scale: 1.04; }
+.stile:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; border-radius: 10px; }
+/* Carte voix */
+.pstep .vis.voice { aspect-ratio: 16 / 10; position: relative; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto auto; padding: 18px 20px 16px; gap: 8px;
+  background: radial-gradient(70% 90% at 85% 10%, #f0b4a4 0%, transparent 60%), radial-gradient(80% 90% at 10% 40%, #a98bc9 0%, transparent 65%), linear-gradient(160deg, #6d5a8f, #2b2638 70%, #1b1a20); color: #fff; }
+.voice .vhead { display: flex; align-items: center; gap: 8px; font-family: var(--f-display); font-size: 15px; letter-spacing: -.01em; }
+.voice .vhead svg { width: 18px; height: 18px; }
+.voice canvas { width: 100%; height: 100%; min-height: 0; display: block; }
+.voice .vtext { position: relative; height: 3.2em; overflow: hidden; font-size: 14px; line-height: 1.6; }
+.voice .vtext p { position: absolute; inset: 0 0 auto; margin: 0; opacity: 0; translate: 0 8px; transition: opacity .4s, translate .4s var(--out); }
+.voice .vtext p.on { opacity: 1; translate: 0 0; }
+.voice .vtext b { font-weight: 500; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; margin-right: 6px; }
+.voice .vbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
+.voice .vplay { width: 38px; height: 38px; border-radius: 50%; border: 0; background: #fff; color: #1b1a20; display: grid; place-items: center; cursor: pointer; }
+.voice .vplay svg { width: 12px; height: 12px; }
+.voice .vprog { height: 4px; border-radius: 99px; background: rgba(255,255,255,.25); overflow: hidden; cursor: pointer; }
+.voice .vprog i { display: block; height: 100%; width: 0; background: #fff; border-radius: 99px; }
+.voice .vtime { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .85; }
+.pstep .vis.script { aspect-ratio: auto; max-height: 420px; overflow: auto; background: var(--slate); border: 1px solid var(--rule); color: var(--bone); padding: clamp(20px, 3vw, 32px); font-family: var(--f-body); font-size: 14.5px; line-height: 1.6; display: grid; gap: 10px; align-content: start; }
+.pstep .vis.script .sh { font-family: var(--f-display); font-weight: 400; font-size: 13px; letter-spacing: .08em; color: var(--blush); }
+.pstep .vis.script .act { color: var(--haze); font-style: italic; }
+.pstep .vis.script .who2 { text-align: left; font-family: var(--f-display); font-weight: 500; font-size: 12px; letter-spacing: .08em; color: var(--chalk); margin-top: 6px; }
+.pstep .vis.script .line { text-align: left; max-width: none; justify-self: stretch; color: var(--chalk); padding-left: 14px; border-left: 2px solid var(--rule); margin-top: -6px; }
 .panel .txt { display: grid; gap: 14px; align-content: start; }
 .panel h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; line-height: 1.1; }
 .panel .who { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; color: var(--bone); border-top: 1px solid var(--rule); padding-top: 14px; }
@@ -268,6 +300,7 @@ button { font: inherit; color: inherit; }
   .nav .brand { grid-column: 1 / -1; }
   .p-label, .p-title, .sec .s-label, .sec .s-body, .proud .s-label, .proud .s-body, .end .s-body { grid-column: 1 / -1; }
   .proud { padding-inline: 20px; }
+  .strip { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); } .pstep .vis.voice { aspect-ratio: 4 / 5; }
   .proc { grid-column: 1 / -1; } .pstep { grid-template-columns: minmax(0, 1fr); } .panel { grid-template-columns: minmax(0, 1fr); } .steps-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; } .steps-nav::before { display: none; }
   .sec .s-label, .proud .s-label { padding: 0 0 16px; }
   .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
@@ -395,16 +428,16 @@ const PROJETS = [
   { id: "onboarding", n: "03", name: "Onboarding en IA",
     disc: "Motion · Vidéo · IA générative",
     title: "Un thriller pour sensibiliser aux données",
-    sum: "Un thriller de bureau, volontairement décalé, pour sensibiliser les nouveaux arrivants à la gestion des données. Téléphone jaune, alerte générale, compte à rebours : tout est généré par IA, au service d'une idée simple. De petits gestes peuvent avoir de gros impacts.",
+    sum: "Un film de deux minutes, entièrement réalisé en IA générative, qui reprend les codes du thriller pour sensibiliser les nouveaux arrivants à la gestion des données. Le message : de petits gestes du quotidien peuvent avoir de grands impacts.",
     hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
-    fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "ChatGPT · Seedance · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
+    fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "Kling · Google Veo · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
     deep: [
       { label: "Contexte", h: "Sensibiliser aux données dès le premier jour.", p: ["L'onboarding est un moment clé pour ce grand groupe industriel : c'est là que se prennent les bonnes habitudes. Le film devait sensibiliser les nouveaux arrivants à la gestion des données, avec humour et second degré, pour montrer que des gestes anodins du quotidien peuvent avoir de grandes conséquences."] },
     ],
-    process: { label: "Fabrication", h: "De l'idée au film, en six étapes.",
+    process: { label: "Fabrication", h: "De l'idée au film, en sept étapes.",
       p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer."],
       steps: [
-        { t: "Script", d: "Tout commence par l'écriture : un faux thriller de bureau, avec ses codes (musique, voix off, tension), pour parler de bonnes pratiques Data sans faire un cours.",
+        { t: "Script", d: "Le script reprend les codes du thriller (musique, voix off, montée de tension) pour aborder les bonnes pratiques Data sans discours descendant.",
           ia: "Propose des pistes et des variantes de répliques.", moi: "J'écris le récit, je fixe le ton et le rythme.",
           script: `<span class="sh">INTRODUCTION – ALERTE GÉNÉRALE</span>
 <span class="act">Écran noir. Une musique de thriller démarre. Une voix off, très sérieuse.</span>
@@ -415,17 +448,19 @@ const PROJETS = [
 <span class="who2">MANAGER</span><span class="line">« Il nous faut immédiatement un état des lieux de nos compétences Data. Tu as 30 minutes. »</span>
 <span class="act">Le Data Analyst avale sa salive.</span>
 <span class="who2">DATA ANALYST</span><span class="line">« …30 minutes ? »</span>
-<span class="act">L'écran affiche : ALERTE GÉNÉRALE</span>`,
-          listen: { label: "Écouter la scène 1", src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 20 } },
-        { t: "Casting des personnages", d: "Quatre personnages récurrents, définis avant tout le reste : le manager au gilet moutarde, le data analyst, et deux collaboratrices. Chacun a sa fiche pour rester identique d'un plan à l'autre.",
+<span class="act">L'écran affiche : ALERTE GÉNÉRALE</span>` },
+        { t: "Casting des personnages", d: "Quatre personnages récurrents, définis en amont avec une fiche chacun (visage, tenue, couleurs) pour garantir leur cohérence d'un plan à l'autre.",
           ia: "Génère des propositions de visages, de styles et de tenues.", moi: "Je choisis, je fixe une fiche par personnage et je garde la cohérence.", src: "onboarding-casting.webp", alt: "Les quatre personnages du film, générés par IA, sur fond gris" },
-        { t: "Génération des images", d: "Chaque plan est généré dans une direction artistique commune : bureaux un peu rétro, téléphone jaune, palette moutarde et bleu nuit.",
+        { t: "Génération des images", d: "Chaque plan est généré selon une direction artistique commune : décor de bureau d'inspiration rétro, palette moutarde et bleu nuit, accessoires récurrents.",
           ia: "Génère les images à partir de mes consignes.", moi: "Je dirige le style, je sélectionne et je retouche.", src: "onboarding-generation.webp", alt: "Trois plans générés : le téléphone jaune, l'écran Alerte générale, le data analyst surpris" },
         { t: "Storyboard", d: "Les huit premiers plans de la scène 1, mis bout à bout pour valider le récit et le rythme avant d'animer.",
           ia: "Comble les plans manquants.", moi: "Je construis le découpage et je le fais valider.", src: "onboarding-storyboard.webp", alt: "Storyboard de la scène 1 en huit plans", contain: true },
-        { t: "Animation", d: "Les plans validés prennent vie : mouvements de caméra, gestes, expressions.",
+        { t: "Animation", d: "Les plans validés sont animés (mouvements de caméra, gestes, expressions), puis sélectionnés prise par prise.",
           ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
-        { t: "Montage final", d: "Montage, musique, voix off, sous-titres et générique : un film de deux minutes. Il est juste en dessous, en entier.",
+        { t: "Voix et son", d: "Les voix sont générées puis dirigées réplique par réplique : intonation, rythme, pauses. Écoutez la scène 1, sans l'image.",
+          ia: "", moi: "", voice: { title: "Scène 1 · Voix off et dialogues", src: "onboarding-scene1.m4a", poster: "onboarding-casting.webp",
+            lines: [[0, "Ambiance", "Musique de thriller, la tension monte."], [7, "Voix off", "« Nouveau concurrent. Nouveau programme. Nouvelle opportunité. »"], [12, "Manager", "« Il nous faut immédiatement une cartographie détaillée de nos effectifs. »"], [14.5, "Manager", "« Maintenant ! Vous avez 30 minutes ! »"], [16, "Data analyst", "« 30 minutes ?! »"]] } },
+        { t: "Montage final", d: "Montage, musique, sous-titres et générique sont finalisés dans After Effects. Le film complet est présenté ci-dessous.",
           ia: "", moi: "", src: "onboarding-final.webp", alt: "Image extraite du film final" },
       ] },
     film: { video: "onboarding-ia.mp4", poster: "onboarding-poster.webp", cap: "Le film complet, avec un générique en noms de fantaisie" },
@@ -507,16 +542,37 @@ const focus = f => `
       <a href="#realisations" data-scroll>Voir les déclinaisons ↓</a>
     </div>
   </section>`;
-const visOf = st => st.script ? `<div class="vis script" tabindex="0" aria-label="Extrait du script">${st.script}</div>`
+const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+const voiceCard = v => `<div class="vis voice" data-voice>
+    <div class="vhead"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="7" y="2" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 10a6 6 0 0 0 12 0M10 16v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>${v.title}</div>
+    <canvas aria-hidden="true"></canvas>
+    <div class="vtext" aria-live="off">${v.lines.map(l => `<p data-t="${l[0]}"><b>${l[1]}</b> ${l[2]}</p>`).join("")}</div>
+    <div class="vbar"><button type="button" class="vplay" aria-label="Écouter"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg></button>
+      <div class="vprog" role="progressbar" aria-label="Progression de l'écoute" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><span class="vtime">0:00</span></div>
+    <audio src="${A}${v.src}" preload="metadata"></audio>
+  </div>`;
+const visOf = st => st.voice ? voiceCard(st.voice) : st.script ? `<div class="vis script" tabindex="0" aria-label="Extrait du script">${st.script}</div>`
   : st.clip ? `<div class="vis"><video src="${A}${st.clip.src}" poster="${A}${st.clip.poster}" muted playsinline preload="metadata" aria-label="${st.t}" data-clip="${st.clip.start || 0},${st.clip.end || ""}"></video></div>`
   : st.src ? `<div class="vis"${st.contain ? ' style="aspect-ratio:auto;background:none"' : ""}><img src="${A}${st.src}" alt="${st.alt || st.t}" loading="lazy"${st.contain ? ' style="height:auto"' : ""}></div>`
   : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`;
-const proc = f => `
-  <section class="c sec" aria-label="${f.label}">
+const thumbOf = st => st.voice ? "" : st.thumb || st.src || (st.clip && st.clip.poster) || "";
+const procStrip = f => `
+  <section class="c sec" data-ess aria-label="${f.label} en bref">
+    <div class="s-label"><span class="slabel">${f.label}</span></div>
+    <div class="s-body"><h2>${f.h}</h2></div>
+    <ol class="strip">${f.steps.map((st, i) => `
+      <li><button type="button" class="stile" data-goto="${i}">
+        <span class="sv">${thumbOf(st) ? `<img src="${A}${thumbOf(st)}" alt="" loading="lazy">` : (st.voice ? `<span class="sdoc vg"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="9" fill="none" stroke="#fff" stroke-width="1.6"/>${Array.from({ length: 24 }, (_, k) => { const a = k / 24 * Math.PI * 2, l = 3 + (k * 7 % 5); return `<line x1="${20 + Math.cos(a) * 11}" y1="${20 + Math.sin(a) * 11}" x2="${20 + Math.cos(a) * (11 + l)}" y2="${20 + Math.sin(a) * (11 + l)}" stroke="#fff" stroke-width="1"/>`; }).join("")}</svg></span>` : `<span class="sdoc">${st.t}</span>`)}</span>
+        <span class="sl"><b>${String(i + 1).padStart(2, "0")}</b>${st.t}</span>
+      </button></li>`).join("")}</ol>
+    <div class="s-body" style="grid-column:4/13"><button class="more" type="button" data-deepen>Voir chaque étape en détail <span aria-hidden="true">↓</span></button></div>
+  </section>`;
+const proc = f => procStrip(f) + `
+  <section class="c sec deep" data-deep aria-label="${f.label}">
     <div class="s-label"><span class="slabel">${f.label}</span></div>
     <div class="s-body"><h2>${f.h}</h2>${f.p.map(t => `<p class="lead">${t}</p>`).join("")}</div>
     <ol class="proc" data-proc>${f.steps.map((st, i) => `
-      <li class="pstep" data-i="${i}">
+      <li class="pstep" data-i="${i}" id="etape-${i}">
         <div class="ptxt"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${st.t}</h3><p>${st.d}</p>
           ${st.listen ? `<button class="play" type="button" data-listen><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>${st.listen.label}</button>` : ""}</div>
         ${visOf(st)}
@@ -620,9 +676,11 @@ function setMode(m, animate) {
   mode = m; store.set(m);
   const deep = m === "profondeur";
   document.querySelectorAll("[data-deep]").forEach(s => { s.hidden = !deep; s.classList.toggle("enter", deep && animate); });
+  document.querySelectorAll("[data-ess]").forEach(s => { s.hidden = deep; });
   document.getElementById("invite").hidden = deep;
   document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
-  document.getElementById("mode-hint").textContent = deep ? "Toute la démarche, étape par étape." : "L'essentiel en 1 minute.";
+  const extra = [...new Set([...document.querySelectorAll("section[data-deep]")].map(x => x.getAttribute("aria-label")))];
+  document.getElementById("mode-hint").textContent = deep ? "Toute la démarche, étape par étape." : `L'essentiel en 1 minute. En profondeur : ${extra.length} sections en plus (${extra.slice(0, 3).join(", ").toLowerCase()}${extra.length > 3 ? "…" : ""}).`;
   const on = document.querySelector(`.seg button[data-mode="${m}"]`), pill = document.querySelector(".seg .pill");
   pill.style.width = on.offsetWidth + "px"; pill.style.translate = on.offsetLeft + "px 0";
 }
@@ -650,7 +708,52 @@ function wireVideos() {
     b.addEventListener("click", () => { v.muted = !v.muted; if (!v.muted) v.play(); b.setAttribute("aria-pressed", String(!v.muted)); b.textContent = v.muted ? "Activer le son" : "Couper le son"; });
   });
 }
+function wireVoice(card) {
+  const au = card.querySelector("audio"), cv = card.querySelector("canvas"), btn = card.querySelector(".vplay"),
+        bar = card.querySelector(".vprog"), fill = bar.querySelector("i"), tm = card.querySelector(".vtime"), lines = [...card.querySelectorAll(".vtext p")];
+  const g = cv.getContext("2d"); let ctx, an, data, raf, t0 = performance.now();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const icon = p => btn.innerHTML = p ? '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z" fill="currentColor"/></svg>' : '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>';
+  const setLine = t => { let k = -1; lines.forEach((l, i) => { if (t >= +l.dataset.t) k = i; }); lines.forEach((l, i) => l.classList.toggle("on", i === Math.max(0, k))); };
+  setLine(0);
+  function draw(now) {
+    const r = cv.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+    if (cv.width !== Math.round(r.width * dpr)) { cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
+    const W = cv.width, H = cv.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * .26, N = 96;
+    g.clearRect(0, 0, W, H);
+    if (an && !au.paused) an.getByteFrequencyData(data);
+    const tt = (now - t0) / 1000;
+    g.strokeStyle = "rgba(255,255,255,.92)"; g.lineWidth = Math.max(1.2, 1.4 * dpr); g.lineCap = "round";
+    for (let i = 0; i < N; i++) {
+      const a = i / N * Math.PI * 2 - Math.PI / 2;
+      let v;
+      if (an && !au.paused) { const k = Math.floor((i < N / 2 ? i : N - i) / (N / 2) * data.length * .6); v = Math.min(1, data[k] / 255 * 1.5); }
+      else v = reduce ? .08 : .06 + .05 * Math.sin(tt * 1.6 + i * .35) * Math.sin(tt * .7 + i * .11);
+      const L = R * (.06 + v * .9);
+      g.beginPath(); g.moveTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); g.lineTo(cx + Math.cos(a) * (R + L), cy + Math.sin(a) * (R + L)); g.stroke();
+    }
+    const grd = g.createRadialGradient(cx, cy - R * .3, R * .1, cx, cy, R);
+    grd.addColorStop(0, "rgba(255,255,255,.18)"); grd.addColorStop(1, "rgba(255,255,255,.04)");
+    g.fillStyle = grd; g.beginPath(); g.arc(cx, cy, R * .94, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = "rgba(255,255,255,.95)"; g.lineWidth = 2 * dpr; g.beginPath(); g.arc(cx, cy, R * .94, 0, Math.PI * 2); g.stroke();
+    raf = requestAnimationFrame(draw);
+  }
+  raf = requestAnimationFrame(draw);
+  btn.addEventListener("click", () => {
+    if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); const src = ctx.createMediaElementSource(au); an = ctx.createAnalyser(); an.fftSize = 256; data = new Uint8Array(an.frequencyBinCount); src.connect(an); an.connect(ctx.destination); } catch (e) { an = null; } }
+    if (ctx && ctx.state === "suspended") ctx.resume();
+    if (au.paused) au.play().catch(() => {}); else au.pause();
+  });
+  au.addEventListener("play", () => { icon(true); btn.setAttribute("aria-label", "Mettre en pause"); });
+  au.addEventListener("pause", () => { icon(false); btn.setAttribute("aria-label", "Écouter"); });
+  au.addEventListener("timeupdate", () => { const p = au.duration ? au.currentTime / au.duration * 100 : 0; fill.style.width = p + "%"; bar.setAttribute("aria-valuenow", Math.round(p)); tm.textContent = fmt(au.currentTime); setLine(au.currentTime); });
+  au.addEventListener("ended", () => { au.currentTime = 0; setLine(0); });
+  bar.addEventListener("click", e => { const r = bar.getBoundingClientRect(); if (au.duration) au.currentTime = (e.clientX - r.left) / r.width * au.duration; });
+}
 function wireProc() {
+  document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => { setMode("profondeur", true); const t = document.getElementById("etape-" + b.dataset.goto); requestAnimationFrame(() => t && t.scrollIntoView({ behavior: "smooth", block: "start" })); }));
+  document.querySelectorAll("[data-deepen]").forEach(b => b.addEventListener("click", () => { setMode("profondeur", true); const t = document.getElementById("etape-0"); requestAnimationFrame(() => t && t.scrollIntoView({ behavior: "smooth", block: "start" })); }));
+  document.querySelectorAll("[data-voice]").forEach(wireVoice);
   const box = document.querySelector("[data-proc]"); if (!box || !PROC) return;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   box.querySelectorAll("video[data-clip]").forEach(v => {
