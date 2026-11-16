@@ -211,6 +211,10 @@ button { font: inherit; color: inherit; }
 .stile .sdoc { font-family: var(--f-display); font-size: 15px; color: var(--haze); padding: 10px; text-align: center; }
 .stile .sdoc.vg { width: 100%; height: 100%; display: grid; place-items: center; padding: 0; background: radial-gradient(70% 90% at 85% 10%, #f0b4a4, transparent 60%), radial-gradient(80% 90% at 10% 40%, #a98bc9, transparent 65%), linear-gradient(160deg, #6d5a8f, #2b2638); }
 .stile .sdoc.vg svg { width: 56%; height: 56%; }
+.vdir { margin: 6px 0 0; border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; background: var(--slate); max-width: 46ch; }
+.vdir figcaption { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--haze); }
+.vdir p { margin: 0; color: var(--chalk); font-size: 14.5px; line-height: 1.9; }
+.vdir .tag { display: inline-block; font-size: 11.5px; line-height: 1.5; padding: 1px 8px; border-radius: 99px; background: rgba(231,185,182,.14); color: var(--blush); border: 1px solid rgba(231,185,182,.3); margin: 0 2px; vertical-align: 1px; }
 .stile .sl { font-size: 13px; color: var(--bone); line-height: 1.35; display: grid; gap: 2px; }
 .stile .sl b { font-family: var(--f-display); font-weight: 300; color: var(--haze); font-size: 13px; }
 .stile:hover .sv, .stile:focus-visible .sv { border-color: var(--blush); }
@@ -336,7 +340,7 @@ const PROJETS = [
   { id: "programme", n: "01", name: "C-NUM",
     disc: "Direction artistique · Motion design · Communication interne · Événementiel",
     title: "Un programme de transformation, rendu clair et désirable",
-    sum: "Comment rendre lisible un programme de transformation numérique qui touche plus de 3 000 collaborateurs et des métiers très différents ? J'ai d'abord pris le lead d'une équipe de designers pour poser l'univers du programme, puis je l'ai décliné sur tous les formats : print, slide decks, motion design, newsletters, SharePoint. Et je l'ai fait vivre au-delà des écrans, en concevant et en coordonnant ses événements.",
+    sum: "Comment rendre lisible un programme de transformation numérique qui touche plus de 3 000 collaborateurs et des métiers très différents ? D'abord, le lead d'une équipe de designers pour poser l'univers du programme. Puis son déploiement sur tous les formats : print, slide decks, motion design, newsletters, SharePoint. Et enfin, des événements conçus et coordonnés pour le faire vivre au-delà des écrans.",
     hero: { ar: "16 / 9", src: "cnum-univers.webp", alt: "Univers graphique C-NUM : formes, couleurs et motif de turbine" },
     fiche: [["Client", "Groupe industriel international"], ["Années", "2024–2025"], ["Durée", "2 ans, puis des missions ponctuelles"],
             ["Rôle", "Design lead au lancement · Direction artistique · Motion design · Conception et coordination d'événements"],
@@ -352,10 +356,10 @@ const PROJETS = [
                "<strong>Faire vivre l'univers sur de nombreux formats</strong> : adapter chaque contenu au message, au métier et au canal, sans perdre l'identité du programme.",
                "<strong>Faire de la communication une expérience</strong> : imaginer des événements et des dispositifs participatifs qui rendent la transformation concrète et humaine."] },
       { label: "Démarche", h: "Comprendre, incarner, expliquer, faire vivre.",
-        steps: [["Poser les bases et fédérer l'équipe", "Tout a commencé par un audit de l'existant et des interviews, pour identifier les bons axes de communication. En parallèle, j'ai pris le lead d'une équipe de designers pour structurer les premières productions et poser un langage visuel cohérent, capable d'accompagner le programme dans la durée."],
-                ["Donner un visage au programme", "Pour rendre la communication moins institutionnelle, nous avons créé des mascottes. Elles incarnent les messages, introduisent les informations et apportent une dimension humaine à des sujets très techniques. Elles sont devenues des repères de l'univers C-NUM, réutilisables sur tous les supports."],
+        steps: [["Poser les bases et fédérer l'équipe", "Tout a commencé par un audit de l'existant et des interviews, pour identifier les bons axes de communication. En parallèle, le lead d'une équipe de designers a permis de structurer les premières productions et de poser un langage visuel cohérent, capable d'accompagner le programme dans la durée."],
+                ["Donner un visage au programme", "Pour rendre la communication moins institutionnelle, une famille de mascottes a été créée. Elles incarnent les messages, introduisent les informations et apportent une dimension humaine à des sujets très techniques. Elles sont devenues des repères de l'univers C-NUM, réutilisables sur tous les supports."],
                 ["Expliquer, animer, déployer", "Vidéos de présentation des métiers, glossaire animé des concepts techniques : le motion design rend les notions complexes plus simples et plus vivantes. En parallèle, l'univers se décline dans les newsletters, les affiches, les bannières et le site SharePoint. Chaque support répond à un besoin précis, avec des codes visuels communs."],
-                ["Imaginer et orchestrer les événements", "J'ai participé à la conception des événements de bout en bout : recherche d'idées, concepts, direction artistique, organisation et coordination des intervenants. Animations participatives, photobooth, scénographie : ces temps forts ont fait vivre C-NUM autrement, en créant des moments de rencontre et d'échange avec les collaborateurs."]] },
+                ["Imaginer et orchestrer les événements", "Les événements ont été conçus de bout en bout : recherche d'idées, concepts, direction artistique, organisation et coordination des intervenants. Animations participatives, photobooth, scénographie : ces temps forts ont fait vivre C-NUM autrement, en créant des moments de rencontre et d'échange avec les collaborateurs."]] },
       { label: "Le système", h: "Un univers visuel pensé pour vivre sur tous les supports.",
         cards: [["Identité graphique", "Un langage commun : principes de composition, couleurs, typographies et éléments graphiques, pour que chaque communication soit reconnaissable."],
                 ["Motion design", "Des principes d'animation et de narration visuelle, pour les vidéos pédagogiques, les présentations métiers et les formats courts."],
@@ -366,7 +370,7 @@ const PROJETS = [
     ],
     focus: { label: "Focus : la charte", h: "Une charte au cœur du programme, déclinée partout.",
       p: ["Tout part de la charte graphique. Un C ouvert, une couleur par domaine métier, des formes simples et une famille de personnages : un langage assez solide pour garantir la cohérence, et assez souple pour que chaque équipe puisse s'en servir.",
-          "Pour qu'elle vive au-delà de l'équipe design, je l'ai accompagnée d'un guide d'utilisation et d'un guide d'adoption. " + todo("à ajuster avec le document de charte")],
+          "Pour qu'elle vive au-delà de l'équipe design, elle est accompagnée d'un guide d'utilisation et d'un guide d'adoption. " + todo("à ajuster avec le document de charte")],
       items: [{ src: "cnum-palette.webp", alt: "Palette C-NUM : un orange signature et une couleur par domaine métier", cap: "La palette : un orange signature, et une couleur par domaine métier", ar: "1580 / 480", light: true },
               { src: "cnum-personnages.webp", alt: "Les dix mascottes C-NUM", cap: "Les personnages : dix mascottes, dix façons d'aborder le changement", ar: "1600 / 680", light: true },
               { todo: "Le C et ses règles d'usage (extrait de la charte)", ar: "16 / 9" },
@@ -392,15 +396,15 @@ const PROJETS = [
         note: "Ces chiffres décrivent l'envergure du programme, pas un résultat attribuable à la seule communication." },
     ],
     proud: { h: "Comprendre les métiers de l'intérieur, pour mieux raconter leur transformation.",
-      p: ["Ma plus grande fierté, c'est d'avoir fait vivre un univers créatif complet : du pilotage d'une équipe de designers jusqu'à la conception de contenus et d'expériences événementielles.",
-          "Et de l'avoir fait au plus près des équipes. En m'intégrant à elles, j'ai compris leurs problématiques de l'intérieur, et j'ai pu proposer des exemples qui leur parlent vraiment."] },
-    learned: { h: "Comprendre, raconter, puis donner forme.", p: "C-NUM résume bien ma façon de travailler : comprendre un sujet, trouver comment le raconter, puis imaginer toutes les formes qu'il peut prendre. Il m'a aussi permis de conjuguer création, leadership et coordination, de la conception graphique jusqu'aux expériences collectives." },
+      p: ["Avoir fait vivre un univers créatif complet, du pilotage d'une équipe de designers jusqu'à la conception de contenus et d'expériences événementielles.",
+          "Et l'avoir fait au plus près des équipes : une immersion qui a permis de comprendre leurs problématiques de l'intérieur, et de proposer des exemples qui leur parlent vraiment."] },
+    learned: { h: "Comprendre, raconter, puis donner forme.", p: "C-NUM résume une méthode de travail : comprendre un sujet, trouver comment le raconter, puis imaginer toutes les formes qu'il peut prendre. Le projet a aussi conjugué création, leadership et coordination, de la conception graphique jusqu'aux expériences collectives." },
     confidential: true },
 
   { id: "kaizo", n: "02", name: "Kaizo",
     disc: "Atelier de branding · Naming · Identité · Motion",
     title: "Kaizo, donner un visage à un produit tech",
-    sum: "Une solution déjà développée par une équipe tech, mais sans designer : pas de nom définitif, pas d'identité, rien pour donner envie de l'utiliser. J'ai réuni les parties prenantes en atelier pour lui trouver un nom, puis je lui ai donné un visage : un logo, une identité et une mascotte poulpe.",
+    sum: "Une solution déjà développée par une équipe tech, mais sans designer : pas de nom définitif, pas d'identité, rien pour donner envie de l'utiliser. Un atelier avec les parties prenantes pour lui trouver un nom, puis un visage : un logo, une identité et une mascotte poulpe.",
     hero: { src: "kaizo-poulpe.webp", alt: "Mascotte poulpe de Kaizo", contain: true },
     fiche: [["Année", "2026"], ["Rôle", "Directrice artistique · Animation d'ateliers"], ["Livrables", "Atelier de branding, nom, logo, logo animé, mascotte, identité visuelle"], ["Produit", todo("ce que fait l'outil, pour qui")]],
     deep: [
@@ -409,7 +413,7 @@ const PROJETS = [
       { label: "Le défi", h: "Donner une identité à un produit qui existe déjà.",
         list: ["Challenger le nom provisoire et en trouver un que toutes les parties prenantes portent", "Créer une direction visuelle cohérente pour une solution conçue sans designer", "Rendre le produit accessible et attachant, pour faciliter son adoption"] },
       { label: "Démarche", h: "Faire émerger le nom ensemble, puis lui donner vie.",
-        steps: [["Réunir les parties prenantes", "J'ai conçu et animé un atelier de branding avec les acteurs du projet, pour qu'ils construisent ensemble ce que le produit devait incarner."],
+        steps: [["Réunir les parties prenantes", "Un atelier de branding, conçu et animé avec les acteurs du projet, pour qu'ils construisent ensemble ce que le produit devait incarner."],
                 ["Trouver le nom", "Le nom provisoire a été challengé en atelier. Kaizo en est sorti. " + todo("pourquoi Kaizo ? origine, sens")],
                 ["Créer le visage", "Un logo, une identité visuelle et une mascotte : un poulpe. " + todo("pourquoi un poulpe ?")],
                 ["L'animer", "Un logo animé, pour que la mascotte et la marque prennent vie à l'écran."]] },
@@ -422,7 +426,7 @@ const PROJETS = [
       { todo: "Déclinaisons : écrans, supports", w: 12, ar: "16 / 7" },
     ],
     proud: { h: "Rendre attachant un produit tech, pour qu'on ait envie de l'adopter.",
-      p: ["Au départ, c'était un outil efficace mais froid, pensé par des ingénieurs pour des ingénieurs. Ma fierté, c'est de l'avoir rendu attendrissant. Avec un nom qui sonne juste et un petit poulpe pour l'incarner, le produit a cessé d'être un outil de plus : il est devenu quelqu'un qu'on a envie de rencontrer. Et c'est ce qui accélère son adoption."] },
+      p: ["Au départ, c'était un outil efficace mais froid, pensé par des ingénieurs pour des ingénieurs. Le pari réussi : le rendre attendrissant. Avec un nom qui sonne juste et un petit poulpe pour l'incarner, le produit a cessé d'être un outil de plus : il est devenu quelqu'un qu'on a envie de rencontrer. Et c'est ce qui accélère son adoption."] },
     learned: todo("optionnel") },
 
   { id: "onboarding", n: "03", name: "Onboarding en IA",
@@ -430,7 +434,7 @@ const PROJETS = [
     title: "Un thriller pour sensibiliser aux données",
     sum: "Un film de deux minutes, entièrement réalisé en IA générative, qui reprend les codes du thriller pour sensibiliser les nouveaux arrivants à la gestion des données. Le message : de petits gestes du quotidien peuvent avoir de grands impacts.",
     hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
-    fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "Kling · Google Veo · Seedance · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
+    fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "Kling · Google Veo · Seedance · ElevenLabs · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
     deep: [
       { label: "Contexte", h: "Sensibiliser aux données dès le premier jour.", p: ["L'onboarding est un moment clé pour ce grand groupe industriel : c'est là que se prennent les bonnes habitudes. Le film devait sensibiliser les nouveaux arrivants à la gestion des données, avec humour et second degré, pour montrer que des gestes anodins du quotidien peuvent avoir de grandes conséquences."] },
     ],
@@ -438,7 +442,6 @@ const PROJETS = [
       p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer."],
       steps: [
         { t: "Script", d: "Le script reprend les codes du thriller (musique, voix off, montée de tension) pour aborder les bonnes pratiques Data sans discours descendant.",
-          ia: "Propose des pistes et des variantes de répliques.", moi: "J'écris le récit, je fixe le ton et le rythme.",
           script: `<span class="sh">INTRODUCTION – ALERTE GÉNÉRALE</span>
 <span class="act">Écran noir. Une musique de thriller démarre. Une voix off, très sérieuse.</span>
 <span class="who2">VOIX OFF</span><span class="line">« Nouveau concurrent. Nouveau programme aéronautique. Nouvelle opportunité. »</span>
@@ -449,26 +452,21 @@ const PROJETS = [
 <span class="act">Le Data Analyst avale sa salive.</span>
 <span class="who2">DATA ANALYST</span><span class="line">« …30 minutes ? »</span>
 <span class="act">L'écran affiche : ALERTE GÉNÉRALE</span>` },
-        { t: "Casting des personnages", d: "Quatre personnages récurrents, définis en amont avec une fiche chacun (visage, tenue, couleurs) pour garantir leur cohérence d'un plan à l'autre.",
-          ia: "Génère des propositions de visages, de styles et de tenues.", moi: "Je choisis, je fixe une fiche par personnage et je garde la cohérence.", src: "onboarding-casting.webp", alt: "Les quatre personnages du film, générés par IA, sur fond gris" },
-        { t: "Génération des images", d: "Chaque plan est généré selon une direction artistique commune : décor de bureau d'inspiration rétro, palette moutarde et bleu nuit, accessoires récurrents.",
-          ia: "Génère les images à partir de mes consignes.", moi: "Je dirige le style, je sélectionne et je retouche.", src: "onboarding-generation.webp", alt: "Trois plans générés : le téléphone jaune, l'écran Alerte générale, le data analyst surpris" },
-        { t: "Storyboard", d: "Les huit premiers plans de la scène 1, mis bout à bout pour valider le récit et le rythme avant d'animer.",
-          ia: "Comble les plans manquants.", moi: "Je construis le découpage et je le fais valider.", src: "onboarding-storyboard.webp", alt: "Storyboard de la scène 1 en huit plans", contain: true },
-        { t: "Animation", d: "Les plans validés sont animés (mouvements de caméra, gestes, expressions), puis sélectionnés prise par prise.",
-          ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
-        { t: "Voix et son", d: "Les voix sont générées puis dirigées réplique par réplique : intonation, rythme, pauses. Écoutez la scène 1, sans l'image.",
-          ia: "", moi: "", voice: { title: "Scène 1 · Voix off et dialogues", src: "onboarding-scene1.mp3", poster: "onboarding-casting.webp",
+        { t: "Casting des personnages", d: "Quatre personnages récurrents, définis en amont avec une fiche chacun (visage, tenue, couleurs) pour garantir leur cohérence d'un plan à l'autre.", src: "onboarding-casting.webp", alt: "Les quatre personnages du film, générés par IA, sur fond gris" },
+        { t: "Génération des images", d: "Chaque plan est généré selon une direction artistique commune : décor de bureau d'inspiration rétro, palette moutarde et bleu nuit, accessoires récurrents.", src: "onboarding-generation.webp", alt: "Trois plans générés : le téléphone jaune, l'écran Alerte générale, le data analyst surpris" },
+        { t: "Storyboard", d: "Les huit premiers plans de la scène 1, mis bout à bout pour valider le récit et le rythme avant d'animer.", src: "onboarding-storyboard.webp", alt: "Storyboard de la scène 1 en huit plans", contain: true },
+        { t: "Animation", d: "Les plans validés sont animés (mouvements de caméra, gestes, expressions), puis sélectionnés prise par prise.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
+        { t: "Voix et son", d: "Les voix sont générées avec ElevenLabs, puis dirigées réplique par réplique : intonation, rythme, pauses. Ci-dessous, la consigne donnée pour une réplique du manager, puis la scène 1 à écouter sans l'image.",
+          direction: { who: "Manager", text: "[shout] Il nous faut [pause 0.3s] immédiatement [strong, deep, mean] un état des lieux de nos compétences Data. [urgent] Vous avez [pause 0.2s] 30 minutes [pause 0.3s] [shout] PAS PLUS !" }, voice: { title: "Scène 1 · Voix off et dialogues", src: "onboarding-scene1.mp3", poster: "onboarding-casting.webp",
             lines: [[0, "Ambiance", "Musique de thriller, la tension monte."], [7, "Voix off", "« Nouveau concurrent. Nouveau programme. Nouvelle opportunité. »"], [12, "Manager", "« Il nous faut immédiatement une cartographie détaillée de nos effectifs. »"], [14.5, "Manager", "« Maintenant ! Vous avez 30 minutes ! »"], [16, "Data analyst", "« 30 minutes ?! »"]] } },
-        { t: "Montage final", d: "Montage, musique, sous-titres et générique sont finalisés dans After Effects. Le film complet est présenté ci-dessous.",
-          ia: "", moi: "", src: "onboarding-final.webp", alt: "Image extraite du film final" },
+        { t: "Montage final", d: "Montage, musique, sous-titres et générique sont finalisés dans After Effects. Le film complet est présenté ci-dessous.", src: "onboarding-final.webp", alt: "Image extraite du film final" },
       ] },
     film: { video: "onboarding-ia.mp4", poster: "onboarding-poster.webp", cap: "Le film complet, avec un générique en noms de fantaisie" },
     planche: true,
     gallery: [],
     proud: { h: "Faire sourire d'un sujet sérieux, sans jamais le prendre à la légère.",
-      p: ["Nous sommes partis de situations réelles, travaillées avec les équipes internes : des gestes du quotidien que beaucoup font sans y penser, parce qu'ils semblent sans conséquence.",
-          "Ma fierté, c'est d'avoir poussé ces scènes dans un univers surréaliste, assez fort pour marquer les esprits, et d'avoir offert au groupe un format qui sort de ses communications internes habituelles."] } },
+      p: ["Le film part de situations réelles, travaillées avec les équipes internes : des gestes du quotidien que beaucoup font sans y penser, parce qu'ils semblent sans conséquence.",
+          "Ces scènes sont poussées dans un univers surréaliste, assez fort pour marquer les esprits. Le groupe dispose ainsi d'un format qui sort de ses communications internes habituelles."] } },
 
   { id: "evenement", n: "04", name: "Événement interne",
     disc: "Communication · Slide decks · Photobooth",
@@ -574,6 +572,7 @@ const proc = f => procStrip(f) + `
     <ol class="proc" data-proc>${f.steps.map((st, i) => `
       <li class="pstep" data-i="${i}" id="etape-${i}">
         <div class="ptxt"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${st.t}</h3><p>${st.d}</p>
+          ${st.direction ? `<figure class="vdir"><figcaption>Consigne de voix · ${st.direction.who}</figcaption><p>${st.direction.text.replace(/\[([^\]]+)\]/g, '<span class="tag">$1</span>')}</p></figure>` : ""}
           ${st.listen ? `<button class="play" type="button" data-listen><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>${st.listen.label}</button>` : ""}</div>
         ${visOf(st)}
       </li>`).join("")}</ol>
@@ -633,8 +632,8 @@ function render(id) {
   ${(p.after || []).map(x => section(x, true)).join("")}
   ${p.produced ? section({ label: "Ce que le projet a produit", h: "Une identité, et tout ce qui la fait vivre.", list: p.produced }, true) : ""}
 
-  <section class="c proud" aria-label="Ce dont je suis le plus fière">
-    <div class="s-label"><span class="slabel">Ce dont je suis le plus fière</span></div>
+  <section class="c proud" aria-label="La fierté du projet">
+    <div class="s-label"><span class="slabel">La fierté du projet</span></div>
     <div class="s-body" style="display:grid;gap:24px">
       <h2>${p.proud.h}</h2>
       ${p.proud.p.map(t => `<p class="lead">${t}</p>`).join("")}
@@ -644,14 +643,14 @@ function render(id) {
   ${p.learned ? section({ label: "Ce que j'en retiens", h: p.learned.h || "Avec le recul.", p: [p.learned.p || p.learned] }, true) : ""}
 
   <section class="c sec" id="invite" aria-label="Lecture en profondeur">
-    <div class="s-body" style="grid-column:4/13"><button class="more" type="button" id="go-deep">Envie de voir comment j'ai travaillé ? Passer en lecture en profondeur <span aria-hidden="true">↓</span></button></div>
+    <div class="s-body" style="grid-column:4/13"><button class="more" type="button" id="go-deep">Voir toute la démarche <span aria-hidden="true">↓</span></button></div>
   </section>
 
   <section class="c end" aria-labelledby="h-end">
     <div class="s-body">
       ${p.confidential ? `<p class="note">Certains éléments ont été modifiés pour des raisons de confidentialité.</p>` : ""}
-      <h2 id="h-end">Un projet similaire&nbsp;? Parlons-en.</h2>
-      <div class="row"><a class="cta solid mag" href="index.html#contact" data-home id="end-cta"><span class="lbl">Écrivez-moi <span aria-hidden="true">→</span></span></a><a class="cta" href="index.html#projets" data-home>Tous les projets</a></div>
+      <h2 id="h-end">Un projet similaire en tête&nbsp;?</h2>
+      <div class="row"><a class="cta solid mag" href="index.html#contact" data-home id="end-cta"><span class="lbl">Prendre contact <span aria-hidden="true">→</span></span></a><a class="cta" href="index.html#projets" data-home>Tous les projets</a></div>
     </div>
     <a class="next" href="#${nx.id}" aria-label="Projet suivant : ${nx.name}, ${nx.title}">
       <div class="top"><b>Projet suivant</b><span class="count">${nx.n} / ${String(list.length).padStart(2, "0")}</span></div>

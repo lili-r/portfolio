@@ -369,11 +369,11 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <div class="hero-text">
     <span class="mono dim">Designer graphique &amp; motion · Paris</span>
     <h1>Julie<br>Ramier</h1>
-    <p class="phrase">Je conçois des univers visuels qui se déclinent et prennent vie sur <span class="rot2" id="hero-rot"><span>tous les supports</span></span>.</p>
+    <p class="phrase">Des univers visuels conçus pour se décliner sur <span class="rot2" id="hero-rot"><span>tous les supports</span></span>.</p>
     <p class="sub">Logo, slides, motion, événement, SharePoint.<br>8&nbsp;ans en cabinet de conseil.</p>
     <div class="row hero-row">
-      <a class="cta solid mag" href="#contact" id="hero-cta"><span class="lbl">Écrivez-moi <span aria-hidden="true">→</span></span></a>
-      <span class="cta" title="Le CV sera ajouté au site">Télécharger mon CV</span>
+      <a class="cta solid mag" href="#contact" id="hero-cta"><span class="lbl">Prendre contact <span aria-hidden="true">→</span></span></a>
+      <span class="cta" title="Le CV sera ajouté au site">Télécharger le CV</span>
     </div>
   </div>
   <div class="hero-media" id="media" aria-label="Aperçu des projets"></div>
@@ -415,8 +415,8 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
       <div class="s-body">
         <h2 id="h-about">Huit ans de conseil, un œil de designer.</h2>
         <div class="about">
-          <p>Pendant 8 ans, j'ai été designer en cabinet de conseil. J'ai appris à transformer des sujets complexes en images claires, et des programmes internes en projets dont les équipes ont envie de parler.</p>
-          <p>Aujourd'hui, je travaille en indépendante depuis Paris, avec des entreprises et des cabinets de conseil. Comprendre avant de dessiner, penser système, livrer des fichiers que les équipes peuvent reprendre.</p>
+          <p>Huit ans de design en cabinet de conseil, à transformer des sujets complexes en images claires, et des programmes internes en projets dont les équipes ont envie de parler.</p>
+          <p>Aujourd'hui en indépendante, depuis Paris, avec des entreprises et des cabinets de conseil. Une méthode : comprendre avant de dessiner, penser système, livrer des fichiers que les équipes peuvent reprendre.</p>
         </div>
       </div>
     </div>
@@ -457,7 +457,7 @@ const P = [
     title: "Un programme de transformation, rendu clair et désirable", sum: "", meta: [] },
   { id: "kaizo", n: "02", name: "Kaizo", year: "2026", disc: "Atelier de branding · Naming · Identité",
     title: "Kaizo, donner un visage à un produit tech",
-    sum: "Une solution développée par une équipe tech, sans designer. J'ai réuni les parties prenantes en atelier pour lui trouver un nom, puis je lui ai donné un visage : un logo, une identité et une mascotte poulpe.",
+    sum: "Une solution développée par une équipe tech, sans designer. Un atelier avec les parties prenantes pour lui trouver un nom, puis un visage : un logo, une identité et une mascotte poulpe.",
     meta: [["Année","2026"],["Rôle","Directrice artistique · Animation d'ateliers"],["Livrables","Atelier de branding, nom, logo, logo animé, mascotte, identité visuelle"]] },
   { id: "onboarding", n: "03", name: "Onboarding en IA", year: "2026", disc: "Motion · Vidéo · IA générative",
     title: "Une vidéo d'onboarding réalisée en IA générative", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Motion design, vidéo, IA générative"]] },
@@ -471,7 +471,7 @@ const P = [
     title: "Utah, le logo d'un coffee shop dog-friendly", sum: "Création du logo d'Utah, un coffee shop qui accueille les chiens. Étude de cas en cours de rédaction.", meta: [["Disciplines","Logo, identité"]] },
   { id: "voeux", n: "08", name: "Carte de vœux", year: "Bientôt", disc: "Projet sous embargo", teaser: true,
     title: "Une carte de vœux, encore sous embargo",
-    sum: "Ce projet sera dévoilé dès que la carte aura été envoyée. En attendant, une étoile s'en est échappée et s'est posée dans mon header.",
+    sum: "Ce projet sera dévoilé dès que la carte aura été envoyée. En attendant, une étoile s'en est échappée et s'est posée en haut de cette page.",
     meta: [["Projet","Carte de vœux"],["Statut","Sous embargo, dévoilement prochainement"]] },
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
@@ -592,7 +592,7 @@ const K = {
       <div class="k1" style="display:grid;gap:clamp(40px,5vw,64px)">
         <h2 id="h-contact"><span class="line"><span style="--i:0">Un projet,</span></span><span class="line"><span style="--i:1">une mission,</span></span><span class="line"><span style="--i:2">une idée ?</span></span></h2>
         <div><a class="mail" href="#contact">${MAIL}</a></div>
-        <div class="row"><span class="cta solid" style="--i:0">Parlons de votre projet →</span><span class="cta" style="--i:1">LinkedIn ↗</span></div>
+        <div class="row"><span class="cta solid" style="--i:0">Prendre contact →</span><span class="cta" style="--i:1">LinkedIn ↗</span></div>
       </div>`,
     init(root) {
       const el = root.querySelector(".k1");
@@ -604,7 +604,7 @@ const K = {
   2: { name: "Magnétique", html: `
       <div class="k2" style="display:grid;row-gap:48px">
         <h2 id="h-contact">Un projet, une mission, une idée ?</h2>
-        <div class="zone"><button class="orb" type="button"><span class="lbl">Écrivez-moi</span></button></div>
+        <div class="zone"><button class="orb" type="button"><span class="lbl">Prendre contact</span></button></div>
         <div class="copyrow"><span class="addr">${MAIL}</span><button class="copy mono" type="button"><span>Copier l'adresse</span><span>Adresse copiée ✓</span></button></div>
       </div>`,
     init(root) {
@@ -648,7 +648,7 @@ const K = {
       <div class="k4" style="display:grid;gap:clamp(40px,5vw,64px)">
         <h2 id="h-contact">Un <span class="rot" aria-live="off"><span>logo</span></span><br>à faire vivre ?</h2>
         <div class="dots" aria-hidden="true"></div>
-        <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
+        <div class="row"><span class="cta solid">Prendre contact →</span><span class="dim">${MAIL}</span></div>
       </div>`,
     init(root) {
       const words = ["logo", "programme", "événement", "univers", "lancement"], T = 2600;
@@ -679,7 +679,7 @@ K[5] = { name: "Lettres", html: `
       <div class="k5" style="display:grid;gap:clamp(40px,5vw,64px)">
         <h2 id="h-contact" aria-label="Un projet, une mission, une idée ?"></h2>
         <div class="bar"></div>
-        <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
+        <div class="row"><span class="cta solid">Prendre contact →</span><span class="dim">${MAIL}</span></div>
       </div>`,
   init(root) {
     const h = root.querySelector("h2"); let c = 0;
@@ -689,7 +689,7 @@ K[5] = { name: "Lettres", html: `
 K[6] = { name: "Contour puis plein", html: `
       <div class="k6" style="display:grid;gap:clamp(40px,5vw,64px)">
         <h2 id="h-contact" aria-label="Un projet, une mission, une idée ?">${["Un projet,", "une mission,", "une idée ?"].map((l, i) => `<span class="ln" style="--i:${i}" aria-hidden="true"><span class="o">${l}</span><span class="f">${l}</span></span>`).join("")}</h2>
-        <div class="row"><span class="cta solid">Parlons de votre projet →</span><span class="dim">${MAIL}</span></div>
+        <div class="row"><span class="cta solid">Prendre contact →</span><span class="dim">${MAIL}</span></div>
       </div>`,
   init(root) { return playOnView(root.querySelector(".k6")); } };
 let api = { replay() {}, stop() {} };

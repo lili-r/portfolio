@@ -21,7 +21,9 @@
 - Confidentialité : ne jamais afficher le nom du client aéronautique (logo effacé sur la blouse, fichiers renommés). Prévenir Julie si un nouveau visuel le montre.
 - Orbit = projet fictif : ne jamais le présenter comme un projet client.
 - Business de templates de mariage (GIF « opening-door » attendu, jamais reçu) : rester discret.
-- Pas d'écriture inclusive. Ton chaleureux, design, structuré.
+- Pas d'écriture inclusive. Ton chaleureux, design, structuré, « sympa mais pro ».
+- **Forme neutre, pas de « je »** (choix de Julie, 16/11) : tournures impersonnelles ou nominales. CTA « Prendre contact ». Label « La fierté du projet ».
+- Règle visuels clients : design seul, aucun vrai texte, aucun visage de collaborateur, jamais le nom/logo du groupe (voir `docs/validation-com.md`).
 - Méthode de Julie : tester d'abord, figer les règles ensuite (`docs/da.md` reste à écrire).
 - Commits au nom de Julie Ramier, poussés sur `main` à chaque étape.
 
