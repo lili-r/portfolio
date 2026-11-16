@@ -185,6 +185,15 @@ button { font: inherit; color: inherit; }
 .panel .vis { border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--slate); }
 .panel .vis img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .panel .vis.todo-tile { border: 1px dashed #4a4844; background: none; display: grid; place-items: center; align-content: center; gap: 8px; color: var(--haze); font-size: 14px; text-align: center; padding: 16px; }
+.panel .vis.script { aspect-ratio: auto; max-height: 460px; overflow: auto; background: #f3f0e8; color: #1d1c1a; padding: clamp(20px, 3vw, 36px); font-family: "Courier Prime", "Courier New", Courier, monospace; font-size: 14px; line-height: 1.55; display: grid; gap: 12px; align-content: start; border-radius: 14px; }
+.script .sh { font-weight: 700; letter-spacing: .04em; }
+.script .act { color: #4a4844; }
+.script .who2 { text-align: center; font-weight: 700; margin-top: 6px; }
+.script .line { text-align: center; max-width: 34ch; justify-self: center; }
+.play { justify-self: start; display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--chalk); background: var(--chalk); color: var(--night); border-radius: 999px; padding: 11px 18px; font-size: 14px; cursor: pointer; transition: background .25s, border-color .25s; }
+.play:hover { background: var(--blush); border-color: var(--blush); }
+.play svg { width: 12px; height: 12px; }
+.panel .vis video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
 .panel .txt { display: grid; gap: 14px; align-content: start; }
 .panel h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; line-height: 1.1; }
 .panel .who { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 12px; font-size: 14px; color: var(--bone); border-top: 1px solid var(--rule); padding-top: 14px; }
@@ -374,24 +383,43 @@ const PROJETS = [
 
   { id: "onboarding", n: "03", name: "Onboarding en IA",
     disc: "Motion · Vidéo · IA générative",
-    title: "Une vidéo d'onboarding réalisée en IA générative",
-    sum: "L'IA pour aller vite, le regard de designer pour que ce soit juste. " + todo("pour qui, dans quel but"),
+    title: "Un thriller de bureau pour parler de données",
+    sum: "Un faux thriller, avec téléphone jaune, alerte générale et compte à rebours, pour faire passer les bonnes pratiques de Data Management sans faire un cours. Tout est généré par IA, de l'image au son, et chaque choix reste un choix de designer. " + todo("pour qui, dans quel cadre"),
     hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
-    fiche: [["Année", todo("année")], ["Rôle", todo("ton rôle")], ["Outils", todo("outils d'IA utilisés")], ["Livrables", "Vidéo d'onboarding"]],
+    fiche: [["Année", todo("année")], ["Rôle", "Productrice · " + todo("script, DA, montage ?")], ["Durée", "2 minutes"], ["Outils", "Nano Banana, Stable Diffusion, ElevenLabs " + todo("à confirmer")], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
     deep: [
-      { label: "Contexte", h: "Accueillir les nouveaux arrivants, en vidéo.", p: [todo("le contexte, le public, la durée de la vidéo")] },
+      { label: "Contexte", h: "Accueillir les nouveaux arrivants, en vidéo.", p: [todo("le contexte, le public, l'objectif du film")] },
     ],
     process: { label: "Fabrication", h: "De l'idée au film, en six étapes.",
-      p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer. " + todo("à valider : l'ordre et le contenu des étapes")],
+      p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer. Cliquez sur une étape pour la voir."],
       steps: [
-        { t: "Script", d: "Écrire ce que la vidéo doit faire comprendre, scène par scène, et le ton juste pour les nouveaux arrivants.", ia: "Propose des pistes et des variantes de formulation.", moi: "Je fixe le message, le rythme et je tranche.", todo: "Extrait du script" },
-        { t: "Casting des personnages", d: "Définir les personnages avant tout le reste, pour qu'ils restent les mêmes d'une image à l'autre.", ia: "Génère des propositions de visages, de styles et de tenues.", moi: "Je choisis, je fixe une fiche par personnage et je garde la cohérence.", todo: "Planche de casting des personnages" },
-        { t: "Génération des images", d: "Produire les décors et les plans clés, dans une direction artistique commune.", ia: "Génère les images à partir de mes consignes.", moi: "Je dirige le style, je sélectionne et je retouche.", todo: "Sélection d'images générées" },
-        { t: "Storyboard", d: "Assembler les images en séquence pour valider le récit avant d'animer.", ia: "Comble les plans manquants.", moi: "Je construis le découpage et le fais valider.", todo: "Storyboard" },
-        { t: "Animation", d: "Donner du mouvement aux plans validés.", ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", todo: "Extrait animé" },
-        { t: "Montage final", d: "Monter, rythmer, ajouter la musique, la voix et les titres.", ia: "Aide sur la voix ou la musique, si besoin.", moi: "Je monte, je rythme et je livre le film.", src: "onboarding-video.webp", alt: "Image extraite de la vidéo finale" },
+        { t: "Script", d: "Tout commence par l'écriture : un faux thriller de bureau, avec ses codes (musique, voix off, tension), pour parler de bonnes pratiques Data sans faire un cours.",
+          ia: "Propose des pistes et des variantes de répliques.", moi: "J'écris le récit, je fixe le ton et le rythme.",
+          script: `<span class="sh">INTRODUCTION – ALERTE GÉNÉRALE</span>
+<span class="act">Écran noir. Une musique de thriller démarre. Une voix off, très sérieuse.</span>
+<span class="who2">VOIX OFF</span><span class="line">« Nouveau concurrent. Nouveau programme aéronautique. Nouvelle opportunité. »</span>
+<span class="act">Plan sur une salle de réunion. Un téléphone sonne. Un manager décroche. Son visage change.</span>
+<span class="who2">MANAGER</span><span class="line">« Ils veulent une réponse aujourd'hui. »</span>
+<span class="act">Il se tourne vers un Data Analyst.</span>
+<span class="who2">MANAGER</span><span class="line">« Il nous faut immédiatement un état des lieux de nos compétences Data. Tu as 30 minutes. »</span>
+<span class="act">Le Data Analyst avale sa salive.</span>
+<span class="who2">DATA ANALYST</span><span class="line">« …30 minutes ? »</span>
+<span class="act">L'écran affiche : ALERTE GÉNÉRALE</span>`,
+          listen: { label: "Écouter la scène 1", src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 20 } },
+        { t: "Casting des personnages", d: "Quatre personnages récurrents, définis avant tout le reste : le manager au gilet moutarde, le data analyst, et deux collaboratrices. Chacun a sa fiche pour rester identique d'un plan à l'autre.",
+          ia: "Génère des propositions de visages, de styles et de tenues.", moi: "Je choisis, je fixe une fiche par personnage et je garde la cohérence.", src: "onboarding-casting.webp", alt: "Les quatre personnages du film, générés par IA, sur fond gris" },
+        { t: "Génération des images", d: "Chaque plan est généré dans une direction artistique commune : bureaux un peu rétro, téléphone jaune, palette moutarde et bleu nuit.",
+          ia: "Génère les images à partir de mes consignes.", moi: "Je dirige le style, je sélectionne et je retouche.", src: "onboarding-generation.webp", alt: "Trois plans générés : le téléphone jaune, l'écran Alerte générale, le data analyst surpris" },
+        { t: "Storyboard", d: "Les huit premiers plans de la scène 1, mis bout à bout pour valider le récit et le rythme avant d'animer.",
+          ia: "Comble les plans manquants.", moi: "Je construis le découpage et je le fais valider.", src: "onboarding-storyboard.webp", alt: "Storyboard de la scène 1 en huit plans", contain: true },
+        { t: "Animation", d: "Les plans validés prennent vie : mouvements de caméra, gestes, expressions.",
+          ia: "Anime les images fixes en courtes séquences.", moi: "Je choisis les prises et je corrige ce qui ne va pas.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
+        { t: "Montage final", d: "Montage, musique, voix off, sous-titres et générique : un film de deux minutes. Il est juste en dessous, en entier.",
+          ia: "Génère les voix et l'ambiance sonore.", moi: "Je monte, je rythme et je livre le film.", src: "onboarding-poster.webp", alt: "Image du film final" },
       ] },
-    gallery: [{ src: "onboarding-video.webp", alt: "Image extraite de la vidéo", cap: "Image extraite de la vidéo", w: 12, ar: "1200 / 679" }, { todo: "La vidéo elle-même, ou un extrait", w: 6 }, { todo: "Storyboard", w: 6 }],
+    film: { video: "onboarding-ia.mp4", poster: "onboarding-poster.webp", cap: "Le film complet, avec un générique en noms de fantaisie" },
+    planche: true,
+    gallery: [],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
 
   { id: "evenement", n: "04", name: "Événement interne",
@@ -611,9 +639,27 @@ function wireProc() {
     const st = PROC.steps[i];
     tabs.forEach((b, k) => { b.setAttribute("aria-selected", String(k === i)); b.tabIndex = k === i ? 0 : -1; });
     panel.setAttribute("aria-labelledby", "pt-" + i);
-    panel.innerHTML = `${st.src ? `<div class="vis"><img src="${A}${st.src}" alt="${st.alt || st.t}"></div>` : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`}
+    const vis = st.script ? `<div class="vis script" tabindex="0" aria-label="Extrait du script">${st.script}</div>`
+      : st.clip ? `<div class="vis"><video src="${A}${st.clip.src}" poster="${A}${st.clip.poster}" muted playsinline preload="metadata" aria-label="${st.t}"></video></div>`
+      : st.src ? `<div class="vis"${st.contain ? ' style="aspect-ratio:auto;background:none"' : ""}><img src="${A}${st.src}" alt="${st.alt || st.t}"${st.contain ? ' style="height:auto"' : ""}></div>` : `<div class="vis todo-tile">${st.todo}<span class="todo">Visuel à fournir</span></div>`;
+    panel.innerHTML = `${vis}
       <div class="txt"><h3>${st.t}</h3><p class="lead" style="font-size:16px">${st.d}</p>
-      <div class="who"><b>L'IA</b><span>${st.ia}</span><b>Moi</b><span class="me">${st.moi}</span></div></div>`;
+      <div class="who"><b>L'IA</b><span>${st.ia}</span><b>Moi</b><span class="me">${st.moi}</span></div>
+      ${st.listen ? `<button class="play" type="button" data-listen><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>${st.listen.label}</button>` : ""}</div>`;
+    const v = panel.querySelector("video");
+    if (v && st.clip) { const { start = 0, end } = st.clip; v.currentTime = start;
+      v.addEventListener("timeupdate", () => { if (end && v.currentTime >= end) v.currentTime = start; });
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { v.loop = !end; v.play().catch(() => {}); } }
+    const lb = panel.querySelector("[data-listen]");
+    if (lb) lb.addEventListener("click", () => {
+      const L = st.listen, box = panel.querySelector(".vis");
+      box.className = "vis"; box.removeAttribute("tabindex");
+      box.innerHTML = `<video src="${A}${L.src}" poster="${A}${L.poster}" playsinline controls aria-label="${L.label}"></video>`;
+      const vv = box.querySelector("video"); vv.currentTime = L.start || 0;
+      vv.addEventListener("timeupdate", () => { if (L.end && vv.currentTime >= L.end) vv.pause(); });
+      vv.play().catch(() => {});
+      lb.hidden = true;
+    });
     panel.classList.remove("enter"); if (anim) { void panel.offsetWidth; panel.classList.add("enter"); }
   };
   tabs.forEach((b, i) => { b.addEventListener("click", () => show(i, true)); b.addEventListener("keydown", e => {
