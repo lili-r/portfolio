@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Space+Mono&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Space+Mono&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Archivo:wdth,wght@125,300;125,400&family=Syne:wght@400;500&display=swap">
 <style>
 @view-transition { navigation: auto; }
 /* Layout : un seul conteneur 12 colonnes pour tout le site. Header = texte (col. 1–5) + images seules (col. 7–12). Sections = label (col. 1–3) + contenu (col. 4–12), beaucoup d'air. */
@@ -330,6 +330,8 @@ a { color: inherit; }
 .switch .ebtn[aria-pressed="true"], .switch .nbtn[aria-pressed="true"] { background: var(--chalk); color: var(--night); }
 .switch .kbtn.wide, .switch .nbtn.wide { width: auto; padding: 0 12px; }
 .switch .kbtn { height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; }
+.switch .xbtn { height: 30px; border: 0; border-radius: 999px; background: none; color: var(--haze); font-size: 13px; cursor: pointer; padding: 0 10px; }
+.switch .xbtn[aria-pressed="true"] { background: var(--blush); color: var(--night); }
 .switch .kbtn[aria-pressed="true"] { background: var(--blush); color: var(--night); }
 @media (max-width: 640px) { .switch { flex-wrap: wrap; justify-content: center; width: calc(100vw - 32px); border-radius: 22px; } }
 
@@ -367,17 +369,55 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   .pile .p { transition: none; translate: none; }
   .shot:hover .img { scale: 1; }
 }
+
+/* ───── Tests typographiques (data-type sur <html>) ───── */
+:root { --h-track: -.045em; --h1-track: -.06em; --h-weight: 300; --h-case: none; --h-scale: 1; }
+.hero-text h1, .s-body > h2, .contact h2, .proj h3, .skill h3 { text-transform: var(--h-case); font-weight: var(--h-weight); }
+.hero-text h1 { letter-spacing: var(--h1-track); font-size: calc(clamp(56px, 8.4vw, 128px) * var(--h-scale)); }
+.s-body > h2 { letter-spacing: var(--h-track); font-size: calc(clamp(36px, 4.6vw, 68px) * var(--h-scale)); }
+.contact h2 { letter-spacing: var(--h1-track); }
+.proj h3, .skill h3 { letter-spacing: var(--h-track); }
+/* 2 · Mixte : grotesque fine + serif italique sur les mots clés */
+[data-type="mixte"] .hero-text h1 .w2, [data-type="mixte"] .rot2 span { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; }
+[data-type="mixte"] .rot2 span { font-size: 1.12em; line-height: 1; }
+/* 3 · Éditoriale : serif fine partout dans les titres */
+[data-type="editoriale"] { --f-display: "Instrument Serif", Georgia, serif; --h-track: -.01em; --h1-track: -.025em; --h-weight: 400; --h-scale: 1.06; }
+[data-type="editoriale"] .rot2 span { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 1.1em; line-height: 1; }
+/* 4 · Didone : contraste fort, très mode */
+[data-type="didone"] { --f-display: "Bodoni Moda", Didot, Georgia, serif; --h-track: -.02em; --h1-track: -.035em; --h-weight: 400; --h-scale: .96; }
+[data-type="didone"] .hero-text h1 .w2 { font-style: italic; }
+/* 5 · Étendue : capitales larges, inspirées de tes références */
+[data-type="etendue"] { --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif; --h-track: .01em; --h1-track: -.01em; --h-weight: 300; --h-case: uppercase; --h-scale: .74; }
+[data-type="etendue"] .hero-text h1 { line-height: .95; }
+[data-type="etendue"] .s-body > h2, [data-type="etendue"] .contact h2 { line-height: 1.02; }
+/* 6 · Syne : grotesque à caractère */
+[data-type="syne"] { --f-display: "Syne", "Helvetica Neue", Arial, sans-serif; --h-track: -.035em; --h1-track: -.05em; --h-weight: 400; --h-scale: .92; }
+
+/* ───── Structure légère (data-struct="legere") ───── */
+.nav .nn { display: none; font-style: normal; margin-right: 8px; color: var(--rule); font-variant-numeric: tabular-nums; transition: color .25s; }
+[data-struct="legere"] .nav .nn { display: inline; }
+[data-struct="legere"] .nav ul a:hover .nn { color: var(--blush); }
+[data-struct="legere"] .nav { border-bottom: 1px solid var(--rule); }
+[data-struct="legere"] .rule { position: relative; overflow: visible; }
+[data-struct="legere"] .rule::before, [data-struct="legere"] .rule::after { content: ""; position: absolute; top: -6px; width: 13px; height: 13px; background: linear-gradient(var(--haze), var(--haze)) 6px 0 / 1px 13px no-repeat, linear-gradient(var(--haze), var(--haze)) 0 6px / 13px 1px no-repeat; }
+[data-struct="legere"] .rule::before { left: -6px; } [data-struct="legere"] .rule::after { right: -6px; }
+[data-struct="legere"] .s-body { border-left: 1px solid var(--rule); padding-left: clamp(20px, 2.4vw, 40px); }
+[data-struct="legere"] .s-label { position: relative; }
+[data-struct="legere"] .hero { position: relative; }
+[data-struct="legere"] .hero::after { content: "Paris · Missions freelance · 2026"; position: absolute; left: 0; bottom: calc(var(--section) * .45); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--haze); border-top: 1px solid var(--rule); padding-top: 12px; width: min(100%, 360px); }
+[data-struct="legere"] .proj .frame { outline: 1px solid var(--rule); outline-offset: 8px; }
+@media (max-width: 900px) { [data-struct="legere"] .s-body { border-left: 0; padding-left: 0; } [data-struct="legere"] .hero::after { display: none; } }
 </style>
 
 <nav class="c nav" aria-label="Navigation du site">
   <span class="brand">Julie Ramier</span>
-  <ul><li><a href="#projets">Projets</a></li><li><a href="#savoir-faire">Savoir-faire</a></li><li><a href="#a-propos">À propos</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul><li><a href="#projets"><i class="nn">01</i>Projets</a></li><li><a href="#savoir-faire"><i class="nn">02</i>Savoir-faire</a></li><li><a href="#a-propos"><i class="nn">03</i>À propos</a></li><li><a href="#contact"><i class="nn">04</i>Contact</a></li></ul>
 </nav>
 
 <header class="c hero">
   <div class="hero-text">
     <span class="mono dim">Designer graphique &amp; motion · Paris</span>
-    <h1>Julie<br>Ramier</h1>
+    <h1><span class="w1">Julie</span><br><span class="w2">Ramier</span></h1>
     <p class="phrase">Des univers visuels conçus pour se décliner sur <span class="rot2" id="hero-rot"><span>tous les supports</span></span>.</p>
     <p class="sub">Logo, slides, motion, événement, SharePoint.<br>8&nbsp;ans en cabinet de conseil.</p>
     <div class="row hero-row">
@@ -450,7 +490,10 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 <nav class="switch" aria-label="Variantes à tester">
   <div class="grp"><span class="mono dim">Header</span>
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
-  <div class="grp"><span class="mono dim">Nouvelle DA</span><a href="accueil-grille.html">Grille</a></div>
+  <div class="grp"><span class="mono dim">Typo</span>
+    <button class="tbtn xbtn" type="button" data-t="actuelle">Actuelle</button><button class="tbtn xbtn" type="button" data-t="mixte">Mixte</button><button class="tbtn xbtn" type="button" data-t="editoriale">Éditoriale</button><button class="tbtn xbtn" type="button" data-t="didone">Didone</button><button class="tbtn xbtn" type="button" data-t="etendue">Étendue</button><button class="tbtn xbtn" type="button" data-t="syne">Syne</button></div>
+  <div class="grp"><span class="mono dim">Structure</span>
+    <button class="sbtn xbtn" type="button" data-s="aucune">Avant</button><button class="sbtn xbtn" type="button" data-s="legere">Légère</button></div>
 </nav>
 
 
@@ -764,4 +807,15 @@ document.addEventListener("click", e => {
   location.href = "projet.html#" + id;
 });
 addEventListener("pageshow", () => document.querySelectorAll("[style*='view-transition-name']").forEach(el => el.style.viewTransitionName = ""));
+
+/* Tests typo + structure (mémorisés) */
+(() => {
+  const root = document.documentElement, get = k => { try { return localStorage.getItem(k); } catch { return null; } }, set = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+  const apply = (attr, val, sel, key) => { root.dataset[attr] = val; set(key, val);
+    document.querySelectorAll(sel).forEach(b => b.setAttribute("aria-pressed", String(b.dataset[attr === "type" ? "t" : "s"] === val))); };
+  apply("type", get("da-type") || "actuelle", ".tbtn", "da-type");
+  apply("struct", get("da-struct") || "legere", ".sbtn", "da-struct");
+  document.querySelectorAll(".tbtn").forEach(b => b.addEventListener("click", () => apply("type", b.dataset.t, ".tbtn", "da-type")));
+  document.querySelectorAll(".sbtn").forEach(b => b.addEventListener("click", () => apply("struct", b.dataset.s, ".sbtn", "da-struct")));
+})();
 </script>
