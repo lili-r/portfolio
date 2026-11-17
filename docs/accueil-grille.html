@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Accueil en grille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400&family=Inter:wght@400;500&display=swap">
+<style>
+/* Concept « planche de montage » : toute la page est une grille de filets visibles, comme une planche d'imprimeur.
+   Chaque contenu occupe une case ; des traits de coupe marquent les angles. Mode sombre uniquement. */
+:root {
+  --ink: #0e0e0d;      /* fond */
+  --cell: #141413;     /* case au survol */
+  --line: #2c2b28;     /* filets de la grille */
+  --paper: #ecebe6;    /* texte principal */
+  --mute: #8f8b83;     /* texte secondaire */
+  --blush: #e7b9b6;    /* accent (mots qui changent, survols) */
+  --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --out: cubic-bezier(.16,1,.3,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--ink); color: var(--paper); }
+body { margin: 0; font-family: var(--f-body); font-size: 15px; line-height: 1.55; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 32px; }
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blush); outline-offset: 3px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* La planche */
+.sheet { max-width: 1360px; margin-inline: auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.cell { position: relative; min-width: 0; padding: clamp(16px, 2vw, 28px); }
+.cell + .cell { border-left: 1px solid var(--line); }
+/* traits de coupe aux angles */
+.mark::before, .mark::after { content: ""; position: absolute; width: 11px; height: 11px; pointer-events: none; }
+.mark::before { left: -6px; top: -6px; background: linear-gradient(var(--mute), var(--mute)) 5px 0 / 1px 11px no-repeat, linear-gradient(var(--mute), var(--mute)) 0 5px / 11px 1px no-repeat; }
+.mark::after { right: -6px; bottom: -6px; background: linear-gradient(var(--mute), var(--mute)) 5px 0 / 1px 11px no-repeat, linear-gradient(var(--mute), var(--mute)) 0 5px / 11px 1px no-repeat; }
+
+.label { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.title { font-family: var(--f-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; line-height: .98; }
+
+/* Bandeau */
+.band { text-align: center; padding-block: 10px; }
+.band .label { letter-spacing: .2em; }
+.band b { color: var(--paper); font-weight: 400; }
+
+/* Navigation */
+.nav .cell { padding-block: 18px; display: flex; align-items: center; }
+.nav .brand { grid-column: span 4; font-family: var(--f-display); font-size: 20px; letter-spacing: .02em; text-transform: uppercase; font-weight: 300; text-decoration: none; }
+.nav a.item { grid-column: span 2; text-decoration: none; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); transition: color .25s, background .25s; }
+.nav a.item:hover { color: var(--paper); background: var(--cell); }
+.nav a.item span { color: var(--line); margin-right: 10px; font-variant-numeric: tabular-nums; transition: color .25s; }
+.nav a.item:hover span { color: var(--blush); }
+
+/* Accueil */
+.hero .who { grid-column: span 5; display: grid; align-content: space-between; gap: 48px; min-height: clamp(460px, 52vw, 680px); }
+.hero h1 { font-size: clamp(64px, 9.4vw, 148px); letter-spacing: -.035em; line-height: .84; }
+.hero h1 span { display: block; }
+.hero h1 span + span { padding-left: .5em; }
+.hero .phrase { font-family: var(--f-display); font-weight: 300; font-size: clamp(22px, 2vw, 30px); line-height: 1.2; letter-spacing: -.01em; max-width: 19ch; }
+.rot { display: inline-grid; vertical-align: bottom; color: var(--blush); }
+.rot > span { grid-area: 1 / 1; white-space: nowrap; transition: opacity .5s, translate .6s var(--out); }
+.rot > .in { opacity: 0; translate: 0 .5em; }
+.rot > .out { opacity: 0; translate: 0 -.5em; }
+.hero .sub { color: var(--mute); max-width: 34ch; font-size: 14px; }
+.hero .acts { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 13px 20px; border: 1px solid var(--paper); text-decoration: none; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; transition: background .3s, color .3s, border-color .3s; }
+.btn:hover, .btn:focus-visible { background: var(--paper); color: var(--ink); }
+.btn.ghost { border-color: var(--line); color: var(--mute); }
+.btn.ghost:hover { border-color: var(--paper); color: var(--ink); }
+.hero .pic { grid-column: span 4; padding: 0; overflow: hidden; }
+.hero .pic img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.05); transition: filter 1.2s var(--out), scale 1.6s var(--out); }
+.hero .pic:hover img { filter: grayscale(0); scale: 1.02; }
+.hero .side { grid-column: span 3; display: grid; grid-template-rows: 1fr auto; gap: 24px; }
+.vert { writing-mode: vertical-rl; rotate: 180deg; font-family: var(--f-display); font-weight: 200; text-transform: uppercase; font-size: clamp(34px, 3.6vw, 58px); letter-spacing: .04em; line-height: 1; justify-self: end; color: var(--paper); }
+.index { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 13px; }
+.index li { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; border-top: 1px solid var(--line); padding-top: 8px; }
+.index b { font-weight: 400; color: var(--mute); font-variant-numeric: tabular-nums; }
+.index i { font-style: normal; color: var(--mute); font-variant-numeric: tabular-nums; }
+
+/* Projets */
+.work .head { grid-column: span 4; display: grid; align-content: start; gap: 22px; }
+.work .head .inner { position: sticky; top: 24px; display: grid; gap: 22px; }
+.work .head h2 { font-size: clamp(48px, 6vw, 92px); letter-spacing: -.03em; }
+.work .head p { color: var(--mute); max-width: 28ch; }
+.work .grid { grid-column: span 8; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.proj { position: relative; display: grid; grid-template-rows: auto 1fr; text-decoration: none; border-bottom: 1px solid var(--line); min-width: 0; cursor: pointer; background: none; border-top: 0; border-left: 0; border-right: 0; padding: 0; text-align: left; color: inherit; font: inherit; }
+.proj:nth-child(odd) { border-right: 1px solid var(--line); }
+.proj:nth-last-child(-n+2) { border-bottom: 0; }
+.proj .top { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px; padding: 18px 20px 14px; }
+.proj .n { font-family: var(--f-display); font-weight: 200; font-size: clamp(44px, 4.4vw, 68px); line-height: .8; color: var(--line); font-variant-numeric: tabular-nums; transition: color .4s; }
+.proj h3 { font-family: var(--f-display); font-weight: 400; font-size: 17px; letter-spacing: .02em; text-transform: uppercase; }
+.proj .meta { font-size: 12.5px; color: var(--mute); margin-top: 4px; }
+.proj .img { position: relative; overflow: hidden; aspect-ratio: 4 / 3; margin: 0 20px 20px; background: var(--cell); }
+.proj .img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) brightness(.85); transition: filter .8s var(--out), scale 1.2s var(--out); }
+.proj .img.contain img { object-fit: contain; padding: 14%; }
+.proj .img.light { background: #e9e6df; }
+.proj:hover .n, .proj:focus-visible .n { color: var(--blush); }
+.proj:hover .img img, .proj:focus-visible .img img { filter: none; scale: 1.03; }
+.proj .go { position: absolute; right: 30px; bottom: 30px; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--paper); color: var(--paper); background: rgba(14,14,13,.55); opacity: 0; translate: 0 6px; transition: opacity .3s, translate .4s var(--out); }
+.proj:hover .go, .proj:focus-visible .go { opacity: 1; translate: 0 0; }
+/* décalage en escalier, comme une planche contact */
+.work .grid .proj:nth-child(even) { margin-top: clamp(40px, 7vw, 110px); }
+.work .grid .proj:nth-child(even):nth-last-child(-n+2) { margin-bottom: 0; }
+.proj .ph { display: grid; place-items: center; height: 100%; font-family: var(--f-display); font-weight: 200; text-transform: uppercase; color: var(--mute); letter-spacing: .1em; font-size: 13px; border: 1px dashed var(--line); }
+/* carte de vœux à gratter */
+.scratch { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 18px; background: #1a1a18; }
+.scratch strong { font-family: var(--f-display); font-weight: 300; font-size: clamp(20px, 1.9vw, 28px); line-height: 1.15; }
+.scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+.scratch .hint { position: absolute; left: 12px; bottom: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #3b3a46; pointer-events: none; transition: opacity .4s; }
+
+/* Savoir-faire : tableau */
+.skills .head { grid-column: span 4; }
+.skills .head h2 { font-size: clamp(34px, 3.4vw, 52px); letter-spacing: -.02em; overflow-wrap: break-word; }
+.skills .head p { color: var(--mute); margin-top: 18px; max-width: 26ch; }
+.skills .tbl { grid-column: span 8; padding: 0; }
+.skills .tr { display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1.2fr) 40px; gap: 16px; align-items: baseline; padding: 22px 24px; border-bottom: 1px solid var(--line); transition: background .3s; }
+.skills .tr:last-child { border-bottom: 0; }
+.skills .tr:hover { background: var(--cell); }
+.skills .tr b { font-weight: 400; color: var(--mute); font-variant-numeric: tabular-nums; font-size: 13px; }
+.skills .tr h3 { font-family: var(--f-display); font-weight: 300; text-transform: uppercase; font-size: clamp(22px, 2.2vw, 32px); letter-spacing: .01em; }
+.skills .tr p { color: var(--mute); font-size: 14px; }
+.skills .tr i { font-style: normal; color: var(--line); text-align: right; transition: color .3s, translate .4s var(--out); }
+.skills .tr:hover i { color: var(--blush); translate: 4px 0; }
+
+/* À propos */
+.about .photo { grid-column: span 3; padding: 0; overflow: hidden; }
+.about .photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); }
+.about .txt { grid-column: span 6; display: grid; gap: 22px; align-content: start; }
+.about .txt h2 { font-size: clamp(34px, 3.8vw, 56px); letter-spacing: -.02em; }
+.about .txt p { color: var(--paper); font-size: clamp(16px, 1.3vw, 18px); max-width: 52ch; }
+.about .txt p + p { color: var(--mute); }
+.about .method { grid-column: span 3; display: grid; align-content: start; gap: 12px; }
+.about .method ol { list-style: none; padding: 0; margin: 0; display: grid; }
+.about .method li { border-top: 1px solid var(--line); padding: 12px 0; font-family: var(--f-display); font-weight: 300; font-size: 18px; text-transform: uppercase; letter-spacing: .02em; }
+.about .method li span { display: block; font-family: var(--f-body); text-transform: none; font-size: 13px; color: var(--mute); letter-spacing: 0; margin-top: 4px; }
+.li { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); border-bottom: 1px solid var(--line); padding-bottom: 4px; transition: color .25s, border-color .25s; justify-self: start; }
+.li:hover { color: var(--paper); border-color: var(--blush); }
+
+/* Contact : lueur */
+.contact .big { grid-column: span 8; position: relative; overflow: hidden; isolation: isolate; min-height: clamp(320px, 34vw, 460px); display: grid; align-content: space-between; gap: 32px; }
+.contact .glow { position: absolute; z-index: -1; width: 70%; aspect-ratio: 1; border-radius: 50%; left: 0; top: 0; translate: calc(var(--gx, 300px) - 50%) calc(var(--gy, 200px) - 50%); background: radial-gradient(closest-side, rgba(231,185,182,.22), rgba(231,185,182,.06) 55%, transparent); pointer-events: none; }
+.contact h2 { font-size: clamp(52px, 7.6vw, 120px); letter-spacing: -.035em; line-height: .88; }
+.contact .info { grid-column: span 4; display: grid; align-content: end; gap: 18px; }
+.contact .mail { font-family: var(--f-display); font-weight: 300; font-size: clamp(20px, 2vw, 28px); letter-spacing: -.01em; word-break: break-word; }
+
+/* Pied de page */
+.foot .cell { grid-column: span 4; font-size: 12px; color: var(--mute); letter-spacing: .1em; text-transform: uppercase; }
+.foot .cell:last-child { text-align: right; }
+.back { display: inline-block; margin: 16px auto 0; }
+
+/* Apparition */
+@keyframes rise { from { opacity: 0; translate: 0 18px; } }
+.hero h1 span { animation: rise 1s var(--out) both; }
+.hero h1 span + span { animation-delay: .08s; }
+.hero .phrase, .hero .acts { animation: rise 1s .18s var(--out) both; }
+
+@media (max-width: 960px) {
+  .nav .brand { grid-column: span 12; }
+  .nav a.item { grid-column: span 3; border-top: 1px solid var(--line); }
+  .nav a.item:nth-of-type(1) { border-left: 0; }
+  .hero .who { grid-column: span 12; min-height: 0; }
+  .hero .pic { grid-column: span 7; border-left: 0; border-top: 1px solid var(--line); aspect-ratio: 3 / 4; }
+  .hero .side { grid-column: span 5; border-top: 1px solid var(--line); }
+  .work .head, .work .grid, .skills .head, .skills .tbl, .contact .big, .contact .info { grid-column: span 12; border-left: 0; }
+  .work .grid, .skills .tbl, .contact .info { border-top: 1px solid var(--line); }
+  .work .head .inner { position: static; }
+  .about .photo { grid-column: span 5; } .about .txt { grid-column: span 7; } .about .method { grid-column: span 12; border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 600px) {
+  .nav a.item { grid-column: span 6; }
+  .nav a.item:nth-of-type(3) { border-left: 0; }
+  .hero .pic, .hero .side { grid-column: span 12; border-left: 0; }
+  .hero .side { grid-template-rows: auto auto; }
+  .vert { writing-mode: horizontal-tb; rotate: none; justify-self: start; font-size: 30px; }
+  .work .grid { grid-template-columns: minmax(0, 1fr); }
+  .proj:nth-child(odd) { border-right: 0; }
+  .proj:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  .work .grid .proj:nth-child(even) { margin-top: 0; }
+  .skills .tr { grid-template-columns: 44px minmax(0, 1fr); }
+  .skills .tr p { grid-column: 2; } .skills .tr i { display: none; }
+  .about .photo, .about .txt { grid-column: span 12; border-left: 0; }
+  .about .photo { aspect-ratio: 1; }
+  .about .txt { border-top: 1px solid var(--line); }
+  .foot .cell { grid-column: span 12; border-left: 0 !important; text-align: left !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 span, .hero .phrase, .hero .acts { animation: none; }
+  .proj .img img, .hero .pic img { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="row band"><div class="cell" style="grid-column: span 12"><span class="label">Designer graphique &amp; motion · Paris · <b>Missions freelance</b></span></div></div>
+
+  <nav class="row nav" aria-label="Navigation du site">
+    <a class="cell brand" href="#top">Julie Ramier</a>
+    <a class="cell item" href="#projets"><span>01</span>Projets</a>
+    <a class="cell item" href="#savoir-faire"><span>02</span>Savoir-faire</a>
+    <a class="cell item" href="#a-propos"><span>03</span>À propos</a>
+    <a class="cell item" href="#contact"><span>04</span>Contact</a>
+  </nav>
+
+  <header class="row hero" id="top">
+    <div class="cell who mark">
+      <h1 class="title"><span>Julie</span><span>Ramier</span></h1>
+      <div style="display:grid;gap:20px">
+        <p class="phrase">Des univers visuels conçus pour se décliner sur <span class="rot" id="rot"><span>tous les supports</span></span>.</p>
+        <p class="sub">Logo, slides, motion, événement, SharePoint. 8 ans en cabinet de conseil.</p>
+        <div class="acts"><a class="btn" href="#contact">Écrivez-moi <span aria-hidden="true">→</span></a><a class="btn ghost" href="#a-propos">Télécharger le CV</a></div>
+      </div>
+    </div>
+    <div class="cell pic"><img src="assets/portrait-chien.webp" alt="Julie Ramier avec son chien"></div>
+    <div class="cell side">
+      <span class="vert" aria-hidden="true">Graphisme &amp; motion</span>
+      <ol class="index" aria-label="Sommaire">
+        <li><b>01</b><span>Projets</span><i>08</i></li>
+        <li><b>02</b><span>Savoir-faire</span><i>05</i></li>
+        <li><b>03</b><span>À propos</span><i></i></li>
+        <li><b>04</b><span>Contact</span><i></i></li>
+      </ol>
+    </div>
+  </header>
+
+  <section class="row work" id="projets" aria-labelledby="h-work">
+    <div class="cell head mark"><div class="inner">
+      <span class="label">01 · Projets</span>
+      <h2 class="title" id="h-work">Projets.</h2>
+      <p>Des univers pensés pour prendre vie, de la charte au jour J.</p>
+    </div></div>
+    <div class="cell grid" id="grid"></div>
+  </section>
+
+  <section class="row skills" id="savoir-faire" aria-labelledby="h-sf">
+    <div class="cell head mark">
+      <span class="label">02 · Savoir-faire</span>
+      <h2 class="title" id="h-sf" style="margin-top:22px">Cinq métiers, un seul interlocuteur.</h2>
+      <p>De l'idée à l'univers, du concept au mouvement.</p>
+    </div>
+    <div class="cell tbl">
+      <div class="tr"><b>01</b><h3>Identité</h3><p>Logo, univers visuel, charte, mascotte.</p><i aria-hidden="true">→</i></div>
+      <div class="tr"><b>02</b><h3>Déclinaisons</h3><p>PowerPoint, slide decks, print.</p><i aria-hidden="true">→</i></div>
+      <div class="tr"><b>03</b><h3>Motion</h3><p>Motion design et vidéo, accélérés par l'IA générative.</p><i aria-hidden="true">→</i></div>
+      <div class="tr"><b>04</b><h3>Expérience</h3><p>Événements, fil rouge, photobooth.</p><i aria-hidden="true">→</i></div>
+      <div class="tr"><b>05</b><h3>Digital interne</h3><p>SharePoint et intranet.</p><i aria-hidden="true">→</i></div>
+    </div>
+  </section>
+
+  <section class="row about" id="a-propos" aria-labelledby="h-about">
+    <div class="cell photo"><img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" loading="lazy"></div>
+    <div class="cell txt mark">
+      <span class="label">03 · À propos</span>
+      <h2 class="title" id="h-about">Huit ans de conseil, un œil de designer.</h2>
+      <p>Huit ans de design en cabinet de conseil, à transformer des sujets complexes en images claires, et des programmes internes en projets dont les équipes ont envie de parler.</p>
+      <p>Aujourd'hui en indépendante, depuis Paris, avec des entreprises et des cabinets de conseil.</p>
+      <a class="li" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="cell method">
+      <span class="label">Méthode</span>
+      <ol>
+        <li>Comprendre<span>avant de dessiner</span></li>
+        <li>Penser système<span>pour que tout se décline</span></li>
+        <li>Transmettre<span>des fichiers que les équipes peuvent reprendre</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row contact" id="contact" aria-labelledby="h-contact">
+    <div class="cell big mark" id="lueur">
+      <span class="glow" aria-hidden="true"></span>
+      <span class="label">04 · Contact</span>
+      <h2 class="title" id="h-contact">Un projet, une mission, une idée&nbsp;?</h2>
+    </div>
+    <div class="cell info">
+      <span class="label">Écrire</span>
+      <span class="mail">adresse@à-venir.fr</span>
+      <a class="btn" href="#contact">Parlons de votre projet <span aria-hidden="true">→</span></a>
+      <a class="li" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <footer class="row foot">
+    <div class="cell">© 2026 Julie Ramier</div>
+    <div class="cell" style="text-align:center">Paris · Missions en France et à distance</div>
+    <div class="cell">Mentions légales</div>
+  </footer>
+</div>
+<p style="text-align:center"><a class="li back" href="index.html">Voir l'accueil actuel</a></p>
+
+<script>
+const A = "assets/";
+const P = [
+  { id: "programme", n: "01", name: "C-NUM", meta: "Direction artistique · Motion · Événementiel", img: "cnum-univers.webp" },
+  { id: "kaizo", n: "02", name: "Kaizo", meta: "Atelier de branding · Naming · Identité", img: "kaizo-poulpe.webp", contain: true },
+  { id: "onboarding", n: "03", name: "Onboarding en IA", meta: "Motion · Vidéo · IA générative", img: "onboarding-video.webp" },
+  { id: "evenement", n: "04", name: "Événement interne", meta: "Communication · Slide decks · Photobooth", img: "evenement-kaleidoscope.webp" },
+  { id: "sharepoint", n: "05", name: "Intranet SharePoint", meta: "Digital interne · UI", img: null },
+  { id: "restaurant", n: "06", name: "Utah", meta: "Logo · Identité · Coffee shop", img: "utah-logo.webp", contain: true, light: true },
+  { id: "orbit", n: "07", name: "Orbit", meta: "Exploration IA · Logo", img: "orbit-logo-scene.webp" },
+  { id: "voeux", n: "08", name: "Carte de vœux", meta: "À gratter… sans rien révéler", scratch: true },
+];
+const grid = document.getElementById("grid");
+grid.innerHTML = P.map(p => {
+  const inner = `<span class="top"><span><h3>${p.name}</h3><span class="meta">${p.meta}</span></span><span class="n">${p.n}</span></span>
+    <span class="img${p.contain ? " contain" : ""}${p.light ? " light" : ""}">${p.scratch ? `<span class="scratch"><strong>Patience…<br>elle arrive avec la nouvelle année.</strong><canvas aria-hidden="true"></canvas><span class="hint">Grattez</span></span>` : p.img ? `<img src="${A}${p.img}" alt="" loading="lazy">` : `<span class="ph">Visuel à venir</span>`}</span>
+    ${p.scratch ? "" : `<span class="go" aria-hidden="true">→</span>`}`;
+  return p.scratch ? `<div class="proj" role="group" aria-label="Carte de vœux, à gratter">${inner}</div>`
+    : `<a class="proj" href="projet.html#${p.id}" aria-label="${p.n}, ${p.name} : ${p.meta}">${inner}</a>`;
+}).join("");
+
+/* Carte à gratter */
+(() => {
+  const cv = grid.querySelector(".scratch canvas"); if (!cv) return;
+  const box = cv.parentElement;
+  const paint = () => {
+    const r = box.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+    cv.width = Math.max(1, r.width * dpr); cv.height = Math.max(1, r.height * dpr);
+    const g = cv.getContext("2d"); g.scale(dpr, dpr);
+    const grd = g.createLinearGradient(0, 0, r.width, r.height); grd.addColorStop(0, "#c9c4d6"); grd.addColorStop(.5, "#ece9f3"); grd.addColorStop(1, "#b7b0c8");
+    g.fillStyle = grd; g.fillRect(0, 0, r.width, r.height);
+    for (let k = 0; k < 700; k++) { g.fillStyle = `rgba(80,70,110,${Math.random() * .12})`; g.fillRect(Math.random() * r.width, Math.random() * r.height, 1.5, 1.5); }
+    g.globalCompositeOperation = "destination-out";
+    let last = null;
+    const scratch = e => { const b = cv.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+      g.lineWidth = 32; g.lineCap = "round"; g.beginPath(); g.moveTo(last ? last[0] : x, last ? last[1] : y); g.lineTo(x, y); g.stroke(); last = [x, y];
+      box.querySelector(".hint").style.opacity = 0; };
+    cv.onpointermove = scratch; cv.onpointerleave = () => last = null;
+  };
+  new ResizeObserver(paint).observe(box);
+})();
+
+/* Mots qui changent */
+(() => {
+  const rot = document.getElementById("rot");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const words = ["une slide", "une affiche", "un écran", "un événement", "une vidéo", "tous les supports"];
+  let i = words.length - 1;
+  const step = () => {
+    const old = rot.querySelector("span:not(.out)"); i = (i + 1) % words.length;
+    const n = document.createElement("span"); n.textContent = words[i]; n.className = "in"; rot.append(n);
+    requestAnimationFrame(() => requestAnimationFrame(() => { n.classList.remove("in"); old.classList.add("out"); }));
+    setTimeout(() => old.remove(), 800);
+    setTimeout(step, i === words.length - 1 ? 4200 : 1900);
+  };
+  setTimeout(step, 3000);
+})();
+
+/* Lueur du contact */
+(() => {
+  const card = document.getElementById("lueur"), glow = card.querySelector(".glow");
+  let tx = 0, ty = 0, x = 0, y = 0, hover = false, t0 = performance.now();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  card.addEventListener("pointermove", e => { const r = card.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; hover = true; });
+  card.addEventListener("pointerleave", () => hover = false);
+  const tick = now => {
+    const r = card.getBoundingClientRect(), t = (now - t0) / 1000;
+    if (!hover) { tx = r.width * (.55 + .25 * Math.cos(t * .35)); ty = r.height * (.5 + .3 * Math.sin(t * .5)); }
+    x += (tx - x) * .08; y += (ty - y) * .08;
+    glow.style.setProperty("--gx", x + "px"); glow.style.setProperty("--gy", y + "px");
+    if (!reduce) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+
+/* Retour depuis une page projet : mémoriser l'accueil */
+document.querySelectorAll("a.proj").forEach(a => a.addEventListener("click", () => { try { sessionStorage.setItem("home", location.pathname + location.search); } catch {} }));
+</script>
+</body>
+</html>
