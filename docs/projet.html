@@ -161,6 +161,16 @@ button { font: inherit; color: inherit; }
 .gallery .todo-fr { border: 1px dashed #4a4844; background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.015) 14px 28px); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--haze); font-size: 14px; }
 
 /* Ce dont je suis le plus fière */
+/* Équipe */
+.team .s-body { gap: 24px; }
+.people { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.person { display: grid; grid-template-columns: 72px minmax(0, 1fr) 36px; align-items: center; gap: 16px; padding: 12px 16px 12px 12px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; transition: border-color .3s, background .3s; }
+.person:hover { border-color: var(--blush); background: var(--slate); }
+.person img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1); }
+.person b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 18px; letter-spacing: -.01em; }
+.person span span { font-size: 13px; color: var(--haze); line-height: 1.4; }
+.person .li { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--chalk); color: var(--night); font-weight: 600; font-size: 14px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 /* Focus charte */
 .focus .s-body { gap: 28px; }
 .focus .slabel { color: var(--blush); }
@@ -432,13 +442,18 @@ const PROJETS = [
   { id: "onboarding", n: "03", name: "Onboarding en IA",
     disc: "Motion · Vidéo · IA générative",
     title: "Un thriller pour sensibiliser aux données",
+    sumShort: "Un film de deux minutes, réalisé en IA générative, pour sensibiliser les nouveaux arrivants à la gestion des données.",
+    ficheEss: 3, compact: true,
+    team: { label: "En équipe", h: "Un film réalisé en binôme.", people: [
+      { name: "Julie Ramier", role: "Réalisation et direction artistique", photo: "equipe-julie-ramier.webp", li: "https://www.linkedin.com/in/julie-r-139b55b2/" },
+      { name: "Axel Masson", role: "Direction artistique", photo: "equipe-axel-masson.webp", li: "https://www.linkedin.com/in/axel-masson/" } ] },
     sum: "Un film de deux minutes, entièrement réalisé en IA générative, qui reprend les codes du thriller pour sensibiliser les nouveaux arrivants à la gestion des données. Le message : de petits gestes du quotidien peuvent avoir de grands impacts.",
     hero: { src: "onboarding-video.webp", alt: "Image extraite de la vidéo d'onboarding réalisée en IA générative" },
     fiche: [["Client", "Groupe industriel international"], ["Année", "2026"], ["Rôle", "Réalisation et direction artistique en IA générative"], ["Durée", "2 minutes"], ["Outils", "Kling · Google Veo · Seedance · ElevenLabs · After Effects"], ["Livrables", "Film d'onboarding, script, casting, storyboard"]],
     deep: [
       { label: "Contexte", h: "Sensibiliser aux données dès le premier jour.", p: ["L'onboarding est un moment clé pour ce grand groupe industriel : c'est là que se prennent les bonnes habitudes. Le film devait sensibiliser les nouveaux arrivants à la gestion des données, avec humour et second degré, pour montrer que des gestes anodins du quotidien peuvent avoir de grandes conséquences."] },
     ],
-    process: { label: "Fabrication", h: "De l'idée au film, en sept étapes.",
+    process: { label: "Fabrication", h: "De l'idée au film, en sept étapes.", strip: false,
       p: ["L'IA accélère chaque étape, mais chaque choix reste un choix de designer."],
       steps: [
         { t: "Script", d: "Le script reprend les codes du thriller (musique, voix off, montée de tension) pour aborder les bonnes pratiques Data sans discours descendant.",
@@ -456,8 +471,8 @@ const PROJETS = [
         { t: "Génération des images", d: "Chaque plan est généré selon une direction artistique commune : décor de bureau d'inspiration rétro, palette moutarde et bleu nuit, accessoires récurrents.", src: "onboarding-generation.webp", alt: "Trois plans générés : le téléphone jaune, l'écran Alerte générale, le data analyst surpris" },
         { t: "Storyboard", d: "Les huit premiers plans de la scène 1, mis bout à bout pour valider le récit et le rythme avant d'animer.", src: "onboarding-storyboard.webp", alt: "Storyboard de la scène 1 en huit plans", contain: true },
         { t: "Animation", d: "Les plans validés sont animés (mouvements de caméra, gestes, expressions), puis sélectionnés prise par prise.", clip: { src: "onboarding-ia.mp4", poster: "onboarding-poster.webp", start: 0, end: 9 } },
-        { t: "Voix et son", d: "Les voix sont générées avec ElevenLabs, puis dirigées réplique par réplique : intonation, rythme, pauses. Ci-dessous, la consigne donnée pour une réplique du manager, puis la scène 1 à écouter sans l'image.",
-          direction: { who: "Manager", text: "[shout] Il nous faut [pause 0.3s] immédiatement [strong, deep, mean] un état des lieux de nos compétences Data. [urgent] Vous avez [pause 0.2s] 30 minutes [pause 0.3s] [shout] PAS PLUS !" }, voice: { title: "Scène 1 · Voix off et dialogues", src: "onboarding-scene1.mp3", poster: "onboarding-casting.webp",
+        { t: "Création des voix", d: "Les voix sont générées avec ElevenLabs, puis dirigées réplique par réplique : intonation, rythme, pauses. Ci-dessous, la consigne donnée pour une réplique du manager. La bande audio de la scène 1 s'écoute seule, sans l'image.",
+          direction: { who: "Manager", text: "[shout] Il nous faut [pause 0.3s] immédiatement [strong, deep, mean] un état des lieux de nos compétences Data. [urgent] Vous avez [pause 0.2s] 30 minutes [pause 0.3s] [shout] PAS PLUS !" }, voice: { title: "Bande audio · Scène 1", src: "onboarding-scene1.mp3", poster: "onboarding-casting.webp",
             lines: [[0, "Ambiance", "Musique de thriller, la tension monte."], [7, "Voix off", "« Nouveau concurrent. Nouveau programme. Nouvelle opportunité. »"], [12, "Manager", "« Il nous faut immédiatement une cartographie détaillée de nos effectifs. »"], [14.5, "Manager", "« Maintenant ! Vous avez 30 minutes ! »"], [16, "Data analyst", "« 30 minutes ?! »"]] } },
         { t: "Montage final", d: "Montage, musique, sous-titres et générique sont finalisés dans After Effects. Le film complet est présenté ci-dessous.", src: "onboarding-final.webp", alt: "Image extraite du film final" },
       ] },
@@ -526,6 +541,20 @@ const tile = g => {
 };
 const planche = (list, cls = "") => `<div class="planche ${cls}">${list.map(tile).join("")}</div>`;
 const film = g => `<figure class="film"><div class="fr vid"><video src="${A}${g.video}" poster="${A}${g.poster}" muted autoplay loop playsinline preload="metadata" aria-label="${g.cap}"></video><button class="snd" type="button" aria-pressed="false">Activer le son</button></div><figcaption>${g.cap}</figcaption></figure>`;
+const team = t => `
+  <section class="c sec team" aria-label="${t.label}">
+    <div class="s-label"><span class="slabel">${t.label}</span></div>
+    <div class="s-body">
+      <h2>${t.h}</h2>
+      ${t.p ? `<p class="lead">${t.p}</p>` : ""}
+      <ul class="people">${t.people.map(m => `
+        <li><a href="${m.li}" target="_blank" rel="noopener" class="person">
+          <img src="${A}${m.photo}" alt="${m.name}" loading="lazy" width="72" height="72">
+          <span><b>${m.name}</b><span>${m.role}</span></span>
+          <span class="li" aria-hidden="true">in</span><span class="vh">Profil LinkedIn de ${m.name} (nouvel onglet)</span>
+        </a></li>`).join("")}</ul>
+    </div>
+  </section>`;
 const focus = f => `
   <section class="c sec focus" aria-label="${f.label}">
     <div class="s-label"><span class="slabel">${f.label}</span></div>
@@ -565,7 +594,7 @@ const procStrip = f => `
       </button></li>`).join("")}</ol>
     <div class="s-body" style="grid-column:4/13"><button class="more" type="button" data-deepen>Voir chaque étape en détail <span aria-hidden="true">↓</span></button></div>
   </section>`;
-const proc = f => procStrip(f) + `
+const proc = f => (f.strip === false ? "" : procStrip(f)) + `
   <section class="c sec deep" data-deep aria-label="${f.label}">
     <div class="s-label"><span class="slabel">${f.label}</span></div>
     <div class="s-body"><h2>${f.h}</h2>${f.p.map(t => `<p class="lead">${t}</p>`).join("")}</div>
@@ -607,7 +636,7 @@ function render(id) {
     <div class="p-label"><span class="num">${p.n}</span><span class="disc">${p.disc}</span></div>
     <div class="p-title">
       <h1>${p.title}</h1>
-      <p class="sum">${p.sum}</p>
+      ${p.sumShort ? `<p class="sum" data-ess>${p.sumShort}</p><p class="sum" data-deep hidden>${p.sum}</p>` : `<p class="sum">${p.sum}</p>`}
       <div class="modes">
         <div class="seg" role="group" aria-label="Mode de lecture"><span class="pill" aria-hidden="true"></span><button type="button" data-mode="essentiel">Essentiel</button><button type="button" data-mode="profondeur">En profondeur</button></div>
         <span class="hint" id="mode-hint"></span>
@@ -616,11 +645,12 @@ function render(id) {
   </header>
   <div class="c">
     ${hv.todo ? `<div class="hero-vis todo-fr" style="display:grid;place-items:center;align-content:center;gap:10px;border:1px dashed #4a4844;color:var(--haze);text-align:center;padding:24px">${hv.todo}<span class="todo">Visuel à fournir</span></div>` : `<div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"${hv.ar ? ` style="aspect-ratio:${hv.ar}"` : ""}><img src="${A}${hv.src}" alt="${hv.alt}"></div>`}
-    <dl class="fiche">${p.fiche.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+    <dl class="fiche">${p.fiche.map(([k, v], i) => `<div${p.ficheEss && i >= p.ficheEss ? " data-deep hidden" : ""}><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
   </div>
 
   ${p.deep.map(s => section(s, true)).join("")}
 
+  ${p.team ? team(p.team) : ""}
   ${p.focus ? focus(p.focus) : ""}
   ${p.process ? proc(p.process) : ""}
   <section class="c sec" id="realisations" aria-label="Réalisations">
@@ -636,7 +666,7 @@ function render(id) {
     <div class="s-label"><span class="slabel">Ce dont je suis le plus fière</span></div>
     <div class="s-body" style="display:grid;gap:24px">
       <h2>${p.proud.h}</h2>
-      ${p.proud.p.map(t => `<p class="lead">${t}</p>`).join("")}
+      ${p.proud.p.map(t => `<p class="lead"${p.compact ? " data-deep hidden" : ""}>${t}</p>`).join("")}
     </div>
   </section>
 

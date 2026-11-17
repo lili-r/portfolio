@@ -259,6 +259,15 @@ a { color: inherit; }
 .k2 .copy.done span { translate: 0 -100%; }
 .k2 .copy span + span { color: var(--sage); }
 
+/* Profil LinkedIn */
+.profile { justify-self: start; display: inline-grid; grid-template-columns: 64px auto 36px; align-items: center; gap: 16px; padding: 10px 14px 10px 10px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; transition: border-color .3s, background .3s; }
+.profile:hover { border-color: var(--blush); background: var(--slate); }
+.profile img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1); }
+.profile b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 17px; }
+.profile span span { font-size: 13px; color: var(--haze); }
+.profile .li { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--chalk); color: var(--night); font-weight: 600; font-size: 14px; font-family: var(--f-body); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.foot a { color: inherit; }
 /* Contact 3 · Lueur */
 .k3 .card { position: relative; overflow: hidden; border-radius: 28px; border: 1px solid var(--rule); background: var(--slate); padding: clamp(32px, 6vw, 88px); display: grid; gap: 36px; isolation: isolate; }
 .k3 .glow { position: absolute; z-index: -1; left: 0; top: 0; width: 70%; aspect-ratio: 1; border-radius: 50%; translate: calc(var(--gx, 300px) - 50%) calc(var(--gy, 200px) - 50%);
@@ -418,6 +427,11 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
           <p>Huit ans de design en cabinet de conseil, à transformer des sujets complexes en images claires, et des programmes internes en projets dont les équipes ont envie de parler.</p>
           <p>Aujourd'hui en indépendante, depuis Paris, avec des entreprises et des cabinets de conseil. Une méthode : comprendre avant de dessiner, penser système, livrer des fichiers que les équipes peuvent reprendre.</p>
         </div>
+        <a class="profile" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">
+          <img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" width="64" height="64">
+          <span><b>Julie Ramier</b><span>Designer graphique &amp; motion · Paris</span></span>
+          <span class="li" aria-hidden="true">in</span><span class="vh">Profil LinkedIn (nouvel onglet)</span>
+        </a>
       </div>
     </div>
   </section>
@@ -430,7 +444,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     </div>
   </section>
 
-  <footer class="c foot mono dim"><span>© 2026 Julie Ramier · Paris</span><span>Mentions légales</span></footer>
+  <footer class="c foot mono dim"><span>© 2026 Julie Ramier · Paris</span><span><a href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn</a> · Mentions légales</span></footer>
 </main>
 
 <nav class="switch" aria-label="Variantes à tester">
@@ -626,7 +640,7 @@ const K = {
       <div class="k3"><div class="card">
         <span class="glow" aria-hidden="true"></span>
         <h2 id="h-contact">Un projet, une mission, une idée ?</h2>
-        <div class="row"><span class="cta solid">${MAIL}</span><span class="cta">LinkedIn ↗</span></div>
+        <div class="row"><span class="cta solid">${MAIL}</span><a class="cta" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
       </div></div>`,
     init(root) {
       const card = root.querySelector(".card"), glow = root.querySelector(".glow");
