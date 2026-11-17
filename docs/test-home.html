@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Major+Mono+Display&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Archivo:wdth,wght@125,300;125,400&family=Syne:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Major+Mono+Display&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 @view-transition { navigation: auto; }
 /* Layout : un seul conteneur 12 colonnes pour tout le site. Header = texte (col. 1–5) + images seules (col. 7–12). Sections = label (col. 1–3) + contenu (col. 4–12), beaucoup d'air. */
@@ -260,12 +260,13 @@ a { color: inherit; }
 .k2 .copy span + span { color: var(--sage); }
 
 /* Profil LinkedIn */
-.profile { justify-self: start; display: inline-grid; grid-template-columns: 64px auto 36px; align-items: center; gap: 16px; padding: 10px 14px 10px 10px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; transition: border-color .3s, background .3s; }
-.profile:hover { border-color: var(--blush); background: var(--slate); }
-.profile img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1); }
-.profile b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 17px; }
+.profile { justify-self: start; display: grid; grid-template-columns: minmax(0, 340px) auto; grid-template-rows: 1fr auto; align-items: end; gap: 12px 24px; text-decoration: none; }
+.profile:hover b { color: var(--blush); }
+.profile img { grid-row: span 2; width: 100%; height: auto; aspect-ratio: 1; border-radius: 14px; object-fit: cover; display: block; filter: grayscale(1); transition: filter .8s; }
+.profile:hover img { filter: none; }
+.profile b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 22px; transition: color .3s; }
 .profile span span { font-size: 13px; color: var(--haze); }
-.profile .li { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--chalk); color: var(--night); font-weight: 600; font-size: 14px; font-family: var(--f-body); }
+.profile .li { align-self: end; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--chalk); color: var(--night); font-weight: 600; font-size: 14px; font-family: var(--f-body); }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .foot a { color: inherit; }
 /* Contact 3 · Lueur */
@@ -377,21 +378,10 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 .s-body > h2 { letter-spacing: var(--h-track); font-size: calc(clamp(36px, 4.6vw, 68px) * var(--h-scale)); }
 .contact h2 { letter-spacing: var(--h1-track); }
 .proj h3, .skill h3 { letter-spacing: var(--h-track); }
-/* 2 · Mixte : grotesque fine + serif italique sur les mots clés */
-[data-type="mixte"] .hero-text h1 .w2, [data-type="mixte"] .rot2 span { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; }
-[data-type="mixte"] .rot2 span { font-size: 1.12em; line-height: 1; }
-/* 3 · Éditoriale : serif fine partout dans les titres */
-[data-type="editoriale"] { --f-display: "Instrument Serif", Georgia, serif; --h-track: -.01em; --h1-track: -.025em; --h-weight: 400; --h-scale: 1.06; }
-[data-type="editoriale"] .rot2 span { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 1.1em; line-height: 1; }
-/* 4 · Didone : contraste fort, très mode */
-[data-type="didone"] { --f-display: "Bodoni Moda", Didot, Georgia, serif; --h-track: -.02em; --h1-track: -.035em; --h-weight: 400; --h-scale: .96; }
-[data-type="didone"] .hero-text h1 .w2 { font-style: italic; }
-/* 5 · Étendue : capitales larges, inspirées de tes références */
-[data-type="etendue"] { --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif; --h-track: .01em; --h1-track: -.01em; --h-weight: 300; --h-case: uppercase; --h-scale: .74; }
-[data-type="etendue"] .hero-text h1 { line-height: .95; }
-[data-type="etendue"] .s-body > h2, [data-type="etendue"] .contact h2 { line-height: 1.02; }
-/* 6 · Syne : grotesque à caractère */
-[data-type="syne"] { --f-display: "Syne", "Helvetica Neue", Arial, sans-serif; --h-track: -.035em; --h1-track: -.05em; --h-weight: 400; --h-scale: .92; }
+/* Titres en Major Mono Display */
+[data-type="major"] { --f-display: "Major Mono Display", ui-monospace, monospace; --h-track: -.02em; --h1-track: -.04em; --h-weight: 400; --h-scale: .82; }
+[data-type="major"] .hero-text h1 { line-height: .95; }
+[data-type="major"] .s-body > h2, [data-type="major"] .contact h2 { line-height: 1.08; }
 
 /* ───── Structure légère (data-struct="legere") ───── */
 .nav .nn { display: none; font-style: normal; margin-right: 8px; color: var(--rule); font-variant-numeric: tabular-nums; transition: color .25s; }
@@ -405,7 +395,6 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 [data-struct="legere"] .s-label { position: relative; }
 [data-struct="legere"] .hero { position: relative; }
 [data-struct="legere"] .hero::after { content: "Paris · Missions freelance · 2026"; position: absolute; left: 0; bottom: calc(var(--section) * .45); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--haze); border-top: 1px solid var(--rule); padding-top: 12px; width: min(100%, 360px); }
-[data-struct="legere"] .proj .frame { outline: 1px solid var(--rule); outline-offset: 8px; }
 @media (max-width: 900px) { [data-struct="legere"] .s-body { border-left: 0; padding-left: 0; } [data-struct="legere"] .hero::after { display: none; } }
 </style>
 
@@ -468,7 +457,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
           <p>Aujourd'hui en indépendante, depuis Paris, avec des entreprises et des cabinets de conseil. Une méthode : comprendre avant de dessiner, penser système, livrer des fichiers que les équipes peuvent reprendre.</p>
         </div>
         <a class="profile" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">
-          <img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" width="64" height="64">
+          <img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" width="340" height="340">
           <span><b>Julie Ramier</b><span>Designer graphique &amp; motion · Paris</span></span>
           <span class="li" aria-hidden="true">in</span><span class="vh">Profil LinkedIn (nouvel onglet)</span>
         </a>
@@ -490,8 +479,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 <nav class="switch" aria-label="Variantes à tester">
   <div class="grp"><span class="mono dim">Header</span>
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
-  <div class="grp"><span class="mono dim">Typo</span>
-    <button class="tbtn xbtn" type="button" data-t="actuelle">Actuelle</button><button class="tbtn xbtn" type="button" data-t="mixte">Mixte</button><button class="tbtn xbtn" type="button" data-t="editoriale">Éditoriale</button><button class="tbtn xbtn" type="button" data-t="didone">Didone</button><button class="tbtn xbtn" type="button" data-t="etendue">Étendue</button><button class="tbtn xbtn" type="button" data-t="syne">Syne</button></div>
+  <div class="grp"><span class="mono dim">Titres</span><button class="tbtn xbtn" type="button" data-t="major">Major Mono</button><button class="tbtn xbtn" type="button" data-t="actuelle">Inter Tight</button></div>
   <div class="grp"><span class="mono dim">Structure</span>
     <button class="sbtn xbtn" type="button" data-s="aucune">Avant</button><button class="sbtn xbtn" type="button" data-s="legere">Légère</button></div>
 </nav>
@@ -814,7 +802,7 @@ addEventListener("pageshow", () => document.querySelectorAll("[style*='view-tran
   const root = document.documentElement, get = k => { try { return localStorage.getItem(k); } catch { return null; } }, set = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
   const apply = (attr, val, sel, key) => { root.dataset[attr] = val; set(key, val);
     document.querySelectorAll(sel).forEach(b => b.setAttribute("aria-pressed", String(b.dataset[attr === "type" ? "t" : "s"] === val))); };
-  apply("type", get("da-type") || "actuelle", ".tbtn", "da-type");
+  apply("type", (["major","actuelle"].includes(get("da-type")) && get("da-type")) || "major", ".tbtn", "da-type");
   apply("struct", get("da-struct") || "legere", ".sbtn", "da-struct");
   document.querySelectorAll(".tbtn").forEach(b => b.addEventListener("click", () => apply("type", b.dataset.t, ".tbtn", "da-type")));
   document.querySelectorAll(".sbtn").forEach(b => b.addEventListener("click", () => apply("struct", b.dataset.s, ".sbtn", "da-struct")));
