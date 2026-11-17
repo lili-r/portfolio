@@ -14,7 +14,7 @@
   --night: #0f0f0e; --slate: #191917; --rule: #2a2926; --chalk: #ecebe6; --haze: #8f8b83;
   --sage: #8c9d78; --blush: #e7b9b6; --ember: #e0532b; --bone: #dcd8cf;
   --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --f-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --container: 1280px; --gap: clamp(16px, 2vw, 32px); --section: clamp(96px, 11vw, 168px);
   --out: cubic-bezier(.16,1,.3,1); --back: cubic-bezier(.34,1.56,.64,1);
   color-scheme: dark;
@@ -347,7 +347,17 @@ const todo = t => `<span class="todo">À compléter : ${t}</span>`;
 
 /* Contenu des études de cas (tiré de docs/projets/*.md) */
 const PROJETS = [
-  { id: "programme", n: "01", name: "C-NUM",
+  { id: "restaurant", n: "01", name: "Utah",
+    disc: "Logo · Identité · Coffee shop",
+    title: "Utah, le logo d'un coffee shop dog-friendly",
+    sum: "Création du logo d'Utah, un coffee shop qui accueille les chiens. " + todo("comment le projet est arrivé"),
+    hero: { src: "utah-logo.webp", alt: "Logo Utah, coffee shop dog-friendly", contain: true, light: true },
+    fiche: [["Année", todo("année")], ["Livrables", "Logo " + todo("et autres supports ?")]],
+    deep: [{ label: "Contexte", h: "Un café où les chiens sont les bienvenus.", p: [todo("pourquoi « Utah » ? comment le logo dit « dog-friendly » ?")] }],
+    gallery: [{ src: "utah-logo.webp", alt: "Logo Utah", cap: "Le logo", w: 7, ar: "946 / 663", contain: true, light: true }, { todo: "Le logo en situation : enseigne, gobelet…", w: 5, ar: "946 / 663" }],
+    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+
+  { id: "programme", n: "02", name: "C-NUM",
     disc: "Direction artistique · Motion design · Communication interne · Événementiel",
     title: "Un programme de transformation, rendu clair et désirable",
     sum: "Comment rendre lisible un programme de transformation numérique qui touche plus de 3 000 collaborateurs et des métiers très différents ? D'abord, le lead d'une équipe de designers pour poser l'univers du programme. Puis son déploiement sur tous les formats : print, slide decks, motion design, newsletters, SharePoint. Et enfin, des événements conçus et coordonnés pour le faire vivre au-delà des écrans.",
@@ -411,7 +421,7 @@ const PROJETS = [
     learned: { h: "Comprendre, raconter, puis donner forme.", p: "C-NUM résume une méthode de travail : comprendre un sujet, trouver comment le raconter, puis imaginer toutes les formes qu'il peut prendre. Le projet a aussi conjugué création, leadership et coordination, de la conception graphique jusqu'aux expériences collectives." },
     confidential: true },
 
-  { id: "kaizo", n: "02", name: "Kaizo",
+  { id: "kaizo", n: "03", name: "Kaizo",
     disc: "Atelier de branding · Naming · Identité · Motion",
     title: "Kaizo, donner un visage à un produit tech",
     sum: "Une solution déjà développée par une équipe tech, mais sans designer : pas de nom définitif, pas d'identité, rien pour donner envie de l'utiliser. Un atelier avec les parties prenantes pour lui trouver un nom, puis un visage : un logo, une identité et une mascotte poulpe.",
@@ -439,7 +449,7 @@ const PROJETS = [
       p: ["Au départ, c'était un outil efficace mais froid, pensé par des ingénieurs pour des ingénieurs. Le pari réussi : le rendre attendrissant. Avec un nom qui sonne juste et un petit poulpe pour l'incarner, le produit a cessé d'être un outil de plus : il est devenu quelqu'un qu'on a envie de rencontrer. Et c'est ce qui accélère son adoption."] },
     learned: todo("optionnel") },
 
-  { id: "onboarding", n: "03", name: "Onboarding en IA",
+  { id: "onboarding", n: "04", name: "Onboarding en IA",
     disc: "Motion · Vidéo · IA générative",
     title: "Un thriller pour sensibiliser aux données",
     sumShort: "Un film de deux minutes, réalisé en IA générative, pour sensibiliser les nouveaux arrivants à la gestion des données.",
@@ -483,7 +493,7 @@ const PROJETS = [
       p: ["Le film part de situations réelles, travaillées avec les équipes internes : des gestes du quotidien que beaucoup font sans y penser, parce qu'ils semblent sans conséquence.",
           "Ces scènes sont poussées dans un univers surréaliste, assez fort pour marquer les esprits. Le groupe dispose ainsi d'un format qui sort de ses communications internes habituelles."] } },
 
-  { id: "evenement", n: "04", name: "Événement interne",
+  { id: "evenement", n: "05", name: "Événement interne",
     disc: "Communication · Slide decks · Photobooth",
     title: "Une journée pour 200 personnes, et chaque support y contribuait",
     sum: "Communication, slide decks et photobooth pour un événement interne de 200 participants. " + todo("contexte de l'événement"),
@@ -496,7 +506,7 @@ const PROJETS = [
     gallery: [{ src: "evenement-kaleidoscope.webp", alt: "Visuel de l'événement", cap: "Le visuel de l'événement", w: 5, ar: "800 / 887" }, { todo: "Photos de l'événement", w: 7, ar: "800 / 887" }],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] }, confidential: true },
 
-  { id: "sharepoint", n: "05", name: "Intranet SharePoint",
+  { id: "sharepoint", n: "06", name: "Intranet SharePoint",
     disc: "Digital interne · UI",
     title: "Un espace où l'information se trouve du premier coup",
     sum: "L'espace SharePoint d'un programme interne. " + todo("le problème à résoudre"),
@@ -505,16 +515,6 @@ const PROJETS = [
     deep: [{ label: "Démarche", h: "Ranger avant de dessiner.", p: [todo("ta démarche")] }],
     gallery: [{ todo: "Captures anonymisées de l'espace SharePoint", w: 12, ar: "16 / 7" }],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] }, confidential: true },
-
-  { id: "restaurant", n: "06", name: "Utah",
-    disc: "Logo · Identité · Coffee shop",
-    title: "Utah, le logo d'un coffee shop dog-friendly",
-    sum: "Création du logo d'Utah, un coffee shop qui accueille les chiens. " + todo("comment le projet est arrivé"),
-    hero: { src: "utah-logo.webp", alt: "Logo Utah, coffee shop dog-friendly", contain: true, light: true },
-    fiche: [["Année", todo("année")], ["Livrables", "Logo " + todo("et autres supports ?")]],
-    deep: [{ label: "Contexte", h: "Un café où les chiens sont les bienvenus.", p: [todo("pourquoi « Utah » ? comment le logo dit « dog-friendly » ?")] }],
-    gallery: [{ src: "utah-logo.webp", alt: "Logo Utah", cap: "Le logo", w: 7, ar: "946 / 663", contain: true, light: true }, { todo: "Le logo en situation : enseigne, gobelet…", w: 5, ar: "946 / 663" }],
-    proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
 
   { id: "orbit", n: "07", name: "Orbit",
     disc: "Projet personnel · Exploration IA · Logo",
