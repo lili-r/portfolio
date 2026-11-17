@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Major+Mono+Display&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 @view-transition { navigation: auto; }
 /* Layout : un seul conteneur 12 colonnes pour tout le site. Header = texte (col. 1–5) + images seules (col. 7–12). Sections = label (col. 1–3) + contenu (col. 4–12), beaucoup d'air. */
@@ -378,10 +378,10 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 .s-body > h2 { letter-spacing: var(--h-track); font-size: calc(clamp(36px, 4.6vw, 68px) * var(--h-scale)); }
 .contact h2 { letter-spacing: var(--h1-track); }
 .proj h3, .skill h3 { letter-spacing: var(--h-track); }
-/* Titres en Major Mono Display */
-[data-type="major"] { --f-display: "Major Mono Display", ui-monospace, monospace; --h-track: -.02em; --h1-track: -.04em; --h-weight: 400; --h-scale: .82; }
-[data-type="major"] .hero-text h1 { line-height: .95; }
-[data-type="major"] .s-body > h2, [data-type="major"] .contact h2 { line-height: 1.08; }
+/* Titres en Inter Tight */
+[data-type="major"] { --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif; --h-track: -.045em; --h1-track: -.06em; --h-weight: 300; --h-scale: 1; }
+[data-type="major"] .hero-text h1 { line-height: .86; }
+[data-type="major"] .s-body > h2, [data-type="major"] .contact h2 { line-height: 1; }
 
 /* ───── Structure légère (data-struct="legere") ───── */
 .nav .nn { display: none; font-style: normal; margin-right: 8px; color: var(--rule); font-variant-numeric: tabular-nums; transition: color .25s; }
@@ -479,7 +479,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
 <nav class="switch" aria-label="Variantes à tester">
   <div class="grp"><span class="mono dim">Header</span>
     <a href="#header-c" id="t-c">Ta compo</a><a href="#header-a" id="t-a">Mosaïque</a></div>
-  <div class="grp"><span class="mono dim">Titres</span><button class="tbtn xbtn" type="button" data-t="major">Major Mono</button><button class="tbtn xbtn" type="button" data-t="actuelle">Inter Tight</button></div>
+  <div class="grp"><span class="mono dim">Titres</span><button class="tbtn xbtn" type="button" data-t="actuelle">Inter Tight</button></div>
   <div class="grp"><span class="mono dim">Structure</span>
     <button class="sbtn xbtn" type="button" data-s="aucune">Avant</button><button class="sbtn xbtn" type="button" data-s="legere">Légère</button></div>
 </nav>
@@ -802,7 +802,7 @@ addEventListener("pageshow", () => document.querySelectorAll("[style*='view-tran
   const root = document.documentElement, get = k => { try { return localStorage.getItem(k); } catch { return null; } }, set = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
   const apply = (attr, val, sel, key) => { root.dataset[attr] = val; set(key, val);
     document.querySelectorAll(sel).forEach(b => b.setAttribute("aria-pressed", String(b.dataset[attr === "type" ? "t" : "s"] === val))); };
-  apply("type", (["major","actuelle"].includes(get("da-type")) && get("da-type")) || "major", ".tbtn", "da-type");
+  apply("type", "actuelle", ".tbtn", "da-type");
   apply("struct", get("da-struct") || "legere", ".sbtn", "da-struct");
   document.querySelectorAll(".tbtn").forEach(b => b.addEventListener("click", () => apply("type", b.dataset.t, ".tbtn", "da-type")));
   document.querySelectorAll(".sbtn").forEach(b => b.addEventListener("click", () => apply("struct", b.dataset.s, ".sbtn", "da-struct")));
