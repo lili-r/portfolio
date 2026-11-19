@@ -260,6 +260,9 @@ a { color: inherit; }
 .k2 .copy.done span { translate: 0 -100%; }
 .k2 .copy span + span { color: var(--sage); }
 
+/* Lien vers la prise de brief (Nuancier) */
+.brief { grid-column: 4 / 13; justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 14px; color: var(--haze); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 6px; transition: color .25s, text-decoration-color .25s; }
+.brief:hover { color: var(--chalk); text-decoration-color: var(--blush); }
 /* Profil LinkedIn */
 .profile { justify-self: start; display: grid; grid-template-columns: minmax(0, 340px) auto; grid-template-rows: 1fr auto; align-items: end; gap: 12px 24px; text-decoration: none; }
 .profile:hover b { color: var(--blush); }
@@ -459,6 +462,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
       <div class="rule"></div>
       <div class="s-label"><span class="num" data-n="4" data-t="4"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" hidden></span><button class="replay mono" id="ct-replay" type="button" hidden>↻ Rejouer</button></div>
       <div class="s-body" id="ct-body"></div>
+      <a class="brief" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener">Pas encore de brief ? Posez-le en 3 minutes <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
