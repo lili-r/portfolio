@@ -535,7 +535,7 @@ const headerB = `<div class="pile" id="pile">${PILE.map(([id, x, y, w, ar, r, z,
 
 /* Header C : composition de Julie (positions relevées sur son test Figma n°2) */
 const headerC = `<div class="compo" id="compo">
-  <button class="el tile" data-id="evenement" aria-label="Ouvrir le projet Événement interne" style="--x:0%;--y:0%;--w:24.1%;--z:1;--d:10;--delay:.05s"><img class="floaty" style="--fd:-1s" src="${A}evenement-attente-cover.webp" alt=""></button>
+  <button class="el orn" data-id="evenement" aria-label="Ouvrir le projet Événement interne" style="--x:13.7%;--y:3.3%;--w:19%;--z:1;--d:8;--delay:.05s"><img class="floaty" style="--fd:-1s" src="${A}evenement-ornement.webp" alt=""></button>
   <div class="el glass" aria-hidden="true" style="--x:23%;--y:17.6%;--w:16.3%;--z:3;--d:22;--delay:.35s"><img class="floaty" style="--fd:-3s" src="${A}icone-fleche.webp" alt=""></div>
   <div class="el photo" style="--x:35.9%;--y:13.2%;--w:35.2%;--z:2;--d:6;--delay:.15s"><img src="${A}portrait-chien.webp" alt="Julie Ramier avec son chien"></div>
   <button class="el stamp" data-id="programme" aria-label="Ouvrir le projet C-NUM" style="--x:54.4%;--y:1.9%;--w:35.2%;--z:4;--d:16;--delay:.25s"><img src="${A}programme-tampon.webp" alt=""></button>
@@ -790,6 +790,22 @@ document.addEventListener("click", e => {
   location.href = "projet.html#" + id;
 });
 addEventListener("pageshow", () => document.querySelectorAll("[style*='view-transition-name']").forEach(el => el.style.viewTransitionName = ""));
+
+/* Étoile violette : trois rotations par minute, à des moments tirés au hasard (aucune si mouvement réduit) */
+(() => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const tourner = () => {
+    const s = document.querySelector(".compo .star"); if (!s || !s.animate) return;
+    s.animate([{ rotate: "0deg" }, { rotate: (Math.random() < .5 ? -360 : 360) + "deg" }],
+      { duration: 1400 + Math.random() * 800, easing: "cubic-bezier(.65, 0, .35, 1)" });
+  };
+  const minute = () => {
+    const t = [];
+    while (t.length < 3) { const x = 2 + Math.random() * 56; if (t.every(y => Math.abs(y - x) > 8)) t.push(x); }
+    t.forEach(x => setTimeout(tourner, x * 1000));
+  };
+  minute(); setInterval(minute, 60000);
+})();
 
 
 </script>
