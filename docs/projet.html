@@ -539,36 +539,51 @@ const PROJETS = [
     proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
 
   { id: "beaucachet", n: "08", name: "Beau Cachet",
-    disc: "Projet personnel · Motion design · Invitation animée",
-    title: "Beau Cachet, une invitation qui s'ouvre comme une porte",
-    sumShort: "Une invitation de mariage animée, pensée pour qu'un simple lien ait le charme d'un faire-part.",
-    sum: "Beau Cachet est un projet personnel : une gamme d'invitations de mariage en ligne, pensée pour que chaque invité, où qu'il vive et quel que soit son âge, reçoive un lien qui a le charme d'un faire-part. Voici le premier geste de la gamme : une porte qui s'ouvre sur un jardin.",
-    hero: { video: "beaucachet-porte.mp4", src: "beaucachet-porte-poster.webp", alt: "Une porte voûtée entourée de fleurs, dessinée en bleu sur fond ivoire, dont les deux battants s'ouvrent sur un jardin" },
-    fiche: [["Type", "Projet personnel"], ["Année", "2026"], ["Rôle", "Direction artistique · Motion design"], ["Statut", "En préparation"],
-            ["Disciplines", "Invitation animée · Illustration · IA générative"], ["Outils", "Magnific · " + todo("autres outils")], ["Livrables", "Animation d'ouverture · " + todo("autres livrables : site, vidéo d'invitation, story ?")]],
+    disc: "Projet personnel · Produit digital · Direction artistique · Motion design",
+    title: "Beau Cachet, rendre simple le design d'un mariage",
+    sumShort: "Conception d'une plateforme digitale dédiée à l'expérience du mariage, de la première invitation aux souvenirs du jour J.",
+    sum: "Conception d'une plateforme digitale dédiée à l'expérience du mariage, de la première invitation aux souvenirs du jour J. Une solution personnalisable associant création de sites de mariage, gestion des invitations et des RSVP, et partage collaboratif de photos. Un espace pensé pour simplifier l'organisation des mariés et faire vivre l'expérience à leurs invités avant, pendant et après la célébration.",
+    hero: { video: "beaucachet-porte.mp4", src: "beaucachet-porte-poster.webp", alt: "La porte du site Beau Cachet : une porte voûtée gravée en bleu sur fond ivoire, dont les battants s'ouvrent sur un jardin" },
+    fiche: [["Type", "Projet personnel, concept produit"], ["Site", '<a href="https://www.beaucachet.fr" target="_blank" rel="noopener">beaucachet.fr</a>'], ["Année", "2026"],
+            ["Rôle", "Conception, direction artistique, motion design, rédaction, développement web"],
+            ["Livrables", "Identité, styles d'invitation, site, back office, animations"], ["Outils", "Magnific · Claude · Supabase (base de données)"]],
     ficheEss: 3,
     deep: [
-      { label: "Contexte", h: "Donner à un lien le charme d'un faire-part.", p: [
-        "Les mariés passent au numérique pour se simplifier la vie, mais un lien s'oublie là où un faire-part se garde. Et ce sont les invités les moins à l'aise avec les écrans qui décident si l'envoi fonctionne.",
-        "Beau Cachet part de ce constat : une invitation en ligne aussi belle qu'un faire-part, qu'on ouvre comme un objet, et à laquelle chaque invité sait répondre, sans compte et sans notice. Elle s'adresse d'abord aux couples dont les invités vivent dans plusieurs pays."] },
-      { label: "Le parti pris", h: "Un autre geste que l'enveloppe.", p: [
-        "L'enveloppe 3D et son cachet de cire brisé sont devenus le cliché des invitations de mariage en ligne. Beau Cachet cherche un dévoilement propre à chaque style : un pli qui se déplie, un calque qu'on soulève, une carte qui se retourne. Pour celui-ci, c'est une porte."] },
+      { label: "Contexte", h: "Un faire-part, sans les contraintes du papier.", p: [
+        "Les mariés passent au numérique pour se simplifier la vie.",
+        "Beau Cachet s'adresse d'abord aux couples dont les invités vivent dans plusieurs pays : le papier devient lent, coûteux et incertain, et il faut traduire et relancer pour la moitié des invités."] },
+      { label: "La conviction", h: "Rendre simple le design d'un mariage.", p: [
+        "Un mariage demande des dizaines de décisions de design : un style, une typographie, un site, des traductions, un suivi des réponses. La plupart des outils les laissent aux mariés. Beau Cachet les prend en charge : le couple choisit un style déjà composé, remplace ses informations et envoie un seul lien. Il n'a rien à designer, ni à traduire, ni à configurer."] },
     ],
-    process: { label: "Le dévoilement", h: "Une porte, cinq secondes, quatre décisions.", strip: true,
-      p: ["Chaque décision répond à la même question : que ressent l'invité dans la première seconde, avant même de lire un mot ?"],
+    process: { label: "De l'idée au produit", h: "De l'idée au produit, en six étapes.", strip: true,
+      p: ["Le premier style, une toile de Jouy, est en ligne sur beaucachet.fr avec un mariage de démonstration : Bérénice & Côme."],
       steps: [
-        { t: "Le geste", d: "Ouvrir une porte, c'est entrer quelque part. Le geste dit l'accueil sans un mot, dans toutes les langues. L'invité regarde d'abord, il lit ensuite.", src: "beaucachet-porte-2-entrouverte.webp", alt: "La porte, à moitié ouverte, laisse voir un jardin" },
-        { t: "Le dessin", d: "Une gravure dans un seul bleu d'encre, sur fond ivoire : une porte voûtée, des vases fleuris, un feuillage dense. Pas de pastel, pas de doré : le trait suffit, comme sur du papier gravé.", src: "beaucachet-porte-1-fermee.webp", alt: "La porte fermée : gravure bleue sur fond ivoire, avec deux vases fleuris" },
-        { t: "L'animation", d: "La caméra reste fixe, seuls les deux battants bougent, lentement, sur un jardin et une allée bordée de cyprès. Cinq secondes, sans coupe, réalisées en IA générative à partir du dessin.", clip: { src: "beaucachet-porte.mp4", poster: "beaucachet-porte-3-ouverte.webp" } },
-        { t: "La suite", d: "La porte s'ouvre sur l'essentiel : qui, quand, où. L'invité répond ensuite en apposant son cachet, le geste signature de la marque.", todo: "L'invitation sur téléphone, après l'ouverture de la porte" },
+        { t: "Concept", d: "Un seul lien pour tout le mariage. Le parcours de l'invité tient en quatre pages : l'Accueil, où l'on pousse la porte ; l'Invitation et son programme ; les Informations pratiques et la réponse ; puis les Souvenirs, où chacun dépose ses photos après le jour J.", src: "bc-parcours.webp", alt: "Les quatre pages du site : Accueil, Invitation, Informations et Souvenirs", contain: true },
+        { t: "Direction artistique", d: "Une toile de Jouy revisitée : des gravures bleu outremer sur papier ivoire, et des pivoines au crayon noir en accent. Quatre typographies, chacune avec un rôle : WindSong pour la calligraphie des prénoms et des grands titres, Bodoni Moda pour les titres de section, Fraunces pour les textes, DM Sans pour les menus et les boutons.", src: "bc-da.webp", alt: "Planche de direction artistique : palette, typographies et porte gravée", contain: true },
+        { t: "Déclinaison d'images", d: "Chaque moment du mariage a son illustration, dans le même trait de gravure : le domaine, les mariés en voiture, la table, la pièce montée, le violon, les alliances, la clé des hébergements. Le programme s'appuie sur 25 icônes gravées. L'univers se décline jusqu'au save the date animé.", src: "bc-declinaisons.webp", alt: "Planche des illustrations gravées et bandeau d'icônes du programme", contain: true },
+        { t: "Développement front", d: "Un site responsive, pensé d'abord pour le téléphone, en français et en anglais. Les animations restent légères et s'arrêtent quand l'appareil demande moins de mouvement. Des scripts contrôlent chaque mise en page : les alignements à 360, 390 et 1 440 px, et le contraste des textes (WCAG AA).", src: "bc-mobile.webp", alt: "Le site sur téléphone : accueil, invitation, programme et formulaire de réponse", contain: true },
+        { t: "Back office", d: "Les mariés personnalisent leur site sans designer : un clic sur un texte pour le réécrire, sur une image pour la remplacer, un œil pour masquer un élément, des flèches pour réordonner les sections. Rien n'est visible des invités avant « Enregistrer ». Les réponses arrivent dans un tableau de bord : présents, absents, et qui vient à chaque moment.", src: "bc-backoffice.webp", alt: "Le mode personnalisation et le tableau de bord des réponses reçues", contain: true },
+        { t: "Tests utilisateurs (en cours)", d: "Les tests sont en cours sur le site de démonstration. Ils portent sur le parcours de l'invité, de la porte jusqu'à la réponse, et sur la personnalisation du site par les mariés.", src: "bc-repondre.webp", alt: "Le formulaire de réponse : Serez-vous à nos côtés ?" },
       ] },
-    film: { video: "beaucachet-porte.mp4", poster: "beaucachet-porte-poster.webp", cap: "L'ouverture de la porte, en boucle", silent: true },
-    gallery: [{ todo: "Déclinaison pour une invitation d'événement d'entreprise", w: 12, ar: "16 / 6" }],
-    after: [{ label: "Et ensuite", h: "Et si une entreprise s'en servait ?", p: [
-      "Le même principe peut ouvrir l'invitation à un événement d'entreprise : séminaire, remise de prix, soirée de lancement. " + todo("déclinaison à concevoir, à valider avec toi")] }],
-    proud: { h: "Faire sentir le papier dans un lien.",
-      p: ["Une animation de cinq secondes suffit pour que l'invité ait le sentiment d'ouvrir quelque chose de précieux. Sans compte à créer, sans notice, sans bouton à chercher.",
-          "C'est le test que je garde en tête pour chaque choix : l'invité le moins à l'aise avec le numérique doit comprendre, et avoir envie de répondre."] } },
+    film: { video: "bc-site.mp4", poster: "bc-site-poster.webp", cap: "Le site de démonstration : pousser la porte, puis découvrir l'invitation", silent: true },
+    planche: true,
+    gallery: [
+      { src: "bc-accueil.webp", alt: "Accueil : la porte fermée et le bouton Pousser la porte", cap: "Accueil : pousser la porte", ar: "1440 / 900" },
+      { src: "bc-std-prenoms.webp", alt: "Save the date : les prénoms Adèle et Gauthier entre des pivoines gravées", cap: "Save the date animé, format story", ar: "720 / 1280" },
+      { src: "bc-programme.webp", alt: "Le programme en blanc sur bandeau bleu, avec icônes gravées", cap: "Le programme et ses icônes", ar: "1440 / 900" },
+      { src: "bc-dormir.webp", alt: "Les hébergements, chacun avec sa clé gravée", cap: "Où dormir : une clé par adresse", ar: "1440 / 900" },
+      { src: "bc-std-lieu.webp", alt: "Save the date : le manoir dans une arche gravée", cap: "Save the date : le lieu", ar: "720 / 1280" },
+      { src: "bc-dresscode.webp", alt: "Le dress code et ses pastilles de couleur", cap: "Le dress code", ar: "1440 / 900" },
+      { src: "bc-souvenirs.webp", alt: "La page Souvenirs, avec les consignes pour partager ses photos", cap: "Souvenirs : les photos des invités", ar: "1440 / 900" },
+      { src: "bc-std-reponse.webp", alt: "Save the date : la carte finale qui invite à répondre sur beaucachet.fr", cap: "Save the date : l'appel à répondre", ar: "720 / 1280" },
+      { src: "bc-edition.webp", alt: "Le mode personnalisation, avec sa barre d'outils", cap: "Le mode personnalisation", ar: "1440 / 900" },
+      { src: "bc-reponses.webp", alt: "Le tableau de bord des réponses reçues", cap: "Les réponses reçues", ar: "1440 / 900" },
+    ],
+    learned: { h: "Le design construit la personnalité d'un produit.", p: "L'identité visuelle, les interactions et le motion ne viennent pas décorer un produit. Ils construisent sa personnalité, traduisent son intention et contribuent directement à la perception de sa valeur." },
+    then: [{ label: "Et ensuite", h: "Un univers de marque pour chaque couple.", p: [
+      "La première phase pose les fondations digitales du projet. La suite consistera à développer un véritable univers de marque pour chaque couple, décliné sur l'ensemble de son expérience de mariage, du premier contact avec les invités jusqu'aux détails de la réception."] }],
+    proud: { h: "Imaginer des univers visuels singuliers, cohérents et inattendus.",
+      p: ["En mettant le design et le motion au service d'une expérience de mariage qui ne ressemble à aucune autre, et qui laisse un souvenir durable aux invités."] } },
 ];
 
 /* Rendu */
@@ -715,6 +730,7 @@ function render(id) {
   </section>
 
   ${p.learned ? section({ label: "Ce que j'en retiens", h: p.learned.h || "Avec le recul.", p: [p.learned.p || p.learned] }, true) : ""}
+  ${(p.then || []).map(x => section(x, true)).join("")}
 
   <section class="c sec" id="invite" aria-label="Lecture en profondeur">
     <div class="s-body" style="grid-column:4/13"><button class="more" type="button" id="go-deep">Voir toute la démarche <span aria-hidden="true">↓</span></button></div>

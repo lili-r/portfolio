@@ -15,12 +15,12 @@
 - La barre de test en bas ne propose plus que : Header « Ta compo » / « Mosaïque ».
 
 ## Projets (miniatures actuelles)
-01 Programme interne (visuel C-NUM + galerie de 3) · 02 Kaizo (poulpe) · 03 Onboarding IA (homme au téléphone jaune) · 04 Événement interne (écran d'attente animé « It's break time! ») · 05 Intranet SharePoint (emplacement provisoire) · 06 Utah, coffee shop dog-friendly (logo) · 07 Orbit (marque fictive, à présenter comme exploration IA) · 08 Beau Cachet (invitation animée, projet perso, porte qui s'ouvre) · 09 Carte de vœux (sous embargo, carte à gratter).
+01 Programme interne (visuel C-NUM + galerie de 3) · 02 Kaizo (poulpe) · 03 Onboarding IA (homme au téléphone jaune) · 04 Événement interne (écran d'attente animé « It's break time! ») · 05 Intranet SharePoint (emplacement provisoire) · 06 Utah, coffee shop dog-friendly (logo) · 07 Orbit (marque fictive, à présenter comme exploration IA) · 08 Beau Cachet (plateforme de mariage, porte qui s'ouvre) · 09 Carte de vœux (sous embargo, carte à gratter).
 
 ## Règles importantes
 - Confidentialité : ne jamais afficher le nom du client aéronautique (logo effacé sur la blouse, fichiers renommés). Prévenir Julie si un nouveau visuel le montre.
 - Orbit = projet fictif : ne jamais le présenter comme un projet client.
-- Business de templates de mariage « Beau Cachet » (GIF « open the door » reçu le 25/11, case 08 rédigé) : rester discret. Sur le site : ni prix, ni Etsy, ni lieux partenaires, ni hypothèses du brief ; statut « En préparation ». Source : brief stratégique (artefact Gh47HpfVAYiiLVAgSayCto). Déclinaison BtoB à concevoir.
+- Beau Cachet (case 08) : plateforme de sites de mariage avec back office, en ligne sur beaucachet.fr (public, validé par Julie le 25/11). Texte de Julie appliqué. Visuels tirés du dépôt `lili-r/wedding` (maquette, illustrations) et du storyboard du save the date (artefact VNvZybuUMFE5mifg6vWKyW). Ne jamais afficher : prix, Etsy, lieux partenaires. Manque : la vidéo finale du save the date (mp4).
 - Pas d'écriture inclusive. Ton chaleureux, design, structuré, « sympa mais pro ».
 - **Dosage du « je »** (choix de Julie, 16/11) : un mélange. Trop de « je » fait narcissique, pas du tout fait froid.
   - Forme neutre pour les descriptions (accroche, à propos, résumés, démarches) : « Des univers visuels conçus pour se décliner sur… », « Huit ans de design en cabinet de conseil… ».
