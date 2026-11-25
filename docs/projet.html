@@ -578,7 +578,7 @@ const PROJETS = [
       { label: "Contexte", h: "Un faire-part, sans les contraintes du papier.", p: [
         "Les mariés passent au numérique pour se simplifier la vie.",
         "Beau Cachet s'adresse d'abord aux couples dont les invités vivent dans plusieurs pays : le papier devient lent, coûteux et incertain, et il faut traduire et relancer pour la moitié des invités."] },
-      { label: "La conviction", h: "Rendre simple le design d'un mariage.", p: [
+      { label: "La conviction", h: "Permettre à chaque couple de raconter son histoire à travers un univers graphique qui lui ressemble, jusque dans les moindres détails.", p: [
         "Un mariage demande des dizaines de décisions de design : un style, une typographie, un site, des traductions, un suivi des réponses. La plupart des outils les laissent aux mariés. Beau Cachet les prend en charge : le couple choisit un style déjà composé, remplace ses informations et envoie un seul lien. Il n'a rien à designer, ni à traduire, ni à configurer."] },
     ],
     process: { label: "De l'idée au produit", h: "De l'idée au produit, en six étapes.", strip: true,
@@ -788,6 +788,31 @@ function render(id) {
 /* Mode de lecture : mémorisé, partageable avec ?lecture=profondeur */
 const store = { get: () => { try { return localStorage.getItem("lecture"); } catch { return null; } }, set: v => { try { localStorage.setItem("lecture", v); } catch {} } };
 let mode = new URLSearchParams(location.search).get("lecture") === "profondeur" ? "profondeur" : (store.get() || "essentiel");
+/* Le sélecteur Essentiel / En profondeur se clique ou se fait glisser (doigt ou souris) */
+function wireSwipe(seg) {
+  if (!seg) return;
+  const pill = seg.querySelector(".pill"), btn = m => seg.querySelector(`button[data-mode="${m}"]`);
+  let x0 = null, base = 0, moved = false;
+  seg.style.touchAction = "pan-y";
+  seg.addEventListener("pointerdown", e => { x0 = e.clientX; moved = false; base = btn(mode).offsetLeft; });
+  addEventListener("pointermove", e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; if (Math.abs(dx) < 6) return;
+    moved = true; pill.style.transition = "none";
+    const min = btn("essentiel").offsetLeft, max = btn("profondeur").offsetLeft;
+    pill.style.translate = Math.min(max, Math.max(min, base + dx)) + "px 0";
+  });
+  const end = e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; x0 = null; pill.style.transition = "";
+    if (!moved) return;
+    setMode(Math.abs(dx) > 24 ? (dx > 0 ? "profondeur" : "essentiel") : mode, true);
+  };
+  addEventListener("pointerup", end);
+  addEventListener("pointercancel", e => { if (x0 === null) return; x0 = null; pill.style.transition = ""; setMode(mode, false); });
+  // Après un glissement, on ignore le clic que le navigateur envoie au relâchement
+  seg.addEventListener("click", e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+}
 function setMode(m, animate) {
   mode = m; store.set(m);
   const deep = m === "profondeur";
@@ -895,6 +920,7 @@ function wire() {
   document.querySelectorAll("[data-scroll]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); document.getElementById("realisations").scrollIntoView({ behavior: "smooth" }); }));
   lightbox();
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode, true)));
+  wireSwipe(document.querySelector(".seg"));
   document.getElementById("go-deep").addEventListener("click", () => { const y = scrollY; setMode("profondeur", true); scrollTo({ top: y }); document.querySelector("[data-deep]")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
   setMode(mode, false);
   const btn = document.getElementById("end-cta"), lbl = btn.querySelector(".lbl"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -334,6 +334,19 @@ a { color: inherit; }
 .k6.play .row { animation: rise 1s 1.2s var(--out) both; }
 
 @media (max-width: 900px) { .k2 { grid-template-columns: minmax(0, 1fr); } .k2 .zone { justify-self: start; } }
+/* Le Nuancier : encart d'appel vers le slider de personnalité */
+.nu { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.nu-txt { display: grid; gap: 28px; justify-items: start; }
+.nu-txt p { font-size: 18px; line-height: 1.6; max-width: 46ch; }
+.nu-vis { display: grid; gap: 22px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--rule); border-radius: 18px; background: var(--slate); }
+.nu-row { display: grid; grid-template-columns: 104px minmax(0, 1fr) 104px; align-items: center; gap: 16px; font-size: 13px; color: var(--haze); }
+.nu-row > span:last-child { text-align: right; }
+.nu-track { position: relative; height: 2px; background: #3a3935; border-radius: 2px; }
+.nu-track i { position: absolute; top: 50%; left: var(--p); width: 14px; height: 14px; border-radius: 50%; background: var(--ember); translate: -50% -50%; animation: nu-move var(--d) ease-in-out infinite alternate; }
+@keyframes nu-move { from { left: var(--p); } to { left: var(--q); } }
+@media (max-width: 900px) { .nu { grid-template-columns: minmax(0, 1fr); } .nu-row { grid-template-columns: 88px minmax(0, 1fr) 88px; font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .nu-track i { animation: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   .k1.play .line > span, .k1.play .mail, .k1.play .row > *, .k4 .dots i.on::after, .k5.play h2, .k5.play .ch, .k5.play .bar, .k5.play .row, .k6.play .ln .f, .k6 .ln:hover .f, .k6.play .row { animation: none; }
   .k2 .orb, .k2 .orb .lbl, .k4 .rot, .k4 .rot span { transition: none; }
@@ -431,7 +444,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" id="projets" aria-labelledby="h-projets">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="1" data-t="4"></span><span class="slabel">Projets</span></div>
+      <div class="s-label"><span class="num" data-n="1" data-t="5"></span><span class="slabel">Projets</span></div>
       <div class="s-body">
         <h2 id="h-projets">Des univers pensés pour prendre vie.</h2>
         <div class="projects" id="projects"></div>
@@ -442,7 +455,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" id="savoir-faire" aria-labelledby="h-sf">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="2" data-t="4"></span><span class="slabel">Savoir-faire</span></div>
+      <div class="s-label"><span class="num" data-n="2" data-t="5"></span><span class="slabel">Savoir-faire</span></div>
       <div class="s-body">
         <h2 id="h-sf">De l'idée à l'univers, du concept au mouvement.</h2>
         <div class="skills">
@@ -459,7 +472,7 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" id="a-propos" aria-labelledby="h-about">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="3" data-t="4"></span><span class="slabel">À propos</span></div>
+      <div class="s-label"><span class="num" data-n="3" data-t="5"></span><span class="slabel">À propos</span></div>
       <div class="s-body">
         <h2 id="h-about">Huit ans de conseil, un œil de designer.</h2>
         <div class="about">
@@ -475,10 +488,27 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     </div>
   </section>
 
+  <section class="section nuancier" id="brief" aria-labelledby="h-brief">
+    <div class="c">
+      <div class="rule"></div>
+      <div class="s-label"><span class="num" data-n="4" data-t="5"></span><span class="slabel">Le Nuancier</span></div>
+      <div class="s-body">
+        <h2 id="h-brief">Besoin d'un brief ?</h2>
+        <div class="nu">
+          <div class="nu-txt">
+            <p>Besoin de mettre au clair votre idée ? Testez le Nuancier, un slider de personnalité : réglez cinq curseurs, voyez l'effet de chacun, et repartez avec un brief clair, en 3 minutes.</p>
+            <a class="cta solid" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener">Tester le slider de personnalité <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="nu-vis" aria-hidden="true"><div class="nu-row"><span>Classique</span><span class="nu-track"><i style="--p:30%;--q:74%;--d:7s"></i></span><span>Contemporain</span></div><div class="nu-row"><span>Discret</span><span class="nu-track"><i style="--p:62%;--q:38%;--d:9s"></i></span><span>Affirmé</span></div><div class="nu-row"><span>Rationnel</span><span class="nu-track"><i style="--p:44%;--q:80%;--d:8s"></i></span><span>Émotionnel</span></div><div class="nu-row"><span>Accessible</span><span class="nu-track"><i style="--p:26%;--q:52%;--d:10s"></i></span><span>Exclusif</span></div><div class="nu-row"><span>Conventionnel</span><span class="nu-track"><i style="--p:58%;--q:86%;--d:7.5s"></i></span><span>Audacieux</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section contact" id="contact" aria-labelledby="h-contact">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="4" data-t="4"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" hidden></span><button class="replay mono" id="ct-replay" type="button" hidden>↻ Rejouer</button></div>
+      <div class="s-label"><span class="num" data-n="5" data-t="5"></span><span class="slabel">Contact</span><span class="mono dim" id="ct-name" hidden></span><button class="replay mono" id="ct-replay" type="button" hidden>↻ Rejouer</button></div>
       <div class="s-body" id="ct-body"></div>
       <a class="brief" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener">Pas encore de brief ? Posez-le en 3 minutes <span aria-hidden="true">→</span></a>
     </div>
@@ -525,7 +555,7 @@ const P = [
     title: "Beau Cachet, rendre simple le design d'un mariage",
     sum: "Conception d'une plateforme digitale dédiée à l'expérience du mariage, de la première invitation aux souvenirs du jour J.",
     meta: [["Type","Projet personnel, concept produit"],["Rôle","Conception, direction artistique, motion design, développement web"],["Site","beaucachet.fr"]] },
-  { id: "voeux", n: "09", name: "Carte de vœux", year: "Bientôt", disc: "Projet sous embargo", teaser: true,
+  { id: "voeux", n: "09", name: "Carte de vœux", year: "2027", disc: "Carte de vœux 2027 · Re-invent", soon: true,
     title: "Une carte de vœux, encore sous embargo",
     sum: "Ce projet sera dévoilé dès que la carte aura été envoyée. En attendant, une étoile s'en est échappée et s'est posée en haut de cette page.",
     meta: [["Projet","Carte de vœux"],["Statut","Sous embargo, dévoilement prochainement"]] },
@@ -568,10 +598,10 @@ const headerC = `<div class="compo" id="compo">
 const daysToNewYear = () => { const now = new Date(), ny = new Date(now.getFullYear() + 1, 0, 1); return Math.ceil((ny - now) / 864e5); };
 const EMB = {
   a: () => `<div class="img i-env"><div class="env"><div class="flap"></div><div class="seal"><img src="${A}etoile.webp" alt=""></div></div></div>`,
-  b: () => `<div class="img i-scratch"><img class="ph" src="${A}voeux-miniature.webp" alt="Carte de vœux : 2027, re-invent, une éclipse violette" style="object-position:center top"><canvas></canvas><span class="hint2 mono">Grattez</span></div>`,
+  b: () => `<div class="img"><img class="ph" src="${A}voeux-miniature.webp" alt="Carte de vœux : 2027, re-invent, une éclipse violette" style="object-position:center top"></div>`,
   c: () => `<div class="img i-count"><img class="glow2" src="${A}etoile.webp" alt=""><div class="cnt"><b>J-${daysToNewYear()}</b><span>avant les vœux</span></div></div>`,
 };
-const EMBMETA = { a: ["Carte de vœux", "Encore sous pli", "Cachetée"], b: ["Carte de vœux", "À gratter pour la découvrir", "2027"], c: ["Carte de vœux", "Dévoilée avec la nouvelle année", "Bientôt"] };
+const EMBMETA = { a: ["Carte de vœux", "Encore sous pli", "Cachetée"], b: ["Carte de vœux", "Carte de vœux 2027 · Re-invent", "2027"], c: ["Carte de vœux", "Dévoilée avec la nouvelle année", "Bientôt"] };
 let emb = "a";
 Object.defineProperty(IMG, "voeux", { get: () => EMB[emb](), enumerable: true });
 function initScratch(root) {
@@ -594,7 +624,7 @@ function initScratch(root) {
 /* Projets (contenu de page) */
 function renderProjects() {
 document.getElementById("projects").innerHTML = P.map(p => p.soon ? `
-  <div class="shot proj soon" style="height:auto" aria-label="${p.name}, projet en cours">
+  <div class="shot proj soon" data-card="${p.id}" style="height:auto" aria-label="${p.name}${p.id === "voeux" ? "" : ", projet en cours"}">
     <div class="frame">${IMG[p.id]}</div>
     <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
   </div>` : `
@@ -613,7 +643,7 @@ function setEmbargo(k) {
   renderProjects();
   document.querySelectorAll(".ebtn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.e === k)));
 }
-document.querySelectorAll(".ebtn").forEach(b => b.addEventListener("click", () => { setEmbargo(b.dataset.e); document.querySelector('#projects [data-id="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" }); }));
+document.querySelectorAll(".ebtn").forEach(b => b.addEventListener("click", () => { setEmbargo(b.dataset.e); document.querySelector('#projects [data-card="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" }); }));
 
 /* Numérotation */
 function setNum(st) {
@@ -803,7 +833,7 @@ document.addEventListener("click", e => {
   const c = e.target.closest("[data-id]"); if (!c) return;
   const id = c.dataset.id;
   if (id === "voeux") { // sous embargo : pas de page, on va gratter la carte
-    if (!c.closest("#projects")) document.querySelector('#projects [data-id="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!c.closest("#projects")) document.querySelector('#projects [data-card="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
   try { sessionStorage.setItem("home", location.pathname + location.search); } catch {}
