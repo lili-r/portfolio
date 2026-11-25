@@ -214,6 +214,7 @@ a { color: inherit; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(48px, 5vw, 80px) var(--gap); }
 .proj { display: grid; gap: 18px; text-align: left; }
 .proj .frame { aspect-ratio: 4 / 3; max-width: 100%; }
+.proj.soon { cursor: default; } .proj.soon:hover .img { scale: 1; }
 .proj .meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; }
 .proj h3 { font-size: 26px; letter-spacing: var(--title-track); line-height: 1.15; }
 .proj p { color: var(--haze); font-size: 14px; grid-column: 1 / -1; }
@@ -498,8 +499,8 @@ const IMG = {
   kaizo: `<div class="img"><img class="ph" src="${A}kaizo-poulpe.webp" alt="Mascotte poulpe de Kaizo"></div>`,
   onboarding: `<div class="img"><img class="ph" src="${A}onboarding-video.webp" alt="Image extraite de la vidéo d'onboarding réalisée en IA générative"></div>`,
   evenement: `<div class="img"><video class="ph" src="${A}evenement-attente.mp4" poster="${A}evenement-attente-poster.webp" muted loop playsinline preload="none" aria-label="Écran d'attente de l'événement interne : It's break time"></video></div>`,
-  beaucachet: `<div class="img"><img class="ph" src="${A}beaucachet-porte-poster.webp" alt="La porte du site Beau Cachet, gravée en bleu sur fond ivoire"></div>`,
-  sharepoint: `<div class="img i-sharepoint"><div class="bar"><i></i><i></i><i></i></div><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i></div></div>`,
+  beaucachet: `<div class="img"><video class="ph" src="${A}beaucachet-porte.mp4" poster="${A}beaucachet-porte-poster.webp" muted loop playsinline preload="none" aria-label="La porte du site Beau Cachet qui s'ouvre, gravée en bleu sur fond ivoire"></video></div>`,
+  sharepoint: `<div class="img"><img class="ph" src="${A}sharepoint-miniature.webp" alt="Page « La mission » de l'intranet : quatre cartes numérotées sur un fond de rideaux bleus et violets"></div>`,
   orbit: `<div class="img"><img class="ph" src="${A}orbit-logo-scene.webp" alt="Logo Orbit projeté sur un écran devant un auditoire"></div>`,
   restaurant: `<div class="img" style="background:#fff"><img class="ph" style="object-fit:contain;padding:10%" src="${A}utah-logo.webp" alt="Logo Utah, coffee shop dog-friendly"></div>`,
 };
@@ -516,7 +517,7 @@ const P = [
     title: "Une vidéo d'onboarding réalisée en IA générative", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Motion design, vidéo, IA générative"]] },
   { id: "evenement", n: "05", name: "Événement interne", year: "—", disc: "Communication · Slide decks · Photobooth",
     title: "Un événement interne pour 200 personnes", sum: "Communication, slide decks et photobooth. Étude de cas en cours de rédaction.", meta: [["Public","200 participants"],["Livrables","Communication, slide decks, photobooth"]] },
-  { id: "sharepoint", n: "06", name: "Intranet SharePoint", year: "—", disc: "Digital interne · UI",
+  { id: "sharepoint", n: "06", name: "Intranet SharePoint", soon: true, year: "(en cours)", disc: "Digital interne · UI",
     title: "L'espace SharePoint d'un programme interne", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Digital interne, UI"]] },
   { id: "orbit", n: "07", name: "Orbit", year: "—", disc: "Exploration IA · Logo",
     title: "Orbit, une marque fictive pour explorer l'IA", sum: "Un projet personnel : créer une marque de bout en bout, du logo à sa mise en scène, pour tester ce que les outils d'IA générative apportent au travail de designer. Étude de cas en cours de rédaction.", meta: [["Type","Projet personnel, marque fictive"],["Disciplines","Création de logo, mise en scène, IA générative"]] },
@@ -567,10 +568,10 @@ const headerC = `<div class="compo" id="compo">
 const daysToNewYear = () => { const now = new Date(), ny = new Date(now.getFullYear() + 1, 0, 1); return Math.ceil((ny - now) / 864e5); };
 const EMB = {
   a: () => `<div class="img i-env"><div class="env"><div class="flap"></div><div class="seal"><img src="${A}etoile.webp" alt=""></div></div></div>`,
-  b: () => `<div class="img i-scratch"><div class="msg"><strong>Patience…<br>elle arrive avec la nouvelle année.</strong><span>Carte de vœux, encore sous scellés</span></div><canvas></canvas><span class="hint2 mono">Grattez</span></div>`,
+  b: () => `<div class="img i-scratch"><img class="ph" src="${A}voeux-miniature.webp" alt="Carte de vœux : 2027, re-invent, une éclipse violette" style="object-position:center top"><canvas></canvas><span class="hint2 mono">Grattez</span></div>`,
   c: () => `<div class="img i-count"><img class="glow2" src="${A}etoile.webp" alt=""><div class="cnt"><b>J-${daysToNewYear()}</b><span>avant les vœux</span></div></div>`,
 };
-const EMBMETA = { a: ["Carte de vœux", "Encore sous pli", "Cachetée"], b: ["Carte de vœux", "À gratter… sans rien révéler", "Bientôt"], c: ["Carte de vœux", "Dévoilée avec la nouvelle année", "Bientôt"] };
+const EMBMETA = { a: ["Carte de vœux", "Encore sous pli", "Cachetée"], b: ["Carte de vœux", "À gratter pour la découvrir", "2027"], c: ["Carte de vœux", "Dévoilée avec la nouvelle année", "Bientôt"] };
 let emb = "a";
 Object.defineProperty(IMG, "voeux", { get: () => EMB[emb](), enumerable: true });
 function initScratch(root) {
@@ -592,8 +593,12 @@ function initScratch(root) {
 
 /* Projets (contenu de page) */
 function renderProjects() {
-document.getElementById("projects").innerHTML = P.map(p => `
-  <button class="shot proj" data-id="${p.id}" aria-label="${p.teaser ? "Carte de vœux sous embargo, à gratter" : "Ouvrir le projet " + p.name}" style="height:auto">
+document.getElementById("projects").innerHTML = P.map(p => p.soon ? `
+  <div class="shot proj soon" style="height:auto" aria-label="${p.name}, projet en cours">
+    <div class="frame">${IMG[p.id]}</div>
+    <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
+  </div>` : `
+  <button class="shot proj" data-id="${p.id}" aria-label="${p.teaser ? "Carte de vœux à gratter" : "Ouvrir le projet " + p.name}" style="height:auto">
     <div class="frame">${IMG[p.id]}</div>
     <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
   </button>`).join("");

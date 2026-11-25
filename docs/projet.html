@@ -518,7 +518,7 @@ const PROJETS = [
     gallery: [{ src: "evenement-kaleidoscope.webp", alt: "Visuel de l'événement", cap: "Le visuel de l'événement", w: 5, ar: "800 / 887" }, { todo: "Photos de l'événement", w: 7, ar: "800 / 887" }],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] }, confidential: true },
 
-  { id: "sharepoint", n: "06", name: "Intranet SharePoint",
+  { id: "sharepoint", n: "06", name: "Intranet SharePoint", soon: true,
     disc: "Digital interne · UI",
     title: "Un espace où l'information se trouve du premier coup",
     sum: "L'espace SharePoint d'un programme interne. " + todo("le problème à résoudre"),
@@ -686,7 +686,8 @@ const year = p => { const f = p.fiche.find(([k]) => /^Année/.test(k)); return f
 function render(id) {
   LB = [];
   PROC = null;
-  const list = PROJETS, i = Math.max(0, list.findIndex(p => p.id === id)), p = list[i], nx = list[(i + 1) % list.length];
+  const list = PROJETS, i = Math.max(0, list.findIndex(p => p.id === id)), p = list[i];
+  let k = (i + 1) % list.length; while (list[k].soon && k !== i) k = (k + 1) % list.length; const nx = list[k];
   document.title = `${p.name}, Julie Ramier`;
   const hv = p.hero; PROC = p.process || null;
   document.getElementById("page").innerHTML = `
