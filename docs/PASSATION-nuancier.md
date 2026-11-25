@@ -14,6 +14,13 @@
 - Section « Pourquoi ce jeu ? » après l'intro : texte de Julie sur l'atelier qui ouvre ses projets.
 - Transition : l'ancienne planche est figée dans un calque « fantôme » posé par-dessus, le nouveau profil s'installe dessous, puis le fantôme s'efface en « éclosion » : les anciennes formes se replient, les nouvelles s'ouvrent (fonctions `ghost()` et `morph()`). Désactivée si l'utilisateur a demandé moins d'animations.
 
+## Version 2 (`docs/nuancier-v2.html`)
+- Demande de Julie : la v1 est trop chargée (« effet IA, trop de contenu ») ; simplifier, redonner un côté humain.
+- Piste « La carte de nuancier » : fond papier clair, une seule page, 5 curseurs sans question ni exemple, une phrase-résumé (« Votre projet est… »), un nuancier de peinture (5 bandes de couleur, nom du profil, duo typo) et une seule mention, écrite à la main et signée Julie. Appel à l'action : « Écrivez-moi » + « Copier mon profil ».
+- Typo de la page : Instrument Serif (titres), Instrument Sans (texte), Caveat (note manuscrite). Mêmes 32 profils que la v1.
+- Retirés par rapport à la v1 : barre de test, étapes numérotées, choix équipes / clients, planche et moodboard, portrait, formulaire de brief, mode équipe, avertissements répétés.
+- Sur mobile, la carte devient une bande compacte collée en haut pendant le réglage.
+
 ## Décisions de Julie
 - Outil **simple, grand public, ludique**.
 - **5 curseurs** : Classique ↔ Contemporain (ex. Hermès / Nothing), Discret ↔ Affirmé (Aesop / Diesel), Rationnel ↔ Émotionnel (IBM / Disney), Accessible ↔ Exclusif (IKEA / Rolex), Conventionnel ↔ Audacieux (LinkedIn / Balenciaga).
