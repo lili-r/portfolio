@@ -542,17 +542,17 @@ const P = [
     title: "Utah, le coffee shop où le chien est invité", sum: "Création d'un univers de marque chaleureux et accessible pour un coffee shop dog friendly.", meta: [["Disciplines","Stratégie de marque, logo, mascotte, charte graphique"]] },
   { id: "programme", n: "02", name: "C-NUM", year: "2024–2025", disc: "Direction artistique · Motion design · Événementiel",
     title: "Un programme de transformation, rendu clair et désirable", sum: "", meta: [] },
-  { id: "kaizo", n: "03", name: "Kaizo", year: "2026", disc: "Atelier de branding · Naming · Identité",
+  { id: "kaizo", n: "03", name: "Kaizo", soon: true, year: "(en cours)", disc: "Atelier de branding · Naming · Identité",
     title: "Kaizo, donner un visage à un produit tech",
     sum: "Une solution développée par une équipe tech, sans designer. Un atelier avec les parties prenantes pour lui trouver un nom, puis un visage : un logo, une identité et une mascotte poulpe.",
     meta: [["Année","2026"],["Rôle","Directrice artistique · Animation d'ateliers"],["Livrables","Atelier de branding, nom, logo, logo animé, mascotte, identité visuelle"]] },
   { id: "onboarding", n: "04", name: "Onboarding en IA", year: "2026", disc: "Motion · Vidéo · IA générative",
     title: "Une vidéo d'onboarding réalisée en IA générative", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Motion design, vidéo, IA générative"]] },
-  { id: "evenement", n: "05", name: "Événement interne", year: "—", disc: "Communication · Slide decks · Photobooth",
+  { id: "evenement", n: "05", name: "Événement interne", soon: true, year: "(en cours)", disc: "Communication · Slide decks · Photobooth",
     title: "Un événement interne pour 200 personnes", sum: "Communication, slide decks et photobooth. Étude de cas en cours de rédaction.", meta: [["Public","200 participants"],["Livrables","Communication, slide decks, photobooth"]] },
   { id: "sharepoint", n: "06", name: "Intranet SharePoint", soon: true, year: "(en cours)", disc: "Digital interne · UI",
     title: "L'espace SharePoint d'un programme interne", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Digital interne, UI"]] },
-  { id: "orbit", n: "07", name: "Orbit", year: "—", disc: "Exploration IA · Logo",
+  { id: "orbit", n: "07", name: "Orbit", soon: true, year: "(en cours)", disc: "Exploration IA · Logo",
     title: "Orbit, une marque fictive pour explorer l'IA", sum: "Un projet personnel : créer une marque de bout en bout, du logo à sa mise en scène, pour tester ce que les outils d'IA générative apportent au travail de designer. Étude de cas en cours de rédaction.", meta: [["Type","Projet personnel, marque fictive"],["Disciplines","Création de logo, mise en scène, IA générative"]] },
   { id: "beaucachet", n: "08", name: "Beau Cachet", year: "2026", disc: "Produit digital · Direction artistique · Motion design",
     title: "Beau Cachet, rendre simple le design d'un mariage",
@@ -677,7 +677,7 @@ addEventListener("hashchange", () => { if (location.hash.startsWith("#header-"))
 route();
 
 /* ───── Zone de contact : 4 animations à tester ───── */
-const MAIL = "adresse@à-venir.fr";
+const MAIL = "ramierjulie@gmail.com";
 const ctBody = document.getElementById("ct-body");
 const ctName = document.getElementById("ct-name");
 let cleanup = () => {};
@@ -686,7 +686,7 @@ const K = {
   1: { name: "Révélation", html: `
       <div class="k1" style="display:grid;gap:clamp(40px,5vw,64px)">
         <h2 id="h-contact"><span class="line"><span style="--i:0">Un projet,</span></span><span class="line"><span style="--i:1">une mission,</span></span><span class="line"><span style="--i:2">une idée ?</span></span></h2>
-        <div><a class="mail" href="#contact">${MAIL}</a></div>
+        <div><a class="mail" href="mailto:${MAIL}">${MAIL}</a></div>
         <div class="row"><span class="cta solid" style="--i:0">Parlons de votre projet →</span><span class="cta" style="--i:1">LinkedIn ↗</span></div>
       </div>`,
     init(root) {
@@ -721,7 +721,7 @@ const K = {
       <div class="k3"><div class="card">
         <span class="glow" aria-hidden="true"></span>
         <h2 id="h-contact">Un projet, une mission, une idée ?</h2>
-        <div class="row"><span class="cta solid">${MAIL}</span><a class="cta" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        <div class="row"><a class="cta solid" href="mailto:${MAIL}">${MAIL}</a><a class="cta" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
       </div></div>`,
     init(root) {
       const card = root.querySelector(".card"), glow = root.querySelector(".glow");
@@ -835,6 +835,11 @@ showContact(3);
 document.addEventListener("click", e => {
   const c = e.target.closest("[data-id]"); if (!c) return;
   const id = c.dataset.id;
+  const pj = P.find(x => x.id === id);
+  if (pj && pj.soon) { // projet en cours : pas de page pour l'instant, on montre sa carte
+    const card = document.querySelector(`#projects [data-card="${id}"]`); if (card && !c.closest("#projects")) card.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
   if (id === "voeux") { // sous embargo : pas de page, on va gratter la carte
     if (!c.closest("#projects")) document.querySelector('#projects [data-card="voeux"]').scrollIntoView({ behavior: "smooth", block: "center" });
     return;
