@@ -163,6 +163,23 @@ a { color: inherit; }
 .compo:has(button.el:hover) .el:not(:hover) img { filter: brightness(.6); }
 .compo .stamp { transition: translate .8s var(--ease), rotate .8s var(--ease); }
 .compo .star { filter: drop-shadow(0 18px 30px rgba(60,20,140,.45)); }
+.compo .el:has(> .star) { perspective: 700px; }
+/* Ornement de l'écran d'attente : volet radial (apparition puis disparition), centré sur le cœur de l'anneau */
+@property --wa { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --wb { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.compo .orn img {
+  -webkit-mask: conic-gradient(from 180deg at 100% 50%, transparent var(--wb), #000 var(--wb) var(--wa), transparent var(--wa));
+  mask: conic-gradient(from 180deg at 100% 50%, transparent var(--wb), #000 var(--wb) var(--wa), transparent var(--wa));
+  animation: drift 6s ease-in-out infinite alternate, volet 9s infinite;
+  animation-delay: var(--fd, 0s), 0s;
+}
+@keyframes volet {
+  0%, 6% { --wa: 0deg; --wb: 0deg; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  38% { --wa: 181deg; --wb: 0deg; }
+  70% { --wa: 181deg; --wb: 0deg; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  100% { --wa: 181deg; --wb: 181deg; }
+}
+@media (prefers-reduced-motion: reduce) { .compo .orn img { -webkit-mask: none; mask: none; animation: none; } }
 .compo .badge { filter: drop-shadow(0 8px 16px rgba(0,0,0,.45)); }
 @media (max-width: 900px) { .hero-media:has(.compo) { height: auto; } .compo { position: relative; top: auto; translate: none; } }
 
@@ -791,13 +808,13 @@ document.addEventListener("click", e => {
 });
 addEventListener("pageshow", () => document.querySelectorAll("[style*='view-transition-name']").forEach(el => el.style.viewTransitionName = ""));
 
-/* Étoile violette : trois rotations par minute, à des moments tirés au hasard (aucune si mouvement réduit) */
+/* Étoile violette : trois tours sur elle-même (axe vertical) par minute, à des moments tirés au hasard (aucune si mouvement réduit) */
 (() => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const tourner = () => {
     const s = document.querySelector(".compo .star"); if (!s || !s.animate) return;
-    s.animate([{ rotate: "0deg" }, { rotate: (Math.random() < .5 ? -360 : 360) + "deg" }],
-      { duration: 1400 + Math.random() * 800, easing: "cubic-bezier(.65, 0, .35, 1)" });
+    s.animate([{ rotate: "y 0deg" }, { rotate: "y " + (Math.random() < .5 ? -360 : 360) + "deg" }],
+      { duration: 1500 + Math.random() * 700, easing: "cubic-bezier(.65, 0, .35, 1)" });
   };
   const minute = () => {
     const t = [];
