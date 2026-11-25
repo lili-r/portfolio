@@ -228,8 +228,6 @@ a { color: inherit; }
 .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
 .about p { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; }
 .about p + p { color: var(--haze); font-size: 16px; }
-.about { align-items: start; }
-.about-pic { margin: 0; } .about-pic img { display: block; width: 100%; height: auto; border-radius: 14px; }
 
 .contact h2 { font-size: clamp(48px, 7.4vw, 112px); letter-spacing: var(--title-track); line-height: .9; max-width: 12ch; }
 .contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
@@ -342,13 +340,13 @@ a { color: inherit; }
 .nu-txt p { font-size: 18px; line-height: 1.6; max-width: 46ch; }
 .nu-vis { display: grid; gap: 22px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--rule); border-radius: 18px; background: var(--slate); text-decoration: none; color: inherit; transition: border-color .4s, translate .6s var(--out); }
 .nu-vis:hover { border-color: var(--blush); translate: 0 -4px; }
-.cta.nu-cta { background: var(--blush); border-color: var(--blush); color: var(--night); font-size: 17px; padding: 18px 30px; }
+.cta.nu-cta { background: var(--blush); border-color: var(--blush); color: var(--night); }
 .nu-cta.mag::before { background: var(--chalk); }
 .nu-cta.mag:hover { background: var(--chalk); border-color: var(--chalk); }
 .nu-row { display: grid; grid-template-columns: 104px minmax(0, 1fr) 104px; align-items: center; gap: 16px; font-size: 13px; color: var(--haze); }
 .nu-row > span:last-child { text-align: right; }
-.nu-track { position: relative; height: 2px; background: #3a3935; border-radius: 2px; }
-.nu-track i { position: absolute; top: 50%; left: var(--p); width: 14px; height: 14px; border-radius: 50%; background: var(--ember); translate: -50% -50%; animation: nu-move var(--d) ease-in-out infinite alternate; }
+.nu-track { position: relative; height: 1px; background: #3a3935; }
+.nu-track i { position: absolute; top: 50%; left: var(--p); width: 11px; height: 11px; border-radius: 50%; background: var(--night); border: 1px solid var(--blush); box-shadow: inset 0 0 0 2px var(--night), inset 0 0 0 6px var(--blush), 0 0 0 4px rgba(231, 185, 182, .08); translate: -50% -50%; animation: nu-move var(--d) ease-in-out infinite alternate; }
 @keyframes nu-move { from { left: var(--p); } to { left: var(--q); } }
 @media (max-width: 900px) { .nu { grid-template-columns: minmax(0, 1fr); } .nu-row { grid-template-columns: 88px minmax(0, 1fr) 88px; font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .nu-track i { animation: none; } }
@@ -500,7 +498,6 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
         <h2 id="h-about">Le sens du conseil, le regard du design.</h2>
         <div class="about">
           <p>Comprendre les enjeux, trouver le bon angle et lui donner forme. Huit ans à faire le lien entre réflexion stratégique, direction artistique et création, pour rendre les sujets complexes plus lisibles et les idées plus vivantes.</p>
-          <figure class="about-pic"><img src="assets/a-propos-presentation.webp" alt="Julie Ramier, micro à la main, présente un programme de transformation devant un écran" width="1300" height="867" loading="lazy"></figure>
         </div>
         <a class="profile" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">
           <img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" width="340" height="340">
