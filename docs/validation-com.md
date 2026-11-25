@@ -27,6 +27,7 @@ Statuts : ✅ conforme à la règle · ⚠️ à faire valider · ⛔ exclu
 | Photo photobooth | Figma « Photobooth-photo » | ⛔ | Visage d'une collaboratrice |
 | Photo de régie | Figma « IMG_0133 » | ⛔ | Le nom du client est lisible à l'écran |
 | Bandeau « C-MINUT » | Figma « Banner Newsletter » | ⛔ | Photos du client, logos sur les tenues |
+| Photo de Julie en présentation (À propos) | `a-propos-presentation.webp` | ⚠️ | L'écran montre le nom « C-NUM » et la phrase « Aujourd'hui pour construire un moteur il faut plus de 10 ans… », qui laisse deviner l'aéronautique. La moitié droite de l'écran est déjà floutée. |
 
 ## Événement interne (projet 05)
 

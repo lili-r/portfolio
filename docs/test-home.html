@@ -228,6 +228,8 @@ a { color: inherit; }
 .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
 .about p { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; }
 .about p + p { color: var(--haze); font-size: 16px; }
+.about { align-items: start; }
+.about-pic { margin: 0; } .about-pic img { display: block; width: 100%; height: auto; border-radius: 14px; }
 
 .contact h2 { font-size: clamp(48px, 7.4vw, 112px); letter-spacing: var(--title-track); line-height: .9; max-width: 12ch; }
 .contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
@@ -338,7 +340,11 @@ a { color: inherit; }
 .nu { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
 .nu-txt { display: grid; gap: 28px; justify-items: start; }
 .nu-txt p { font-size: 18px; line-height: 1.6; max-width: 46ch; }
-.nu-vis { display: grid; gap: 22px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--rule); border-radius: 18px; background: var(--slate); }
+.nu-vis { display: grid; gap: 22px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--rule); border-radius: 18px; background: var(--slate); text-decoration: none; color: inherit; transition: border-color .4s, translate .6s var(--out); }
+.nu-vis:hover { border-color: var(--blush); translate: 0 -4px; }
+.cta.nu-cta { background: var(--blush); border-color: var(--blush); color: var(--night); font-size: 17px; padding: 18px 30px; }
+.nu-cta.mag::before { background: var(--chalk); }
+.nu-cta.mag:hover { background: var(--chalk); border-color: var(--chalk); }
 .nu-row { display: grid; grid-template-columns: 104px minmax(0, 1fr) 104px; align-items: center; gap: 16px; font-size: 13px; color: var(--haze); }
 .nu-row > span:last-child { text-align: right; }
 .nu-track { position: relative; height: 2px; background: #3a3935; border-radius: 2px; }
@@ -452,10 +458,27 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
     </div>
   </section>
 
+  <section class="section nuancier" id="brief" aria-labelledby="h-brief">
+    <div class="c">
+      <div class="rule"></div>
+      <div class="s-label"><span class="num" data-n="2" data-t="5"></span><span class="slabel">Le Nuancier</span></div>
+      <div class="s-body">
+        <h2 id="h-brief">Besoin d'un brief ?</h2>
+        <div class="nu">
+          <div class="nu-txt">
+            <p>Besoin de mettre au clair votre idée ? Testez le Nuancier, un slider de personnalité : réglez cinq curseurs, voyez l'effet de chacun, et repartez avec un brief clair, en 3 minutes.</p>
+            <a class="cta solid mag nu-cta" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener"><span class="lbl">Tester le slider de personnalité <span aria-hidden="true">→</span></span></a>
+          </div>
+          <a class="nu-vis" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="nu-row"><span>Classique</span><span class="nu-track"><i style="--p:30%;--q:74%;--d:7s"></i></span><span>Contemporain</span></div><div class="nu-row"><span>Discret</span><span class="nu-track"><i style="--p:62%;--q:38%;--d:9s"></i></span><span>Affirmé</span></div><div class="nu-row"><span>Rationnel</span><span class="nu-track"><i style="--p:44%;--q:80%;--d:8s"></i></span><span>Émotionnel</span></div><div class="nu-row"><span>Accessible</span><span class="nu-track"><i style="--p:26%;--q:52%;--d:10s"></i></span><span>Exclusif</span></div><div class="nu-row"><span>Conventionnel</span><span class="nu-track"><i style="--p:58%;--q:86%;--d:7.5s"></i></span><span>Audacieux</span></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="savoir-faire" aria-labelledby="h-sf">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="2" data-t="5"></span><span class="slabel">Savoir-faire</span></div>
+      <div class="s-label"><span class="num" data-n="3" data-t="5"></span><span class="slabel">Savoir-faire</span></div>
       <div class="s-body">
         <h2 id="h-sf">De l'idée à l'univers, du concept au mouvement.</h2>
         <div class="skills">
@@ -472,35 +495,18 @@ dialog::backdrop { background: rgba(8,8,7,.75); backdrop-filter: blur(6px); }
   <section class="section" id="a-propos" aria-labelledby="h-about">
     <div class="c">
       <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="3" data-t="5"></span><span class="slabel">À propos</span></div>
+      <div class="s-label"><span class="num" data-n="4" data-t="5"></span><span class="slabel">À propos</span></div>
       <div class="s-body">
-        <h2 id="h-about">Huit ans de conseil, un œil de designer.</h2>
+        <h2 id="h-about">Le sens du conseil, le regard du design.</h2>
         <div class="about">
-          <p>Huit ans de design en cabinet de conseil, à transformer des sujets complexes en images claires, et des programmes internes en projets dont les équipes ont envie de parler.</p>
-          <p>Aujourd'hui en indépendante, depuis Paris, avec des entreprises et des cabinets de conseil. Une méthode : comprendre avant de dessiner, penser système, livrer des fichiers que les équipes peuvent reprendre.</p>
+          <p>Comprendre les enjeux, trouver le bon angle et lui donner forme. Huit ans à faire le lien entre réflexion stratégique, direction artistique et création, pour rendre les sujets complexes plus lisibles et les idées plus vivantes.</p>
+          <figure class="about-pic"><img src="assets/a-propos-presentation.webp" alt="Julie Ramier, micro à la main, présente un programme de transformation devant un écran" width="1300" height="867" loading="lazy"></figure>
         </div>
         <a class="profile" href="https://www.linkedin.com/in/julie-r-139b55b2/" target="_blank" rel="noopener">
           <img src="assets/equipe-julie-ramier.webp" alt="Julie Ramier" width="340" height="340">
           <span><b>Julie Ramier</b><span>Designer graphique &amp; motion · Paris</span></span>
           <span class="li" aria-hidden="true">in</span><span class="vh">Profil LinkedIn (nouvel onglet)</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section nuancier" id="brief" aria-labelledby="h-brief">
-    <div class="c">
-      <div class="rule"></div>
-      <div class="s-label"><span class="num" data-n="4" data-t="5"></span><span class="slabel">Le Nuancier</span></div>
-      <div class="s-body">
-        <h2 id="h-brief">Besoin d'un brief ?</h2>
-        <div class="nu">
-          <div class="nu-txt">
-            <p>Besoin de mettre au clair votre idée ? Testez le Nuancier, un slider de personnalité : réglez cinq curseurs, voyez l'effet de chacun, et repartez avec un brief clair, en 3 minutes.</p>
-            <a class="cta solid" href="https://claude.ai/artifact/H2PSPizcPv9z7Dwu2yjmDZ" target="_blank" rel="noopener">Tester le slider de personnalité <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="nu-vis" aria-hidden="true"><div class="nu-row"><span>Classique</span><span class="nu-track"><i style="--p:30%;--q:74%;--d:7s"></i></span><span>Contemporain</span></div><div class="nu-row"><span>Discret</span><span class="nu-track"><i style="--p:62%;--q:38%;--d:9s"></i></span><span>Affirmé</span></div><div class="nu-row"><span>Rationnel</span><span class="nu-track"><i style="--p:44%;--q:80%;--d:8s"></i></span><span>Émotionnel</span></div><div class="nu-row"><span>Accessible</span><span class="nu-track"><i style="--p:26%;--q:52%;--d:10s"></i></span><span>Exclusif</span></div><div class="nu-row"><span>Conventionnel</span><span class="nu-track"><i style="--p:58%;--q:86%;--d:7.5s"></i></span><span>Audacieux</span></div></div>
-        </div>
       </div>
     </div>
   </section>
@@ -800,14 +806,14 @@ document.querySelectorAll(".kbtn").forEach(b => b.addEventListener("click", () =
 document.getElementById("ct-replay").addEventListener("click", () => api.replay());
 showContact(3);
 
-/* Bouton « Écrivez-moi » du header : léger aimant + remplissage depuis le curseur */
+/* Boutons aimantés (« Écrivez-moi », Nuancier) : léger aimant + remplissage depuis le curseur */
 (() => {
-  const btn = document.getElementById("hero-cta"), lbl = btn.querySelector(".lbl");
+  document.querySelectorAll(".mag").forEach(btn => { const lbl = btn.querySelector(".lbl"); if (!lbl) return;
   btn.addEventListener("pointermove", e => { const r = btn.getBoundingClientRect();
     btn.style.setProperty("--fx", `${e.clientX - r.left}px`); btn.style.setProperty("--fy", `${e.clientY - r.top}px`);
     if (reduce) return; const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
     btn.style.translate = `${dx * .18}px ${dy * .3}px`; lbl.style.translate = `${dx * .08}px ${dy * .12}px`; });
-  btn.addEventListener("pointerleave", () => { btn.style.translate = "0 0"; lbl.style.translate = "0 0"; });
+  btn.addEventListener("pointerleave", () => { btn.style.translate = "0 0"; lbl.style.translate = "0 0"; }); });
 })();
 
 /* Mots qui changent dans la phrase du header */
