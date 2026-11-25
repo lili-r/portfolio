@@ -73,7 +73,7 @@ button { font: inherit; color: inherit; }
 
 /* Visuel principal */
 .hero-vis { grid-column: 1 / -1; aspect-ratio: 16 / 8; border-radius: 18px; overflow: hidden; background: var(--slate); view-transition-name: projet-visuel; }
-.hero-vis img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-vis img, .hero-vis video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-vis.contain img { object-fit: contain; padding: 8%; }
 .hero-vis.light { background: #fff; }
 
@@ -318,7 +318,7 @@ button { font: inherit; color: inherit; }
   .strip { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); } .pstep .vis.voice { aspect-ratio: 4 / 5; }
   .proc { grid-column: 1 / -1; } .pstep { grid-template-columns: minmax(0, 1fr); } .panel { grid-template-columns: minmax(0, 1fr); } .steps-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; } .steps-nav::before { display: none; }
   .sec .s-label, .proud .s-label { padding: 0 0 16px; }
-  .hero-vis { aspect-ratio: auto; } .hero-vis img { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
+  .hero-vis { aspect-ratio: auto; } .hero-vis img, .hero-vis video { height: auto; } .hero-vis.contain img { aspect-ratio: 1; }
   .steps { grid-template-columns: minmax(0, 1fr); }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
   .gallery > * { grid-column: 1 / -1 !important; }
@@ -509,7 +509,7 @@ const PROJETS = [
     disc: "Communication · Slide decks · Photobooth",
     title: "Une journée pour 200 personnes, et chaque support y contribuait",
     sum: "Communication, slide decks et photobooth pour un événement interne de 200 participants. " + todo("contexte de l'événement"),
-    hero: { src: "evenement-kaleidoscope.webp", alt: "Visuel de l'événement interne" },
+    hero: { video: "evenement-attente.mp4", src: "evenement-attente-poster.webp", alt: "Écran d'attente de l'événement : « It's break time! » au centre d'un compte à rebours en anneau" },
     fiche: [["Public", "200 participants"], ["Année", todo("année")], ["Rôle", todo("ton rôle")], ["Livrables", "Communication, slide decks, photobooth"]],
     deep: [
       { label: "Contexte", h: "Un moment où les gens s'approprient le projet.", p: [todo("même événement que le projet 01 ? objectifs de la journée")] },
@@ -537,6 +537,38 @@ const PROJETS = [
     deep: [{ label: "L'exploration", h: "Ce que l'IA change, et ce qu'elle ne change pas.", p: [todo("ce que tu cherchais à vérifier, et ce que tu en as retenu")] }],
     gallery: [{ src: "orbit-logo-scene.webp", alt: "Logo Orbit mis en scène", cap: "Le logo mis en scène", w: 12, ar: "1400 / 699" }],
     proud: { h: todo("ce dont tu es le plus fière"), p: [] } },
+
+  { id: "beaucachet", n: "08", name: "Beau Cachet",
+    disc: "Projet personnel · Motion design · Invitation animée",
+    title: "Beau Cachet, une invitation qui s'ouvre comme une porte",
+    sumShort: "Une invitation de mariage animée, pensée pour qu'un simple lien ait le charme d'un faire-part.",
+    sum: "Beau Cachet est un projet personnel : une gamme d'invitations de mariage en ligne, pensée pour que chaque invité, où qu'il vive et quel que soit son âge, reçoive un lien qui a le charme d'un faire-part. Voici le premier geste de la gamme : une porte qui s'ouvre sur un jardin.",
+    hero: { video: "beaucachet-porte.mp4", src: "beaucachet-porte-poster.webp", alt: "Une porte voûtée entourée de fleurs, dessinée en bleu sur fond ivoire, dont les deux battants s'ouvrent sur un jardin" },
+    fiche: [["Type", "Projet personnel"], ["Année", "2026"], ["Rôle", "Direction artistique · Motion design"], ["Statut", "En préparation"],
+            ["Disciplines", "Invitation animée · Illustration · IA générative"], ["Outils", "Magnific · " + todo("autres outils")], ["Livrables", "Animation d'ouverture · " + todo("autres livrables : site, vidéo d'invitation, story ?")]],
+    ficheEss: 3,
+    deep: [
+      { label: "Contexte", h: "Donner à un lien le charme d'un faire-part.", p: [
+        "Les mariés passent au numérique pour se simplifier la vie, mais un lien s'oublie là où un faire-part se garde. Et ce sont les invités les moins à l'aise avec les écrans qui décident si l'envoi fonctionne.",
+        "Beau Cachet part de ce constat : une invitation en ligne aussi belle qu'un faire-part, qu'on ouvre comme un objet, et à laquelle chaque invité sait répondre, sans compte et sans notice. Elle s'adresse d'abord aux couples dont les invités vivent dans plusieurs pays."] },
+      { label: "Le parti pris", h: "Un autre geste que l'enveloppe.", p: [
+        "L'enveloppe 3D et son cachet de cire brisé sont devenus le cliché des invitations de mariage en ligne. Beau Cachet cherche un dévoilement propre à chaque style : un pli qui se déplie, un calque qu'on soulève, une carte qui se retourne. Pour celui-ci, c'est une porte."] },
+    ],
+    process: { label: "Le dévoilement", h: "Une porte, cinq secondes, quatre décisions.", strip: true,
+      p: ["Chaque décision répond à la même question : que ressent l'invité dans la première seconde, avant même de lire un mot ?"],
+      steps: [
+        { t: "Le geste", d: "Ouvrir une porte, c'est entrer quelque part. Le geste dit l'accueil sans un mot, dans toutes les langues. L'invité regarde d'abord, il lit ensuite.", src: "beaucachet-porte-2-entrouverte.webp", alt: "La porte, à moitié ouverte, laisse voir un jardin" },
+        { t: "Le dessin", d: "Une gravure dans un seul bleu d'encre, sur fond ivoire : une porte voûtée, des vases fleuris, un feuillage dense. Pas de pastel, pas de doré : le trait suffit, comme sur du papier gravé.", src: "beaucachet-porte-1-fermee.webp", alt: "La porte fermée : gravure bleue sur fond ivoire, avec deux vases fleuris" },
+        { t: "L'animation", d: "La caméra reste fixe, seuls les deux battants bougent, lentement, sur un jardin et une allée bordée de cyprès. Cinq secondes, sans coupe, réalisées en IA générative à partir du dessin.", clip: { src: "beaucachet-porte.mp4", poster: "beaucachet-porte-3-ouverte.webp" } },
+        { t: "La suite", d: "La porte s'ouvre sur l'essentiel : qui, quand, où. L'invité répond ensuite en apposant son cachet, le geste signature de la marque.", todo: "L'invitation sur téléphone, après l'ouverture de la porte" },
+      ] },
+    film: { video: "beaucachet-porte.mp4", poster: "beaucachet-porte-poster.webp", cap: "L'ouverture de la porte, en boucle", silent: true },
+    gallery: [{ todo: "Déclinaison pour une invitation d'événement d'entreprise", w: 12, ar: "16 / 6" }],
+    after: [{ label: "Et ensuite", h: "Et si une entreprise s'en servait ?", p: [
+      "Le même principe peut ouvrir l'invitation à un événement d'entreprise : séminaire, remise de prix, soirée de lancement. " + todo("déclinaison à concevoir, à valider avec toi")] }],
+    proud: { h: "Faire sentir le papier dans un lien.",
+      p: ["Une animation de cinq secondes suffit pour que l'invité ait le sentiment d'ouvrir quelque chose de précieux. Sans compte à créer, sans notice, sans bouton à chercher.",
+          "C'est le test que je garde en tête pour chaque choix : l'invité le moins à l'aise avec le numérique doit comprendre, et avoir envie de répondre."] } },
 ];
 
 /* Rendu */
@@ -552,7 +584,7 @@ const tile = g => {
   return `<figure><button class="tile${g.light ? " light" : ""}${g.contain ? " contain" : ""}" type="button" data-lb="${i}" style="--ar:${g.ar || "4 / 3"}" aria-label="Agrandir : ${g.cap || g.alt}"><img src="${A}${g.src}" alt="${g.alt}" loading="lazy"></button>${g.cap ? `<figcaption>${g.cap}</figcaption>` : ""}</figure>`;
 };
 const planche = (list, cls = "") => `<div class="planche ${cls}">${list.map(tile).join("")}</div>`;
-const film = g => `<figure class="film"><div class="fr vid"><video src="${A}${g.video}" poster="${A}${g.poster}" muted autoplay loop playsinline preload="metadata" aria-label="${g.cap}"></video><button class="snd" type="button" aria-pressed="false">Activer le son</button></div><figcaption>${g.cap}</figcaption></figure>`;
+const film = g => `<figure class="film"><div class="fr vid"><video src="${A}${g.video}" poster="${A}${g.poster}" muted autoplay loop playsinline preload="metadata" aria-label="${g.cap}"></video>${g.silent ? "" : `<button class="snd" type="button" aria-pressed="false">Activer le son</button>`}</div><figcaption>${g.cap}</figcaption></figure>`;
 const team = t => `
   <section class="c sec team" aria-label="${t.label}">
     <div class="s-label"><span class="slabel">${t.label}</span></div>
@@ -656,7 +688,7 @@ function render(id) {
     </div>
   </header>
   <div class="c">
-    ${hv.todo ? `<div class="hero-vis todo-fr" style="display:grid;place-items:center;align-content:center;gap:10px;border:1px dashed #4a4844;color:var(--haze);text-align:center;padding:24px">${hv.todo}<span class="todo">Visuel à fournir</span></div>` : `<div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"${hv.ar ? ` style="aspect-ratio:${hv.ar}"` : ""}><img src="${A}${hv.src}" alt="${hv.alt}"></div>`}
+    ${hv.todo ? `<div class="hero-vis todo-fr" style="display:grid;place-items:center;align-content:center;gap:10px;border:1px dashed #4a4844;color:var(--haze);text-align:center;padding:24px">${hv.todo}<span class="todo">Visuel à fournir</span></div>` : `<div class="hero-vis${hv.contain ? " contain" : ""}${hv.light ? " light" : ""}"${hv.ar ? ` style="aspect-ratio:${hv.ar}"` : ""}>${hv.video ? `<video src="${A}${hv.video}" poster="${A}${hv.src}" muted autoplay loop playsinline preload="metadata" aria-label="${hv.alt}"></video>` : `<img src="${A}${hv.src}" alt="${hv.alt}">`}</div>`}
     <dl class="fiche">${p.fiche.map(([k, v], i) => `<div${p.ficheEss && i >= p.ficheEss ? " data-deep hidden" : ""}><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
   </div>
 
@@ -739,6 +771,7 @@ function lightbox() {
   document.querySelectorAll("[data-lb]").forEach(b => b.addEventListener("click", () => { show(+b.dataset.lb); dlg.showModal(); }));
 }
 function wireVideos() {
+  document.querySelectorAll(".hero-vis video").forEach(v => { if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); } });
   document.querySelectorAll(".vid").forEach(box => {
     const v = box.querySelector("video"), b = box.querySelector(".snd");
     const fail = () => { box.outerHTML = `<div class="fr todo-fr" style="--ar:16 / 9">Vidéo d'introduction<br><span class="todo" style="margin-top:8px">Fichier à renvoyer</span></div>`; };
@@ -746,7 +779,7 @@ function wireVideos() {
     v.addEventListener("error", fail);
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); }
     else if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: .3 }).observe(v);
-    b.addEventListener("click", () => { v.muted = !v.muted; if (!v.muted) v.play(); b.setAttribute("aria-pressed", String(!v.muted)); b.textContent = v.muted ? "Activer le son" : "Couper le son"; });
+    if (b) b.addEventListener("click", () => { v.muted = !v.muted; if (!v.muted) v.play(); b.setAttribute("aria-pressed", String(!v.muted)); b.textContent = v.muted ? "Activer le son" : "Couper le son"; });
   });
 }
 function wireVoice(card) {

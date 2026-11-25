@@ -88,7 +88,7 @@ a { color: inherit; }
 .i-restaurant::before { content: ""; width: 44%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--bone); box-shadow: inset 0 0 0 10px #1d1c1a, inset 0 0 0 12px var(--ember); }
 
 /* Vraies images */
-.img > img.ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.img > img.ph, .img > video.ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .img.contain { background: #1d1c1a; }
 .img.contain > img.ph { object-fit: contain; padding: 12%; }
 
@@ -480,7 +480,8 @@ const IMG = {
   programme: `<div class="img"><img class="ph" src="${A}cnum-univers.webp" alt="Univers graphique C-NUM"></div>`,
   kaizo: `<div class="img"><img class="ph" src="${A}kaizo-poulpe.webp" alt="Mascotte poulpe de Kaizo"></div>`,
   onboarding: `<div class="img"><img class="ph" src="${A}onboarding-video.webp" alt="Image extraite de la vidéo d'onboarding réalisée en IA générative"></div>`,
-  evenement: `<div class="img"><img class="ph" src="${A}evenement-kaleidoscope.webp" alt="Visuel de l'événement interne"></div>`,
+  evenement: `<div class="img"><video class="ph" src="${A}evenement-attente.mp4" poster="${A}evenement-attente-poster.webp" muted loop playsinline preload="none" aria-label="Écran d'attente de l'événement interne : It's break time"></video></div>`,
+  beaucachet: `<div class="img"><img class="ph" src="${A}beaucachet-porte-poster.webp" alt="Une porte voûtée dessinée en bleu sur fond ivoire, qui s'ouvre sur un jardin"></div>`,
   sharepoint: `<div class="img i-sharepoint"><div class="bar"><i></i><i></i><i></i></div><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i></div></div>`,
   orbit: `<div class="img"><img class="ph" src="${A}orbit-logo-scene.webp" alt="Logo Orbit projeté sur un écran devant un auditoire"></div>`,
   restaurant: `<div class="img" style="background:#fff"><img class="ph" style="object-fit:contain;padding:10%" src="${A}utah-logo.webp" alt="Logo Utah, coffee shop dog-friendly"></div>`,
@@ -502,7 +503,11 @@ const P = [
     title: "L'espace SharePoint d'un programme interne", sum: "Étude de cas en cours de rédaction.", meta: [["Disciplines","Digital interne, UI"]] },
   { id: "orbit", n: "07", name: "Orbit", year: "—", disc: "Exploration IA · Logo",
     title: "Orbit, une marque fictive pour explorer l'IA", sum: "Un projet personnel : créer une marque de bout en bout, du logo à sa mise en scène, pour tester ce que les outils d'IA générative apportent au travail de designer. Étude de cas en cours de rédaction.", meta: [["Type","Projet personnel, marque fictive"],["Disciplines","Création de logo, mise en scène, IA générative"]] },
-  { id: "voeux", n: "08", name: "Carte de vœux", year: "Bientôt", disc: "Projet sous embargo", teaser: true,
+  { id: "beaucachet", n: "08", name: "Beau Cachet", year: "2026", disc: "Projet personnel · Motion design · Invitation animée",
+    title: "Beau Cachet, une invitation qui s'ouvre comme une porte",
+    sum: "Une invitation de mariage animée, pensée pour qu'un simple lien ait le charme d'un faire-part.",
+    meta: [["Type","Projet personnel"],["Rôle","Direction artistique · Motion design"],["Livrables","Animation d'ouverture"]] },
+  { id: "voeux", n: "09", name: "Carte de vœux", year: "Bientôt", disc: "Projet sous embargo", teaser: true,
     title: "Une carte de vœux, encore sous embargo",
     sum: "Ce projet sera dévoilé dès que la carte aura été envoyée. En attendant, une étoile s'en est échappée et s'est posée en haut de cette page.",
     meta: [["Projet","Carte de vœux"],["Statut","Sous embargo, dévoilement prochainement"]] },
@@ -530,7 +535,7 @@ const headerB = `<div class="pile" id="pile">${PILE.map(([id, x, y, w, ar, r, z,
 
 /* Header C : composition de Julie (positions relevées sur son test Figma n°2) */
 const headerC = `<div class="compo" id="compo">
-  <button class="el tile" data-id="evenement" aria-label="Ouvrir le projet Événement interne" style="--x:0%;--y:0%;--w:24.1%;--z:1;--d:10;--delay:.05s"><img class="floaty" style="--fd:-1s" src="${A}evenement-kaleidoscope.webp" alt=""></button>
+  <button class="el tile" data-id="evenement" aria-label="Ouvrir le projet Événement interne" style="--x:0%;--y:0%;--w:24.1%;--z:1;--d:10;--delay:.05s"><img class="floaty" style="--fd:-1s" src="${A}evenement-attente-cover.webp" alt=""></button>
   <div class="el glass" aria-hidden="true" style="--x:23%;--y:17.6%;--w:16.3%;--z:3;--d:22;--delay:.35s"><img class="floaty" style="--fd:-3s" src="${A}icone-fleche.webp" alt=""></div>
   <div class="el photo" style="--x:35.9%;--y:13.2%;--w:35.2%;--z:2;--d:6;--delay:.15s"><img src="${A}portrait-chien.webp" alt="Julie Ramier avec son chien"></div>
   <button class="el stamp" data-id="programme" aria-label="Ouvrir le projet C-NUM" style="--x:54.4%;--y:1.9%;--w:35.2%;--z:4;--d:16;--delay:.25s"><img src="${A}programme-tampon.webp" alt=""></button>
@@ -576,6 +581,10 @@ document.getElementById("projects").innerHTML = P.map(p => `
     <div class="meta"><h3>${p.name}</h3><span class="mono dim">${p.year}</span><p>${p.disc}</p></div>
   </button>`).join("");
   initScratch(document.getElementById("projects"));
+  /* Couvertures vidéo : lecture seulement quand la carte est visible (et jamais si mouvement réduit) */
+  const vids = document.querySelectorAll("#projects video.ph");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window)
+    vids.forEach(v => new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: .4 }).observe(v));
 }
 function setEmbargo(k) {
   emb = k; const v = P.find(p => p.id === "voeux"); [v.name, v.disc, v.year] = EMBMETA[k];

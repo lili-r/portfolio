@@ -28,6 +28,12 @@ Statuts : ✅ conforme à la règle · ⚠️ à faire valider · ⛔ exclu
 | Photo de régie | Figma « IMG_0133 » | ⛔ | Le nom du client est lisible à l'écran |
 | Bandeau « C-MINUT » | Figma « Banner Newsletter » | ⛔ | Photos du client, logos sur les tenues |
 
+## Événement interne (projet 05)
+
+| Visuel | Fichier | Statut | Remarque |
+|---|---|---|---|
+| Écran d'attente (couverture) | `evenement-attente.mp4`, `-poster.webp`, `-cover.webp` | ⚠️ | Vidéo d'attente d'un événement du client : aucun logo, nom ni visage repéré (images relues toutes les 3 s), mais texte « It's break time! » et son à confirmer. Source : `visuels/evenement-attente-original.mp4` |
+
 ## Question générale à poser à la com
 - Peut-on citer le nom du programme « C-NUM / Continuité Numérique » ?
 - Peut-on montrer l'univers aéronautique (avions, moteurs) ?
